@@ -40,15 +40,15 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 <tr>
                     <td class="DataEntry">
                         <asp:Label ID="label6" runat="server"  Text="username"></asp:Label>
-                        <asp:TextBox ID="txtUserLoginName" xRequired="True" runat="server" Width="132px" MaxLength="10"></asp:TextBox>
+                        <asp:TextBox ID="txtUserLoginName" xRequired="True" runat="server" Width="132px" MaxLength="100"></asp:TextBox>
                     </td>
                     <td class="DataEntry">
                          <asp:Label ID="label7" xRequired="True" runat="server" Text="Create Start" ></asp:Label>
-                        <asp:TextBox ID="txtCreateDateTimeStart" runat="server" Width="132px" MaxLength="10" Type="Date"></asp:TextBox>
+                        <asp:TextBox ID="txtCreateDateTimeStart" runat="server" Width="132px" MaxLength="100" Type="Date"></asp:TextBox>
                     </td>
                     <td class="DataEntry">
                          <asp:Label ID="label8" xRequired="True" runat="server" Text="Create End"></asp:Label>
-                        <asp:TextBox ID="txtCreateDateTimeEnd" xRequired="True" runat="server" Width="132px" MaxLength="10" Type="Date"></asp:TextBox>
+                        <asp:TextBox ID="txtCreateDateTimeEnd" xRequired="True" runat="server" Width="132px" MaxLength="100" Type="Date"></asp:TextBox>
                     </td>
 
                 <td align="left">
