@@ -135,6 +135,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="AddFunding.aspx" />
+    <Content Include="ClaimOverviewSamplingBatch.aspx" />
     <Content Include="AddSamplePercent.aspx" />
     <Content Include="BgService.aspx" />
     <Content Include="CappedItemService.aspx" />
@@ -327,6 +328,13 @@
     <Compile Include="AddFunding.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>AddFunding.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClaimOverviewSamplingBatch.aspx.designer.vb">
+      <DependentUpon>ClaimOverviewSamplingBatch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClaimOverviewSamplingBatch.aspx.vb">
+      <DependentUpon>ClaimOverviewSamplingBatch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AddSamplePercent.aspx.designer.vb">
       <DependentUpon>AddSamplePercent.aspx</DependentUpon>
@@ -1179,7 +1187,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57214</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:7218/</IISUrl>
+          <IISUrl>http://localhost:57215/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
