@@ -34,7 +34,6 @@
     <DocumentationFile>
     </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -143,9 +142,11 @@
     <Content Include="ChangePassword.aspx" />
     <Content Include="Claim.aspx" />
     <Content Include="ClaimAdministrator.aspx" />
+    <Content Include="ClaimDetails.aspx" />
     <Content Include="ClaimFeedback.aspx" />
     <Content Include="ClaimOverview.aspx" />
     <Content Include="ClaimOverviewSampling.aspx" />
+    <Content Include="ClaimOverviewSamplingBatch.aspx" />
     <Content Include="ClaimReview.aspx" />
     <Content Include="ClaimReviewNew.aspx" />
     <Content Include="Default.aspx" />
@@ -158,7 +159,6 @@
     <Content Include="favicon.ico" />
     <Content Include="FeedbackPrompt.aspx" />
     <Content Include="FindClaimAdministrator.aspx" />
-    <Content Include="ClaimSamplings.aspx" />
     <Content Include="FindClaims.aspx" />
     <Content Include="FindFamily.aspx" />
     <Content Include="FindHealthFacility.aspx" />
@@ -291,7 +291,6 @@
     <Content Include="Images\Updated\dummy.dmd" />
     <Content Include="x64\SQLite.Interop.dll" />
     <Content Include="AutoCompleteHandlers\AutoCompleteHandler.ashx" />
-    <Content Include="App_GlobalResources\Resource.designer.zip" />
     <None Include="IMISDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>IMISDataSet.Designer.vb</LastGenOutput>
@@ -333,14 +332,8 @@
       <DependentUpon>AddSamplePercent.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddSamplePercent.aspx.vb">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>AddSamplePercent.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="App_GlobalResources\Resource.designer.vb" />
-    <Compile Include="App_GlobalResources\Resource1.designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AutoCompleteHandlers\AutoCompleteHandler.ashx.vb">
       <DependentUpon>AutoCompleteHandler.ashx</DependentUpon>
@@ -387,6 +380,13 @@
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>ClaimAdministrator.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClaimDetails.aspx.designer.vb">
+      <DependentUpon>ClaimDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClaimDetails.aspx.vb">
+      <DependentUpon>ClaimDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ClaimFeedback.aspx.designer.vb">
       <DependentUpon>ClaimFeedback.aspx</DependentUpon>
     </Compile>
@@ -406,7 +406,14 @@
     </Compile>
     <Compile Include="ClaimOverviewSampling.aspx.vb">
       <DependentUpon>ClaimOverviewSampling.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClaimOverviewSamplingBatch.aspx.designer.vb">
+      <DependentUpon>ClaimOverviewSamplingBatch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClaimOverviewSamplingBatch.aspx.vb">
+      <DependentUpon>ClaimOverviewSamplingBatch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ClaimReview.aspx.designer.vb">
       <DependentUpon>ClaimReview.aspx</DependentUpon>
@@ -477,13 +484,6 @@
     <Compile Include="FindClaimAdministrator.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>FindClaimAdministrator.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClaimSamplings.aspx.designer.vb">
-      <DependentUpon>ClaimSamplings.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClaimSamplings.aspx.vb">
-      <DependentUpon>ClaimSamplings.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FindClaims.aspx.designer.vb">
       <DependentUpon>FindClaims.aspx</DependentUpon>
@@ -881,10 +881,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Resource.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Resource1.designer.vb</LastGenOutput>
-    </Content>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -987,7 +983,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_GlobalResources\" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
@@ -1017,7 +1015,7 @@
       <Name>IMIS_BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\IMIS_DAL\IMIS_DAL.vbproj">
-      <Project>{4FA70042-5378-4AE5-BC4F-C55F6A4A4807}</Project>
+      <Project>{4fa70042-5378-4ae5-bc4f-c55f6a4a4807}</Project>
       <Name>IMIS_DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\IMIS_EN\IMIS_EN.vbproj">
@@ -1181,7 +1179,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57214</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57214/</IISUrl>
+          <IISUrl>http://localhost:7218/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -1189,7 +1187,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="False" />
+      <UserProperties BuildVersion_DetectChanges="False" BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_StartDate="2012/1/1" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

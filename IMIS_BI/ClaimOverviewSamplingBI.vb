@@ -26,12 +26,12 @@
 ' 
 '
 
-Public Class ClaimOverviewBI
+Public Class ClaimOverviewSamplingBI
     Public UserRights As New IMIS_BL.UsersBL
     Public Function checkRights(ByVal Right As IMIS_EN.Enums.Rights, ByVal UserID As Integer) As Boolean
         Return UserRights.CheckRights(Right, UserID)
     End Function
-    Dim ClaimOverview As New IMIS_BL.ClaimsBL
+    Dim ClaimOverview As New IMIS_BL.ClaimsSamplingBL
 
     Public Function GetDistricts(ByVal userId As Integer, Optional ByVal showSelect As Boolean = False, Optional ByVal RegionId As Integer = 0) As DataTable
         Dim Districts As New IMIS_BL.LocationsBL
@@ -40,6 +40,9 @@ Public Class ClaimOverviewBI
 
     Public Function GetReviewClaims(ByRef eClaims As IMIS_EN.tblClaim, ByVal UserID As Integer) As DataTable
         Return ClaimOverview.GetReviewClaims(eClaims, UserID)
+    End Function
+    Public Function GetBatchClaims(ByRef eClaims As IMIS_EN.tblClaimFilter, ByVal UserID As Integer) As DataTable
+        Return ClaimOverview.GetBatchClaims(eClaims, UserID)
     End Function
     Public Function GetReviewClaimsCount(ByRef eClaims As IMIS_EN.tblClaim, ByVal UserID As Integer) As Integer
         Return ClaimOverview.GetReviewClaimsCount(eClaims, UserID)
@@ -62,6 +65,18 @@ Public Class ClaimOverviewBI
         Dim GetDataTable As New IMIS_BL.ClaimsBL
         Return GetDataTable.GetReviewStatus(RetrievalValue)
     End Function
+
+    Public Function GetClaimSampleBatches(Optional ByVal RetrievalValue As Integer = 0) As DataTable
+        Dim GetDataTable As New IMIS_BL.ClaimsBL
+        Return GetDataTable.GetClaimSampleBatches(RetrievalValue)
+    End Function
+
+    Public Function GetClaimReviewers() As DataTable
+        Dim GetDataTable As New IMIS_BL.ClaimsBL
+        Return GetDataTable.GetClaimReviewers()
+    End Function
+
+
     Public Function GetClaimStatus(Optional ByVal RetrievalValue As Integer = 0) As DataTable
         Dim GetDataTable As New IMIS_BL.ClaimsBL
         Return GetDataTable.GetClaimStatus(RetrievalValue)
@@ -96,14 +111,5 @@ Public Class ClaimOverviewBI
     Public Function GetHFCodesAll() As DataTable
         Dim hf As New IMIS_BL.HealthFacilityBL
         Return hf.GetHFCodesAll()
-    End Function
-    Public Function GetClaimSampleBatches(Optional ByVal RetrievalValue As Integer = 0) As DataTable
-        Dim GetDataTable As New IMIS_BL.ClaimsBL
-        Return GetDataTable.GetClaimSampleBatches(RetrievalValue)
-    End Function
-
-    Public Function GetClaimReviewers() As DataTable
-        Dim GetDataTable As New IMIS_BL.ClaimsBL
-        Return GetDataTable.GetClaimReviewers()
     End Function
 End Class

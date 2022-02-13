@@ -26,8 +26,11 @@
 ' 
 '
 
-Public Class ClaimsDAL
+Imports IMIS_EN
+
+Public Class ClaimsSamplingDAL
     Dim data As New ExactSQL
+
     Public Sub LoadClaim(ByRef eClaim As IMIS_EN.tblClaim, Optional ByRef eExtra As Dictionary(Of String, Object) = Nothing)
         Dim dt As New DataTable
         Dim sSQLClaim As String
@@ -97,7 +100,7 @@ Public Class ClaimsDAL
 
             eInsuree.InsureeID = dr("InsureeId")
             eInsuree.CHFID = dr("CHFID")
-            eInsuree.LastName = if(("LastName") Is Nothing, String.Empty, dr("LastName"))
+            eInsuree.LastName = If(("LastName") Is Nothing, String.Empty, dr("LastName"))
             eInsuree.OtherNames = dr("OtherNames")
 
             eCD.ICDCode = dr("ICDCode")
@@ -105,38 +108,38 @@ Public Class ClaimsDAL
             eCD.ICDName = dr("ICDName")
 
             eClaim.DateFrom = dr("DateFrom")
-            eClaim.DateTo = if(dr("DateTo") Is DBNull.Value, Nothing, dr("DateTo"))
+            eClaim.DateTo = If(dr("DateTo") Is DBNull.Value, Nothing, dr("DateTo"))
             eClaim.ClaimCode = dr("ClaimCode")
-            eClaim.DateClaimed = if(dr("DateClaimed") Is DBNull.Value, Nothing, dr("DateClaimed"))
-            eClaim.DateProcessed = if(dr("DateProcessed") Is DBNull.Value, Nothing, dr("DateProcessed"))
-            eClaim.Claimed = if(dr("Claimed") Is DBNull.Value, Nothing, dr("Claimed"))
-            eClaim.Approved = if(dr("Approved") Is DBNull.Value, Nothing, dr("Approved"))
-            eClaim.Valuated = if(dr("Valuated") Is DBNull.Value, Nothing, dr("Valuated"))
-            eClaim.Explanation = if(dr("Explanation") Is DBNull.Value, String.Empty, dr("Explanation"))
-            eClaim.Adjustment = if(dr("Adjustment") Is DBNull.Value, String.Empty, dr("Adjustment"))
+            eClaim.DateClaimed = If(dr("DateClaimed") Is DBNull.Value, Nothing, dr("DateClaimed"))
+            eClaim.DateProcessed = If(dr("DateProcessed") Is DBNull.Value, Nothing, dr("DateProcessed"))
+            eClaim.Claimed = If(dr("Claimed") Is DBNull.Value, Nothing, dr("Claimed"))
+            eClaim.Approved = If(dr("Approved") Is DBNull.Value, Nothing, dr("Approved"))
+            eClaim.Valuated = If(dr("Valuated") Is DBNull.Value, Nothing, dr("Valuated"))
+            eClaim.Explanation = If(dr("Explanation") Is DBNull.Value, String.Empty, dr("Explanation"))
+            eClaim.Adjustment = If(dr("Adjustment") Is DBNull.Value, String.Empty, dr("Adjustment"))
             eClaim.ClaimStatus = dr("ClaimStatus")
-            eClaim.FeedbackStatus = if(dr("FeedbackStatus") Is DBNull.Value, Nothing, dr("FeedbackStatus"))
+            eClaim.FeedbackStatus = If(dr("FeedbackStatus") Is DBNull.Value, Nothing, dr("FeedbackStatus"))
             eClaim.ReviewStatus = If(dr("ReviewStatus") Is DBNull.Value, Nothing, dr("ReviewStatus"))
             eClaimItems.RejectionReason = If(dr("ItemRejectionReason") Is DBNull.Value, Nothing, dr("ItemRejectionReason"))
             eClaimServices.RejectionReason = If(dr("ServiceRejectionReason") Is DBNull.Value, Nothing, dr("ServiceRejectionReason"))
             eFeedback.FeedbackID = If(dr("FeedbackID") Is DBNull.Value, Nothing, dr("FeedbackID"))
-            eFeedback.FeedbackDate = if(dr("FeedbackDate") Is DBNull.Value, Nothing, dr("FeedbackDate"))
-            eFeedback.CareRendered = if(dr("CareRendered") Is DBNull.Value, Nothing, dr("CareRendered"))
-            eFeedback.DrugPrescribed = if(dr("DrugPrescribed") Is DBNull.Value, Nothing, dr("DrugPrescribed"))
-            eFeedback.DrugReceived = if(dr("DrugReceived") Is DBNull.Value, Nothing, dr("DrugReceived"))
-            eFeedback.PaymentAsked = if(dr("PaymentAsked") Is DBNull.Value, Nothing, dr("PaymentAsked"))
-            eFeedback.Asessment = if(dr("Asessment") Is DBNull.Value, Nothing, dr("Asessment"))
-            eFeedback.CHFOfficerCode = if(dr("CHFOfficerCode") Is DBNull.Value, Nothing, dr("CHFOfficerCode"))
+            eFeedback.FeedbackDate = If(dr("FeedbackDate") Is DBNull.Value, Nothing, dr("FeedbackDate"))
+            eFeedback.CareRendered = If(dr("CareRendered") Is DBNull.Value, Nothing, dr("CareRendered"))
+            eFeedback.DrugPrescribed = If(dr("DrugPrescribed") Is DBNull.Value, Nothing, dr("DrugPrescribed"))
+            eFeedback.DrugReceived = If(dr("DrugReceived") Is DBNull.Value, Nothing, dr("DrugReceived"))
+            eFeedback.PaymentAsked = If(dr("PaymentAsked") Is DBNull.Value, Nothing, dr("PaymentAsked"))
+            eFeedback.Asessment = If(dr("Asessment") Is DBNull.Value, Nothing, dr("Asessment"))
+            eFeedback.CHFOfficerCode = If(dr("CHFOfficerCode") Is DBNull.Value, Nothing, dr("CHFOfficerCode"))
             If dr("ClaimAdminId") IsNot DBNull.Value Then eClaimAdmin.ClaimAdminId = dr("ClaimAdminId")
             If dr("ClaimAdminCode") IsNot DBNull.Value Then eClaimAdmin.ClaimAdminCode = dr("ClaimAdminCode")
             If dr("CadminLastName") IsNot DBNull.Value Then eClaimAdmin.LastName = dr("CadminLastName")
             If dr("CadminOtherNames") IsNot DBNull.Value Then eClaimAdmin.OtherNames = dr("CadminOtherNames")
-            eClaim.ICDID1 = if(dr("ICDID1") Is DBNull.Value, Nothing, dr("ICDID1"))
+            eClaim.ICDID1 = If(dr("ICDID1") Is DBNull.Value, Nothing, dr("ICDID1"))
             'eClaim.ICDID2 = if(dr("ICDID2") Is DBNull.Value, Nothing, dr("ICDID2"))
             'eClaim.ICDID3 = if(dr("ICDID3") Is DBNull.Value, Nothing, dr("ICDID3"))
             'eClaim.ICDID4 = if(dr("ICDID4") Is DBNull.Value, Nothing, dr("ICDID4"))
             If eExtra IsNot Nothing Then
-                eExtra.Add("ICDCode1", if(dr("ICDCode1") Is DBNull.Value, Nothing, dr("ICDCode1")))
+                eExtra.Add("ICDCode1", If(dr("ICDCode1") Is DBNull.Value, Nothing, dr("ICDCode1")))
                 'eExtra.Add("ICDCode2", if(dr("ICDCode2") Is DBNull.Value, Nothing, dr("ICDCode2")))
                 'eExtra.Add("ICDCode3", if(dr("ICDCode3") Is DBNull.Value, Nothing, dr("ICDCode3")))
                 'eExtra.Add("ICDCode4", If(dr("ICDCode4") Is DBNull.Value, Nothing, dr("ICDCode4")))
@@ -145,7 +148,7 @@ Public Class ClaimsDAL
                 'eExtra.Add("ICDName3", If(dr("ICDName3") Is DBNull.Value, Nothing, dr("ICDName3")))
                 'eExtra.Add("ICDName4", If(dr("ICDName4") Is DBNull.Value, Nothing, dr("ICDName4")))
             End If
-            eClaim.VisitType = if(dr("VisitType") Is DBNull.Value, Nothing, dr("VisitType"))
+            eClaim.VisitType = If(dr("VisitType") Is DBNull.Value, Nothing, dr("VisitType"))
             If dr("GuaranteeId") IsNot DBNull.Value Then eClaim.GuaranteeId = dr("GuaranteeId")
 
             eClaim.tblHF = eHF
@@ -174,14 +177,14 @@ Public Class ClaimsDAL
 
         'Get Claimed Services
         Dim sSQLClaimedServices As String = ""
-        sSQLClaimedServices = "SELECT CS.PriceValuated,CS.RejectionReason, CS.ClaimServiceID,S.ServiceID,S.ServCode + '  '  + S.ServName as ServCode," & _
-            " CS.QtyProvided,CS.PriceAsked,CS.QtyApproved,CS.PriceApproved,CS.Explanation,CS.Justification,CS.ClaimServiceStatus,S.ServCode Code," & _
-            " S.ServName,CASE WHEN S.ServPrice - PLD.PriceOverule > 0 AND ISNULL(PLD.PriceOverule,0) = 0 THEN S.ServPrice ELSE 0 END FreeServicePrice" & _
-            " FROM tblClaim C INNER JOIN tblClaimServices CS ON C.ClaimID = CS.ClaimID and cs.validityto is null" & _
-            " INNER JOIN tblServices S ON CS.ServiceID = S.ServiceID" & _
-            " INNER JOIN tblHF HF ON C.HFID = HF.HfID" & _
-            " INNER JOIN tblPLServices PL ON HF.PLServiceID = PL.PLServiceID" & _
-            " LEFT OUTER JOIN tblPLServicesDetail PLD ON PL.PLServiceID = PLD.PLServiceID AND S.ServiceId = PLD.ServiceID" & _
+        sSQLClaimedServices = "SELECT CS.PriceValuated,CS.RejectionReason, CS.ClaimServiceID,S.ServiceID,S.ServCode + '  '  + S.ServName as ServCode," &
+            " CS.QtyProvided,CS.PriceAsked,CS.QtyApproved,CS.PriceApproved,CS.Explanation,CS.Justification,CS.ClaimServiceStatus,S.ServCode Code," &
+            " S.ServName,CASE WHEN S.ServPrice - PLD.PriceOverule > 0 AND ISNULL(PLD.PriceOverule,0) = 0 THEN S.ServPrice ELSE 0 END FreeServicePrice" &
+            " FROM tblClaim C INNER JOIN tblClaimServices CS ON C.ClaimID = CS.ClaimID and cs.validityto is null" &
+            " INNER JOIN tblServices S ON CS.ServiceID = S.ServiceID" &
+            " INNER JOIN tblHF HF ON C.HFID = HF.HfID" &
+            " INNER JOIN tblPLServices PL ON HF.PLServiceID = PL.PLServiceID" &
+            " LEFT OUTER JOIN tblPLServicesDetail PLD ON PL.PLServiceID = PLD.PLServiceID AND S.ServiceId = PLD.ServiceID" &
             " WHERE C.ClaimID = @ClaimID AND CS.LegacyID IS NULL AND CS.ValidityTo IS NULL AND PL.ValidityTo IS NULL AND PLD.ValidityTo IS NULL"
 
 
@@ -193,14 +196,14 @@ Public Class ClaimsDAL
         dtClaimedServices.TableName = "ClaimedServices"
         'Get Claimed Items
         Dim sSQLClaimedItems As String = ""
-        sSQLClaimedItems = "SELECT CI.PriceValuated, CI.ClaimItemID,CI.RejectionReason,I.ItemID,I.ItemCode + '  ' + I.ItemName as ItemCode ,CI.QtyProvided," & _
-            " CI.PriceAsked,CI.QtyApproved,CI.PriceApproved,CI.Explanation,CI.Justification,CI.ClaimItemStatus ,I.ItemCode Code,I.ItemName," & _
-            " CASE WHEN I.ItemPrice - PLD.PriceOverule > 0 AND ISNULL(PLD.PriceOverule,0) = 0 THEN I.ItemPrice ELSE 0 END FreeItemPrice" & _
-            " FROM tblClaim C INNER JOIN tblClaimItems CI ON C.ClaimID = CI.ClaimID and cI.validityto is null" & _
-            " INNER JOIN tblItems I ON CI.ItemID = I.ItemID " & _
-            " INNER JOIN tblHF HF ON C.HFID = HF.HfID" & _
-            " INNER JOIN tblPLItems PL ON HF.PLItemID = PL.PLItemID" & _
-            " LEFT OUTER JOIN tblPLItemsDetail PLD ON PL.PLItemID = PLD.PLItemID AND I.ItemID = PLD.ItemID" & _
+        sSQLClaimedItems = "SELECT CI.PriceValuated, CI.ClaimItemID,CI.RejectionReason,I.ItemID,I.ItemCode + '  ' + I.ItemName as ItemCode ,CI.QtyProvided," &
+            " CI.PriceAsked,CI.QtyApproved,CI.PriceApproved,CI.Explanation,CI.Justification,CI.ClaimItemStatus ,I.ItemCode Code,I.ItemName," &
+            " CASE WHEN I.ItemPrice - PLD.PriceOverule > 0 AND ISNULL(PLD.PriceOverule,0) = 0 THEN I.ItemPrice ELSE 0 END FreeItemPrice" &
+            " FROM tblClaim C INNER JOIN tblClaimItems CI ON C.ClaimID = CI.ClaimID and cI.validityto is null" &
+            " INNER JOIN tblItems I ON CI.ItemID = I.ItemID " &
+            " INNER JOIN tblHF HF ON C.HFID = HF.HfID" &
+            " INNER JOIN tblPLItems PL ON HF.PLItemID = PL.PLItemID" &
+            " LEFT OUTER JOIN tblPLItemsDetail PLD ON PL.PLItemID = PLD.PLItemID AND I.ItemID = PLD.ItemID" &
             " WHERE C.ClaimID = @ClaimID and CI.LegacyID IS NULL AND CI.ValidityTo IS NULL AND PL.ValidityTo IS NULL AND PLD.ValidityTo IS NULL"
 
 
@@ -227,12 +230,12 @@ Public Class ClaimsDAL
         data.params("@ICDID", SqlDbType.Int, eClaim.tblICDCodes.ICDID)
         data.params("@ClaimCode", SqlDbType.NVarChar, 10, eClaim.ClaimCode)
         data.params("@DateFrom", SqlDbType.SmallDateTime, eClaim.DateFrom)
-        data.params("@DateTo", SqlDbType.SmallDateTime, if(eClaim.DateTo Is Nothing, SqlTypes.SqlDateTime.Null, eClaim.DateTo))
+        data.params("@DateTo", SqlDbType.SmallDateTime, If(eClaim.DateTo Is Nothing, SqlTypes.SqlDateTime.Null, eClaim.DateTo))
         data.params("@Explanation", SqlDbType.NText, 100, eClaim.Explanation)
         data.params("@Claimed", SqlDbType.Decimal, eClaim.Claimed)
         data.params("@DateClaimed", SqlDbType.SmallDateTime, eClaim.DateClaimed)
         data.params("@AuditUserID", SqlDbType.Int, eClaim.AuditUserID)
-        data.params("@ClaimAdminID", SqlDbType.Int, if(eClaim.tblClaimAdmin.ClaimAdminId = 0, Nothing, eClaim.tblClaimAdmin.ClaimAdminId))
+        data.params("@ClaimAdminID", SqlDbType.Int, If(eClaim.tblClaimAdmin.ClaimAdminId = 0, Nothing, eClaim.tblClaimAdmin.ClaimAdminId))
         data.params("@ICDID1", SqlDbType.Int, eClaim.ICDID1)
         data.params("@ICDID2", SqlDbType.Int, eClaim.ICDID2)
         data.params("@ICDID3", SqlDbType.Int, eClaim.ICDID3)
@@ -264,12 +267,12 @@ Public Class ClaimsDAL
         data.params("@ICDID", SqlDbType.Int, eClaim.tblICDCodes.ICDID)
         data.params("@ClaimCode", SqlDbType.NVarChar, 10, eClaim.ClaimCode)
         data.params("@DateFrom", SqlDbType.SmallDateTime, eClaim.DateFrom)
-        data.params("@DateTo", SqlDbType.SmallDateTime, if(eClaim.DateTo Is Nothing, SqlTypes.SqlDateTime.Null, eClaim.DateTo))
+        data.params("@DateTo", SqlDbType.SmallDateTime, If(eClaim.DateTo Is Nothing, SqlTypes.SqlDateTime.Null, eClaim.DateTo))
         data.params("@Claimed", SqlDbType.Decimal, eClaim.Claimed)
         data.params("@DateClaimed", SqlDbType.Date, eClaim.DateClaimed)
         data.params("@Explanation", SqlDbType.NText, 100, eClaim.Explanation)
         data.params("@AuditUserID", SqlDbType.Int, eClaim.AuditUserID)
-        data.params("@ClaimAdminID", SqlDbType.Int, if(eClaim.tblClaimAdmin.ClaimAdminId = 0, Nothing, eClaim.tblClaimAdmin.ClaimAdminId))
+        data.params("@ClaimAdminID", SqlDbType.Int, If(eClaim.tblClaimAdmin.ClaimAdminId = 0, Nothing, eClaim.tblClaimAdmin.ClaimAdminId))
         data.params("@ICDID1", SqlDbType.Int, eClaim.ICDID1)
         data.params("@ICDID2", SqlDbType.Int, eClaim.ICDID2)
         data.params("@ICDID3", SqlDbType.Int, eClaim.ICDID3)
@@ -282,7 +285,7 @@ Public Class ClaimsDAL
         data.ExecuteCommand()
     End Sub
     Public Function IsClaimStatusChanged(ByRef eClaim As IMIS_EN.tblClaim) As DataTable
-        Dim str As String = "SELECT ClaimStatus from tblClaim inner join tblHF on tblHF.HfID = tblClaim.HFID " & _
+        Dim str As String = "SELECT ClaimStatus from tblClaim inner join tblHF on tblHF.HfID = tblClaim.HFID " &
                             " WHERE ClaimID = @claimID and tblClaim.ValidityTo is null " 'and tblClaim.HFID = @HFID
 #If HIB Then
         str = "SELECT ClaimStatus from tblClaim inner join tblHF on tblHF.HfID = tblClaim.HFID " &
@@ -307,7 +310,7 @@ Public Class ClaimsDAL
 
         data.ExecuteCommand()
     End Sub
-    
+
     Public Function IsClaimReviewStatusChanged(ByVal eClaim As IMIS_EN.tblClaim) As DataTable
         Dim str As String = "select ReviewStatus from tblClaim where ClaimID = @ClaimID and ValidityTo is null"
 
@@ -328,7 +331,7 @@ Public Class ClaimsDAL
         data.ExecuteCommand()
     End Sub
 
- 
+
     Public Function ManualSelectionUpdate(ByVal eClaim As IMIS_EN.tblClaim) As Boolean
 
         Dim str As String = "INSERT INTO tblClaim ([InsureeID],[HFID],[ClaimCode],[DateFrom],[DateTo],[ICDID],[ClaimStatus],[Adjuster],[Adjustment],[Claimed]" _
@@ -420,6 +423,35 @@ Public Class ClaimsDAL
         data.ExecuteCommand()
     End Sub
 
+    Public Function GetSampleBatchClaims(ByRef eClaims As IMIS_EN.tblClaim) As DataTable
+
+        Dim sSQL As String
+        sSQL = "SELECT " + UtilitiesDAL.GetEnvMaxRows()
+
+        sSQL += " tblClaim.ClaimID, Claimed, ISNULL(Approved,-1) as Approved, "
+        sSQL += " ClaimSampleBatchID, IsBatchSampleForVerify, ReviewStatus "
+        sSQL += " from tblClaim where 1=1"
+        If eClaims.ClaimSampleBatchID <> 0 Then
+            sSQL += " and tblClaim.ClaimSampleBatchID=@ClaimSampleBatchID "
+        End If
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@ClaimSampleBatchID", SqlDbType.Int, eClaims.ClaimSampleBatchID)
+
+        Return data.Filldata
+    End Function
+
+    'this function will return user who reviews the claim for sampling'
+    Public Function GetClaimReviewers() As DataTable
+
+        Dim sSQL As String
+        sSQL = "select * from tblUsers where RoleID = 10"
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+        'data.params("@ClaimSampleBatchID", SqlDbType.Int, eClaims.ClaimSampleBatchID)
+
+        Return data.Filldata
+    End Function
 
     Public Function IsClaimStatusChecked(ByVal eClaim As IMIS_EN.tblClaim) As DataTable
         Dim str As String = "select ClaimStatus from tblClaim where ClaimID = @ClaimID and ValidityTo is null"
@@ -430,16 +462,16 @@ Public Class ClaimsDAL
         Return data.Filldata
     End Function
 
-    'Corrected by Rogers
-    Public Function GetReviewClaims(ByRef eClaims As IMIS_EN.tblClaim, ByVal claimStatus As DataTable, ByVal UserID As Integer) As DataTable
-
-        'Dim sSQL As String = ""
+    Public Function SelectClaims() As String
         Dim sSQL As String
+
         sSQL = "SELECT " + UtilitiesDAL.GetEnvMaxRows()
 
         sSQL += " tblClaim.ClaimID,claimcode,DateClaimed,Claimed,ISNULL(Approved, Claimed)Approved, ClaimSt.name as ClaimStatus,"
         sSQL += " FeedbackStatus,ReviewStatus,tblClaim.RowID,tblHF.HFCode,HFName,tblClaim.HfID,tblClaim.ClaimAdminID,"
-        sSQL += " Cadm.ClaimAdminID,Cadm.ClaimAdminCode,Cadm.LastName CadminLastName,Cadm.OtherNames CadminOtherNames,tblInsuree.CHFID, Attachment from tblClaim"
+        sSQL += " Cadm.ClaimAdminID,Cadm.ClaimAdminCode,Cadm.LastName CadminLastName,Cadm.OtherNames CadminOtherNames,tblInsuree.CHFID, Attachment, "
+        sSQL += " ClaimSampleBatchID, IsBatchSampleForVerify, 4 as terobau "
+        sSQL += " from tblClaim"
         sSQL += " INNER JOIN tblICDCodes ON tblICDCodes.ICDID = tblClaim.ICDID"
         sSQL += " INNER JOIN tblInsuree ON tblInsuree.InsureeID = tblClaim.InsureeID"
         sSQL += " INNER JOIN tblFamilies ON tblFamilies.FamilyID = tblInsuree.FamilyID"
@@ -460,30 +492,54 @@ Public Class ClaimsDAL
         sSQL += " AND tblUsersDistricts.ValidityTo IS NULL"
         sSQL += " INNER JOIN @ClaimSt ClaimSt ON ClaimSt.ID = tblClaim.ClaimStatus"
         sSQL += " LEFT JOIN tblClaimAdmin Cadm ON Cadm.ClaimAdminId = tblClaim.ClaimAdminId"
+        Return sSQL
+
+    End Function
+
+    'Corrected by Rogers
+    Public Function GetReviewClaims(ByRef eClaims As IMIS_EN.tblClaimFilter, ByVal claimStatus As DataTable, ByVal UserID As Integer) As DataTable
+
+        'Dim sSQL As String = ""
+        Dim sSQL As String = SelectClaims()
+
         sSQL += " WHERE tblClaim.ValidityTo IS NULL AND @FeedbackStatus & tblClaim.FeedbackStatus > 0"
         sSQL += " AND @ReviewStatus & tblClaim.ReviewStatus > 0 AND @ClaimStatus & tblClaim.ClaimStatus  > 0"
         sSQL += " AND (CASE WHEN @ICDID = 0 THEN 0 ELSE tblICDCodes.ICDID END) = @ICDID"
 
+        If eClaims.ClaimSampleBatchID = -1 Then
+            If eClaims.ClaimCode <> 0 Then
+
+            Else
+                sSQL += " AND tblClaim.ClaimSampleBatchID is null "
+            End If
+
+        ElseIf eClaims.ClaimSampleBatchID <> 0 Then
+                sSQL += " AND tblClaim.ClaimSampleBatchID=@ClaimSampleBatchID"
+        End If
+
         If eClaims.Attachment = 1 Then
             sSQL += " AND tblClaim.Attachment= 1"
         End If
-        If eClaims.tblHF.RegionId <> 0 Then
-            sSQL += " AND FMR.locationid = @RegionId"
-        End If
-        If eClaims.tblHF.DistrictId <> 0 Then
-            sSQL += " AND FMD.LocationId = @DistrictId"
-        End If
-        If eClaims.tblBatchRun.RunID <> 0 Then
-            sSQL += " AND tblClaim.RunID = @RunID"
-        End If
-        If eClaims.tblHF.HfID <> 0 Then
-            sSQL += " AND tblHF.HfID = @HFID"
-        End If
-        'If Not eClaims.tblHF.HFName = Nothing Then
-        '    sSQL += " and tblHF.HFName like @HFName + '%'"
-        'End If
-        If Not eClaims.tblHF.HFName = Nothing Then
-            sSQL += " and tblHF.HFName= @HFName"
+
+        If Not IsNothing(eClaims.tblHF) Then
+            If eClaims.tblHF.RegionId <> 0 Then
+                sSQL += " AND FMR.locationid = @RegionId"
+            End If
+            If eClaims.tblHF.DistrictId <> 0 Then
+                sSQL += " AND FMD.LocationId = @DistrictId"
+            End If
+            If eClaims.tblBatchRun.RunID <> 0 Then
+                sSQL += " AND tblClaim.RunID = @RunID"
+            End If
+            If eClaims.tblHF.HfID <> 0 Then
+                sSQL += " AND tblHF.HfID = @HFID"
+            End If
+            'If Not eClaims.tblHF.HFName = Nothing Then
+            '    sSQL += " and tblHF.HFName like @HFName + '%'"
+            'End If
+            If Not eClaims.tblHF.HFName = Nothing Then
+                sSQL += " and tblHF.HFName= @HFName"
+            End If
         End If
         'If Not eClaims.tblInsuree.CHFID = Nothing Then
         '    sSQL += " and tblInsuree.CHFID like @CHFID + '%'"
@@ -533,10 +589,25 @@ Public Class ClaimsDAL
         'End If
 
         ' Change By Purushottam Ends
+        If eClaims.ClaimSampleBatchID = -1 Then
+            ' do nothing load all 
+        Else
+            ' load batch sample conditions
+            If eClaims.LoadBatchNonSamples = 1 Then
+                sSQL += " AND tblClaim.IsBatchSampleForVerify=0 "
+            ElseIf eClaims.LoadAllBatchClaims = 0 Then
+                sSQL += " AND tblClaim.IsBatchSampleForVerify=1 "
+            End If
+        End If
 
-        sSQL += " order by ClaimID desc"
+        If eClaims.ClaimSampleBatchID <> 0 Then
+            sSQL += " order by  tblClaim.ClaimSampleBatchID desc"
+        Else
+            sSQL += " order by  ClaimID desc"
+        End If
+
         data.setSQLCommand(sSQL, CommandType.Text)
-
+        data.params("@ClaimSampleBatchID", SqlDbType.Int, eClaims.ClaimSampleBatchID)
         data.params("@UserID", SqlDbType.Int, UserID)
         data.params("@FeedbackStatus", SqlDbType.TinyInt, eClaims.FeedbackStatus)
         data.params("@ReviewStatus", SqlDbType.TinyInt, eClaims.ReviewStatus)
@@ -548,6 +619,7 @@ Public Class ClaimsDAL
         data.params("@Claimed", SqlDbType.Int, eClaims.Claimed)
         data.params("@Adjuster", SqlDbType.Int, eClaims.Adjuster)
         data.params("@Attachment", SqlDbType.Bit, eClaims.Attachment)
+
         If eClaims.VisitType = "O" Or eClaims.VisitType = "R" And eClaims.GuaranteeId IsNot "0" Then
             data.params("@OpdIpd", SqlDbType.Char, 3, eClaims.GuaranteeId)
         End If
@@ -593,7 +665,36 @@ Public Class ClaimsDAL
         Return data.Filldata
     End Function
 
-    'Corrected By Rogers
+    Public Function GetBatchClaims(ByRef eClaims As IMIS_EN.tblClaimFilter, ByVal claimStatus As DataTable, ByVal UserID As Integer) As DataTable
+        Dim sSQL As String = SelectClaims()
+        sSQL += " WHERE 1=1"
+        sSQL += " AND tblUsersDistricts.UserID = @UserID"
+        If eClaims.ClaimSampleBatchID <> 0 Then
+            sSQL += " AND tblClaim.ClaimSampleBatchID=@ClaimSampleBatchID"
+        End If
+
+        If eClaims.LoadBatchNonSamples = 1 Then
+            sSQL += " AND tblClaim.IsBatchSampleForVerify=0 "
+        ElseIf eClaims.LoadAllBatchClaims = 0 Then
+            sSQL += " AND tblClaim.IsBatchSampleForVerify=1 "
+        End If
+
+        If eClaims.ClaimSampleBatchID <> 0 Then
+            sSQL += " order by  IsBatchSampleForVerify desc"
+        Else
+            sSQL += " order by  ClaimID desc"
+        End If
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@ClaimSampleBatchID", SqlDbType.Int, eClaims.ClaimSampleBatchID)
+        data.params("@UserID", SqlDbType.Int, UserID)
+        data.params("@ClaimStatus", SqlDbType.TinyInt, eClaims.ClaimStatus)
+        data.params("@ClaimSt", claimStatus, "xAttribute")
+
+        Return data.Filldata
+    End Function
+
+    'Corrected By Rogersa
     Public Function GetReviewClaimsCount(ByRef eClaims As IMIS_EN.tblClaim, ByVal claimStatus As DataTable, ByVal UserID As Integer) As DataTable
 
         Dim sSQL As String = ""
@@ -678,11 +779,15 @@ Public Class ClaimsDAL
         If eClaims.ClaimCategory IsNot Nothing Then
             sSQL += " and tblInsuree.Gender = @ClaimCategory" 'used for carrier for gender
         End If
+        If eClaims.ClaimSampleBatchID <> 0 Then
+            sSQL += " and tblClaim.ClaimSampleBatchID = @ClaimSampleBatchID"
+
+        End If
 
         ' Change By Purushottam Ends
 
         data.setSQLCommand(sSQL, CommandType.Text)
-
+        data.params("@ClaimSampleBatchID", SqlDbType.Int, eClaims.ClaimSampleBatchID)
         data.params("@UserID", SqlDbType.Int, UserID)
         data.params("@LocationId", SqlDbType.Int, eClaims.LegacyID) 'Used as a carrier for DistrictID 
         data.params("@FeedbackStatus", SqlDbType.TinyInt, eClaims.FeedbackStatus)
@@ -727,7 +832,6 @@ Public Class ClaimsDAL
         Return data.Filldata
     End Function
 
-
     Public Function GetClaims(ByRef eClaims As IMIS_EN.tblClaim, ByVal claimStatus As DataTable, ByVal FeedbackStatus As DataTable, ByVal ReviewStatus As DataTable, ByVal UserID As Integer) As DataTable
 
         'Dim sSQL As String = ""
@@ -737,6 +841,7 @@ Public Class ClaimsDAL
         sSQL += "  tblClaim.ClaimID,tblClaim.ClaimUUID,claimcode,DateClaimed,Claimed,CASE WHEN ClaimStatus = 2 THEN Approved                                             ELSE ISNULL(Approved, Claimed) END Approved,"
         sSQL += " tblClaim.HfID,ClaimSt.name AS ClaimStatus,FeedbackSt.name AS FeedbackStatus, ReviewSt.name AS ReviewStatus ,tblClaim.RowID,"
         sSQL += " tblHF.HFCode,HFName,tblClaim.HfID,Cadm.ClaimAdminID,Cadm.ClaimAdminCode,Cadm.LastName CadminLastName,Cadm.OtherNames CadminOtherNames,  VisitType, Attachment "
+        sSQL += ",tblClaim.ClaimAmountPayment, tblClaim.SampleAmountDecrease, tblClaim.SampleAmountPercent,tblClaim.ClaimSampleBatchID"
         sSQL += " FROM tblClaim"
         sSQL += " INNER JOIN tblICDCodes ON tblICDCodes.ICDID = tblClaim.ICDID"
         sSQL += " INNER JOIN tblInsuree ON tblInsuree.InsureeID = tblClaim.InsureeID"
@@ -883,10 +988,10 @@ Public Class ClaimsDAL
             ssql += " AND tblClaim.Attachment= 1"
         End If
         If Not eClaims.tblBatchRun.RunID = Nothing Then
-            sSQL += " and tblClaim.RunID = @RunID"
+            ssql += " and tblClaim.RunID = @RunID"
         End If
         If Not eClaims.tblHF.HfID = Nothing Then
-            sSQL += " and tblClaim.HfID = @HFID"
+            ssql += " and tblClaim.HfID = @HFID"
         End If
         'If Not eClaims.tblHF.HFName = Nothing Then
         '    sSQL += " and tblHF.HFName like @HFName + '%'"
@@ -910,28 +1015,28 @@ Public Class ClaimsDAL
             ssql += " and tblClaim.DateFrom >= @DateFrom"
         End If
         If Not eClaims.DateTo Is Nothing Then
-            sSQL += " and tblClaim.DateTo <= @DateTo"
+            ssql += " and tblClaim.DateTo <= @DateTo"
         End If
         'Claim date criteria changed by Ruzo ( 11 Jan 2014 ) >> start..
         If Not eClaims.DateClaimed = Nothing Then
-            sSQL += " and tblClaim.DateClaimed >= @DateClaimedFrom"
+            ssql += " and tblClaim.DateClaimed >= @DateClaimedFrom"
         End If
         If eClaims.DateProcessed IsNot Nothing Then
-            sSQL += " and tblClaim.DateClaimed <= @DateClaimedTo"
+            ssql += " and tblClaim.DateClaimed <= @DateClaimedTo"
         End If
         'If Not (eClaims.DateClaimed = Nothing) And Not (eClaims.DateProcessed = Nothing) Then 'Used as a carrier for ClaimedDate to range 
         '    sSQL += " and tblClaim.DateClaimed between @DateClaimedFrom and @DateClaimedTo"
         'End If
         'Claim date criteria changed by Ruzo ( 11 Jan 2014 ) >> end
         If eClaims.VisitType IsNot Nothing AndAlso eClaims.VisitType <> "" Then
-            sSQL += " AND tblClaim.VisitType = @VisitType"
+            ssql += " AND tblClaim.VisitType = @VisitType"
         End If
         'If eClaims.Attachment = 1 Then
         'ssql += " AND tblClaim.ClaimID in (select claim_id from claim_ClaimAttachmentsCountView where attachments_count>=1)"
         'End If
 
 
-        data.setSQLCommand(sSQL, CommandType.Text)
+        data.setSQLCommand(ssql, CommandType.Text)
 
         data.params("@UserID", SqlDbType.Int, UserID)
         data.params("@LocationId", SqlDbType.Int, eClaims.LegacyID) 'Used as a carrier for DistrictID
@@ -972,7 +1077,7 @@ Public Class ClaimsDAL
         'End If
         Return data.Filldata
     End Function
-    
+
 
     Public Sub ReviewFeedbackSelection(ByVal dt As DataTable, ByVal Value As Decimal, ByVal ReviewType As Int16, ByVal SelectionType As Int16, ByVal SelectionValue As Decimal, ByRef Submitted As Integer, ByRef Selected As Integer, ByRef NotSelected As Integer)
         Dim sSQL As String = "uspClaimSelection"
@@ -1019,7 +1124,7 @@ Public Class ClaimsDAL
         Failed = data.sqlParameters("@Failed")
         ReturnValue = data.sqlParameters("@oReturnValue")
 
-       
+
     End Sub
     Public Sub SubmitClaims(ByVal dt As DataTable, ByVal UserID As Integer, ByRef Submitted As Integer, ByRef Checked As Integer, ByRef Rejected As Integer, ByRef Changed As Integer, ByRef Failed As Integer, ByRef ItemsPassed As Integer, ByRef ServicesPassed As Integer, ByRef ItemsRejected As Integer, ByRef ServicesRejected As Integer)
         Dim sSQL As String = "uspSubmitClaims"
@@ -1050,14 +1155,14 @@ Public Class ClaimsDAL
         ItemsRejected = data.sqlParameters("@ItemsRejected")
         ServicesRejected = data.sqlParameters("@ServicesRejected")
 
-       
+
     End Sub
     Public Sub InsertFeedback(ByVal efeedback As IMIS_EN.tblFeedback)
 
         Dim str As String
-        str = "INSERT INTO tblFeedback([ClaimID],[CareRendered],[PaymentAsked]" & _
-              ",[DrugPrescribed],[DrugReceived],[Asessment],[CHFOfficerCode],[FeedbackDate],[AuditUserID])" & _
-              " VALUES(@ClaimID,@CareRendered,@PaymentAsked,@DrugPrescribed,@DrugReceived,@Asessment,@CHFOfficerCode,@FeedbackDate,@AuditUserID);" & _
+        str = "INSERT INTO tblFeedback([ClaimID],[CareRendered],[PaymentAsked]" &
+              ",[DrugPrescribed],[DrugReceived],[Asessment],[CHFOfficerCode],[FeedbackDate],[AuditUserID])" &
+              " VALUES(@ClaimID,@CareRendered,@PaymentAsked,@DrugPrescribed,@DrugReceived,@Asessment,@CHFOfficerCode,@FeedbackDate,@AuditUserID);" &
               "update tblClaim set FeedbackStatus = 8 where ClaimID = @ClaimID and ValidityTo is null"
 
         data.setSQLCommand(str, CommandType.Text)
@@ -1075,14 +1180,14 @@ Public Class ClaimsDAL
     End Sub
     Public Sub UpdateFeedback(ByVal efeedback As IMIS_EN.tblFeedback)
         Dim str As String
-        str = "INSERT INTO tblFeedback([ClaimID],[CareRendered],[PaymentAsked]" & _
-              ",[DrugPrescribed],[DrugReceived],[Asessment],[CHFOfficerCode],[FeedbackDate],[ValidityFrom]" & _
-              ",[ValidityTo],[LegacyID],[AuditUserID])" & _
-              " SELECT [ClaimID],[CareRendered],[PaymentAsked]" & _
-              ",[DrugPrescribed],[DrugReceived],[Asessment],[CHFOfficerCode],[FeedbackDate],[ValidityFrom]" & _
-              ",getdate(),[FeedbackID],[AuditUserID] FROM tblFeedback WHERE [FeedbackID]=@FeedbackID;" & _
-              " UPDATE tblFeedback SET [CareRendered]=@CareRendered,[PaymentAsked]=@PaymentAsked,[DrugPrescribed]=@DrugPrescribed" & _
-              ",[DrugReceived]=@DrugReceived,[Asessment]=@Asessment,[CHFOfficerCode]=@CHFOfficerCode,[FeedbackDate]=@FeedbackDate,[AuditUserID]=@AuditUserID" & _
+        str = "INSERT INTO tblFeedback([ClaimID],[CareRendered],[PaymentAsked]" &
+              ",[DrugPrescribed],[DrugReceived],[Asessment],[CHFOfficerCode],[FeedbackDate],[ValidityFrom]" &
+              ",[ValidityTo],[LegacyID],[AuditUserID])" &
+              " SELECT [ClaimID],[CareRendered],[PaymentAsked]" &
+              ",[DrugPrescribed],[DrugReceived],[Asessment],[CHFOfficerCode],[FeedbackDate],[ValidityFrom]" &
+              ",getdate(),[FeedbackID],[AuditUserID] FROM tblFeedback WHERE [FeedbackID]=@FeedbackID;" &
+              " UPDATE tblFeedback SET [CareRendered]=@CareRendered,[PaymentAsked]=@PaymentAsked,[DrugPrescribed]=@DrugPrescribed" &
+              ",[DrugReceived]=@DrugReceived,[Asessment]=@Asessment,[CHFOfficerCode]=@CHFOfficerCode,[FeedbackDate]=@FeedbackDate,[AuditUserID]=@AuditUserID" &
               ",[ValidityFrom]=getdate() WHERE [FeedbackID]=@FeedbackID"
 
         data.setSQLCommand(str, CommandType.Text)
@@ -1181,6 +1286,137 @@ Public Class ClaimsDAL
 
         data.ExecuteCommand()
     End Sub
+
+    Public Sub UpdateClaimSample(ByRef eClaim As IMIS_EN.tblClaim)
+        ' todo fix approvedAmount'
+        Dim sSQL = "
+            Update tblClaim Set 
+                ClaimAmountPayment = @ClaimAmountPayment,
+                Approved = @ClaimAmountPayment, 
+                SampleAmountDecrease = @SampleAmountDecrease, 
+                IsBatchSampleForVerify = @IsBatchSampleForVerify,
+                ClaimSampleBatchID=@ClaimSampleBatchID,
+                ReviewStatus=@ReviewStatus
+            where ClaimID = @ClaimID"
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+
+        data.params("@ClaimID", SqlDbType.Int, eClaim.ClaimID)
+        data.params("@ClaimAmountPayment", SqlDbType.Float, eClaim.ClaimAmountPayment)
+        data.params("@ClaimSampleBatchID", SqlDbType.Int, eClaim.ClaimSampleBatchID)
+        data.params("@SampleAmountDecrease", SqlDbType.Float, eClaim.SampleAmountDecrease)
+        data.params("@IsBatchSampleForVerify", SqlDbType.Float, eClaim.IsBatchSampleForVerify)
+        data.params("@SampleAmountPercent", SqlDbType.Float, eClaim.SampleAmountPercent)
+        data.params("@ReviewStatus", SqlDbType.Int, eClaim.ReviewStatus)
+        data.ExecuteCommand()
+    End Sub
+
+    Public Function HasBatchForClaims(ByRef strClaimIds As String) As Boolean
+        Dim sSQL = $" Select count(*) from tblClaim where ClaimId in ({strClaimIds}) and ClaimSampleBatchID >0 and ClaimSampleBatchID is not null"
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.ExecuteCommand()
+        Dim x As Integer = data.Filldata.Rows(0)(0)
+        Return x > 0
+    End Function
+
+    Public Function IsSampleSelectedBatchClaims(ByRef strClaimIds As String, ByVal batchId As Integer) As Boolean
+        Dim sSQL = $" 
+            Select count(*) from tblClaim 
+                where ClaimId in ({strClaimIds}) 
+                and ClaimSampleBatchID >0 and ClaimSampleBatchID is not null
+                and IsBatchSampleForVerify = 1 
+                and ClaimSampleBatchID={batchId}
+        "
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.ExecuteCommand()
+        Dim x As Integer = data.Filldata.Rows(0)(0)
+        Return x > 0
+    End Function
+
+    Public Sub UpdateClaimItemsAndServices(ByRef eClaim As IMIS_EN.tblClaim)
+        Dim sSQL = "
+            Update tblClaimItems Set 
+                -- PriceApproved = QtyProvided*(PriceAsked- PriceAsked*@SampleAmountPercent)
+                -- PriceApproved = PriceAsked- PriceAsked*@SampleAmountPercent
+                   PriceApproved = (PriceAsked*@SampleAmountPercent),
+                --   RejectionReason = 20,
+                   RejectionReason = 0
+            where ClaimID = @ClaimID; 
+            Update tblClaimServices Set 
+                -- PriceApproved = QtyProvided*(PriceAsked- PriceAsked*@SampleAmountPercent)
+                -- PriceApproved = PriceAsked- PriceAsked*@SampleAmountPercent
+                PriceApproved = (PriceAsked*@SampleAmountPercent),
+                RejectionReason = 0
+            where ClaimID = @ClaimID; 
+
+            "
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@ClaimID", SqlDbType.Int, eClaim.ClaimID)
+        data.params("@SampleAmountPercent", SqlDbType.Float, eClaim.SampleAmountPercent)
+        data.ExecuteCommand()
+    End Sub
+    Public Function GetDataTableClaimSampleBatchById(ByVal id As Integer) As DataTable
+        Dim sSQL As String = "Select 
+            *
+        from tblClaimSampleBatch where ClaimSampleBatchID=@ClaimSampleBatchID "
+        Dim data As New ExactSQL
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@ClaimSampleBatchID", SqlDbType.Int, id)
+
+        Return data.Filldata
+    End Function
+
+    Public Function GetClaimSampleBatchByIdUpdate(ByVal id As Integer) As tblClaimSampleBatch
+        Dim x As IMIS_EN.tblClaimSampleBatch = New tblClaimSampleBatch
+        Dim dt = GetDataTableClaimSampleBatchById(id)
+        x._updateClone(dt.Rows(0))
+        Return x
+    End Function
+
+
+    Public Function SaveSampleBatch(ByRef mdl As IMIS_EN.tblClaimSampleBatch, UserID As Integer) As Integer
+        'ClaimSelectSamplePercent ClaimDeltaPercent
+        Try
+
+
+            Dim sSQL = "insert into tblClaimSampleBatch 
+                (ClaimSelectSamplePercent, CreatedByUserID, AssignedClaimReviewerID, CreatedDateTime)
+             values
+                (@ClaimSelectSamplePercent, @CreatedByUserID, @AssignedClaimReviewerID, @CreatedDateTime)"
+
+            If mdl.__UPDATE__ Then
+                sSQL = "
+                Update tblClaimSampleBatch Set 
+                    ClaimSelectSamplePercent=@ClaimSelectSamplePercent,
+                    ClaimDeltaPercent=@ClaimDeltaPercent,
+                    IsCalcDone=@IsCalcDone
+                WHERE ClaimSampleBatchID=@ClaimSampleBatchID
+            "
+            End If
+            data.setSQLCommand(sSQL, CommandType.Text)
+            data.params("@ClaimSampleBatchID", SqlDbType.Int, mdl.ClaimSampleBatchID)
+            data.params("@ClaimSelectSamplePercent", SqlDbType.Float, mdl.ClaimSelectSamplePercent)
+            data.params("@ClaimDeltaPercent", SqlDbType.Float, mdl.ClaimDeltaPercent)
+            data.params("@IsCalcDone", SqlDbType.Bit, mdl.IsCalcDone)
+            data.params("@CreatedByUserID", SqlDbType.Int, UserID)
+            data.params("@AssignedClaimReviewerID", SqlDbType.Int, mdl.ClaimedAssignedReviewerID)
+            data.params("@CreatedDateTime", SqlDbType.DateTime, DateTime.Now)
+            data.ExecuteCommand()
+
+            If mdl.__UPDATE__ Then
+                Return mdl.ClaimSampleBatchID
+            End If
+
+            sSQL = "select MAX(ClaimSampleBatchID) from tblClaimSampleBatch"
+            data.setSQLCommand(sSQL, CommandType.Text)
+            data.ExecuteCommand()
+            Dim maxID = data.Filldata
+            Return maxID(0)(0)
+        Catch ex As Exception
+
+        End Try
+    End Function
     Public Function GetClaimIdByUUID(ByVal uuid As Guid) As DataTable
         Dim sSQL As String = ""
         Dim data As New ExactSQL
@@ -1201,4 +1437,109 @@ Public Class ClaimsDAL
 
         Return data.Filldata
     End Function
+
+    Public Function GetUserRoleID(ByVal id As Integer) As Integer
+
+        Try
+            Dim dt As New DataTable
+            Dim sSQL As String = ""
+            Dim data As New ExactSQL
+            sSQL = "select top 1  RoleID from tblUsers where UserID = @UserID"
+
+            data.setSQLCommand(sSQL, CommandType.Text)
+            data.params("@UserID", SqlDbType.Int, id)
+            Return data.Filldata.Rows(0)("RoleID")
+        Catch
+            Return Nothing
+        End Try
+
+
+    End Function
+
+
+    Public Function cancelSampleByBatchByID(ByVal id As Integer) As Integer
+
+        Try
+            Dim dt As New DataTable
+            Dim sSQL As String = ""
+            Dim data As New ExactSQL
+            sSQL = "update tblClaim set ClaimSampleBatchID = NULL, ReviewStatus = 1, IsBatchSampleForVerify=0  where ClaimSampleBatchID=@BatchID; "
+            sSQL += "update tblClaimSampleBatch set IsCalcDone=1 where ClaimSampleBatchID = @BatchID"
+            data.setSQLCommand(sSQL, CommandType.Text)
+            data.params("@BatchID", SqlDbType.Int, id)
+            data.ExecuteCommand()
+            Return True
+        Catch ex As Exception
+            Return Nothing
+        End Try
+
+
+    End Function
+
+    Public Function GetDataTableClaimSampleBatches(ByRef batch As IMIS_EN.tblClaimSampleBatchFilter) As DataTable
+        Dim sSQL As String = "select 
+            b.claimsampleBatchId,
+            u.LoginName,
+            IsCalcDone,
+            CreatedDateTime
+            -- ,*
+             from tblclaimsamplebatch b
+            inner join tblusers u on  b.AssignedClaimReviewerID = u.UserId
+            where 1=1 "
+            
+        If not String.IsNullOrWhiteSpace(batch.UserLoginName) Then
+            sSQL += " and u.LoginName=@UserLoginName "
+        End If
+        If Not String.IsNullOrWhiteSpace(batch.CreateDateTimeStart) Then
+            sSQL += " And CreatedDateTime >= @CreateDateTimeStart "
+        End If
+        If Not String.IsNullOrWhiteSpace(batch.CreateDateTimeEnd) Then
+            sSQL += " And CreatedDateTime <= @CreateDateTimeEnd "
+        End If
+        sSQL += " order by IsCalcDone, b.claimsampleBatchId "
+
+        Dim data As New ExactSQL
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@UserLoginName", SqlDbType.NVarChar, 100, batch.UserLoginName)
+        data.params("@CreateDateTimeStart", SqlDbType.NVarChar, 100, batch.CreateDateTimeStart)
+        data.params("@CreateDateTimeEnd", SqlDbType.NVarChar, 100, batch.CreateDateTimeEnd)
+
+        Return data.Filldata
+    End Function
+
+    Public Sub AddUpdateClaimPercentSetting(ByRef eClaim As IMIS_EN.tblClaim)
+
+        'Dim strSQL As String = "select top 1 ClaimID from tblClaim where validityFromReview Is null And ClaimID = @ClaimID;if @@rowcount > 0 begin UPDATE tblClaim SET  [Adjustment] = @Adjustment, [ValidityFromReview] = getdate(), [AudituserIdReview] = @AuditUserID "
+        'If Not eClaim.Approved Is Nothing Then
+        '    strSQL += ", [Approved] = @Approved"
+        'End If
+        'If Not eClaim.ReviewStatus Is Nothing Then
+        '    strSQL += " ,[ReviewStatus] = @ReviewStatus"
+        'End If
+
+        'strSQL += " WHERE ClaimID = @ClaimID; end else begin Insert Into tblClaim ([InsureeID],[HFID],[ClaimCode],[DateFrom],[DateTo],[ICDID], [ClaimStatus],[Adjuster],[Adjustment],[Claimed],[Approved],[Reinsured],[Valuated],[DateClaimed],[DateProcessed],[Feedback],[FeedbackID],[Explanation],[FeedbackStatus],[ReviewStatus],[ApprovalStatus],[RejectionReason],[ValidityFrom],[ValidityTo],[LegacyID], [AuditUserID],[ValidityFromReview],[ValidityToReview],[AuditUserIDReview]) SELECT [InsureeID],[HFID],[ClaimCode],[DateFrom],[DateTo],[ICDID], [ClaimStatus],[Adjuster],[Adjustment],[Claimed],[Approved],[Reinsured],[Valuated],[DateClaimed],[DateProcessed], [Feedback],[FeedbackID],[Explanation],[FeedbackStatus],[ReviewStatus],[ApprovalStatus],[RejectionReason],[ValidityFrom],getdate(),[ClaimID], [AuditUserID],[ValidityFromReview],[ValidityToReview],[AuditUserIDReview] FROM tblClaim WHERE ClaimID = @ClaimID; UPDATE tblClaim SET  [Adjustment] = @Adjustment ,[ValidityFromReview] = getdate(), [AudituserIdReview] = @AuditUserID"
+
+        'If Not eClaim.Approved Is Nothing Then
+        '    strSQL += ", [Approved] = @Approved"
+        'End If
+        'If Not eClaim.ReviewStatus Is Nothing Then
+        '    strSQL += ",[ReviewStatus] = @ReviewStatus"
+        'End If
+
+        'strSQL += " Where ClaimID = @ClaimID; End"
+        'data.setSQLCommand(strSQL, CommandType.Text)
+
+        'data.params("@claimID", SqlDbType.Int, eClaim.ClaimID)
+        'data.params("@Adjustment", SqlDbType.NText, eClaim.Adjustment, ParameterDirection.Input)
+        'data.params("@AuditUserID", SqlDbType.Int, eClaim.AuditUserID)
+
+        'If Not eClaim.Approved Is Nothing Then
+        '    data.params("@Approved", SqlDbType.Decimal, eClaim.Approved)
+        'End If
+        'If Not eClaim.ReviewStatus Is Nothing Then
+        '    data.params("@ReviewStatus", SqlDbType.TinyInt, eClaim.ReviewStatus)
+        'End If
+
+        'data.ExecuteCommand()
+    End Sub
 End Class

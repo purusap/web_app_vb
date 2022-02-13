@@ -420,8 +420,7 @@ Partial Public Class ClaimReviewNew
             EventLog.WriteEntry("IMIS", Page.Title & " : " & imisgen.getLoginName(Session("User")) & " : " & ex.Message, EventLogEntryType.Error, 999)
             Return
         End Try
-
-        RedirectClaimOverviewIfReferer()
+        'Response.Redirect("ClaimOverview.aspx?c=" & eClaim.ClaimUUID.ToString())
         Response.Redirect("ClaimOverview.aspx?c=" & eClaim.ClaimID)
     End Sub
 
@@ -462,15 +461,8 @@ Partial Public Class ClaimReviewNew
 
     Private Sub B_CANCEL_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles B_CANCEL.Click
         'Response.Redirect("ClaimOverview.aspx?c=" & eClaim.ClaimUUID.ToString())
-        RedirectClaimOverviewIfReferer()
         Response.Redirect("ClaimOverview.aspx?c=" & eClaim.ClaimID)
     End Sub
 
-    Private Sub RedirectClaimOverviewIfReferer()
-        Dim referer = Request.QueryString.Get("referer")
-        If referer = "/ClaimOverviewSampling.aspx" Then
-            Response.Redirect($"{referer}?{Request.QueryString}")
-        End If
-    End Sub
 
 End Class

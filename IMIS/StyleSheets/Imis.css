@@ -536,8 +536,6 @@ ImageButton:hover
 }
 
 input[type="button"], input[type="submit"]
-
-input[type="button"], input[type="submit"]
 {
 
     border-top: 1px solid #96d1f8;
@@ -546,7 +544,7 @@ input[type="button"], input[type="submit"]
     background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
     background: -moz-linear-gradient(top, #3e779d, #65a9d7);
     background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-    background: #3e779d;
+    background: -o-linear-gradient(top, #3e779d, #65a9d7);
     padding: 3px 6px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
@@ -560,6 +558,7 @@ input[type="button"], input[type="submit"]
     font-family: Verdana, Arial, Helvetica, sans-serif;
     text-decoration: none;
     /*vertical-align: text-top;*/
+    width: 80px;
     transition:0.2s;
     -moz-transition:0.2s;
     -webkit-transition:0.2s;
@@ -567,7 +566,7 @@ input[type="button"], input[type="submit"]
     cursor:pointer;
 }
 
-"]:hover
+input[type="button"]:hover, input[type="submit"]:hover
 {
     border:1px solid #008CBA;
     background-color:white;

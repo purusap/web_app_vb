@@ -221,15 +221,6 @@ Partial Public Class IMIS
     Protected WithEvents lblClaimsLink As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Label10 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label10 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''SubClaimOverview control.
     '''</summary>
     '''<remarks>
@@ -453,15 +444,6 @@ Partial Public Class IMIS
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents subFunding As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Label9 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label9 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''subEmailSetting control.

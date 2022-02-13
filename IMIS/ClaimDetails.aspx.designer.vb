@@ -11,313 +11,241 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ClaimSamplings
+Partial Public Class ClaimDetails
 
     '''<summary>
-    '''upClaim control.
+    '''pnlPage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents upClaim As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents pnlPage As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''hfICDID control.
+    '''rptInsuree control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfICDID As Global.System.Web.UI.WebControls.HiddenField
+    Protected WithEvents rptInsuree As Global.System.Web.UI.WebControls.Repeater
 
     '''<summary>
-    '''hfICDCode control.
+    '''Label1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfICDCode As Global.System.Web.UI.WebControls.HiddenField
+    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''hfClaimAdminAdjustibility control.
+    '''lblFSPDATA control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfClaimAdminAdjustibility As Global.System.Web.UI.WebControls.HiddenField
+    Protected WithEvents lblFSPDATA As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''L_SELECTCRITERIA control.
+    '''lblExpiry control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents L_SELECTCRITERIA As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblExpiry As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''pnlTop control.
+    '''lblExpiryData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlTop As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents lblExpiryData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''L_REGION control.
+    '''lblStatus control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents L_REGION As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblStatus As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''ddlRegion control.
+    '''lblStatusData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlRegion As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblStatusData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblHFName control.
+    '''lblBalance control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblHFName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblBalance As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtHFName control.
+    '''lblBalacneData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtHFName As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblBalacneData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblVisitDateFrom control.
+    '''Panel1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblVisitDateFrom As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents Panel1 As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''txtVisitDateFrom control.
+    '''lblCLAIMCode control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtVisitDateFrom As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblCLAIMCode As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''btnClaimFrom control.
+    '''lblCLAIMData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnClaimFrom As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents lblCLAIMData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''CalendarExtender1 control.
+    '''lblSTARTDATE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents CalendarExtender1 As Global.AjaxControlToolkit.CalendarExtender
+    Protected WithEvents lblSTARTDATE As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblVisitDateTo control.
+    '''lblSTARTData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblVisitDateTo As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSTARTData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtVisitDateTo control.
+    '''lblCLAIMTOTAL control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtVisitDateTo As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblCLAIMTOTAL As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''btnClaimTo control.
+    '''txtCLAIMTOTALData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnClaimTo As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents txtCLAIMTOTALData As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''txtClaimDate_CalendarExtender control.
+    '''lblHFCODE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtClaimDate_CalendarExtender As Global.AjaxControlToolkit.CalendarExtender
+    Protected WithEvents lblHFCODE As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''L_District control.
+    '''lblHFCODEData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents L_District As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblHFCODEData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''ddlDistrict control.
+    '''lblEND control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlDistrict As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblEND As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblReviewStatus control.
+    '''lblENDData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblReviewStatus As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblENDData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''ddlReviewStatus control.
+    '''lblTotalDays control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlReviewStatus As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblTotalDays As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblClaimedDateFrom control.
+    '''L_APPROVED control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblClaimedDateFrom As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents L_APPROVED As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtClaimedDateFrom control.
+    '''txtApproved control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtClaimedDateFrom As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtApproved As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''btnClaimedDateFrom control.
+    '''lblCLAIMDATE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnClaimedDateFrom As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents lblCLAIMDATE As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''CalendarExtender2 control.
+    '''lblCLAIMDATEData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents CalendarExtender2 As Global.AjaxControlToolkit.CalendarExtender
-
-    '''<summary>
-    '''lblClaimedDateTo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblClaimedDateTo As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''txtClaimedDateTo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtClaimedDateTo As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''btnClaimedDateTo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnClaimedDateTo As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''CalendarExtender3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CalendarExtender3 As Global.AjaxControlToolkit.CalendarExtender
-
-    '''<summary>
-    '''lblHFCode control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblHFCode As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''ddlHFCode control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlHFCode As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''lblFBStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblFBStatus As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''ddlFBStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlFBStatus As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblCLAIMDATEData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''lblICD control.
@@ -329,121 +257,103 @@ Partial Public Class ClaimSamplings
     Protected WithEvents lblICD As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtICDCode control.
+    '''lblICDData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtICDCode As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblICDData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblClaimAdmin0 control.
+    '''lblVALUATED control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblClaimAdmin0 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblVALUATED As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''ddlClaimAdmin control.
+    '''txtPriceVALUATEDData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlClaimAdmin As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents txtPriceVALUATEDData As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''lblClaimStatus control.
+    '''MaskedEditExtender2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblClaimStatus As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents MaskedEditExtender2 As Global.AjaxControlToolkit.MaskedEditExtender
 
     '''<summary>
-    '''ddlClaimStatus control.
+    '''lblDATERELEASED control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlClaimStatus As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblDATERELEASED As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblBatchRun control.
+    '''lblDateProcessed control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblBatchRun As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblDateProcessed As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''ddlBatchRun control.
+    '''lblICD1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlBatchRun As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblICD1 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblAttachment control.
+    '''lblICDData1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblAttachment As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblICDData1 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''chkAttachment control.
+    '''hfOldClaimID control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkAttachment As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents hfOldClaimID As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
-    '''lblCHFID control.
+    '''lblLastVisit control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblCHFID As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblLastVisit As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtCHFID control.
+    '''lblLastDays control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtCHFID As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''lblClaimCode0 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblClaimCode0 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''txtClaimCode control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtClaimCode As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblLastDays As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''lblVisitType control.
@@ -455,130 +365,220 @@ Partial Public Class ClaimSamplings
     Protected WithEvents lblVisitType As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''ddlVisitType control.
+    '''lblVisitTypeData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlVisitType As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblVisitTypeData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''btnSearch control.
+    '''lblOPDIPD control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents lblOPDIPD As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''L_CLAIMSFOUND control.
+    '''lblOPDIPDData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents L_CLAIMSFOUND As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblOPDIPDData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''sample_percent control.
+    '''lblrefer control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents sample_percent As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblrefer As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''samplebtn control.
+    '''lblreferData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents samplebtn As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents lblreferData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''btnSampleSubmit control.
+    '''lblGuaranteeNo control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSampleSubmit As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents lblGuaranteeNo As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblSelectToSubmit control.
+    '''lblGuaranteeData control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblSelectToSubmit As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblGuaranteeData As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''chkboxSubmitAll control.
+    '''lblAttachment control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkboxSubmitAll As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents lblAttachment As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''pnlBody control.
+    '''lblServiceDetails control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlBody As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents lblServiceDetails As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''gvClaims control.
+    '''pnlServiceDetails control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gvClaims As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents pnlServiceDetails As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''hfClaimID control.
+    '''gvService control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfClaimID As Global.System.Web.UI.WebControls.HiddenField
+    Protected WithEvents gvService As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
-    '''hfHFID control.
+    '''lblItems control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfHFID As Global.System.Web.UI.WebControls.HiddenField
+    Protected WithEvents lblItems As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''hfdeleteClaim control.
+    '''pnlItemsDetails control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfdeleteClaim As Global.System.Web.UI.WebControls.HiddenField
+    Protected WithEvents pnlItemsDetails As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''hfSubmitClaims control.
+    '''gvItems control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfSubmitClaims As Global.System.Web.UI.WebControls.HiddenField
+    Protected WithEvents gvItems As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''lblEXPLANATION control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEXPLANATION As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtEXPLANATION control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEXPLANATION As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''lblCLAIMSTATUS control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCLAIMSTATUS As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtClaimStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtClaimStatus As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''lblADJUSTMENT control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblADJUSTMENT As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtADJUSTMENTData control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtADJUSTMENTData As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''hfApprovedValue control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfApprovedValue As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''hfClaimedValue control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfClaimedValue As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''hfClaimAdminId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfClaimAdminId As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''hfBatchID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfBatchID As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
     '''pnlButtons control.
@@ -590,42 +590,6 @@ Partial Public Class ClaimSamplings
     Protected WithEvents pnlButtons As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''B_ADD control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents B_ADD As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''B_LOAD control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents B_LOAD As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''B_DELETE control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents B_DELETE As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''B_SUBMIT control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents B_SUBMIT As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''B_CANCEL control.
     '''</summary>
     '''<remarks>
@@ -633,15 +597,6 @@ Partial Public Class ClaimSamplings
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents B_CANCEL As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''uplblMsg control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents uplblMsg As Global.System.Web.UI.UpdatePanel
 
     '''<summary>
     '''lblMsg control.

@@ -158,6 +158,7 @@
     <Compile Include="ClaimItemsBL.vb" />
     <Compile Include="ClaimsBL.vb" />
     <Compile Include="ClaimServicesBL.vb" />
+    <Compile Include="ClaimsSamplingBL.vb" />
     <Compile Include="ComponentsBL.vb" />
     <Compile Include="EmailHandler.vb" />
     <Compile Include="EmailSettingsBL.vb" />
@@ -397,7 +398,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2012/1/1" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets')" />

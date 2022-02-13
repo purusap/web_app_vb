@@ -29,8 +29,8 @@
 Imports System.Web
 Imports System.IO
 
-Public Class ClaimsBL
-    Dim clm As New IMIS_DAL.ClaimsDAL
+Public Class ClaimsSamplingBL
+    Dim clm As New IMIS_DAL.ClaimsSamplingDAL
     Private imisgen As New GeneralBL
     Private Const MaxGridRow As Integer = 2000
     Public Function getMessage(ByVal MessageID As String) As String
@@ -39,11 +39,11 @@ Public Class ClaimsBL
 
 
     Public Sub LoadClaim(ByRef eClaim As IMIS_EN.tblClaim, Optional ByRef eExtra As Dictionary(Of String, Object) = Nothing)
-        Dim Claim As New IMIS_DAL.ClaimsDAL
+        Dim Claim As New IMIS_DAL.ClaimsSamplingDAL
         Claim.LoadClaim(eClaim, eExtra)
     End Sub
     Public Function ReviewClaim(ByVal ClaimID As Integer) As DataSet
-        Dim claim As New IMIS_DAL.ClaimsDAL
+        Dim claim As New IMIS_DAL.ClaimsSamplingDAL
         Return claim.ReviewClaim(ClaimID)
     End Function
 
@@ -79,6 +79,46 @@ Public Class ClaimsBL
             Case Else : Return getMessage("T_SELECTSTATUS")
         End Select
     End Function
+
+    Public Function GetClaimSampleBatches(Optional ByVal RetrievalValue As Integer = 0) As DataTable
+        Dim data As New IMIS_DAL.ExactSQL
+        Dim sSQL As String = ""
+        sSQL = $"
+        Select ClaimSampleBatchID as Value, ltrim(ClaimSampleBatchID) + ' ' + u.LoginName as Text   from tblclaimsamplebatch b
+        inner join tblUsers u on u.UserID = b.AssignedClaimReviewerID 
+        where IsCalcDone=0 and (AssignedClaimReviewerID={RetrievalValue} or {RetrievalValue}=0)
+        
+        union select 0, '-sample batch-' 
+        "
+        'If RetrievalValue = 0 Then
+        '    sSQL = "Select ClaimSampleBatchID as Value, ltrim(ClaimSampleBatchID) as Text   from tblclaimsamplebatch where IsCalcDone=0 union select 0, '-sample batch-'"
+        'Else
+        '    sSQL = "Select ClaimSampleBatchID as Value, ltrim(ClaimSampleBatchID) as Text   from tblclaimsamplebatch where IsCalcDone=0 and AssignedClaimReviewerID = 5637 union select 0, '-sample batch-' "
+        'End If
+        'sSQL = "Select ClaimSampleBatchID as Value, ltrim(ClaimSampleBatchID) as Text   from tblclaimsamplebatch where IsCalcDone=0 and AssignedClaimReviewerID = 5637 union select 0, '-sample batch-' "
+        data.setSQLCommand(sSQL, CommandType.Text)
+        Return data.Filldata
+    End Function
+
+    Public Function GetClaimReviewers() As DataTable
+        Dim data As New IMIS_DAL.ExactSQL
+        Dim sSQL As String = ""
+        'sSQL = "select UserID, LoginName + ' ' + ltrim(UserID) /* + ' ' + OtherNames + ' '+ LastName */ as Name from tblUsers where RoleID = 10"
+        sSQL = "select UserID, LoginName + ' ' + ltrim(UserID) as Name from tblUsers 
+                where ValidityTo is null
+                order bY LoginName
+                "
+        sSQL = "
+           select distinct u.UserID as UserId, LoginName as Name from tblUserRole UR
+            INNER JOIN tblRoleRight RR ON RR.RoleID = UR.RoleID
+            INNER JOIN tblRole ROLES ON ROLES.RoleID = UR.RoleID -- AND ISNULL(UR.Assign,0) & 1 > 0
+		    inner join tblUsers u on u.UserID=ur.UserID
+		    where  rolename = 'Medical Officer'"
+        data.setSQLCommand(sSQL, CommandType.Text)
+        Return data.Filldata
+    End Function
+
+
     Public Function GetReviewStatus(Optional ByVal RetrievalValue As Integer = 0) As DataTable
         Dim dtbl As New DataTable
         Dim dr As DataRow
@@ -258,11 +298,11 @@ Public Class ClaimsBL
         Return dtbl
     End Function
     Public Sub UpdateClaimApprovedValue(ByRef eClaim As IMIS_EN.tblClaim)
-        Dim claim As New IMIS_DAL.ClaimsDAL
+        Dim claim As New IMIS_DAL.ClaimsSamplingDAL
         claim.UpdateClaimApprovedValue(eClaim)
     End Sub
     Public Function SaveClaim(ByRef eclaim As IMIS_EN.tblClaim) As Integer
-        Dim claim As New IMIS_DAL.ClaimsDAL
+        Dim claim As New IMIS_DAL.ClaimsSamplingDAL
         If eclaim.ClaimID = 0 Then
             claim.InsertClaim(eclaim)
             Return 1
@@ -273,7 +313,7 @@ Public Class ClaimsBL
 
     End Function
     Public Sub UpdateClaimTotalValue(ByRef eClaim As IMIS_EN.tblClaim)
-        Dim claim As New IMIS_DAL.ClaimsDAL
+        Dim claim As New IMIS_DAL.ClaimsSamplingDAL
         claim.UpdateClaimTotalValue(eClaim)
     End Sub
     Public Function UpdateClaimReview(ByRef eClaim As IMIS_EN.tblClaim) As Boolean
@@ -304,7 +344,11 @@ Public Class ClaimsBL
     End Function
 
 
-    Public Function GetReviewClaims(ByRef eClaims As IMIS_EN.tblClaim, ByVal UserID As Integer) As DataTable
+    Public Function GetBatchClaims(ByRef eClaims As IMIS_EN.tblClaimFilter, ByVal UserID As Integer) As DataTable
+        Return clm.GetBatchClaims(eClaims, GetClaimStatus, UserID)
+    End Function
+
+    Public Function GetReviewClaims(ByRef eClaims As IMIS_EN.tblClaimFilter, ByVal UserID As Integer) As DataTable
         Return clm.GetReviewClaims(eClaims, GetClaimStatus, UserID)
     End Function
     Public Function GetReviewClaimsCount(ByRef eClaims As IMIS_EN.tblClaim, ByVal UserID As Integer) As Integer
@@ -335,7 +379,7 @@ Public Class ClaimsBL
         End If
     End Function
 
-  
+
     Public Function GetReviewSelection(Optional ByVal showselect As Boolean = False) As DataTable
 
         Dim dt As New DataTable
@@ -376,7 +420,7 @@ Public Class ClaimsBL
 
     End Function
 
-   
+
     Public Function IsClaimStatusChanged(ByRef eClaim As IMIS_EN.tblClaim) As Boolean
         Dim dt As DataTable = clm.IsClaimStatusChanged(eClaim)
         If dt.Rows.Count > 0 Then
@@ -421,7 +465,7 @@ Public Class ClaimsBL
 
     End Sub
 
-   
+
 
     Public Sub ZipXMLs()
         Dim Extracts As New IMIS_BL.IMISExtractsBL
@@ -521,51 +565,11 @@ Public Class ClaimsBL
         Return imisgen.GetRejectedReasons(ReasonId)
     End Function
     Public Function GetClaimIdByUUID(ByVal uuid As Guid) As Integer
-        Dim Claim As New IMIS_DAL.ClaimsDAL
+        Dim Claim As New IMIS_DAL.ClaimsSamplingDAL
         Return Claim.GetClaimIdByUUID(uuid).Rows(0).Item(0)
     End Function
     Public Function GetClaimUUIDByID(ByVal id As Integer) As Guid
-        Dim Claim As New IMIS_DAL.ClaimsDAL
+        Dim Claim As New IMIS_DAL.ClaimsSamplingDAL
         Return Claim.GetClaimUUIDByID(id).Rows(0).Item(0)
     End Function
-
-
-    Public Function GetClaimSampleBatches(Optional ByVal RetrievalValue As Integer = 0) As DataTable
-        Dim data As New IMIS_DAL.ExactSQL
-        Dim sSQL As String = ""
-        sSQL = $"
-        Select ClaimSampleBatchID as Value, ltrim(ClaimSampleBatchID) + ' ' + u.LoginName as Text   from tblclaimsamplebatch b
-        inner join tblUsers u on u.UserID = b.AssignedClaimReviewerID 
-        where IsCalcDone=0 and (AssignedClaimReviewerID={RetrievalValue} or {RetrievalValue}=0)
-        
-        union select 0, '-sample batch-' 
-        "
-        'If RetrievalValue = 0 Then
-        '    sSQL = "Select ClaimSampleBatchID as Value, ltrim(ClaimSampleBatchID) as Text   from tblclaimsamplebatch where IsCalcDone=0 union select 0, '-sample batch-'"
-        'Else
-        '    sSQL = "Select ClaimSampleBatchID as Value, ltrim(ClaimSampleBatchID) as Text   from tblclaimsamplebatch where IsCalcDone=0 and AssignedClaimReviewerID = 5637 union select 0, '-sample batch-' "
-        'End If
-        'sSQL = "Select ClaimSampleBatchID as Value, ltrim(ClaimSampleBatchID) as Text   from tblclaimsamplebatch where IsCalcDone=0 and AssignedClaimReviewerID = 5637 union select 0, '-sample batch-' "
-        data.setSQLCommand(sSQL, CommandType.Text)
-        Return data.Filldata
-    End Function
-
-    Public Function GetClaimReviewers() As DataTable
-        Dim data As New IMIS_DAL.ExactSQL
-        Dim sSQL As String = ""
-        'sSQL = "select UserID, LoginName + ' ' + ltrim(UserID) /* + ' ' + OtherNames + ' '+ LastName */ as Name from tblUsers where RoleID = 10"
-        sSQL = "select UserID, LoginName + ' ' + ltrim(UserID) as Name from tblUsers 
-                where ValidityTo is null
-                order bY LoginName
-                "
-        sSQL = "
-           select distinct u.UserID as UserId, LoginName as Name from tblUserRole UR
-            INNER JOIN tblRoleRight RR ON RR.RoleID = UR.RoleID
-            INNER JOIN tblRole ROLES ON ROLES.RoleID = UR.RoleID -- AND ISNULL(UR.Assign,0) & 1 > 0
-            inner join tblUsers u on u.UserID=ur.UserID
-            where  rolename = 'Medical Officer'"
-        data.setSQLCommand(sSQL, CommandType.Text)
-        Return data.Filldata
-    End Function
-
 End Class

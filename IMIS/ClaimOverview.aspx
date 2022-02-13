@@ -866,6 +866,7 @@ Title = '<%$ Resources:Resource,L_CLAIMOVERVIEW %>'%>
                 </td>
                 <td class="FormLabel">
                     <asp:Label ID="lblAttachment" runat="server" Text="Attachment"></asp:Label>  <asp:CheckBox ID="chkAttachment" runat="server" />
+                    <a href="/ClaimOverviewSampling.aspx"> Sampling </a>
                 </td>
                 <td class="FormLabel">
                    <asp:Button class="button" ID="btnSearch" runat="server" 

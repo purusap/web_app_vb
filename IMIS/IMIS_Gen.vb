@@ -85,6 +85,10 @@ Public Class IMIS_Gen
             _CHFID = value
         End Set
     End Property
+
+
+
+
     Public Function getUserId(ByVal session As Object) As Integer
         Try
             Dim dt As New DataTable

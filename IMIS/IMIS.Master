@@ -460,10 +460,6 @@
                             <asp:Label ID="lblClaimsLink" runat="server" Text='<%$ Resources:Resource,B_CLAIM %>'></asp:Label>
                             </a>
                             <ul>
-                                
-                                    <li><a class="candisable" href="ClaimOverviewSampling.aspx">
-                                    <asp:Label ID="Label10" runat="server" Text='<%$ Resources:Resource,CLAIM_SAMPLING %>'></asp:Label> 
-                                    </a></li>
                                 <li><a class="candisable" href="FindClaims.aspx">
                                     <asp:Label ID="SubClaimOverview" runat="server" Text='<%$ Resources:Resource,L_HFCLAIM %>'></asp:Label>
                                     </a></li>
@@ -554,9 +550,6 @@
                                     </a></li>
                                 <li><a class="candisable" href="AddFunding.aspx">
                                     <asp:Label ID="subFunding" runat="server" Text='<%$ Resources:Resource,L_FUNDING %>'></asp:Label>
-                                    </a></li>
-                                                                <li><a class="candisable" href="AddSamplePercent.aspx">
-                                    <asp:Label ID="Label9" runat="server" Text='<%$ Resources:Resource,CLAIM_SAMPLE_SETTING %>'></asp:Label>
                                     </a></li>
                                 <li><a id="EmailSetting" class="candisable" href="EmailSettings.aspx">
                                     <asp:Label ID="subEmailSetting" runat="server" Text='<%$ Resources:Resource,L_EMAILSETTING %>'></asp:Label>
