@@ -175,16 +175,16 @@ Partial Public Class ClaimReviewNew
         dt = Insuree.GetInsureeByCHFID(NSHI)
         Dim myDOB As DateTime
         If (dt.Rows.Count > 0) Then
-            Select Case dt.Rows(0)("Gender").ToString()
-                Case "M"
-                    dt.Rows(0)("Gender") = "Male"
-                Case "F"
-                    dt.Rows(0)("Gender") = "Female"
-                Case "O"
-                    dt.Rows(0)("Gender") = "Other"
-                Case Else
-                    dt.Rows(0)("Gender") = "Other"
-            End Select
+            'Select Case dt.Rows(0)("Gender").ToString()
+            '    Case "M"
+            '        dt.Rows(0)("Gender") = "Male"
+            '    Case "F"
+            '        dt.Rows(0)("Gender") = "Female"
+            '    Case "O"
+            '        dt.Rows(0)("Gender") = "Other"
+            '    Case Else
+            '        dt.Rows(0)("Gender") = "Other"
+            'End Select
             myDOB = DateTime.Parse(dt.Rows(0)("DOB"))
 
         End If

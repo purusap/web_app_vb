@@ -86,7 +86,9 @@ Partial Public Class FindInsuree
             ddlMarital.DataValueField = "Code"
             ddlMarital.DataTextField = "Status"
             ddlMarital.DataBind()
-
+            Dim today As DateTime = DateTime.Today
+            Dim dueDate As DateTime = today.AddDays(-120)
+            txtBirthDateFrom.Text = dueDate
 
             ddlPhotoAssigned.DataSource = Insuree.GetPhotoAssigned
             ddlPhotoAssigned.DataValueField = "PhotoAssignedValue"

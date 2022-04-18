@@ -60,20 +60,20 @@ Public Class ClaimAdminDAL
 
     'Corrected
     Public Function GetClaimAdmins(ByVal eClaimAdmin As IMIS_EN.tblClaimAdmin, ByVal All As Boolean) As DataTable
-        'Query = "select ClaimAdminId,ClaimAdminUUID,ClaimAdminCode,ClaimAdminCode +' - '+ ca.LastName Description,ca.LastName,ca.OtherNames,ca.DOB,ca.Phone,ca.ValidityFrom" &
-        '   ",ca.ValidityTo,ca.LegacyId,ca.AuditUserId,tblHF.HfID,tblHF.HFCode, ca.EmailId,ISNULL(ca.HasLogin,0) HasLogin from tblClaimAdmin ca" &
-        '   " inner join tblHF on ca.HFId = tblHF.HfID" &
-        '   " inner join tblUsersDistricts ud on tblHF.LocationId = ud.LocationId And ud.UserID = @UserID" &
-        '   " WHERE ca.ClaimAdminCode like @Code AND " &
-        '   " LastName LIKE @LastName AND OtherNames LIKE @OtherNames  AND ISNULL(ca.Phone,'') LIKE @Phone" &
-        '   " AND ISNULL(ca.EmailId,'') LIKE @EmailId"
         Query = "select ClaimAdminId,ClaimAdminUUID,ClaimAdminCode,ClaimAdminCode +' - '+ ca.LastName Description,ca.LastName,ca.OtherNames,ca.DOB,ca.Phone,ca.ValidityFrom" &
            ",ca.ValidityTo,ca.LegacyId,ca.AuditUserId,tblHF.HfID,tblHF.HFCode, ca.EmailId,ISNULL(ca.HasLogin,0) HasLogin from tblClaimAdmin ca" &
            " inner join tblHF on ca.HFId = tblHF.HfID" &
            " inner join tblUsersDistricts ud on tblHF.LocationId = ud.LocationId And ud.UserID = @UserID" &
-           " WHERE ca.ClaimAdminCode = @Code AND " &
-           " LastName = @LastName AND OtherNames = @OtherNames  AND ISNULL(ca.Phone,'') = @Phone" &
-           " AND ISNULL(ca.EmailId,'') = @EmailId"
+           " WHERE ca.ClaimAdminCode like @Code AND " &
+           " LastName LIKE @LastName AND OtherNames LIKE @OtherNames  AND ISNULL(ca.Phone,'') LIKE @Phone" &
+           " AND ISNULL(ca.EmailId,'') LIKE @EmailId"
+        'Query = "select ClaimAdminId,ClaimAdminUUID,ClaimAdminCode,ClaimAdminCode +' - '+ ca.LastName Description,ca.LastName,ca.OtherNames,ca.DOB,ca.Phone,ca.ValidityFrom" &
+        '   ",ca.ValidityTo,ca.LegacyId,ca.AuditUserId,tblHF.HfID,tblHF.HFCode, ca.EmailId,ISNULL(ca.HasLogin,0) HasLogin from tblClaimAdmin ca" &
+        '   " inner join tblHF on ca.HFId = tblHF.HfID" &
+        '   " inner join tblUsersDistricts ud on tblHF.LocationId = ud.LocationId And ud.UserID = @UserID" &
+        '   " WHERE ca.ClaimAdminCode = @Code AND " &
+        '   " LastName = @LastName AND OtherNames = @OtherNames  AND ISNULL(ca.Phone,'') = @Phone" &
+        '   " AND ISNULL(ca.EmailId,'') = @EmailId"
 
         If Not eClaimAdmin.DOBFrom Is Nothing Then
             Query += " AND ca.DOB >= @DOBFrom"
@@ -112,7 +112,7 @@ Public Class ClaimAdminDAL
         Return Data.Filldata
     End Function
     Public Function GetHFClaimAdminCodes(ByVal HFID As Integer)
-        Query = "select ClaimAdminId,ClaimAdminUUID,ClaimAdminCode,ClaimAdminCode +' - '+ ca.LastName Description,ca.LastName,ca.OtherNames,ca.DOB,ca.Phone,ca.ValidityFrom" &
+        Query = "select ClaimAdminId,ClaimAdminUUID,ClaimAdminCode,ca. Othernames +'  '+ ca.LastName Description,ca.LastName,ca.OtherNames,ca.DOB,ca.Phone,ca.ValidityFrom" &
            ",ca.ValidityTo,ca.LegacyId,ca.AuditUserId,HfID, ca.EmailId from tblClaimAdmin ca where HfID=@HfID And ValidityTo IS NULL"
         Data.setSQLCommand(Query, CommandType.Text)
         Data.params("@HfID", SqlDbType.Int, HFID)

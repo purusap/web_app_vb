@@ -142,8 +142,9 @@ Title = '<%$ Resources:Resource,L_FINDCLAIM %>'%>
                 $cell1 = $row.find("td").eq(7); //   cell7 in the current row.
                 $cell2 = $row.find("td").eq(8); //   cell8 in the current row.
                 ClaimStatus = $.trim($cell1.html()).replace("&nbsp;", "");
-                var $checkbx = $cell2.find("input[type=checkbox]").eq(0);
+                var $checkbx = $cell2.find("input[type=checkbox]:not(:disabled)").eq(0);
                 if (ClaimStatus == '<%=imisgen.getMessage("T_ENTERED", True ) %>') {
+                //if ((ClaimStatus == '<%=imisgen.getMessage("T_ENTERED", True ) %>') || daysCount<=7 ) {
                     $checkbx.attr("checked", target.checked);
                 }
             });
@@ -337,7 +338,7 @@ Title = '<%$ Resources:Resource,L_FINDCLAIM %>'%>
  
 
 
-</script>
+    </script>
 
 
 <asp:UpdatePanel ID="upClaim" runat="server" RenderMode="Inline" > 
@@ -468,9 +469,12 @@ Title = '<%$ Resources:Resource,L_FINDCLAIM %>'%>
             <td class="DataEntry">
                 <asp:TextBox ID="txtICDCode" runat="server" MaxLength="8"  class="cmb txtICDCode" autocomplete="off"></asp:TextBox>
             </td>                  
-            <td class="DataEntry" >
-                  
-            </td>                          
+            <td class="FormLabel">   
+                  <asp:Label ID="Label1" runat="server" Text="No Attachment"></asp:Label>  <asp:CheckBox ID="chkNoAttachment" runat="server"  AutoPostBack="True" />
+                   <%--<asp:Button class="button" ID="btnSearch" runat="server" 
+                          Text='<%$ Resources:Resource,B_SEARCH %>' >
+                    </asp:Button>--%>
+                 </td>                         
            </tr>
            <tr>           
               <td class="FormLabel">
@@ -497,7 +501,7 @@ Title = '<%$ Resources:Resource,L_FINDCLAIM %>'%>
                      </asp:DropDownList>
                  </td>
               <td class="FormLabel">   
-                  <asp:Label ID="lblAttachment" runat="server" Text="Attachment"></asp:Label>  <asp:CheckBox ID="chkAttachment" runat="server" />
+                  <asp:Label ID="lblAttachment" runat="server" Text="Attachment"></asp:Label>  <asp:CheckBox ID="chkAttachment" runat="server" AutoPostBack="True" />
                    <%--<asp:Button class="button" ID="btnSearch" runat="server" 
                           Text='<%$ Resources:Resource,B_SEARCH %>' >
                     </asp:Button>--%>

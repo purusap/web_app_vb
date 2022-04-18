@@ -200,8 +200,8 @@ Public Class UsersDAL
     Public Function IsUserExists(ByVal UserID As Integer) As Boolean
         Dim sSQL As String = String.Empty
         Dim data As New ExactSQL
-        Dim strSQL As String = "Select Top 1 * from tblUsers where  tblUsers.UserId = @UserId AND tblUsers.UserId = @UserId AND isAssociated = 1 AND ValidityTo is null" 'LoginName = @LoginName and 
-
+        'Dim strSQL As String = "Select Top 1 * from tblUsers where  tblUsers.UserId = @UserId AND tblUsers.UserId = @UserId AND isAssociated = 1 AND ValidityTo is null" 'LoginName = @LoginName and 
+        Dim strSQL As String = "Select Top 1 * from tblUsers where  tblUsers.UserId = @UserId AND tblUsers.UserId = @UserId AND isAssociated = 1 AND ValidityTo is null"
         If Not UserID = 0 Then
             strSQL += " AND tblUsers.UserId = @UserId"
         End If

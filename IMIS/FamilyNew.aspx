@@ -54,6 +54,11 @@ In case of dispute arising out or in relation to the use of the program, it is s
         .auto-style2 {
             height: 27px;
         }
+        
+        #Body_txtBirthDate,#Body_Button1 {
+            visibility:hidden;
+        }
+        
     </style>
     <script type="text/javascript" language="javascript">
 

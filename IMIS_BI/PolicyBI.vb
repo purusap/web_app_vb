@@ -121,5 +121,9 @@ Public Class PolicyBI
         Dim Policy As New IMIS_BL.PolicyBL
         Return Policy.GetPolicyByDate(StartDate, ProdID, FamilyID)
     End Function
+    Public Function GetPolicyByEnrollDate(ByVal EnrollDate As Date, ByVal ProdID As Integer, ByVal FamilyID As Integer) As Integer
+        Dim Policy As New IMIS_BL.PolicyBL
+        Return Policy.GetPolicyByEnrollDate(EnrollDate, ProdID, FamilyID)
+    End Function
 
 End Class

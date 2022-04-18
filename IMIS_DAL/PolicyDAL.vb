@@ -199,7 +199,7 @@ Public Class PolicyDAL
     Public Function GetPolicybyFamily(ByVal FamilyId As Integer, ByVal status As DataTable) As DataTable
 
 
-        data.setSQLCommand("SELECT PolicyId,PolicyUUID,EnrollDate,EffectiveDate,StartDate,ExpiryDate,Status.name As PolicyStatus ,PolicyValue,tblPolicy.isOffline,tblPolicy.ValidityFrom,tblPolicy.ValidityTo,tblPolicy.PolicyStage,ProductCode,OtherNames + ' ' + LastName  OfficerName, tblPolicy.ProdID,tblPolicy.FamilyId,F.FamilyUUID, tblProduct.ProdUUID, tblPolicy.PolicyStatus as PolicyStatusID" &
+        data.setSQLCommand("SELECT PolicyId,PolicyUUID,EnrollDate,EffectiveDate,StartDate,ExpiryDate,Status.name As PolicyStatus ,PolicyValue,tblPolicy.isOffline,tblPolicy.ValidityFrom,tblPolicy.ValidityTo,tblPolicy.PolicyStage,ProductCode,OtherNames + ' ' + LastName  OfficerName, tblPolicy.ProdID,tblPolicy.FamilyId,F.FamilyUUID, tblProduct.ProdUUID, tblPolicy.PolicyStatus as PolicyStatusID, tblOfficer.Code as OfficerCode" &
                            " FROM tblPolicy INNER JOIN tblProduct ON tblPolicy.ProdID = tblProduct.ProdId" &
                            " INNER JOIN tblFamilies F On F.FamilyID = tblPolicy.FamilyID " &
                            " LEFT OUTER JOIN tblOfficer ON tblPolicy.OfficerId = tblOfficer.OfficerID" &
@@ -499,6 +499,25 @@ Public Class PolicyDAL
             End If
         End If
         Return PolicyCount
+    End Function
+    Public Function GetPolicyByEnrollDate(ByVal EnrollDate As Date, ByVal ProdID As Integer, ByVal FamilyID As Integer) As Integer
+        Dim sSQL As String = ""
+        Dim data As New ExactSQL
+        sSQL = "SELECT DATEDIFF(DAY,@EnrollDate, ExpiryDate) AS RemainingDays from tblPolicy where FamilyID=@FamilyID and ValidityTo is null and ProdID=@ProductId and ExpiryDate>getdate()"
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@EnrollDate", EnrollDate)
+        data.params("@ProductId", ProdID)
+        data.params("@FamilyID", FamilyID)
+        Dim dt As DataTable = data.Filldata()
+        Dim RemainingDays As Integer = 0
+        If dt.Rows.Count > 0 Then
+            If Not dt(0)("RemainingDays") Is DBNull.Value Then
+                RemainingDays = dt(0)("RemainingDays")
+            Else
+                RemainingDays = 0
+            End If
+        End If
+        Return RemainingDays
     End Function
 
 End Class

@@ -135,7 +135,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="AddFunding.aspx" />
-    <Content Include="ClaimOverviewSamplingBatch.aspx" />
     <Content Include="AddSamplePercent.aspx" />
     <Content Include="BgService.aspx" />
     <Content Include="CappedItemService.aspx" />
@@ -147,7 +146,6 @@
     <Content Include="ClaimFeedback.aspx" />
     <Content Include="ClaimOverview.aspx" />
     <Content Include="ClaimOverviewSampling.aspx" />
-    <Content Include="ClaimOverviewSamplingBatch.aspx" />
     <Content Include="ClaimReview.aspx" />
     <Content Include="ClaimReviewNew.aspx" />
     <Content Include="Default.aspx" />
@@ -329,19 +327,17 @@
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>AddFunding.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClaimOverviewSamplingBatch.aspx.designer.vb">
-      <DependentUpon>ClaimOverviewSamplingBatch.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ClaimOverviewSamplingBatch.aspx.vb">
-      <DependentUpon>ClaimOverviewSamplingBatch.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="AddSamplePercent.aspx.designer.vb">
       <DependentUpon>AddSamplePercent.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddSamplePercent.aspx.vb">
       <DependentUpon>AddSamplePercent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_GlobalResources\Resource.designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
     <Compile Include="AutoCompleteHandlers\AutoCompleteHandler.ashx.vb">
       <DependentUpon>AutoCompleteHandler.ashx</DependentUpon>
@@ -420,7 +416,6 @@
       <DependentUpon>ClaimOverviewSamplingBatch.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClaimOverviewSamplingBatch.aspx.vb">
-      <DependentUpon>ClaimOverviewSamplingBatch.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ClaimReview.aspx.designer.vb">
@@ -889,6 +884,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_GlobalResources\Resource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Resource.designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -991,9 +991,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_GlobalResources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
@@ -1195,7 +1193,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_DetectChanges="False" BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_StartDate="2012/1/1" />
+      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

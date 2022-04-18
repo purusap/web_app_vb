@@ -69,6 +69,11 @@ Public Class PremiumBL
         dr("PayType") = imisgen.getMessage("T_MOBILEPHONE")
         dtbl.Rows.Add(dr)
 
+        dr = dtbl.NewRow
+        dr("Code") = "P"
+        dr("PayType") = "Payment Gateway"
+        dtbl.Rows.Add(dr)
+
         Return dtbl
     End Function
     Public Function SavePremium(ByRef ePremium As IMIS_EN.tblPremium, ByVal IsOffline As Boolean) As Integer '1 updated 0 inserted 2 policyId not existing
@@ -129,6 +134,9 @@ Public Class PremiumBL
 
         Dim dt As DataTable = premium.CheckCanBeDeleted(epremium.PremiumId)
         If dt.Rows.Count > 0 Then Return 2
+
+        Dim pg As DataTable = premium.CheckPaymentGateway(epremium.PremiumId)
+        If pg.Rows.Count > 0 Then Return 3
 
         If premium.DeletePremium(epremium) Then
             Return 1

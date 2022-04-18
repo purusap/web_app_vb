@@ -245,17 +245,21 @@ Partial Public Class Claim
             hfClaimItemID.Value = 0
             hfClaimServiceID.Value = 0
             If Not eClaim.ClaimID = 0 Then
-                If Not eClaim.ClaimStatus = 2 Then
+                Dim days As Integer = (Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing) - Date.ParseExact(eClaim.DateTo, "dd/MM/yyyy", Nothing)).Days
+                If Not eClaim.ClaimStatus = 2 Or days > CInt(System.Configuration.ConfigurationManager.AppSettings("ClaimAllowedDays")) Then
+                    'If Not eClaim.ClaimStatus = 2 Or Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing) <> Date.ParseExact(eClaim.DateClaimed, "dd/MM/yyyy", Nothing) Then
+                    'If Not eClaim.ClaimStatus = 2 Or Date.ParseExact("16/12/2021", "dd/MM/yyyy", Nothing) > Date.ParseExact(eClaim.DateClaimed, "dd/MM/yyyy", Nothing) Then
                     pnlBodyCLM.Attributes.Add("Class", "disabled")
                     pnlBodyCLM.Enabled = False
                     pnlServiceDetails.Enabled = False
                     pnlItemsDetails.Enabled = False
                     B_ADD.Visible = False
+                    B_ADD.Visible = False
                     B_SAVE.Visible = False
                     canClearRow = False
                 End If
             End If
-            tdPrintW.Visible = eClaim.ClaimID > 0
+                tdPrintW.Visible = eClaim.ClaimID > 0
         Catch ex As Exception
             'lblMsg.Text = imisgen.getMessage("M_ERRORMESSAGE")
             imisgen.Alert(imisgen.getMessage("M_ERRORMESSAGE"), pnlButtons, alertPopupTitle:="IMIS")
@@ -626,14 +630,16 @@ Partial Public Class Claim
             End If
 
             If ddlOPDIPD.SelectedValue = "O" Then
-                Dim days As Integer = (Date.ParseExact(txtClaimDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact(txtSTARTData.Text, "dd/MM/yyyy", Nothing)).Days
+                'Dim days As Integer = (Date.ParseExact(txtClaimDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact(txtSTARTData.Text, "dd/MM/yyyy", Nothing)).Days
+                Dim days As Integer = (Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing) - Date.ParseExact(txtSTARTData.Text, "dd/MM/yyyy", Nothing)).Days
                 If days > CInt(System.Configuration.ConfigurationManager.AppSettings("ClaimAllowedDays")) Then
                     imisgen.Alert("Visit From Date should be less than " & System.Configuration.ConfigurationManager.AppSettings("ClaimAllowedDays").ToString() & " days.", pnlButtons, alertPopupTitle:="IMIS")
                     Return "Exit"
                 End If
             End If
             If ddlOPDIPD.SelectedValue = "I" Then
-                Dim days As Integer = (Date.ParseExact(txtClaimDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact(txtENDData.Text, "dd/MM/yyyy", Nothing)).Days
+                'Dim days As Integer = (Date.ParseExact(txtClaimDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact(txtENDData.Text, "dd/MM/yyyy", Nothing)).Days
+                Dim days As Integer = (Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing) - Date.ParseExact(txtENDData.Text, "dd/MM/yyyy", Nothing)).Days
                 If days > CInt(System.Configuration.ConfigurationManager.AppSettings("ClaimAllowedDays")) Then
                     imisgen.Alert("Visit To Date should be less than " & System.Configuration.ConfigurationManager.AppSettings("ClaimAllowedDays").ToString() & " days.", pnlButtons, alertPopupTitle:="IMIS")
                     Return "Exit"

@@ -36,7 +36,8 @@ Public Class RoleDAL
 
         sSQL = "SELECT [RoleID],[RoleUUID],[RoleName], CASE WHEN [IsSystem] > 0 THEN 'True' Else 'False' END System,isSystem,ISNULL(AltLanguage,RoleName) AltLanguage,"
         sSQL += " CASE WHEN [IsBlocked] = 1 THEN 'True' ELSE 'False' END Blocked,[ValidityFrom],[ValidityTo],[AuditUserID],[LegacyID] FROM tblRole"
-        sSQL += " WHERE (Rolename like '" & erole.RoleName & "%' OR AltLanguage LIKE '" & erole.AltLanguage & "%') AND (isBlocked = @isBlocked OR @isBlocked IS NULL)"
+        'sSQL += " WHERE (Rolename like '" & erole.RoleName & "%' OR AltLanguage LIKE '" & erole.AltLanguage & "%') AND (isBlocked = @isBlocked OR @isBlocked IS NULL)"
+        sSQL += " WHERE (Rolename like @RoleName OR AltLanguage LIKE @AltLanguage) AND (isBlocked = @isBlocked OR @isBlocked IS NULL)"
         If erole.IsSystem IsNot Nothing Then
             If erole.IsSystem = 1 Then
                 sSQL += " AND isSystem > 0"
@@ -52,6 +53,8 @@ Public Class RoleDAL
 
         data.setSQLCommand(sSQL, CommandType.Text)
         'data.params("@RoleName", SqlDbType.NVarChar, 50, erole.RoleName)
+        data.params("@RoleName", SqlDbType.NVarChar, 50, $"%{erole.RoleName}%")
+        data.params("@AltLanguage", SqlDbType.NVarChar, 50, $"%{erole.AltLanguage}%")
         data.params("@IsSystem", SqlDbType.Bit, erole.IsSystem)
         data.params("@IsBlocked", SqlDbType.Bit, erole.IsBlocked)
 

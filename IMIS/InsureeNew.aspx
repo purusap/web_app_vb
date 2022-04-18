@@ -122,6 +122,9 @@ In case of dispute arising out or in relation to the use of the program, it is s
 	        opacity:0.9;
 	        display:none;
 	    }
+        #Body_txtBirthDate,#Body_Button1 {
+            visibility:hidden;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="Body" Runat="Server">

@@ -809,6 +809,9 @@ Public Class ClaimsDAL
         If eClaims.Attachment = 1 Then
             sSQL += " AND tblClaim.Attachment= 1"
         End If
+        If eClaims.Attachment = 0 Then
+            sSQL += " AND tblClaim.Attachment= 0"
+        End If
 
         sSQL += " ORDER BY ClaimID DESC"
         data.setSQLCommand(sSQL, CommandType.Text)
@@ -881,6 +884,9 @@ Public Class ClaimsDAL
         'ssql += " AND tblClaim.Attachment= @Attachment"
         If eClaims.Attachment = 1 Then
             ssql += " AND tblClaim.Attachment= 1"
+        End If
+        If eClaims.Attachment = 0 Then
+            ssql += " AND tblClaim.Attachment= 0"
         End If
         If Not eClaims.tblBatchRun.RunID = Nothing Then
             sSQL += " and tblClaim.RunID = @RunID"

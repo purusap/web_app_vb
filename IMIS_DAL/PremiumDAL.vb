@@ -263,7 +263,7 @@ Public Class PremiumDAL
         Dim data As New ExactSQL
         sSQL += " Select tblPremium.isOffline,PY.Amount MatchedAmount, tblPremium.PremiumID,tblPremium.PremiumUUID, tblPolicy.policyid,tblPolicy.PolicyUUID,tblPolicy.FamilyId,tblFamilies.FamilyUUID, PayDate,tblPayer.PayerUUID, "
         sSQL += " PayerName, tblpremium.Amount, CASE PayType WHEN 'M' THEN 'Mobile Phone' WHEN 'C' THEN 'Cash' "
-        sSQL += " When 'B' THEN 'Bank Transfer' END as PayType,Receipt, tblPremium.PayerID, tblpolicy.FamilyID,"
+        sSQL += " When 'B' THEN 'Bank Transfer' When 'P' THEN 'Payment Gateway' END as PayType,Receipt, tblPremium.PayerID, tblpolicy.FamilyID,"
         sSQL += " Case tblPremium.isPhotoFee When 1 Then N'Photo Fee' ELSE N'Contribution' END PayCategory"
         sSQL += " From tblPremium Left OUTER JOIN "
         sSQL += " (SELECT premiumID,SUM(Amount) Amount FROM tblPaymentDetails PD INNER Join tblPayment On PD.PaymentID = tblPayment.PaymentID "
@@ -347,6 +347,14 @@ Public Class PremiumDAL
         data.setSQLCommand(str, CommandType.Text)
         Data.params("@PremiumID", SqlDbType.Int, PremiumID)
         Return Data.Filldata()
+    End Function
+    Public Function CheckPaymentGateway(ByVal PremiumID As Integer) As DataTable
+        Dim str As String = "select top 1 PremiumId from tblPremium pr" &
+                            " where pr.PremiumId=@PremiumID and PayType='P'"
+
+        data.setSQLCommand(str, CommandType.Text)
+        data.params("@PremiumID", SqlDbType.Int, PremiumID)
+        Return data.Filldata()
     End Function
     Public Function DeletePremium(ByVal epremium As IMIS_EN.tblPremium) As Boolean
         Dim data As New ExactSQL

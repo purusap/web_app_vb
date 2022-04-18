@@ -101,7 +101,11 @@ Partial Public Class FindFamily
             ddlPoverty.DataTextField = "Status"
             ddlPoverty.DataBind()
 
-			ddlConfirmationType.DataSource = Family.GetSubsidy
+            Dim today As DateTime = DateTime.Today
+            Dim dueDate As DateTime = today.AddDays(-120)
+            txtBirthDateFrom.Text = dueDate
+
+            ddlConfirmationType.DataSource = Family.GetSubsidy
             ddlConfirmationType.DataValueField = "ConfirmationTypeCode"
             ddlConfirmationType.DataTextField = If(Request.Cookies("CultureInfo").Value = "en", "ConfirmationType", "AltLanguage")
             ddlConfirmationType.DataBind()												  

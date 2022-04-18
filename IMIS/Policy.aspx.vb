@@ -179,7 +179,7 @@ Partial Public Class Policy
                 ddlProduct.Enabled = False
 
                 'Or ePolicy.PolicyStatus > 1 is taken out from the below condition after Jiri's visit 
-                If ePolicy.ValidityTo.HasValue Or ePolicy.PolicyStatus > 1 Or ((IMIS_Gen.offlineHF Or IMIS_Gen.OfflineCHF) And Not if(ePolicy.isOffline Is Nothing, False, ePolicy.isOffline)) Then
+                If ePolicy.ValidityTo.HasValue Or ePolicy.PolicyStatus > 1 Or ((IMIS_Gen.offlineHF Or IMIS_Gen.OfflineCHF) And Not If(ePolicy.isOffline Is Nothing, False, ePolicy.isOffline)) Then
                     PnlBody4.Enabled = False
                     L_FAMILYPANEL.Enabled = False
                     'pnlBody.Enabled = False
@@ -191,6 +191,24 @@ Partial Public Class Policy
                     ddlEnrolementOfficer.Enabled = True
 
                     B_SAVE.Visible = True
+
+                End If
+                Dim paymentGatewayList As String = System.Configuration.ConfigurationManager.AppSettings("PaymentGateWayName").ToString()
+                Dim paymentGateway As String() = paymentGatewayList.Split(",")
+                If paymentGateway.Contains(ddlEnrolementOfficer.SelectedItem.Text) Then
+
+                    'If ddlEnrolementOfficer.SelectedItem.Text = "Khalti" Or ddlEnrolementOfficer.SelectedItem.Text = "IPS" Then
+                    PnlBody4.Enabled = False
+                    L_FAMILYPANEL.Enabled = False
+                    'pnlBody.Enabled = False
+                    txtEnrollmentDate.Enabled = False
+                    btnEnrollmentDate.Enabled = False
+                    txtEffectiveDate.Enabled = False
+                    txtStartDate.Enabled = False
+                    txtExpiryDate.Enabled = False
+                    ddlEnrolementOfficer.Enabled = False
+
+                    B_SAVE.Visible = False
 
                 End If
 

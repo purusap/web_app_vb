@@ -268,7 +268,7 @@ title='<%$ Resources:Resource,L_FAMILY%>'%>
                         </td>
                         <td class="FormLabel">&nbsp;</td>
                         <td class="ReadOnlyText">&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td><asp:HiddenField runat="server" ID="hfGateway" /></td>
                     </tr>
                 </table>      
                     
@@ -278,6 +278,7 @@ title='<%$ Resources:Resource,L_FAMILY%>'%>
                     <tr>
                         <td >
                             <asp:Label  ID="Label2" runat="server"  Text='<%$ Resources:Resource,L_INSUREES %>'></asp:Label>   <asp:Label ID="lblCount" runat="server"></asp:Label>
+                            <asp:HiddenField runat="server" ID="hfFamilyCount" />
                         </td>
                         <td  align="right" style="padding-left:10px; vertical-align:bottom">
                         

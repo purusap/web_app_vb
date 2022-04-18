@@ -150,7 +150,6 @@
     <Compile Include="tblClaimDedRem.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblClaimSampleBatchFilter.vb" />
     <Compile Include="tblClaimFilter.vb" />
     <Compile Include="tblClaimItems.vb">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -541,7 +540,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2012/1/1" />
+      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

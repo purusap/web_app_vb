@@ -275,6 +275,15 @@ Partial Public Class OverviewFamily
     Protected WithEvents txtVillage As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''hfGateway control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfGateway As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''Label2 control.
     '''</summary>
     '''<remarks>
@@ -291,6 +300,15 @@ Partial Public Class OverviewFamily
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCount As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''hfFamilyCount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfFamilyCount As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
     '''AddInsuree control.

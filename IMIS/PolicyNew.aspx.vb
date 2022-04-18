@@ -567,6 +567,15 @@ Partial Public Class PolicyNew
                     End If
                 End If
 
+                'Check if policy is allowed to be renewd
+                Dim policyRenewDays As Integer = System.Configuration.ConfigurationManager.AppSettings("PolicyRenewDays")
+                If policyRenewDays > 0 Then
+                    If Policy.GetPolicyByEnrollDate(txtEnrollmentDate.Text, ePolicy.tblProduct.ProdID, ePolicy.tblFamilies.FamilyID) > policyRenewDays Then
+                        imisgen.Alert("Policy Cannot be Renewed in This Cycle!", pnlButtons, alertPopupTitle:="IMIS")
+                        Return
+                    End If
+                End If
+
                 hfCheckMaxInsureeCount.Value = 0
                 Dim policyID As Integer = Policy.SavePolicyNew(ePolicy, IMIS_Gen.OfflineCHF)
 

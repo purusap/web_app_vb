@@ -187,7 +187,12 @@ Partial Public Class Premium
                 hfPolicyIsOffline.Value = if(ePremium.tblPolicy.isOffline Is Nothing, False, ePremium.tblPolicy.isOffline)
                 hfPremiumIsOffline.Value = if(ePremium.isOffline Is Nothing, False, ePremium.isOffline)
 
-                If ePremium.ValidityTo.HasValue Or ((IMIS_Gen.offlineHF Or IMIS_Gen.OfflineCHF) And Not if(ePremium.isOffline Is Nothing, False, ePremium.isOffline)) Then
+                If ePremium.ValidityTo.HasValue Or ((IMIS_Gen.offlineHF Or IMIS_Gen.OfflineCHF) And Not If(ePremium.isOffline Is Nothing, False, ePremium.isOffline)) Then
+                    pnlBody.Enabled = False
+                    B_SAVE.Visible = False
+                End If
+
+                If ddlTypeOfPayment.SelectedValue = "P" Then
                     pnlBody.Enabled = False
                     B_SAVE.Visible = False
                 End If

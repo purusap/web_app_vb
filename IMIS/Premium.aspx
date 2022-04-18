@@ -138,6 +138,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                     } else {
                         P = 2;
                         Msg += ' <%=imisgen.getMessage("M_PREMIUMEXCEEDSPOLICY", True) %>. ';
+                        return false;
                     }
                     if (Msg != "" )
                         reportPolicyPremiumContribution();

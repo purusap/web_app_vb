@@ -127,6 +127,10 @@ Partial Public Class OverviewFamily
             btnRenewPolicy_Click(sender, New System.Web.UI.ImageClickEventArgs(0, 0))
         End If
 
+        If hfGateway.Value = "1" Then
+            AddInsuree.Visible = False
+        End If
+
         Dim RefUrl = Request.Headers("Referer")
         Dim reg As New Regex("OverviewFamily", RegexOptions.IgnoreCase) '
 #If HIB Then
@@ -289,6 +293,13 @@ Partial Public Class OverviewFamily
                 policyValueCurrent = 0
                 epolicy.PolicyStatus = dr("PolicyStatusID")
                 epolicy.ExpiryDate = dr("ExpiryDate")
+                Dim paymentGatewayList As String = System.Configuration.ConfigurationManager.AppSettings("PaymentGateWayName").ToString()
+                Dim paymentGateway As String() = paymentGatewayList.Split(",")
+                'If paymentGateway.Contains(dr("OfficerCode")) And CInt(hfFamilyCount.Value) <= 5 Then
+                If paymentGateway.Contains(dr("OfficerCode")) Then
+                    AddInsuree.Visible = False
+                    hfGateway.Value = 1
+                End If
                 If epolicy.PolicyStatus > 1 Then
                     Continue For
                 End If
@@ -308,6 +319,8 @@ Partial Public Class OverviewFamily
                         End If
                     Next
                 End If
+
+
 
                 If Not dr("PolicyValue") Is Nothing Then
                     policyValueCurrent = dr("PolicyValue")
@@ -434,6 +447,7 @@ Partial Public Class OverviewFamily
     End Sub
     Private Sub loadGrid(ByRef gv As GridView, ByRef dt As DataTable)
         Dim x As Integer = 0
+        'Dim eo As String
         Dim Rows() As DataRow
         Dim dv As DataView = dt.DefaultView
         Try
@@ -445,6 +459,7 @@ Partial Public Class OverviewFamily
                     dv.Sort = "CHFID"
                     If Rows.Length > 0 Then
                         lblCount.Text = "(" & dt.Rows.Count & ")"
+                        hfFamilyCount.Value = dt.Rows.Count
                         x = dv.Find(Rows(0).Item("CHFID"))
                     End If
 
@@ -454,6 +469,7 @@ Partial Public Class OverviewFamily
                     dv.Sort = "EnrollDate DESC"
                     If Rows.Length > 0 Then
                         x = dv.Find(Rows(0).Item("EnrollDate"))
+
                     End If
 
                 ElseIf gv.ID = "gvPremiums" Then
@@ -462,6 +478,7 @@ Partial Public Class OverviewFamily
                     dv.Sort = "PayerName,PremiumId"
                     If Rows.Length > 0 Then
                         Dim a() As Object = {Rows(0).Item("PayerName"), Rows(0).Item("PremiumId")}
+                        'Dim payerType As String = Rows(0).Item("PayerName")
                         x = dv.Find(a)
                     End If
 
@@ -472,6 +489,7 @@ Partial Public Class OverviewFamily
 
 
             End If
+            'eo = dv.Find(Rows(0).Item("OfficerName"))
             gv.DataSource = dv
             gv.SelectedIndex = x
             gv.DataBind()
@@ -791,6 +809,8 @@ Partial Public Class OverviewFamily
                 Session("msg") = imisgen.getMessage("L_PREMIUM") & " " & imisgen.getMessage("M_DELETED")
             ElseIf chk = 2 Then
                 Session("msg") = imisgen.getMessage("M_PREMIUMISINUSE")
+            ElseIf chk = 3 Then
+                Session("msg") = "Premium Paid Through Online Payment Systems Cannot be Deleted!"
             End If
 
 

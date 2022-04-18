@@ -73,7 +73,9 @@ Partial Public Class FindClaims
             Else
                 txtCHFID.Text = ""
             End If
-
+            Dim today As DateTime = DateTime.Today
+            Dim dueDate As DateTime = today.AddDays(-7)
+            txtClaimedDateFrom.Text = dueDate
         End If
 
         If IsPostBack = False Then RunPageSecurity()
@@ -322,8 +324,12 @@ Partial Public Class FindClaims
                 ddlClaimAdmin.SelectedValue = eClaim.tblClaimAdmin.ClaimAdminId
                 ddlVisitType.SelectedValue = eClaim.VisitType
                 'chkAttachment.Checked = If(eClaim.Attachment > 1, True, False)
+                eClaim.Attachment = 2
                 If chkAttachment.Checked = True Then
                     eClaim.Attachment = 1
+                End If
+                If chkNoAttachment.Checked = True Then
+                    eClaim.Attachment = 0
                 End If
 
                 '''''clear Session("FindClaimsFilter")....
@@ -376,9 +382,12 @@ Partial Public Class FindClaims
                     eClaimAdmin.ClaimAdminId = ddlClaimAdmin.SelectedValue
                 End If
                 eClaim.VisitType = ddlVisitType.SelectedValue
-                eClaim.Attachment = 0
+                eClaim.Attachment = 2
                 If chkAttachment.Checked = True Then
                     eClaim.Attachment = 1
+                End If
+                If chkNoAttachment.Checked = True Then
+                    eClaim.Attachment = 0
                 End If
             End If
 
@@ -617,6 +626,28 @@ Partial Public Class FindClaims
             If e.Row.Cells(13).Text.ToString = "True" Then
                 ImgClaimDocumentURL.ImageUrl = "Images/attach.png"
             End If
+            Dim days As Integer = (Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing) - Date.ParseExact(e.Row.Cells(2).Text, "dd/MM/yyyy", Nothing)).Days
+            Dim CheckBox1 As CheckBox = TryCast(e.Row.FindControl("chkbgridSubmit"), CheckBox)
+            If days >= CInt(System.Configuration.ConfigurationManager.AppSettings("ClaimAllowedDays")) Then
+                CheckBox1.Enabled = False
+            End If
+            'Dim CheckBox1 As CheckBox = TryCast(e.Row.FindControl("chkbgridSubmit"), CheckBox)
+            'If Date.ParseExact("16/12/2021", "dd/MM/yyyy", Nothing) > Date.ParseExact(e.Row.Cells(2).Text, "dd/MM/yyyy", Nothing) Then
+            '    CheckBox1.Enabled = False
+            'End If
+
         End If
+    End Sub
+    Private Sub chkNoAttachment_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoAttachment.CheckedChanged
+        If chkNoAttachment.Checked = True Then
+            chkAttachment.Checked = False
+        End If
+
+    End Sub
+    Private Sub chkAttachment_CheckedChanged(sender As Object, e As EventArgs) Handles chkAttachment.CheckedChanged
+        If chkAttachment.Checked = True Then
+            chkNoAttachment.Checked = False
+        End If
+
     End Sub
 End Class
