@@ -1399,4 +1399,67 @@ In case of dispute arising out or in relation to the use of the program, it is s
         <a href="javascript:void" class="hiddenPanelCloseButton">cancel</a></asp:Panel>
 
 
+<script>
+    gval = "";
+    lsel = "";
+    function dformfill(){ /* debug form fill toggle*/
+        var fill=localStorage.getItem("dformfill");
+        localStorage.setItem("dformfill", !(fill==='true'));
+    }
+    function tt(sel, v) {
+        lsel = sel;
+        gval = null;
+        //sel = "select[name='ctl00$Body$ddlRegion']";
+        //console.log('tt'); //debugger;
+
+        var el = $(sel);
+        var elval = el.val(); //console.log('elval', elval);
+
+        if (elval == "0") {}
+        else if (elval) { return; }
+
+        el.val(v);
+        el.trigger('change');
+        gval = "-_-";
+        console.log(sel, v);
+        setTimeout(function () { tt(sel,v) }, 1000); //run untill we have a value
+        return v;
+    }
+    function ttselect(sel, v) {
+        //tt(`select[name='ctl00$Body$${sel}']`, v);
+        tt(`select[name='${sel}']`, v);
+    }
+    function ttname(sel, v) {
+        tt(`[name='${sel}']`, v);
+    }
+    function jq(sel){
+        return $(`[name='ctl00$Body$${sel}']`);
+    }
+
+    $(document).ready(function () {
+        //alert(1);
+        window.ss = function () {
+            var fill=localStorage.getItem("dformfill"); console.log('dformfill()', fill);
+            if(!(fill==='true')){ return; }
+            
+            //tt("#Body_txtSTARTData",'11/07/2022');
+            tt("#Body_txtSTARTData", $("#Body_txtClaimDate").val() );
+
+            tt("#Body_txtCHFIDData", "111181022");
+            tt("#Body_txtCLAIMCODEData", "2222"+(Math.random()+"").substr(2,5)) //claimno
+            tt("#Body_txtICDCode0","A18 A18 Tuberculosis of other organs "); //main dg
+            tt("#Body_hfICDID0","662");
+
+            tt("#Body_gvService_txtServiceCode_0", "EMR 1  Emergency Hospital");
+            tt("#Body_gvService_txtQuantityS_0", 1);
+            tt("#Body_gvService_txtValue_0", 400);
+            tt("#Body_ddlVisitType", "E");
+            tt("#Body_ddlOPDIPD", "O");
+
+
+
+        };       
+        ss();
+    });
+</script>
     </asp:Content>

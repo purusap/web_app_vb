@@ -65,6 +65,24 @@ Namespace Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Bippana Family New.
+        '''</summary>
+        Friend Shared ReadOnly Property BIPANNA_FAMILY_NEW() As String
+            Get
+                Return ResourceManager.GetString("BIPANNA_FAMILY_NEW", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Bipanna Claims.
+        '''</summary>
+        Friend Shared ReadOnly Property BIPANNA_FIND_CLAIMS() As String
+            Get
+                Return ResourceManager.GetString("BIPANNA_FIND_CLAIMS", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Add.
         '''</summary>
         Friend Shared ReadOnly Property B_ADD() As String

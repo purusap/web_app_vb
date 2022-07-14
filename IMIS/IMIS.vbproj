@@ -154,10 +154,12 @@
     <Content Include="EnterNewPassword.aspx" />
     <Content Include="Error.htm" />
     <Content Include="Family.aspx" />
+    <Content Include="BipannaFamilyNew.aspx" />
     <Content Include="FamilyNew.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="FeedbackPrompt.aspx" />
     <Content Include="FindClaimAdministrator.aspx" />
+    <Content Include="BipannaFindClaims.aspx" />
     <Content Include="FindClaims.aspx" />
     <Content Include="FindFamily.aspx" />
     <Content Include="FindHealthFacility.aspx" />
@@ -222,10 +224,13 @@
     <Content Include="NepaliDate\nepaliDatePicker.css" />
     <Content Include="nojs.htm" />
     <Content Include="Officer.aspx" />
+    <Content Include="BipannaOverviewFamily.aspx" />
     <Content Include="OverviewFamily.aspx" />
     <Content Include="Payer.aspx" />
     <Content Include="PaymentOverview.aspx" />
+    <Content Include="BipannaPolicy.aspx" />
     <Content Include="Policy.aspx" />
+    <Content Include="BipannaPolicyNew.aspx" />
     <Content Include="PolicyNew.aspx" />
     <Content Include="PolicyRenewal.aspx" />
     <Content Include="Premium.aspx" />
@@ -467,6 +472,13 @@
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Family.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BipannaFamilyNew.aspx.designer.vb">
+      <DependentUpon>BipannaFamilyNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BipannaFamilyNew.aspx.vb">
+      <DependentUpon>BipannaFamilyNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="FamilyNew.aspx.designer.vb">
       <DependentUpon>FamilyNew.aspx</DependentUpon>
     </Compile>
@@ -487,6 +499,13 @@
     <Compile Include="FindClaimAdministrator.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>FindClaimAdministrator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BipannaFindClaims.aspx.designer.vb">
+      <DependentUpon>BipannaFindClaims.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BipannaFindClaims.aspx.vb">
+      <DependentUpon>BipannaFindClaims.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FindClaims.aspx.designer.vb">
       <DependentUpon>FindClaims.aspx</DependentUpon>
@@ -729,6 +748,13 @@
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Officer.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BipannaOverviewFamily.aspx.designer.vb">
+      <DependentUpon>BipannaOverviewFamily.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BipannaOverviewFamily.aspx.vb">
+      <DependentUpon>BipannaOverviewFamily.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="OverviewFamily.aspx.designer.vb">
       <DependentUpon>OverviewFamily.aspx</DependentUpon>
     </Compile>
@@ -750,12 +776,26 @@
       <DependentUpon>PaymentOverview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="BipannaPolicy.aspx.designer.vb">
+      <DependentUpon>BipannaPolicy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BipannaPolicy.aspx.vb">
+      <DependentUpon>BipannaPolicy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Policy.aspx.designer.vb">
       <DependentUpon>Policy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Policy.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Policy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BipannaPolicyNew.aspx.designer.vb">
+      <DependentUpon>BipannaPolicyNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BipannaPolicyNew.aspx.vb">
+      <DependentUpon>BipannaPolicyNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PolicyNew.aspx.designer.vb">
       <DependentUpon>PolicyNew.aspx</DependentUpon>
@@ -1193,7 +1233,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="False" />
+      <UserProperties BuildVersion_DetectChanges="False" BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_StartDate="2012/1/1" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

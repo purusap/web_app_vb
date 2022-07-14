@@ -5114,4 +5114,10 @@ adults/children)
   <data name="CLAIM_SAMPLING" xml:space="preserve">
     <value>Claim Sampling</value>
   </data>
+  <data name="BIPANNA_FAMILY_NEW" xml:space="preserve">
+    <value>Bippana Family New</value>
+  </data>
+  <data name="BIPANNA_FIND_CLAIMS" xml:space="preserve">
+    <value>Bipanna Claims</value>
+  </data>
 </root>

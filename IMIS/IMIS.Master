@@ -454,6 +454,9 @@
                                 <li><a id="FindPayment" class="candisable" href="FindPayment.aspx">
                                     <asp:Label ID="SubFindPayment" runat="server" Text='<%$ Resources:Resource,L_PAYMENTS %>'></asp:Label>
                                     </a></li>
+                                <li><a id="Family" class="candisable" href="BipannaFamilyNew.aspx">
+                                    <asp:Label ID="Label8" runat="server" Text='<%$ Resources:Resource,BIPANNA_FAMILY_NEW %>'></asp:Label>
+                                    </a></li>
                             </ul>
                         </li>
                         <li><a href="javascript:void 0">
@@ -462,6 +465,10 @@
                             <ul>
                                 <li><a class="candisable" href="FindClaims.aspx">
                                     <asp:Label ID="SubClaimOverview" runat="server" Text='<%$ Resources:Resource,L_HFCLAIM %>'></asp:Label>
+                                    </a></li>
+                                <li><cite></cite></li>
+                                  <li><a id="bipannaFindClaims" class="candisable" href="BipannaFindClaims.aspx">
+                                    <asp:Label ID="Label9" runat="server" Text='<%$ Resources:Resource,BIPANNA_FIND_CLAIMS %>'></asp:Label>
                                     </a></li>
                                 <li><cite></cite></li>
                                 <li><a class="candisable" href="ClaimOverview.aspx">
