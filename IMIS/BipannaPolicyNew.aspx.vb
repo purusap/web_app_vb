@@ -584,10 +584,10 @@ Partial Public Class BipannaPolicyNew
                 ePolicy.StartDate = txtStartDate.Text
 
                 ePayer.PayerID = ddlPayer.SelectedValue
-                ePremium.Amount = CInt(ddlPremium.SelectedValue)
+                ePremium.Amount = CInt(txtPolicyValue.Text) ' CInt(ddlPremium.SelectedValue) 
                 ePremium.Receipt = txtReceiptNumber.Text
                 ePremium.PayDate = Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing)
-                ePremium.PayType = "C"
+                ePremium.PayType = "L" 'bipanna , low incomme payment type
                 ePremium.isOffline = IMIS_Gen.offlineHF Or IMIS_Gen.OfflineCHF
                 ePremium.AuditUserID = imisgen.getUserId(Session("User"))
                 ePolicy.AuditUserID = ePremium.AuditUserID
@@ -611,7 +611,7 @@ Partial Public Class BipannaPolicyNew
                 ePolicy.isOffline = False
                 ePremium.tblPolicy = ePolicy
                 'removing Policy check for now
-                If Premium.isUniqueReceipt(ePremium) = False Then
+                If Premium.isUniqueReceipt(ePremium) = False And False Then
                     imisgen.Alert(imisgen.getMessage("M_DUPLICATERECEIPT"), pnlBody, alertPopupTitle:="IMIS")
                     Return
                 End If

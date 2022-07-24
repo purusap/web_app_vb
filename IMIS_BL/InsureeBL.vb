@@ -134,6 +134,10 @@ Public Class InsureeBL
         MoveImageToFolder(HttpContext.Current.Server.MapPath(IMIS_EN.AppConfiguration.SubmittedFolder), HttpContext.Current.Server.MapPath(IMIS_EN.AppConfiguration.UpdatedFolder), ePhotos.PhotoFileName)
         If UpdateInDatabase = True Then Insuree.UpdateImage(ePhotos)
     End Sub
+    Public Sub UpdateImageBipanna(ByRef ePhotos As IMIS_EN.tblPhotos, Optional ByVal UpdateInDatabase As Boolean = True)
+        'MoveImageToFolder(HttpContext.Current.Server.MapPath(IMIS_EN.AppConfiguration.SubmittedFolder), HttpContext.Current.Server.MapPath(IMIS_EN.AppConfiguration.UpdatedFolder), ePhotos.PhotoFileName)
+        If UpdateInDatabase = True Then Insuree.UpdateImage(ePhotos)
+    End Sub
     Public Function FindInsureeByCHFID(ByVal CHFID As String, Optional Language As String = "en")
         Return Insuree.FindInsureeByCHFID(CHFID, Language)
     End Function

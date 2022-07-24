@@ -356,13 +356,13 @@ Partial Public Class BipannaFamilyNew
     Protected WithEvents txtCHFID As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''RequiredFieldCHFID0 control.
+    '''fuInsureePhoto control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RequiredFieldCHFID0 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents fuInsureePhoto As Global.System.Web.UI.WebControls.FileUpload
 
     '''<summary>
     '''btnBrowse control.

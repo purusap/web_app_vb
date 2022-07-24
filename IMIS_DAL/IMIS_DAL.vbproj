@@ -142,6 +142,7 @@
     <Compile Include="OfficerVillagesDAL.vb" />
     <Compile Include="PayersDAL.vb" />
     <Compile Include="PayerTypeDAL.vb" />
+    <Compile Include="PremiumDAL1.vb" />
     <Compile Include="PaymentDAL.vb" />
     <Compile Include="PolicyDAL.vb" />
     <Compile Include="PolicyRenewalDAL.vb" />
@@ -361,7 +362,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2012/1/1" />
+      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

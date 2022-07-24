@@ -26,6 +26,8 @@
 ' 
 '
 
+Imports System.IO
+
 Public Class BipannaFamilyNew
     Inherits System.Web.UI.Page
     Private Family As New IMIS_BI.FamilyBI
@@ -466,7 +468,7 @@ Public Class BipannaFamilyNew
             Else
                 birthdate = Date.ParseExact(txtBirthDate.Text, "dd/MM/yyyy", Nothing)
             End If
-
+            txtCHFID.Text = (New Random).Next(1, 1000000000)
             If Not Family.CheckCHFID(txtCHFID.Text) = True And False Then
                 imisgen.Alert(txtCHFID.Text & imisgen.getMessage("M_NOTVALIDCHFNUMBER"), pnlButtons, alertPopupTitle:="IMIS")
                 Return
@@ -537,16 +539,17 @@ Public Class BipannaFamilyNew
             eFamily.ConfirmationNo = txtConfirmationNo.Text
 
             Dim ImageName As String = Mid(Image1.ImageUrl, Image1.ImageUrl.LastIndexOf("\") + 2, Image1.ImageUrl.Length)
+            ImageName = fuInsureePhoto.FileName
 
             ePhotos.PhotoFileName = ImageName
 
 
             If ImageName.Length > 0 Then
-                ePhotos.OfficerID = Family.getOfficerID(ImageName)
+                'ePhotos.OfficerID = Family.getOfficerID(ImageName)
             End If
 
             If ImageName.Length > 0 Then
-                ePhotos.ValidityFrom = Family.ExtractDate(ImageName)
+                ePhotos.ValidityFrom = Now 'Family.ExtractDate(ImageName)
             End If
 
             ePhotos.AuditUserID = dt.Rows(0)("UserID")
@@ -573,7 +576,7 @@ Public Class BipannaFamilyNew
             If ddlCurWard.SelectedValue.Length > 0 Then eInsuree.CurrentVillage = ddlCurWard.SelectedValue
 
             If ImageName.Length > 0 Then
-                eInsuree.GeoLocation = Family.ExtractLatitude(ImageName) & " " & Family.ExtractLongitude(ImageName)
+                'eInsuree.GeoLocation = Family.ExtractLatitude(ImageName) & " " & Family.ExtractLongitude(ImageName)
             End If
             'Addition for Nepal >> End
 
@@ -583,8 +586,8 @@ Public Class BipannaFamilyNew
             eFamily.tblInsuree = eInsuree
 
             Family.SaveFamily(eFamily)
-
-            If Image1.ImageUrl.Length > 0 Then
+            If fuInsureePhoto.HasFile Then
+                'If Image1.ImageUrl.Length > 0 Then
                 '  If Not ePhotos.PhotoFolder.Contains(IMIS_EN.AppConfiguration.UpdatedFolder) Then
                 UpdateImage(ePhotos)
                 'End If
@@ -618,8 +621,16 @@ Public Class BipannaFamilyNew
     End Sub
     Private Sub UpdateImage(ByRef ePhotos As IMIS_EN.tblPhotos)
         Dim Insuree As New IMIS_BI.InsureeBI
-        Insuree.UpdateImage(ePhotos, False)
-        Image1.ImageUrl = IMIS_EN.AppConfiguration.UpdatedFolder & Mid(Image1.ImageUrl, Image1.ImageUrl.LastIndexOf("\") + 2, Image1.ImageUrl.Length)
+        Dim fpath = ePhotos.PhotoFolder & "\" & ePhotos.PhotoFileName
+        Dim fpathSrv = Server.MapPath(" ") & fpath
+        Dim dir = fpathSrv & "\.."
+        If Not Directory.Exists(dir) Then
+            Directory.CreateDirectory(dir)
+        End If
+        fuInsureePhoto.SaveAs(fpathSrv)
+        Insuree.UpdateImageBipanna(ePhotos, False)
+        Image1.ImageUrl = fpath
+        'Image1.ImageUrl = IMIS_EN.AppConfiguration.UpdatedFolder & Mid(Image1.ImageUrl, Image1.ImageUrl.LastIndexOf("\") + 2, Image1.ImageUrl.Length)
     End Sub
     Protected Sub txtCHFID_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtCHFID.TextChanged
         Try
@@ -709,6 +720,7 @@ Public Class BipannaFamilyNew
         End If
     End Sub
     Private Sub ddlPoverty_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlPoverty.SelectedIndexChanged
+        Return
         If ddlPoverty.SelectedValue = 1 Then
             ddlConfirmationType.SelectedValue = 2
             rfConfirmationNo.Enabled = True

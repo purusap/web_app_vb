@@ -302,30 +302,28 @@ In case of dispute arising out or in relation to the use of the program, it is s
                        
                 
                     </tr>                   
-                        <tr>
+                        <tr style="display:none;">
                         <td class="FormLabel">
                             <asp:Label ID="L_PremiumPaid" runat="server" Text='<%$ Resources:Resource,L_PREMIUMPAID %>'></asp:Label>
                         </td>
                         <td class="DataEntry">
                             <asp:DropDownList ID="ddlPremium" runat="server">
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredfieldValidator6" runat="Server" ControlToValidate="ddlPremium" SetFocusOnError="true" Text="*" InitialValue="0" ValidationGroup="check"  ForeColor="Red" Display="Dynamic" ></asp:RequiredFieldValidator>     
+                            <%--<asp:RequiredFieldValidator ID="RequiredfieldValidator6" runat="Server" ControlToValidate="ddlPremium" SetFocusOnError="true" Text="*" InitialValue="0" ValidationGroup="check"  ForeColor="Red" Display="Dynamic" ></asp:RequiredFieldValidator>--%>     
                         </td>
                     </tr>
-                        <tr>
+                    <tr style="display:none;">
                         <td class="FormLabel">
                             <asp:Label ID="L_ReceiptNumber" runat="server" Text='<%$ Resources:Resource,L_RECEIPT %>'></asp:Label>
                         </td>
                         <td class ="DataEntry">
-                            <asp:TextBox ID="txtReceiptNumber" runat="server" style="text-align:right;  padding-right:4px" ></asp:TextBox></td>
+                            <asp:TextBox ID="txtReceiptNumber" runat="server" style="text-align:right;  padding-right:4px" Visible="false"></asp:TextBox></td>
                              <td>                              
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorReceiptNumber" 
+                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidatorReceiptNumber" 
                                 runat="server" ControlToValidate="txtReceiptNumber" 
                                 ValidationGroup="check" ForeColor="Red" Display="Dynamic"  Text="*"
-                                ></asp:RequiredFieldValidator>
+                                ></asp:RequiredFieldValidator>--%>
                             </td>
-                            
-
                         
                     </tr>
                     <tr>
@@ -456,6 +454,47 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 </table>             
          </asp:Panel>
 
+<script>
+    gval = "";
+    lsel = "";
+    function dformfill(){ /* debug form fill toggle*/
+        var fill=localStorage.getItem("dformfill");
+        localStorage.setItem("dformfill", !(fill==='true'));
+    }
+    function tt(sel, v) {
+        lsel = sel;
+        gval = null;
+        //sel = "select[name='ctl00$Body$ddlRegion']";
+        //console.log('tt'); //debugger;
+
+        var el = $(sel);
+        var elval = el.val(); //console.log('elval', elval);
+
+        if (elval == "0") {}
+        else if (elval) { return; }
+
+        el.val(v);
+        el.trigger('change');
+        gval = "-_-";
+        console.log(sel, v);
+        setTimeout(function () { tt(sel,v) }, 1000); //run untill we have a value
+        return v;
+    }
+
+    $(document).ready(function () {
+        //alert(1);
+        window.ss = function () {
+            var fill=localStorage.getItem("dformfill"); console.log('dformfill()', fill);
+            if(!(fill==='true')){ return; }
+            
+            tt("#Body_txtEnrollmentDate", "01/07/2022");
+            tt("#Body_ddlPayer", 2);
+            tt("#Body_txtReceiptNumber", (Math.random() + "").substr(2, 11) );
+            tt("#Body_ddlProduct", "51"); //cancer
+        };       
+        ss();
+    });
+</script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Footer" Runat="Server">
     <asp:Label text="" runat="server" ID="lblMsg"> </asp:Label>

@@ -62,6 +62,10 @@ Public Class InsureeBI
         Dim Images As New IMIS_BL.InsureeBL
         Images.UpdateImage(ePhotos, UpdateInDatabase)
     End Sub
+    Public Sub UpdateImageBipanna(ByRef ePhotos As IMIS_EN.tblPhotos, Optional ByVal UpdateInDatabase As Boolean = True)
+        Dim Images As New IMIS_BL.InsureeBL
+        Images.UpdateImageBipanna(ePhotos, UpdateInDatabase)
+    End Sub
     Public Function GetInsureeByCHFID(ByVal CHFID As String, Optional Language As String = "en") As DataTable
         Dim Insuree As New IMIS_BL.InsureeBL
         Return Insuree.FindInsureeByCHFID(CHFID, Language)

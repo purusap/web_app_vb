@@ -208,12 +208,12 @@ Partial Public Class BipannaOverviewFamily
         Dim UserID As Integer = imisgen.getUserId(Session("User"))
         If Not ondelete Then
             If userBI.RunPageSecurity(IMIS_EN.Enums.Pages.OverviewFamily, Page) Then
-                AddFamily.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.FamilyAdd, UserID)
+                AddFamily.Visible = False 'userBI.checkRights(IMIS_EN.Enums.Rights.FamilyAdd, UserID)
                 EditFamily.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.FamilyEdit, UserID)
-                DeleteFamily.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.FamilyDelete, UserID)
-                AddInsuree.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.InsureeAdd, UserID)
+                DeleteFamily.Visible = False 'userBI.checkRights(IMIS_EN.Enums.Rights.FamilyDelete, UserID)
+                AddInsuree.Visible = False 'userBI.checkRights(IMIS_EN.Enums.Rights.InsureeAdd, UserID)
                 EditInsuree.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.InsureeEdit, UserID)
-                DeleteInsuree.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.InsureeDelete, UserID)
+                DeleteInsuree.Visible = False 'userBI.checkRights(IMIS_EN.Enums.Rights.InsureeDelete, UserID)
                 AddPolicy.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.PolicyAdd, UserID)
                 EditPolicy.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.PolicyEdit, UserID)
                 DeletePolicy.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.PolicyDelete, UserID)
@@ -419,8 +419,8 @@ Partial Public Class BipannaOverviewFamily
     End Sub
     Private Sub loadSecurity()
         Dim UserID As Integer = imisgen.getUserId(Session("User"))
-        AddFamily.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.FamilyAdd, UserID)
-        AddInsuree.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.InsureeAdd, UserID)
+        AddFamily.Visible = False 'BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.FamilyAdd, UserID)
+        AddInsuree.Visible = False 'BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.InsureeAdd, UserID)
         AddPolicy.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.PolicyAdd, UserID)
         AddPremium.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.ContributionAdd, UserID)
         EditFamily.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.FamilyEdit, UserID)
@@ -428,7 +428,7 @@ Partial Public Class BipannaOverviewFamily
         EditPolicy.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.PolicyEdit, UserID)
         EditPremium.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.ContributionEdit, UserID)
         DeleteFamily.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.FamilyDelete, UserID)
-        DeleteInsuree.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.InsureeDelete, UserID)
+        DeleteInsuree.Visible = False 'BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.InsureeDelete, UserID)
         DeletePolicy.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.PolicyDelete, UserID)
         DeletePremium.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.ContributionDelete, UserID)
         btnRenewPolicy.Visible = BipannaOverviewFamily.checkRights(IMIS_EN.Enums.Rights.PolicyAdd, UserID)
@@ -623,7 +623,7 @@ Partial Public Class BipannaOverviewFamily
     Private Sub AddInsuree_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles AddInsuree.Click
         Dim InsureePage As String = "Insuree.aspx"
 #If HIB Then
-        InsureePage = "InsureeNew.aspx"
+        InsureePage = "BipannaInsureeNew.aspx"
         Response.Redirect(InsureePage & "?f=" & FamilyId)
 #End If
         'Response.Redirect(InsureePage & "?f=" & FamilyUUID.ToString())
@@ -633,7 +633,7 @@ Partial Public Class BipannaOverviewFamily
         'InsureeUUID = insureeBI.GetInsureeUUIDByID(gvInsurees.SelectedDataKey.Value)
         Dim InsureePage As String = "Insuree.aspx"
 #If HIB Then
-        InsureePage = "InsureeNew.aspx"
+        InsureePage = "BipannaInsureeNew.aspx"
         Response.Redirect(InsureePage & "?f=" & FamilyId & "&i=" & gvInsurees.SelectedDataKey.Value)
 #End If
         'Response.Redirect(InsureePage & "?f=" & FamilyUUID.ToString() & "&i=" & InsureeUUID.ToString())

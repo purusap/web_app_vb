@@ -77,7 +77,7 @@ Public Class PremiumBL
         Return dtbl
     End Function
     Public Function SavePremium(ByRef ePremium As IMIS_EN.tblPremium, ByVal IsOffline As Boolean) As Integer '1 updated 0 inserted 2 policyId not existing
-        Dim Premium As New IMIS_DAL.PremiumDAL
+        Dim Premium As New IMIS_DAL.PremiumDAL1 'IMIS_DAL.PremiumDAL
         Dim policy As New IMIS_DAL.PolicyDAL
         Dim res As Integer
 
@@ -88,7 +88,9 @@ Public Class PremiumBL
 
 
         If ePremium.PremiumId = 0 Then
-            If Premium.InsertPremium(ePremium) Then
+            If ePremium.PayType = "L" Then 'L: lower income (only insert once), todo: copy this file and inherit 
+                Premium.InsertPremiumBipanna(ePremium)
+            ElseIf Premium.InsertPremium(ePremium) Then
                 res = 0
             End If
         Else

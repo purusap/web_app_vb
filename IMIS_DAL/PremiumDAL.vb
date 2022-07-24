@@ -322,7 +322,7 @@ Public Class PremiumDAL
         data.params("@LegacyID", SqlDbType.Int, 1, ParameterDirection.Output)
         data.params("AuditUserID", SqlDbType.Int, ePremium.AuditUserID)
         data.params("@isPhotoFee", SqlDbType.Bit, ePremium.isPhotoFee)
-
+        Dim x = 1
         data.ExecuteCommand()
         Return True
     End Function

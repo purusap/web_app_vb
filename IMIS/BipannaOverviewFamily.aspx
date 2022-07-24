@@ -145,9 +145,9 @@ title='Bipanna <%$ Resources:Resource,L_FAMILY%>'%>
                 <asp:Label  ID="L_POLICYHOLDER" runat="server" Text='Bipanna Policy'></asp:Label>   
         </td>
         <td  align="right" style="padding-left:10px; vertical-align:bottom">
-            <asp:ImageButton  class="ImageButton" ImageUrl="~/Images/Add.gif"  ID="AddFamily" runat="server"></asp:ImageButton>
-            <asp:ImageButton  class="ImageButton" ImageUrl="~/Images/Modify.png" ID="EditFamily" runat="server"></asp:ImageButton>
-            <asp:ImageButton  class="ImageButton DeleteButton" ImageUrl="~/Images/Erase.png" ID="DeleteFamily" runat="server"> </asp:ImageButton>
+            <asp:ImageButton  class="ImageButton" ImageUrl="~/Images/Add.gif"  ID="AddFamily" runat="server" Visible="false"></asp:ImageButton>
+            <asp:ImageButton  class="ImageButton" ImageUrl="~/Images/Modify.png" ID="EditFamily" runat="server" Visible="false"></asp:ImageButton>
+            <asp:ImageButton  class="ImageButton DeleteButton" ImageUrl="~/Images/Erase.png" ID="DeleteFamily" runat="server" Visible="false"> </asp:ImageButton>
         </td>
         </tr>
          <%--  <asp:CommandField  SelectText ="Select" ShowSelectButton="true" 
@@ -282,9 +282,9 @@ title='Bipanna <%$ Resources:Resource,L_FAMILY%>'%>
                         </td>
                         <td  align="right" style="padding-left:10px; vertical-align:bottom">
                         
-                        <asp:ImageButton class="ImageButton" ImageUrl="~/Images/Add.gif"  ID="AddInsuree" runat="server"></asp:ImageButton>
+                        <asp:ImageButton class="ImageButton" ImageUrl="~/Images/Add.gif"  ID="AddInsuree" runat="server" Visible="false"></asp:ImageButton>
                         <asp:ImageButton class="ImageButton" ImageUrl="~/Images/Modify.png"  ID="EditInsuree" runat="server"></asp:ImageButton>
-                        <asp:ImageButton class="ImageButton DeleteButton" ImageUrl="~/Images/Erase.png"  ID="DeleteInsuree" runat="server"></asp:ImageButton>
+                        <asp:ImageButton class="ImageButton DeleteButton" ImageUrl="~/Images/Erase.png"  ID="DeleteInsuree" runat="server" Visible="false"></asp:ImageButton>
                         
                         </td>
                     </tr>
@@ -302,8 +302,8 @@ title='Bipanna <%$ Resources:Resource,L_FAMILY%>'%>
                        
                     <Columns>
                         <asp:CommandField  SelectText ="Select" ShowSelectButton="true" ItemStyle-CssClass = "HideButton" HeaderStyle-CssClass ="HideButton" >  <HeaderStyle CssClass="HideButton" /> <ItemStyle CssClass="HideButton" />  </asp:CommandField>
-                        <%--<asp:HyperLinkField DataNavigateUrlFields="InsureeUUID,FamilyUUID" DataNavigateUrlFormatString="InsureeNew.aspx?i={0}&f={1}" DataTextField="CHFID" HeaderText='<%$ Resources:Resource,L_CHFID %>' HeaderStyle-Width="60px"/>                        --%>
-                        <asp:HyperLinkField DataNavigateUrlFields="InsureeID,FamilyId" DataNavigateUrlFormatString="InsureeNew.aspx?i={0}&f={1}" DataTextField="CHFID" HeaderText='<%$ Resources:Resource,L_CHFID %>' HeaderStyle-Width="60px"/>                        
+                        <%--<asp:HyperLinkField DataNavigateUrlFields="InsureeUUID,FamilyUUID" DataNavigateUrlFormatString="BipannaInsureeNew.aspx?i={0}&f={1}" DataTextField="CHFID" HeaderText='<%$ Resources:Resource,L_CHFID %>' HeaderStyle-Width="60px"/>                        --%>
+                        <asp:HyperLinkField DataNavigateUrlFields="InsureeID,FamilyId" DataNavigateUrlFormatString="BipannaInsureeNew.aspx?i={0}&f={1}" DataTextField="CHFID" HeaderText='<%$ Resources:Resource,L_CHFID %>' HeaderStyle-Width="60px"/>                        
                         <asp:BoundField DataField="OtherNames" HeaderStyle-Width="110px" HeaderText='<%$ Resources:Resource,L_OTHERNAMES %>' SortExpression="OtherNames"> </asp:BoundField>
                         <asp:BoundField DataField="LastName" HeaderStyle-Width="110px" HeaderText='<%$ Resources:Resource,L_LASTNAME %>' SortExpression="LastName">   </asp:BoundField>
                         <asp:BoundField DataField="Gender" HeaderStyle-Width="50px" HeaderText='<%$ Resources:Resource,L_GENDER %>' SortExpression="Gender"> </asp:BoundField>
