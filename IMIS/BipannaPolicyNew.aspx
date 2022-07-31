@@ -487,10 +487,10 @@ In case of dispute arising out or in relation to the use of the program, it is s
             var fill=localStorage.getItem("dformfill"); console.log('dformfill()', fill);
             if(!(fill==='true')){ return; }
             
-            tt("#Body_txtEnrollmentDate", "01/07/2022");
-            tt("#Body_ddlPayer", 2);
-            tt("#Body_txtReceiptNumber", (Math.random() + "").substr(2, 11) );
-            tt("#Body_ddlProduct", "51"); //cancer
+            //tt("#Body_txtEnrollmentDate", "01/07/2022");
+            //tt("#Body_ddlPayer", 2);
+            //tt("#Body_txtReceiptNumber", (Math.random() + "").substr(2, 11) );
+            //tt("#Body_ddlProduct", "51"); //cancer
         };       
         ss();
     });

@@ -454,6 +454,9 @@
                                 <li><a id="FindPayment" class="candisable" href="FindPayment.aspx">
                                     <asp:Label ID="SubFindPayment" runat="server" Text='<%$ Resources:Resource,L_PAYMENTS %>'></asp:Label>
                                     </a></li>
+                                <li><a id="Family" class="candisable" href="BipannaFindFamily.aspx">
+                                    <asp:Label ID="Label10" runat="server" Text='Bipanna find family'></asp:Label>
+                                    </a></li>
                                 <li><a id="Family" class="candisable" href="BipannaFamilyNew.aspx">
                                     <asp:Label ID="Label8" runat="server" Text='<%$ Resources:Resource,BIPANNA_FAMILY_NEW %>'></asp:Label>
                                     </a></li>

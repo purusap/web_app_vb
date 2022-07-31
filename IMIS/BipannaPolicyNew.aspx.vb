@@ -337,6 +337,7 @@ Partial Public Class BipannaPolicyNew
                     txtStartDate.Enabled = False
                 End If
                 hfInsurancePeriod.Value = eProduct.InsurancePeriod
+                hfInsurancePeriod.Value = 1200 '100 years
 
                 'Get the start and end date 
                 Dim dt As New DataTable
@@ -352,23 +353,23 @@ Partial Public Class BipannaPolicyNew
                 dt = Policy.GetPeriodForPolicy(eProduct.ProdID, dEnrolDate, HasCycle, "N")
                 'If (dt.Rows.Count > 0 And HasCycle = True) Or (Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing) <= dt(0)("StartDate") And hfPolicyStage.Value = "N") Then
                 If (dt.Rows.Count > 0 And HasCycle = True) Or (Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing) <= dt(0)("StartDate") And hfPolicyStage.Value = "N") Then
-                        If IsDate(dt(0)("StartDate")) Then
-                            txtStartDate.Text = dt(0)("StartDate")
-                        End If
-                        If IsDate(dt(0)("StartDate")) Then
-                            txtEffectiveDate.Text = dt(0)("StartDate")
-                        End If
-                        If IsDate(dt(0)("ExpiryDate")) Then
-                            txtExpiryDate.Text = dt(0)("ExpiryDate")
-                        End If
+                    If IsDate(dt(0)("StartDate")) Then
+                        txtStartDate.Text = dt(0)("StartDate")
+                    End If
+                    If IsDate(dt(0)("StartDate")) Then
+                        txtEffectiveDate.Text = dt(0)("StartDate")
+                    End If
+                    If IsDate(dt(0)("ExpiryDate")) Then
+                        txtExpiryDate.Text = dt(0)("ExpiryDate")
+                    End If
 
-                        'If CalcEffectiveDate < dt(0)("StartDate") Then
-                        '    txtEffectiveDate.Text = dt(0)("StartDate")
-                        'Else
-                        '    txtEffectiveDate.Text = CalcEffectiveDate
-                        'End If
-                    Else
-                        Dim dStartDate As Date
+                    'If CalcEffectiveDate < dt(0)("StartDate") Then
+                    '    txtEffectiveDate.Text = dt(0)("StartDate")
+                    'Else
+                    '    txtEffectiveDate.Text = CalcEffectiveDate
+                    'End If
+                Else
+                    Dim dStartDate As Date
                     If hfPolicyStage.Value = "N" Or hfPolicyStage.Value = "R" Then
                         txtStartDate.Text = txtEnrollmentDate.Text
                         txtEffectiveDate.Text = txtEnrollmentDate.Text
@@ -385,12 +386,14 @@ Partial Public Class BipannaPolicyNew
                             dStartDate = EnrollAdmin
                         End If
 
-                        txtStartDate.Text = dStartDate
-                        txtEffectiveDate.Text = dStartDate
+                        txtStartDate.Text = txtEnrollmentDate.Text
+                        txtEffectiveDate.Text = txtEnrollmentDate.Text
                         txtExpiryDate.Text = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, CDbl(hfInsurancePeriod.Value), dStartDate))
-
                     End If
                 End If
+                txtStartDate.Text = txtEnrollmentDate.Text
+                txtEffectiveDate.Text = txtEnrollmentDate.Text
+                txtExpiryDate.Text = "01/01/2079"
             End If
             FillOfficers()
         End If
@@ -577,6 +580,7 @@ Partial Public Class BipannaPolicyNew
                 End If
 
                 hfCheckMaxInsureeCount.Value = 0
+                ePolicy.PolicyStatus = 2 'active
                 Dim policyID As Integer = Policy.SavePolicyNew(ePolicy, IMIS_Gen.OfflineCHF)
 
                 ePolicy.PolicyID = CInt(policyID)

@@ -212,6 +212,15 @@ Partial Public Class IMIS
     Protected WithEvents SubFindPayment As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''Label10 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label10 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Label8 control.
     '''</summary>
     '''<remarks>

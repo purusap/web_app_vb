@@ -285,7 +285,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                </ContentTemplate>      
             </asp:UpdatePanel>                      
          </asp:Panel>
-        <asp:Panel ID="pnlBody" runat="server" Style="height: auto;" CssClass="panelBody" GroupingText='Bipanna Policy Holder'>
+        <asp:Panel ID="pnlBody" runat="server" Style="height:auto;" CssClass="panelBody" GroupingText='Bipanna Policy Holder'>
             <asp:UpdatePanel ID="upCHFID" runat="server">
                 <ContentTemplate>
                     <table>
@@ -528,6 +528,17 @@ In case of dispute arising out or in relation to the use of the program, it is s
                             <td class="DataEntry">&nbsp;</td>
                         </tr>
                     </table>
+
+
+
+
+
+
+
+
+
+
+
                 </ContentTemplate>
             </asp:UpdatePanel>
         </asp:Panel>
@@ -568,35 +579,6 @@ In case of dispute arising out or in relation to the use of the program, it is s
         </ContentTemplate>
     </asp:UpdatePanel>
    </div>
-   <asp:Panel ID="pnlButtons" runat="server"   CssClass="panelbuttons" >
-                <table width="100%" cellpadding="10 10 10 10">
-                 <tr>
-                        
-                         <td align="left" >
-                        
-                               <asp:Button 
-                            
-                            ID="B_SAVE" 
-                            runat="server" 
-                            Text='<%$ Resources:Resource,B_SAVE%>'
-                            ValidationGroup="check"  />
-                        </td>
-                        
-                        
-                        <td  align="right">
-                       <asp:Button 
-                            
-                            ID="B_CANCEL" 
-                            runat="server" 
-                            Text='<%$ Resources:Resource,B_CANCEL%>'
-                              />
-                        </td>
-                        
-                    </tr>
-                </table>   
-                 <asp:HiddenField ID="hfInsureeIsOffline" runat="server" Value="" />
-               <asp:HiddenField ID="hfFamilyIsOffline" runat="server" Value="" />
-                    </asp:Panel>
 
 
 
@@ -615,6 +597,18 @@ In case of dispute arising out or in relation to the use of the program, it is s
 
 
 
+
+
+
+
+
+
+
+
+
+
+   <asp:Panel ID="pnlButtons" runat="server"   CssClass="panelbuttons" style="height:auto;">
+       
 <div id="bipannas">
     <table>
         <tr>
@@ -819,12 +813,127 @@ In case of dispute arising out or in relation to the use of the program, it is s
         
         <tr>
             <td class="FormLabel">
-                a
+                Maritial Status
             </td>
             <td class="DataEntry">
                 b
             </td>
             <td class="FormLabel">
+               Relative Name
+            </td>
+            <td class="DataEntry">
+                d
+            </td>
+            <td class="FormLabel">
+                Relation
+            </td>
+            <td class="DataEntry">
+                f                  
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td class="FormLabel">
+                Citizenship No
+            </td>
+            <td class="DataEntry">
+                
+            </td>
+            <td class="FormLabel">
+               Reg No
+            </td>
+            <td class="DataEntry">
+                d
+            </td>
+            <td class="FormLabel">
+                Municipality/VDC
+            </td>
+            <td class="DataEntry">
+                f                  
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td class="FormLabel">
+                ddl Ethnic Group
+            </td>
+            <td class="DataEntry">
+                b
+            </td>
+            <td class="FormLabel">
+               ddl Religiion
+            </td>
+            <td class="DataEntry">
+                d
+            </td>
+            <td class="FormLabel">
+                e
+            </td>
+            <td class="DataEntry">
+                f                  
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td class="FormLabel">
+                District Public Health Office/Palika Letter No *
+            </td>
+            <td class="DataEntry">
+                b
+            </td>
+            <td class="FormLabel">
+               District Public Health Office/Palika Letter Date (B.S.)*
+            </td>
+            <td class="DataEntry">
+                d
+            </td>
+            <td class="FormLabel">
+                Disease
+            </td>
+            <td class="DataEntry">
+                f                  
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td class="FormLabel">
+                Hospital OPD/IPD No/Year *
+            </td>
+            <td class="DataEntry">
+                b
+            </td>
+            <td class="FormLabel">
+               Hospital Bipanna No *
+            </td>
+            <td class="DataEntry">
+                d
+            </td>
+            <td class="FormLabel">
+                cancertype
+            </td>
+            <td class="DataEntry">
+                f                  
+            </td>
+        </tr>
+
+
+
+        <tr style="display:none; forref:only;">
+            <td class="FormLabel">
+                a
+            </td>
+            <td class="DataEntry">
+                b
+            </td>
+            <td class="FormLabel">s
                c
             </td>
             <td class="DataEntry">
@@ -837,189 +946,48 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 f                  
             </td>
         </tr>
-    </table>
-
-
-
-
-F
-														
-
-
-
-
-
-												<p>Relative's Name <span class="red">*</span></p>
-											
-										
-												<p>
-													<input type="text" size="30" maxlength="300" name="txtfather" required="" class=" english_words">
-												</p>
-									
-
-										
-												<p>Relation <span class="red">*</span></p>
-								
-									
-												<p>
-													<input type="text" size="30" maxlength="50" name="txtmother" required="" class=" english_words">
-												</p>
-										
-
-
-
-											<p align="right" class="preeti">Identity Type <span class="red">*</span></p>
-											
-												<p>
-													<select name="txtidentitytype" id="txtidentitytype" required="">
-														<option value=""></option>
-														<option value="1">Citizenship</option>
-														<option value="2">Birth Certificate</option>
-													</select>
-												</p>
-											
-
-										
-									
-
-									
-
-											
-												<p>Citizenship No. <span class="red">*</span></p>
-										
-											
-												<p>
-													<input type="text" size="30" maxlength="50" name="txtcitizenshipno" id="txtcitizenshipno" onblur="return checkcitizen()">
-												</p>
-										
-
-											
-												<p>Birth Certificate No. <span class="red">*</span></p>
-											
-											
-												<p>
-													<input type="text" class="span1" name="txtjanmadartano" id="txtjanmadartano" placeholder="Reg. No.">
-													<input type="text" class="span2" name="txtvdc" id="txtvdc" placeholder="Municipality / V.D.C." onblur="return checkjanma()">
-												</p>
-											
-
-
-
-
-
-
-												<p>Ethnic Group <span class="red">*</span></p>
-											</p>
-											
-												<select name="txtethnicgroupid" required="">
-																											<option value="5">Khas/Arya(Bramin,Chhetri)</option>
-																												<option value="7">Dalit</option>
-																												<option value="8">Janajati</option>
-																												<option value="10">Muslim</option>
-																												<option value="12">Dalit Terai</option>
-																												<option value="13">Non-Dalit Terai</option>
-																												<option value="14">Others(Specify) .....</option>
-																										</select>
-										
-
-									
-									
-											
-												<p>Religion <span class="red">*</span></p>
-											
-										
-												<select name="txtreligionid" required="">
-																											<option value="5">Hindu</option>
-																												<option value="6">Buddhist</option>
-																												<option value="7">Islam</option>
-																												<option value="8">Christian</option>
-																												<option value="9">Kirat</option>
-																												<option value="10">Other(Specify)...</option>
-																										</select>
-											
-											
-												<p>marital status <span class="red">*</span></p>
-										
-											
-												<p>
-													<select name="txtmaritialstatus" required="">
-														<option value="">----</option>
-														<option value="1">Single</option>
-														<option value="2">Married</option>
-														<option value="3">Divorced</option>
-														<option value="4">Widowed</option>
-													</select>
-												</p>
-											
-									
-
-
-						
-												<p>District Public Health Office/Palika Letter No <span class="red">*</span></p>
-										
-										
-												<p>
-													<input type="text" size="30" maxlength="50" name="txtdphletterno" required="">
-												</p>
-											
-											
-												<p>District Public Health Office/Palika Letter Date (B.S.)<span class="red">*</span></p>
-											
-												<p>
-													<input type="text" size="30" maxlength="10" name="txtdphletterdate" id="txtdphletterdate" class="nepali-calendar preeti ndp-nepali-calendar" autocomplete="off" required="" onfocus="showNdpCalendarBox('txtdphletterdate')" placeholder="____-__-__">
-												</p>
-										
-											
-												<p>Hospital OPD/IPD No/Year <span class="red">*</span></p>
-											
-										
-												<p>
-													<input type="text" size="30" maxlength="50" name="txthospitalopdno" required="">
-												</p>
-											
-											
-												<p>Hospital Bipanna No <span class="red">*</span></p>
-										
-										
-												<p>
-													<input type="text" size="30" maxlength="50" name="txthospitalbipid" id="txthospitalbipid" class="preeti" required="">
-												</p>
-										
-
-										
-										
-												<p>Disease <span class="red">*</span></p>
-											
-												<p>
-																										<select name="txtdiseaseid" id="txtdiseaseid" required="">
-														<option value=""></option>
-																											</select>
-													<span id="cancerType">
-														<input type="text" name="txtCancerType" id="txtCancerType" class="form-control" placeholder="Cancer Type">
-													</span>
-												</p>
-										
-											
-												<p>Maximum Amount</p>
-										
-												<p>
-													<input type="text" size="30" maxlength="50" name="txttotalamount" id="txttotalamount" readonly="">
-												</p>
-										
-										
-									
-										
-												<p>Patient's Photo</p>
-										
-											
-												<p><input type="file" name="txtpatientimage" onchange="readURL(this);"></p>
-										
-
-											
-												<p>Referred By (Palika) <span class="red">*</span></p>
-									
+    </table>								
 
 </div>
+
+
+                <table width="100%" cellpadding="10 10 10 10">
+                 <tr>
+                        
+                         <td align="left" >
+                        
+                               <asp:Button 
+                            
+                            ID="B_SAVE" 
+                            runat="server" 
+                            Text='<%$ Resources:Resource,B_SAVE%>'
+                            ValidationGroup="check"  />
+                        </td>
+                        
+                        
+                        <td  align="right">
+                       <asp:Button 
+                            
+                            ID="B_CANCEL" 
+                            runat="server" 
+                            Text='<%$ Resources:Resource,B_CANCEL%>'
+                              />
+                        </td>
+                        
+                    </tr>
+                </table>   
+                 <asp:HiddenField ID="hfInsureeIsOffline" runat="server" Value="" />
+               <asp:HiddenField ID="hfFamilyIsOffline" runat="server" Value="" />
+                    </asp:Panel>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1108,7 +1076,20 @@ F
             //setTimeout(ss, 1000);
 
             //tt("#Body_ddlPoverty", "1");
-             $("#bipannas").text("abcd");
+             //$("#bipannas").text("abcd");
+
+            /*
+               Maritial Status, Relative Name, Relation
+Citizenship No, Reg No, Municipality/VDC
+BirthCertificate No, Reg No, Municipality/VDC
+
+ddl Ethnic Group, ddl Religiion
+
+District Public Health Office/Palika Letter No *,  District Public Health Office/Palika Letter Date (B.S.)*,
+Hospital OPD/IPD No/Year *,  Hospital Bipanna No *, Disease
+cancertype
+
+             */
         };       
         ss();
     });

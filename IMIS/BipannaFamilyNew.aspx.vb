@@ -621,14 +621,16 @@ Public Class BipannaFamilyNew
     End Sub
     Private Sub UpdateImage(ByRef ePhotos As IMIS_EN.tblPhotos)
         Dim Insuree As New IMIS_BI.InsureeBI
-        Dim fpath = ePhotos.PhotoFolder & "\" & ePhotos.PhotoFileName
+        Dim photofilename = DateTime.Now().ToString("/yyyy/MM/dd/HH/") & DateTime.Now().ToString("yyyy_MM_dd_HH_mm_ss_fff_") & ePhotos.PhotoFileName
+        Dim fpath = ePhotos.PhotoFolder & photofilename
         Dim fpathSrv = Server.MapPath(" ") & fpath
         Dim dir = fpathSrv & "\.."
         If Not Directory.Exists(dir) Then
             Directory.CreateDirectory(dir)
         End If
         fuInsureePhoto.SaveAs(fpathSrv)
-        Insuree.UpdateImageBipanna(ePhotos, False)
+        ePhotos.PhotoFileName = photofilename
+        Insuree.UpdateImageBipanna(ePhotos, True)
         Image1.ImageUrl = fpath
         'Image1.ImageUrl = IMIS_EN.AppConfiguration.UpdatedFolder & Mid(Image1.ImageUrl, Image1.ImageUrl.LastIndexOf("\") + 2, Image1.ImageUrl.Length)
     End Sub

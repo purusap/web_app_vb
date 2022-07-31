@@ -162,6 +162,7 @@
     <Content Include="FindClaimAdministrator.aspx" />
     <Content Include="BipannaFindClaims.aspx" />
     <Content Include="FindClaims.aspx" />
+    <Content Include="BipannaFindFamily.aspx" />
     <Content Include="FindFamily.aspx" />
     <Content Include="FindHealthFacility.aspx" />
     <Content Include="FindInsuree.aspx" />
@@ -521,6 +522,13 @@
     <Compile Include="FindClaims.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>FindClaims.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BipannaFindFamily.aspx.designer.vb">
+      <DependentUpon>BipannaFindFamily.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BipannaFindFamily.aspx.vb">
+      <DependentUpon>BipannaFindFamily.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FindFamily.aspx.designer.vb">
       <DependentUpon>FindFamily.aspx</DependentUpon>
@@ -1241,7 +1249,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="False" />
+      <UserProperties BuildVersion_DetectChanges="False" BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_StartDate="2012/1/1" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
