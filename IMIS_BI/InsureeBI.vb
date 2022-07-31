@@ -91,6 +91,10 @@ Public Class InsureeBI
         Dim Ins As New IMIS_BL.InsureeBL
         Return Ins.GetProfession
     End Function
+    Public Function GetReligion() As DataTable
+        Dim Ins As New IMIS_BL.InsureeBL
+        Return Ins.GetReligion
+    End Function
     Public Function GetEducation() As DataTable
         Dim Ins As New IMIS_BL.InsureeBL
         Return Ins.GetEducation

@@ -188,6 +188,27 @@ Public Class InsureeBL
 
         Return dt
     End Function
+
+    Public Function GetReligion() As DataTable
+        Dim dt As New DataTable
+        Dim dr As DataRow
+
+        dt.Columns.Add("Value")
+        dt.Columns.Add("Text")
+
+        dr = dt.NewRow
+        dr("Value") = ""
+        dr("Text") = "None"
+        dt.Rows.Add(dr)
+
+        dr = dt.NewRow
+        dr("Value") = "other"
+        dr("Text") = "Other"
+        dt.Rows.Add(dr)
+
+        Return dt
+    End Function
+
     Public Function GetInsureeOfflineValue(ByVal InsureeID As Integer) As Boolean
         Return Insuree.GetInsureeOfflineValue(InsureeID)
     End Function

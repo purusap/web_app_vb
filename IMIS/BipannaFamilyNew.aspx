@@ -611,224 +611,26 @@ In case of dispute arising out or in relation to the use of the program, it is s
        
 <div id="bipannas">
     <table>
-        <tr>
-            <td class="FormLabel">
-                Occupation
-            </td>
-            <td class="DataEntry">
-                <select>
-	                <option value="" data-select2-id="select2-data-2-toia"></option>
-		            <option value="Business" data-select2-id="select2-data-27-tn6n"> Business </option>
-		            <option value="Driver" data-select2-id="select2-data-28-covx"> Driver </option>
-		            <option value="Farmer" data-select2-id="select2-data-29-z4kd"> Farmer </option>
-		            <option value="Retired Army" data-select2-id="select2-data-30-3lqj"> Retired Army </option>
-		            <option value="Service" data-select2-id="select2-data-31-cpa1"> Service </option>
-		            <option value="Housewife" data-select2-id="select2-data-32-1tar"> Housewife </option>
-		            <option value="Student" data-select2-id="select2-data-33-sof2"> Student </option>
-		            <option value="Agriculture" data-select2-id="select2-data-34-0syl"> Agriculture </option>
-		            <option value="Shopkeeper" data-select2-id="select2-data-35-l6ob"> Shopkeeper </option>
-		            <option value="Tailor" data-select2-id="select2-data-36-qciu"> Tailor </option>
-		            <option value="Construction" data-select2-id="select2-data-37-q40p"> Construction </option>
-		            <option value="Retired" data-select2-id="select2-data-38-adom"> Retired </option>
-		            <option value="Teacher" data-select2-id="select2-data-39-w5m7"> Teacher </option>
-		            <option value="Farming" data-select2-id="select2-data-40-ysm0"> Farming </option>
-		            <option value="Health Worker" data-select2-id="select2-data-41-gq0x"> Health Worker </option>
-		            <option value="Retired From Job" data-select2-id="select2-data-42-lgo9"> Retired From Job </option>
-		            <option value="Labour" data-select2-id="select2-data-43-a1dt"> Labour </option>
-		            <option value="Unemployeed" data-select2-id="select2-data-44-8py1"> Unemployeed </option>
-	            </select>
-            </td>
-            <td class="FormLabel">
-                Permanent Address 
-            </td>
-            <td class="DataEntry">
-                <select>
-					<option value="" data-select2-id="select2-data-4-l7li"></option>
-					<option value="1"> Taplejung </option>
-					<option value="2"> Panchthar </option>
-					<option value="3"> Ilam </option>
-					<option value="4"> Jhapa </option>
-					<option value="5"> Sankhuwashabha </option>
-					<option value="6"> Terhathum </option>
-					<option value="7"> Bhojpur </option>
-					<option value="8"> Dhankuta </option>
-					<option value="9"> Sunsari </option>
-					<option value="10"> Morang </option>
-					<option value="11"> Solukhumbu </option>
-					<option value="12"> Khotang </option>
-					<option value="13"> Udayapur </option>
-					<option value="14"> Okhaldhunga </option>
-					<option value="15"> Saptari </option>
-					<option value="16"> Siraha </option>
-					<option value="17"> Dhanusha </option>
-					<option value="18"> Mahottari </option>
-					<option value="19"> Sarlahi </option>
-					<option value="20"> Sindhuli </option>
-					<option value="21"> Ramechhap </option>
-					<option value="22"> Dolakha </option>
-					<option value="23"> Sindhupalchowk </option>
-					<option value="24"> Rasuwa </option>
-					<option value="25"> Dhading </option>
-					<option value="26"> Nuwakot </option>
-					<option value="27"> Kathmandu </option>
-					<option value="28"> Lalitpur </option>
-					<option value="29"> Bhaktapur </option>
-					<option value="30"> Kavrepalanchowk </option>
-					<option value="31"> Makawanpur </option>
-					<option value="32"> Rautahat </option>
-					<option value="33"> Bara </option>
-					<option value="34"> Parsa </option>
-					<option value="35"> Chitwan </option>
-					<option value="36"> Nawalparasi </option>
-					<option value="37"> Rupandehi </option>
-					<option value="38"> Kapilbastu </option>
-					<option value="39"> Arghakhanchi </option>
-					<option value="40"> Palpa </option>
-					<option value="41"> Gulmi </option>
-					<option value="42"> Syangja </option>
-					<option value="43"> Tanahun </option>
-					<option value="44"> Gorkha </option>
-					<option value="45"> Manang </option>
-					<option value="46"> Lamjung </option>
-					<option value="47"> Kaski </option>
-					<option value="48"> Parbat </option>
-					<option value="49"> Baglung </option>
-					<option value="50"> Myagdi </option>
-					<option value="51"> Mustang </option>
-					<option value="52"> Mugu </option>
-					<option value="53"> Dolpa </option>
-					<option value="54"> Humla </option>
-					<option value="55"> Jumla </option>
-					<option value="56"> Kalikot </option>
-					<option value="57"> Rukum </option>
-					<option value="58"> Rolpa </option>
-					<option value="59"> Pyuthan </option>
-					<option value="60"> Dang </option>
-					<option value="61"> Salyan </option>
-					<option value="62"> Banke </option>
-					<option value="63"> Bardiya </option>
-					<option value="64"> Surkhet </option>
-					<option value="65"> Jajarkot </option>
-					<option value="66"> Dailekh </option>
-					<option value="67"> Kailali </option>
-					<option value="68"> Doti </option>
-					<option value="69"> Achham </option>
-					<option value="70"> Bajura </option>
-					<option value="71"> Bajhang </option>
-					<option value="72"> Darchula </option>
-					<option value="73"> Baitadi </option>
-					<option value="74"> Dadeldhura </option>
-					<option value="75"> Kanchanpur </option>
-					<option value="76"> Rukum East </option>
-					<option value="77"> Nawalparashi West </option>
-			</select>
-            </td>
-            <td class="FormLabel">
-                Temporary Address 
-            </td>
-            <td class="DataEntry">
-               <select>
-                   <option value="" data-select2-id="select2-data-4-l7li"></option>
-                   <option value="1">Taplejung </option>
-                   <option value="2">Panchthar </option>
-                   <option value="3">Ilam </option>
-                   <option value="4">Jhapa </option>
-                   <option value="5">Sankhuwashabha </option>
-                   <option value="6">Terhathum </option>
-                   <option value="7">Bhojpur </option>
-                   <option value="8">Dhankuta </option>
-                   <option value="9">Sunsari </option>
-                   <option value="10">Morang </option>
-                   <option value="11">Solukhumbu </option>
-                   <option value="12">Khotang </option>
-                   <option value="13">Udayapur </option>
-                   <option value="14">Okhaldhunga </option>
-                   <option value="15">Saptari </option>
-                   <option value="16">Siraha </option>
-                   <option value="17">Dhanusha </option>
-                   <option value="18">Mahottari </option>
-                   <option value="19">Sarlahi </option>
-                   <option value="20">Sindhuli </option>
-                   <option value="21">Ramechhap </option>
-                   <option value="22">Dolakha </option>
-                   <option value="23">Sindhupalchowk </option>
-                   <option value="24">Rasuwa </option>
-                   <option value="25">Dhading </option>
-                   <option value="26">Nuwakot </option>
-                   <option value="27">Kathmandu </option>
-                   <option value="28">Lalitpur </option>
-                   <option value="29">Bhaktapur </option>
-                   <option value="30">Kavrepalanchowk </option>
-                   <option value="31">Makawanpur </option>
-                   <option value="32">Rautahat </option>
-                   <option value="33">Bara </option>
-                   <option value="34">Parsa </option>
-                   <option value="35">Chitwan </option>
-                   <option value="36">Nawalparasi </option>
-                   <option value="37">Rupandehi </option>
-                   <option value="38">Kapilbastu </option>
-                   <option value="39">Arghakhanchi </option>
-                   <option value="40">Palpa </option>
-                   <option value="41">Gulmi </option>
-                   <option value="42">Syangja </option>
-                   <option value="43">Tanahun </option>
-                   <option value="44">Gorkha </option>
-                   <option value="45">Manang </option>
-                   <option value="46">Lamjung </option>
-                   <option value="47">Kaski </option>
-                   <option value="48">Parbat </option>
-                   <option value="49">Baglung </option>
-                   <option value="50">Myagdi </option>
-                   <option value="51">Mustang </option>
-                   <option value="52">Mugu </option>
-                   <option value="53">Dolpa </option>
-                   <option value="54">Humla </option>
-                   <option value="55">Jumla </option>
-                   <option value="56">Kalikot </option>
-                   <option value="57">Rukum </option>
-                   <option value="58">Rolpa </option>
-                   <option value="59">Pyuthan </option>
-                   <option value="60">Dang </option>
-                   <option value="61">Salyan </option>
-                   <option value="62">Banke </option>
-                   <option value="63">Bardiya </option>
-                   <option value="64">Surkhet </option>
-                   <option value="65">Jajarkot </option>
-                   <option value="66">Dailekh </option>
-                   <option value="67">Kailali </option>
-                   <option value="68">Doti </option>
-                   <option value="69">Achham </option>
-                   <option value="70">Bajura </option>
-                   <option value="71">Bajhang </option>
-                   <option value="72">Darchula </option>
-                   <option value="73">Baitadi </option>
-                   <option value="74">Dadeldhura </option>
-                   <option value="75">Kanchanpur </option>
-                   <option value="76">Rukum East </option>
-                   <option value="77">Nawalparashi West </option>
-               </select>																								                         
-            </td>
-        </tr>
-        
-        
+       
         <tr>
             <td class="FormLabel">
                 Maritial Status
             </td>
             <td class="DataEntry">
-                b
+                <asp:DropDownList ID="ddlMaritialStatus" runat="server" Width="150px" ></asp:DropDownList>
             </td>
             <td class="FormLabel">
                Relative Name
             </td>
             <td class="DataEntry">
-                d
+                <asp:TextBox ID="txtRelativeName" runat="server"  MaxLength="100"
+                                  TextMode="MultiLine" Width="150px" Style="resize: none;"></asp:TextBox>
             </td>
             <td class="FormLabel">
                 Relation
             </td>
             <td class="DataEntry">
-                f                  
+                <asp:DropDownList ID="ddlRelation" runat="server" Width="150px" ></asp:DropDownList>  
             </td>
         </tr>
 
@@ -836,48 +638,12 @@ In case of dispute arising out or in relation to the use of the program, it is s
 
         <tr>
             <td class="FormLabel">
-                Citizenship No
+               Religion
             </td>
             <td class="DataEntry">
-                
-            </td>
-            <td class="FormLabel">
-               Reg No
-            </td>
-            <td class="DataEntry">
-                d
-            </td>
-            <td class="FormLabel">
-                Municipality/VDC
-            </td>
-            <td class="DataEntry">
-                f                  
+                <asp:DropDownList ID="ddlReligion" runat="server" Width="150px" ></asp:DropDownList>
             </td>
         </tr>
-
-
-
-        <tr>
-            <td class="FormLabel">
-                ddl Ethnic Group
-            </td>
-            <td class="DataEntry">
-                b
-            </td>
-            <td class="FormLabel">
-               ddl Religiion
-            </td>
-            <td class="DataEntry">
-                d
-            </td>
-            <td class="FormLabel">
-                e
-            </td>
-            <td class="DataEntry">
-                f                  
-            </td>
-        </tr>
-
 
 
         <tr>
@@ -885,19 +651,22 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 District Public Health Office/Palika Letter No *
             </td>
             <td class="DataEntry">
-                b
+                <asp:TextBox ID="txtDPHLetterNo" runat="server" MaxLength="25"
+                                  TextMode="MultiLine" Width="150px" Style="resize: none;"></asp:TextBox>
             </td>
             <td class="FormLabel">
                District Public Health Office/Palika Letter Date (B.S.)*
             </td>
             <td class="DataEntry">
-                d
+                <asp:TextBox ID="txtDPHDate" runat="server" MaxLength="25"
+                                  TextMode="MultiLine" Width="150px" Style="resize: none;"></asp:TextBox>
             </td>
             <td class="FormLabel">
                 Disease
             </td>
             <td class="DataEntry">
-                f                  
+                <asp:TextBox ID="txtDisease" runat="server" MaxLength="25"
+                                  TextMode="MultiLine" Width="150px" Style="resize: none;"></asp:TextBox>
             </td>
         </tr>
 
@@ -908,45 +677,29 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 Hospital OPD/IPD No/Year *
             </td>
             <td class="DataEntry">
-                b
+                <asp:TextBox ID="txtHospOpdIpdNoYear" runat="server" MaxLength="25"
+                                  TextMode="MultiLine" Width="150px" Style="resize: none;"></asp:TextBox>
             </td>
             <td class="FormLabel">
                Hospital Bipanna No *
             </td>
             <td class="DataEntry">
-                d
+                <asp:TextBox ID="txtHospBipannaNo" runat="server" MaxLength="25"
+                                  TextMode="MultiLine" Width="150px" Style="resize: none;"></asp:TextBox>
             </td>
             <td class="FormLabel">
                 cancertype
             </td>
             <td class="DataEntry">
-                f                  
+               <asp:TextBox ID="TextBoxCancerType" runat="server" MaxLength="25"
+                                  TextMode="MultiLine" Width="150px" Style="resize: none;"></asp:TextBox>              
             </td>
         </tr>
 
 
 
-        <tr style="display:none; forref:only;">
-            <td class="FormLabel">
-                a
-            </td>
-            <td class="DataEntry">
-                b
-            </td>
-            <td class="FormLabel">s
-               c
-            </td>
-            <td class="DataEntry">
-                d
-            </td>
-            <td class="FormLabel">
-                e
-            </td>
-            <td class="DataEntry">
-                f                  
-            </td>
-        </tr>
-    </table>								
+        
+    </table>                
 
 </div>
 
