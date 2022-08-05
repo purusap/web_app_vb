@@ -137,6 +137,7 @@
     <Compile Include="tblBatchRun.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblBipannaExtra.vb" />
     <Compile Include="tblCeilingInterpretation.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -540,7 +541,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2012/1/1" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

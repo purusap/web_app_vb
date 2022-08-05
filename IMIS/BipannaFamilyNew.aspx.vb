@@ -33,6 +33,9 @@ Public Class BipannaFamilyNew
     Private Family As New IMIS_BI.FamilyBI
     Private eFamily As New IMIS_EN.tblFamilies
     Private eInsuree As New IMIS_EN.tblInsuree
+    Private InsureeBI As New IMIS_BI.InsureeBI
+    Private BipannaInsureeBI As New IMIS_BI.BipannaInsureeBI
+    Private tblBipannaInsuree As New IMIS_EN.tblBipannaInsuree
     Private dtImage As New DataTable
     Private imisgen As New IMIS_Gen
     Private userBI As New IMIS_BI.UserBI
@@ -263,6 +266,20 @@ Public Class BipannaFamilyNew
                 FillCurrentDistricts()
             End If
 
+            ddlMaritialStatus.DataSource = Family.GetMaritalStatus()
+            ddlMaritialStatus.DataValueField = "Code"
+            ddlMaritialStatus.DataTextField = "Status"
+            ddlMaritialStatus.DataBind()
+
+            ddlRelation.DataSource = InsureeBI.GetRelations()
+            ddlRelation.DataValueField = "RelationId"
+            ddlRelation.DataTextField = "Relation"
+            ddlRelation.DataBind()
+
+            ddlReligion.DataSource = InsureeBI.GetReligion()
+            ddlReligion.DataValueField = "Value"
+            ddlReligion.DataTextField = "Text"
+            ddlReligion.DataBind()
 
             If Not eFamily.FamilyID = 0 Then
                 Family.LoadFamily(eFamily)
@@ -592,6 +609,19 @@ Public Class BipannaFamilyNew
                 UpdateImage(ePhotos)
                 'End If
             End If
+
+            tblBipannaInsuree.InsureeID = eInsuree.InsureeID
+            tblBipannaInsuree.RelativeName = txtRelativeName.Text
+            tblBipannaInsuree.Relationship = CInt(ddlRelation.SelectedValue)
+            tblBipannaInsuree.Religion = ddlReligion.SelectedValue
+            tblBipannaInsuree.HospitalOpdIpdNoYear = txtHospOpdIpdNoYear.Text
+            tblBipannaInsuree.HospitalBipannaNo = txtHospBipannaNo.Text
+            tblBipannaInsuree.DistrictPubLetterDate = txtDPHDate.Text
+            tblBipannaInsuree.DistrictPubLetterNo = txtDPHLetterNo.Text
+            tblBipannaInsuree.Disease = txtDisease.Text
+            tblBipannaInsuree.CancerType = txtCancerType.Text
+            tblBipannaInsuree.PhotoID = 0
+            BipannaInsureeBI.SaveBipannaInsuree(tblBipannaInsuree, True)
 
         Catch ex As Exception
             'lblMsg.Text = imisgen.getMessage("M_ERRORMESSAGE")

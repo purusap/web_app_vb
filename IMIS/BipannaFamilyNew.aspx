@@ -691,7 +691,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 cancertype
             </td>
             <td class="DataEntry">
-               <asp:TextBox ID="TextBoxCancerType" runat="server" MaxLength="25"
+               <asp:TextBox ID="txtCancerType" runat="server" MaxLength="25"
                                   TextMode="MultiLine" Width="150px" Style="resize: none;"></asp:TextBox>              
             </td>
         </tr>
@@ -830,6 +830,22 @@ In case of dispute arising out or in relation to the use of the program, it is s
 
             //tt("#Body_ddlPoverty", "1");
              //$("#bipannas").text("abcd");
+
+
+             tt("#Body_ddlMaritialStatus", "M");
+             tt("#Body_txtRelativeName", Math.random());
+             tt("#Body_ddlRelation", "6");
+             tt("#Body_ddlReligion", "other");
+             tt("#Body_txtDPHLetterNo", Math.random());
+             tt("#Body_txtDPHDate", "2022-02-22");
+             tt("#Body_txtDisease", Math.random());
+             tt("#Body_txtHospOpdIpdNoYear", "123456");
+             tt("#Body_txtHospBipannaNo",  Math.random());
+             tt("#Body_txtCancerType",  Math.random());
+             
+
+
+
 
             /*
                Maritial Status, Relative Name, Relation

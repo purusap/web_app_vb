@@ -1,0 +1,172 @@
+
+
+
+
+                        <p>Relative's Name <span class="red">*</span></p>
+                      
+                    
+                        <p>
+                          <input type="text" size="30" maxlength="300" name="txtfather" required="" class=" english_words">
+                        </p>
+                  
+
+                    
+                        <p>Relation <span class="red">*</span></p>
+                
+                  
+                        <p>
+                          <input type="text" size="30" maxlength="50" name="txtmother" required="" class=" english_words">
+                        </p>
+                    
+
+
+
+                      <p align="right" class="preeti">Identity Type <span class="red">*</span></p>
+                      
+                        <p>
+                          <select name="txtidentitytype" id="txtidentitytype" required="">
+                            <option value=""></option>
+                            <option value="1">Citizenship</option>
+                            <option value="2">Birth Certificate</option>
+                          </select>
+                        </p>
+                      
+
+                    
+                  
+
+                  
+
+                      
+                        <p>Citizenship No. <span class="red">*</span></p>
+                    
+                      
+                        <p>
+                          <input type="text" size="30" maxlength="50" name="txtcitizenshipno" id="txtcitizenshipno" onblur="return checkcitizen()">
+                        </p>
+                    
+
+                      
+                        <p>Birth Certificate No. <span class="red">*</span></p>
+                      
+                      
+                        <p>
+                          <input type="text" class="span1" name="txtjanmadartano" id="txtjanmadartano" placeholder="Reg. No.">
+                          <input type="text" class="span2" name="txtvdc" id="txtvdc" placeholder="Municipality / V.D.C." onblur="return checkjanma()">
+                        </p>
+                      
+
+
+
+
+
+
+                        <p>Ethnic Group <span class="red">*</span></p>
+                      </p>
+                      
+                        <select name="txtethnicgroupid" required="">
+                                                      <option value="5">Khas/Arya(Bramin,Chhetri)</option>
+                                                        <option value="7">Dalit</option>
+                                                        <option value="8">Janajati</option>
+                                                        <option value="10">Muslim</option>
+                                                        <option value="12">Dalit Terai</option>
+                                                        <option value="13">Non-Dalit Terai</option>
+                                                        <option value="14">Others(Specify) .....</option>
+                                                    </select>
+                    
+
+                  
+                  
+                      
+                        <p>Religion <span class="red">*</span></p>
+                      
+                    
+                        <select name="txtreligionid" required="">
+                                                      <option value="5">Hindu</option>
+                                                        <option value="6">Buddhist</option>
+                                                        <option value="7">Islam</option>
+                                                        <option value="8">Christian</option>
+                                                        <option value="9">Kirat</option>
+                                                        <option value="10">Other(Specify)...</option>
+                                                    </select>
+                      
+                      
+                        <p>marital status <span class="red">*</span></p>
+                    
+                      
+                        <p>
+                          <select name="txtmaritialstatus" required="">
+                            <option value="">----</option>
+                            <option value="1">Single</option>
+                            <option value="2">Married</option>
+                            <option value="3">Divorced</option>
+                            <option value="4">Widowed</option>
+                          </select>
+                        </p>
+                      
+                  
+
+
+            
+                        <p>District Public Health Office/Palika Letter No <span class="red">*</span></p>
+                    
+                    
+                        <p>
+                          <input type="text" size="30" maxlength="50" name="txtdphletterno" required="">
+                        </p>
+                      
+                      
+                        <p>District Public Health Office/Palika Letter Date (B.S.)<span class="red">*</span></p>
+                      
+                        <p>
+                          <input type="text" size="30" maxlength="10" name="txtdphletterdate" id="txtdphletterdate" class="nepali-calendar preeti ndp-nepali-calendar" autocomplete="off" required="" onfocus="showNdpCalendarBox('txtdphletterdate')" placeholder="____-__-__">
+                        </p>
+                    
+                      
+                        <p>Hospital OPD/IPD No/Year <span class="red">*</span></p>
+                      
+                    
+                        <p>
+                          <input type="text" size="30" maxlength="50" name="txthospitalopdno" required="">
+                        </p>
+                      
+                      
+                        <p>Hospital Bipanna No <span class="red">*</span></p>
+                    
+                    
+                        <p>
+                          <input type="text" size="30" maxlength="50" name="txthospitalbipid" id="txthospitalbipid" class="preeti" required="">
+                        </p>
+                    
+
+                    
+                    
+                        <p>Disease <span class="red">*</span></p>
+                      
+                        <p>
+                                                    <select name="txtdiseaseid" id="txtdiseaseid" required="">
+                            <option value=""></option>
+                                                      </select>
+                          <span id="cancerType">
+                            <input type="text" name="txtCancerType" id="txtCancerType" class="form-control" placeholder="Cancer Type">
+                          </span>
+                        </p>
+                    
+                      
+                        <p>Maximum Amount</p>
+                    
+                        <p>
+                          <input type="text" size="30" maxlength="50" name="txttotalamount" id="txttotalamount" readonly="">
+                        </p>
+                    
+                    
+                  
+                    
+                        <p>Patient's Photo</p>
+                    
+                      
+                        <p><input type="file" name="txtpatientimage" onchange="readURL(this);"></p>
+                    
+
+                      
+                        <p>Referred By (Palika) <span class="red">*</span></p>

@@ -111,6 +111,7 @@
     <Compile Include="IdentificationTypesDAL.vb" />
     <Compile Include="IMISDefaultsDAL.vb" />
     <Compile Include="IMISExtractsDAL.vb" />
+    <Compile Include="BipannaInsureeDAL.vb" />
     <Compile Include="InsureeDAL.vb" />
     <Compile Include="InsureePolicyDAL.vb" />
     <Compile Include="ItemsDAL.vb" />
@@ -362,7 +363,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2012/1/1" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

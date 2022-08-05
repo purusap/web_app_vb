@@ -986,6 +986,96 @@ Partial Public Class BipannaFamilyNew
     Protected WithEvents pnlButtons As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
+    '''ddlMaritialStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlMaritialStatus As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''txtRelativeName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtRelativeName As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''ddlRelation control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlRelation As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''ddlReligion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlReligion As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''txtDPHLetterNo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDPHLetterNo As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtDPHDate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDPHDate As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtDisease control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDisease As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtHospOpdIpdNoYear control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtHospOpdIpdNoYear As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtHospBipannaNo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtHospBipannaNo As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtCancerType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCancerType As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''B_SAVE control.
     '''</summary>
     '''<remarks>
