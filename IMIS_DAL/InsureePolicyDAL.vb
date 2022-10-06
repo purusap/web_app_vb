@@ -98,7 +98,8 @@ Public Class InsureePolicyDAL
 #End If
         data.setSQLCommand(sSQL, CommandType.StoredProcedure)
         data.params("@InsureeId", SqlDbType.Int, InsureeId)
-        data.params("@Activate", SqlDbType.Bit, Activate)
+        'data.params("@Activate", SqlDbType.Bit, Activate)
+        data.params("@Activate", SqlDbType.Bit, False)
         data.ExecuteCommand()
     End Sub
     Public Sub DeactivateInsuree(ByVal InsureeId As Integer)

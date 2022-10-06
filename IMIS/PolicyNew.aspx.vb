@@ -352,23 +352,23 @@ Partial Public Class PolicyNew
                 dt = Policy.GetPeriodForPolicy(eProduct.ProdID, dEnrolDate, HasCycle, "N")
                 'If (dt.Rows.Count > 0 And HasCycle = True) Or (Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing) <= dt(0)("StartDate") And hfPolicyStage.Value = "N") Then
                 If (dt.Rows.Count > 0 And HasCycle = True) Or (Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing) <= dt(0)("StartDate") And hfPolicyStage.Value = "N") Then
-                        If IsDate(dt(0)("StartDate")) Then
-                            txtStartDate.Text = dt(0)("StartDate")
-                        End If
-                        If IsDate(dt(0)("StartDate")) Then
-                            txtEffectiveDate.Text = dt(0)("StartDate")
-                        End If
-                        If IsDate(dt(0)("ExpiryDate")) Then
-                            txtExpiryDate.Text = dt(0)("ExpiryDate")
-                        End If
+                    If IsDate(dt(0)("StartDate")) Then
+                        txtStartDate.Text = dt(0)("StartDate")
+                    End If
+                    If IsDate(dt(0)("StartDate")) Then
+                        txtEffectiveDate.Text = dt(0)("StartDate")
+                    End If
+                    If IsDate(dt(0)("ExpiryDate")) Then
+                        txtExpiryDate.Text = dt(0)("ExpiryDate")
+                    End If
 
-                        'If CalcEffectiveDate < dt(0)("StartDate") Then
-                        '    txtEffectiveDate.Text = dt(0)("StartDate")
-                        'Else
-                        '    txtEffectiveDate.Text = CalcEffectiveDate
-                        'End If
-                    Else
-                        Dim dStartDate As Date
+                    'If CalcEffectiveDate < dt(0)("StartDate") Then
+                    '    txtEffectiveDate.Text = dt(0)("StartDate")
+                    'Else
+                    '    txtEffectiveDate.Text = CalcEffectiveDate
+                    'End If
+                Else
+                    Dim dStartDate As Date
                     If hfPolicyStage.Value = "N" Or hfPolicyStage.Value = "R" Then
                         txtStartDate.Text = txtEnrollmentDate.Text
                         txtEffectiveDate.Text = txtEnrollmentDate.Text
@@ -392,6 +392,7 @@ Partial Public Class PolicyNew
                     End If
                 End If
             End If
+
             FillOfficers()
         End If
 
@@ -444,6 +445,11 @@ Partial Public Class PolicyNew
                 Dim days As Integer = (Date.ParseExact(Now.Date(), "dd/MM/yyyy", Nothing) - Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing)).Days
                 If days < 1 Then
                     imisgen.Alert("Enroll Day should be less than today!", pnlButtons, alertPopupTitle:="IMIS")
+                    Return
+                End If
+                Dim Calculatedays As Integer = (Date.ParseExact(txtStartDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing)).Days
+                If Calculatedays < 1 Then
+                    imisgen.Alert("Enroll Date should be in running cycle!" & Calculatedays, pnlButtons, alertPopupTitle:="IMIS")
                     Return
                 End If
                 If Not ePolicy.PolicyID = 0 Then
