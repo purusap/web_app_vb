@@ -86,24 +86,6 @@ Partial Public Class ChangeFamily
     Protected WithEvents txtRegion As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblPoverty3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblPoverty3 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''txtPoverty control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtPoverty As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''L_ADDRESS0 control.
     '''</summary>
     '''<remarks>
@@ -381,42 +363,6 @@ Partial Public Class ChangeFamily
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidatorVillage As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
-    '''trPoverty control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents trPoverty As Global.System.Web.UI.HtmlControls.HtmlTableRow
-
-    '''<summary>
-    '''lblPoverty control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblPoverty As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''ddlPoverty control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlPoverty As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''rfPoverty control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rfPoverty As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''tfConfirmationType control.

@@ -307,7 +307,17 @@ Public Class ClaimsDAL
 
         data.ExecuteCommand()
     End Sub
-    
+    Public Sub UpdateClaimValue(ByVal claimID As Integer, ByVal claimTotal As Decimal)
+        Dim str As String = "Update tblClaim set [Claimed] = @Claimed where claimID = @claimID"
+
+        data.setSQLCommand(str, CommandType.Text)
+
+        data.params("@claimID", SqlDbType.Int, claimID)
+        data.params("@Claimed", SqlDbType.Decimal, claimTotal)
+
+        data.ExecuteCommand()
+    End Sub
+
     Public Function IsClaimReviewStatusChanged(ByVal eClaim As IMIS_EN.tblClaim) As DataTable
         Dim str As String = "select ReviewStatus from tblClaim where ClaimID = @ClaimID and ValidityTo is null"
 
@@ -532,9 +542,10 @@ Public Class ClaimsDAL
         'sSQL += " AND tblClaim.ClaimID in (select claim_id from claim_ClaimAttachmentsCountView where attachments_count>=1)"
         'End If
 
-        ' Change By Purushottam Ends
+        sSQL += " order by DateClaimed ASC"
+        'sSQL += " order by ClaimID desc"
 
-        sSQL += " order by ClaimID desc"
+        ' Change By Purushottam Ends
         data.setSQLCommand(sSQL, CommandType.Text)
 
         data.params("@UserID", SqlDbType.Int, UserID)

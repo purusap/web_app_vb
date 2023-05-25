@@ -47,5 +47,12 @@ Public Class InsureePolicyBL
         Dim IP As New IMIS_DAL.InsureePolicyDAL
         IP.AddInsuree(InsureeId, Activate)
     End Sub
-    
+    Public Sub UpdateReceipt(ByVal ReceiptId As Integer)
+        Dim PI As New IMIS_DAL.InsureePolicyDAL
+        PI.UpdateReceipt(ReceiptId)
+    End Sub
+    Public Sub UpdateReceiptByCHFID(ByVal ReceiptNum As String, ByVal CHFID As String, ByVal Amount As Integer, ByVal EnrolledDate As Date)
+        Dim PI As New IMIS_DAL.InsureePolicyDAL
+        PI.UpdateReceiptByCHFID(ReceiptNum, CHFID, Amount, EnrolledDate)
+    End Sub
 End Class

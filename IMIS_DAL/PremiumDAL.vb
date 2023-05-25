@@ -426,12 +426,12 @@ Public Class PremiumDAL
         Dim data As New ExactSQL
         Dim dt As New DataTable
 
-        Dim sSQL As String = "SELECT 1" & _
-                " FROM tblPremium PR INNER JOIN tblPolicy PL ON PR.PolicyID = PL.PolicyID" & _
-                " INNER JOIN tblProduct Prod ON PL.ProdID = Prod.ProdId" & _
-                " WHERE PR.ValidityTo Is NULL" & _
-                " AND PR.Receipt = @Receipt" & _
-                " AND PR.PremiumId <> @PremiumId" & _
+        Dim sSQL As String = "SELECT 1" &
+                " FROM tblPremium PR INNER JOIN tblPolicy PL ON PR.PolicyID = PL.PolicyID" &
+                " INNER JOIN tblProduct Prod ON PL.ProdID = Prod.ProdId" &
+                " WHERE PR.ValidityTo Is NULL" &
+                " AND PR.Receipt = @Receipt" &
+                " AND PR.PremiumId <> @PremiumId" &
                 " AND Prod.ProdID = (SELECT ProdId FROM tblPolicy WHERE PolicyId = @PolicyID)"
 
         data.setSQLCommand(sSQL, CommandType.Text)
@@ -439,6 +439,27 @@ Public Class PremiumDAL
         data.params("PremiumID", SqlDbType.Int, ePremium.PremiumId)
         data.params("PolicyID", SqlDbType.Int, ePremium.tblPolicy.PolicyID)
         data.params("Receipt", SqlDbType.NVarChar, 50, ePremium.Receipt)
+
+        dt = data.Filldata
+
+        If dt.Rows.Count > 0 Then
+            Return False
+        Else
+            Return True
+        End If
+
+    End Function
+    Public Function isUniqueReceiptHIB(ByVal ReceiptNum As String) As Boolean
+        Dim data As New ExactSQL
+        Dim dt As New DataTable
+
+        Dim sSQL As String = "SELECT 1" &
+                " FROM tblPremium PR" &
+                " WHERE PR.ValidityTo Is NULL" &
+                " AND PR.Receipt = @Receipt"
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("Receipt", SqlDbType.NVarChar, 50, ReceiptNum)
 
         dt = data.Filldata
 
@@ -502,6 +523,26 @@ Public Class PremiumDAL
         data.setSQLCommand(sSQL, CommandType.Text)
         data.params("@PremiumID", SqlDbType.Int, ePremium.PremiumId)
         Return data.Filldata
+    End Function
+
+    Public Function isUniqueQrReceipt(ByVal ReceiptNum As String) As Boolean
+        Dim data As New ExactSQL
+        Dim dt As New DataTable
+
+        Dim sSQL As String = "select ReceiptId, ReceiptNum from tblReceipt where isUsed=0 and ReceiptNum=@ReceiptNum"
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+
+        data.params("ReceiptNum", SqlDbType.NVarChar, 50, ReceiptNum)
+
+        dt = data.Filldata
+
+        If dt.Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+
     End Function
 
 End Class

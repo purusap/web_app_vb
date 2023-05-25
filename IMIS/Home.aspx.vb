@@ -30,6 +30,7 @@ Imports System.IO
 Imports System.Net
 Imports System.Data
 Imports System.Reflection
+Imports System.Security.Policy
 
 Partial Public Class Home
     Inherits System.Web.UI.Page
@@ -67,6 +68,18 @@ Partial Public Class Home
                 Home.LoadUsers(eUsers)
                 txtCURRENTUSER.Text = eUsers.OtherNames & " " & eUsers.LastName & " (" & eUsers.LoginName & ")"
                 'txtCURRENTUSER.Text = eUsers.OtherNames & " " & eUsers.LastName
+                If Not eUsers.HFID = 0 Then
+                    Dim ContractEndDate = Home.GetHFContractDates(eUsers.HFID)
+                    Dim days As Integer = (Date.ParseExact(Left(ContractEndDate, 10), "dd/MM/yyyy", Nothing) - Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing)).Days
+                    lblExpiryNotice.Text = "Your Hospital Contract is expiring on : " & Left(ContractEndDate, 10) & " (Remaining Days: " & days & ")"
+                    If days < 90 Then
+                        lblExpiryNotice.ForeColor = System.Drawing.Color.Red
+                    End If
+                    If days < 0 Then
+                        Dim Url As String = "Default.aspx?locked=yes&type=hf"
+                        Response.Redirect(Url)
+                    End If
+                End If
             End If
 
             gvRoles.DataSource = Home.GetRoles(eUsers.UserID)

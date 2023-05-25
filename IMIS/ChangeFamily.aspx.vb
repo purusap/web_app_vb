@@ -69,11 +69,11 @@ Partial Public Class ChangeFamily
         rfAddress.Enabled = (Adjustibility = "M")
 
         'Poverty
-        Adjustibility = General.getControlSetting("Poverty")
-        trPoverty.Visible = Not (Adjustibility = "N")
-        rfPoverty.Enabled = (Adjustibility = "M")
-        lblPoverty3.Visible = Not (Adjustibility = "N")
-        txtPoverty.Visible = Not (Adjustibility = "N")
+        'Adjustibility = General.getControlSetting("Poverty")
+        'trPoverty.Visible = Not (Adjustibility = "N")
+        'rfPoverty.Enabled = (Adjustibility = "M")
+        'lblPoverty3.Visible = Not (Adjustibility = "N")
+        'txtPoverty.Visible = Not (Adjustibility = "N")
 
 
 
@@ -120,7 +120,7 @@ Partial Public Class ChangeFamily
                 txtVillage.Text = eFamily.VillageName
                 txtWard.Text = eFamily.WardName
 
-                txtPoverty.Text = If(eFamily.Poverty Is Nothing, "", If(eFamily.Poverty = True, "Yes", "No"))
+                'txtPoverty.Text = If(eFamily.Poverty Is Nothing, "", If(eFamily.Poverty = True, "Yes", "No"))
 
                 txtHeadCHFID.Text = eFamily.tblInsuree.CHFID
                 txtHeadLastName.Text = eFamily.tblInsuree.LastName
@@ -141,11 +141,11 @@ Partial Public Class ChangeFamily
                 ddlWard.SelectedValue = eFamily.WardID
                 ddlVillage.SelectedValue = eFamily.LocationId
 
-                ddlPoverty.DataSource = ChangeFamily.GetYesNO
-                ddlPoverty.DataValueField = "Code"
-                ddlPoverty.DataTextField = "Status"
-                ddlPoverty.DataBind()
-                ddlPoverty.SelectedValue = If(eFamily.Poverty, 1, 0)
+                'ddlPoverty.DataSource = ChangeFamily.GetYesNO
+                'ddlPoverty.DataValueField = "Code"
+                'ddlPoverty.DataTextField = "Status"
+                'ddlPoverty.DataBind()
+                'ddlPoverty.SelectedValue = If(eFamily.Poverty, 1, 0)
 
                 ddlConfirmationType.DataSource = ChangeFamily.GetSubsidy
                 ddlConfirmationType.DataValueField = "ConfirmationTypeCode"
@@ -266,7 +266,7 @@ Partial Public Class ChangeFamily
             ' eFamily.DistrictID = ddlDistrict.SelectedValue
             'eFamily.WardID = ddlWard.SelectedValue
             eFamily.LocationId = ddlVillage.SelectedValue
-            If ddlPoverty.SelectedValue.Length > 0 Then eFamily.Poverty = ddlPoverty.SelectedValue
+            'If ddlPoverty.SelectedValue.Length > 0 Then eFamily.Poverty = ddlPoverty.SelectedValue
             If ddlConfirmationType.SelectedValue.Length > 0 Then eFamily.ConfirmationType = ddlConfirmationType.SelectedValue
             eFamily.isOffline = IMIS_Gen.offlineHF Or IMIS_Gen.OfflineCHF
             eFamily.FamilyType = ddlType.SelectedValue

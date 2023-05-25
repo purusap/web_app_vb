@@ -315,4 +315,8 @@ Public Class HealthFacilityBL
         Return dthf
 
     End Function
+    Public Function getHFContractDateFromID(ByVal HFID As Integer) As String
+        Dim hf As New IMIS_DAL.HealthFacilityDAL
+        Return hf.getHFContractDateFromID(HFID)
+    End Function
 End Class

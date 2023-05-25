@@ -26,7 +26,7 @@
 ' 
 '
 
-Partial Public Class PolicyNew
+Partial Public Class PolicyNewQR
     Inherits System.Web.UI.Page
     Private efamily As New IMIS_EN.tblFamilies
     Private ePolicy As New IMIS_EN.tblPolicy
@@ -75,33 +75,22 @@ Partial Public Class PolicyNew
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         CalendarExtender2.EndDate = DateTime.Now
-        'If HttpContext.Current.Request.QueryString("f") IsNot Nothing Then
-        '    efamily.FamilyUUID = Guid.Parse(HttpContext.Current.Request.QueryString("f"))
-        '    efamily.FamilyID = If(efamily.FamilyUUID.Equals(Guid.Empty), 0, familyBI.GetFamilyIdByUUID(efamily.FamilyUUID))
-        'End If
 
-        'If HttpContext.Current.Request.QueryString("po") IsNot Nothing Then
-        '    ePolicy.PolicyUUID = Guid.Parse(HttpContext.Current.Request.QueryString("po"))
-        '    ePolicy.PolicyID = If(ePolicy.PolicyUUID.Equals(Guid.Empty), 0, Policy.GetPolicyIdByUUID(ePolicy.PolicyUUID))
-        'End If
         efamily.FamilyID = HttpContext.Current.Request.QueryString("f")
         ePolicy.PolicyID = HttpContext.Current.Request.QueryString("po")
         ePolicy.tblFamilies = efamily
         If IsPostBack = True Then Return
-        
+
         FormatForm()
 
-        'If HttpContext.Current.Request.QueryString("pd") IsNot Nothing Then
-        '    eProduct.ProdUUID = Guid.Parse(HttpContext.Current.Request.QueryString("pd"))
-        '    eProduct.ProdID = If(eProduct.ProdUUID.Equals(Guid.Empty), 0, productBI.GetProdIdByUUID(eProduct.ProdUUID))
-        'End If
+
         eProduct.ProdID = Request.QueryString("pd")
         ePolicy.tblProduct = eProduct
         hfPolicyStage.Value = Request.QueryString("stage")
         If hfPolicyStage.Value = "N" Then
-            lblPolicyStage.Text = "New Policy"
+            lblPolicyStage.Text = "QR Enabled New Policy"
         ElseIf hfPolicyStage.Value = "R" Then
-            lblPolicyStage.Text = "Renew Policy"
+            lblPolicyStage.Text = "QR Enabled Renew Policy"
         End If
         RunPageSecurity()
         Try
@@ -123,107 +112,30 @@ Partial Public Class PolicyNew
             'txt.Text = efamily.tblInsuree.Phone
             FillDropDown()
             Dim premiumPaid As Decimal = 0
-
-            'Policy is in modification Mode
-            If Not ePolicy.PolicyID = 0 And hfPolicyStage.Value = "" Then
-                Policy.LoadPolicy(ePolicy, premiumPaid)
-
-                If Not ePolicy.StartDate = Nothing Then
-                    txtStartDate.Text = ePolicy.StartDate
-                End If
-
-                If Not ePolicy.EnrollDate = Nothing Then
-                    txtEnrollmentDate.Text = ePolicy.EnrollDate
-                End If
-
-                If Not ePolicy.ExpiryDate Is Nothing Then
-                    txtExpiryDate.Text = ePolicy.ExpiryDate
-                End If
-
-                If Not ePolicy.EffectiveDate Is Nothing Then
-                    txtEffectiveDate.Text = ePolicy.EffectiveDate
-                End If
-
-                If Not ePolicy.tblProduct.InsurancePeriod = Nothing Then
-                    '      hfInsurancePeriod.Value = ePolicy.tblProduct.InsurancePeriod
-                End If
-
-                'txtPolicyStatus.Text = Policy.ReturnPolicyStatus(ePolicy.PolicyStatus)
-                txtPolicyValue.Text = ePolicy.PolicyValue
-                'txtPremiumPaid.Text = premiumPaid
-                'txtBalance.Text = ePolicy.PolicyValue - premiumPaid
-                ddlProduct.SelectedValue = ePolicy.tblProduct.ProdID
-                ddlEnrolementOfficer.SelectedValue = ePolicy.tblOfficer.OfficerID
-
-                'Check if Product and Enrollment officer has values 
-                'If not then fetch the value and add to the dropdown
-                If ddlProduct.SelectedValue = 0 Then
-                    Dim eProduct As IMIS_EN.tblProduct = Policy.getProductDetailMin(ePolicy.tblProduct.ProdID)
-                    ddlProduct.Items.Add(New ListItem(eProduct.ProductCode, eProduct.ProdID))
-                    ddlProduct.SelectedValue = ePolicy.tblProduct.ProdID
-                End If
-
-                ddlEnrolementOfficer.SelectedValue = ePolicy.tblOfficer.OfficerID
-                If ddlEnrolementOfficer.SelectedValue = 0 Then
-                    Dim eOfficer As IMIS_EN.tblOfficer = Policy.getEnrollmentOfficerMoved(ePolicy.tblOfficer.OfficerID)
-                    ddlEnrolementOfficer.Items.Add(New ListItem(eOfficer.Code, eOfficer.OfficerID))
-                    ddlEnrolementOfficer.SelectedValue = ePolicy.tblOfficer.OfficerID
-                End If
-
-
-                hfPolicyStage.Value = ePolicy.PolicyStage
-                efamily.FamilyID = ePolicy.tblFamilies.FamilyID
-                'Insert Deductables and Rem
-                Dim eclaimDedRem As New IMIS_EN.tblClaimDedRem
-                eclaimDedRem.tblPolicy = ePolicy
-                Policy.LoadPolicyDedRem(eclaimDedRem)
-                'txtPaidDeductable.Text = eclaimDedRem.DedG
-                'txtPaidDeductableIP.Text = eclaimDedRem.DedIP
-                'txtPaidDeductableOP.Text = eclaimDedRem.DedOP
-                'txtRemuneratedHealthCare.Text = eclaimDedRem.RemG
-                'txtRemuneratedIP.Text = eclaimDedRem.RemIP
-                'txtRemuneratedOP.Text = eclaimDedRem.RemOP
-                ddlProduct.Enabled = False
-
-                'Or ePolicy.PolicyStatus > 1 is taken out from the below condition after Jiri's visit 
-                If ePolicy.ValidityTo.HasValue Or ePolicy.PolicyStatus > 1 Or ((IMIS_Gen.offlineHF Or IMIS_Gen.OfflineCHF) And Not If(ePolicy.isOffline Is Nothing, False, ePolicy.isOffline)) Then
-                    'PnlBody4.Enabled = False
-                    L_FAMILYPANEL.Enabled = False
-                    'pnlBody.Enabled = False
-                    txtEnrollmentDate.Enabled = False
-                    btnEnrollmentDate.Enabled = False
-                    txtEffectiveDate.Enabled = False
-                    txtStartDate.Enabled = False
-                    txtExpiryDate.Enabled = False
-                    ddlEnrolementOfficer.Enabled = True
-
-                    B_SAVE.Visible = True
-
-                End If
-
-                'Policy is in Renewal Mode
-            ElseIf Not ePolicy.PolicyID = 0 And hfPolicyStage.Value = "R" Then
-
-                Policy.LoadPolicy(ePolicy, 0)
-                'txtEnrollmentDate.Text = Format(Date.Today, "dd/MM/yyyy")
-                'ddlProduct.SelectedValue = ePolicy.tblProduct.ProdID
-                'SetProductForRenewal()
-                ddlProduct.Enabled = True
-                'getPolicyValue(sender, e)
-
-            ElseIf ePolicy.PolicyID = 0 And hfPolicyStage.Value = "R" Then 'Ruzo : Added on 11 Oct, to fix loading of product when renewing.  
-
-                'txtEnrollmentDate.Text = Format(Date.Today, "dd/MM/yyyy")
-                'ddlProduct.SelectedValue = ePolicy.tblProduct.ProdID
-                'SetProductForRenewal()
-                ddlProduct.Enabled = True
-                'getPolicyValue(sender, e)
-
-
+            Dim receiptDetails As DataTable
+            receiptDetails = Policy.GetQRReceiptNumber(txtHeadCHFID.Text)
+            If receiptDetails.Rows.Count > 0 Then
+                hfReceiptId.Value = receiptDetails.Rows(0)("ReceiptId")
+                txtEnrollmentDate.Text = receiptDetails.Rows(0)("EnrolledDate")
+                ddlProduct.SelectedValue = 49
+                ddlEnrolementOfficer.SelectedValue = receiptDetails.Rows(0)("OfficerID")
+                ddlPayer.SelectedValue = 1
+                txtPremium.Text = receiptDetails.Rows(0)("Amount")
+                txtReceiptNumber.Text = receiptDetails.Rows(0)("ReceiptNum")
+                getPolicyValue(49)
+            Else
+                imisgen.Alert("QR Receipt not found, Enter Data from Old Page!", pnlBody, alertPopupTitle:="IMIS")
+                B_SAVE.Enabled = False
             End If
 
+            txtEnrollmentDate.ReadOnly = True
+            ddlProduct.Enabled = False
+            ddlEnrolementOfficer.Enabled = False
+            'ddlPayer.Enabled = False
+            txtPremium.Enabled = False
+            txtReceiptNumber.Enabled = False
+
             txtEffectiveDate.Enabled = False
-            'HIREN: Expiry date is made editable only for the nepal version because of their calendar
             txtExpiryDate.Enabled = False
             txtStartDate.Enabled = False
             txtEnrollmentDate.Enabled = ePolicy.PolicyID = 0
@@ -257,25 +169,10 @@ Partial Public Class PolicyNew
         FillPayers()
     End Sub
 
-    Public Sub getPolicyValue(ByVal sender As Object, ByVal e As EventArgs) Handles txtEnrollmentDate.TextChanged, ddlProduct.SelectedIndexChanged
+    Public Sub getPolicyValue(ByVal productID As Integer)
         If IsDate(txtEnrollmentDate.Text) Then
 
             Dim dEnrolDate As Date = Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing)
-
-            'if its renewal then we need to verify product for conversion
-            'If hfPolicyStage.Value = "R" Then
-            'SetProductForRenewal()
-            'If
-
-
-            'Code below is commented after Jiri's comment on Start date must be the EnrollDate
-            'If hfPolicyStage.Value = "R" And ePolicy.PolicyID = 0 Then
-            '    'If dEnrolDate < Date.ParseExact(Request.QueryString("ed"), "dd/MM/yyyy", Nothing) Then
-
-            '    dEnrolDate = Date.ParseExact(Request.QueryString("ed"), "dd/MM/yyyy", Nothing)
-            '    dEnrolDate = DateAdd(DateInterval.Day, 1, dEnrolDate)
-            '    'End If
-            'End If
 
             ePolicy.EnrollDate = Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing)
 
@@ -283,14 +180,7 @@ Partial Public Class PolicyNew
 
             'FillProductsd()
             'Addition for Nepal >> Start
-            If sender.ID = txtEnrollmentDate.ID And hfPolicyStage.Value <> "R" Then
-                FillProductsd()
-                ddlProduct.SelectedValue = 0
-                txtStartDate.Text = ""
-                txtExpiryDate.Text = ""
-                txtEffectiveDate.Text = ""
-                txtPolicyValue.Text = ""
-            ElseIf sender.ID = txtEnrollmentDate.ID Then
+            If hfPolicyStage.Value <> "R" Then
                 FillProductsd()
                 ddlProduct.SelectedValue = 0
                 txtStartDate.Text = ""
@@ -302,24 +192,19 @@ Partial Public Class PolicyNew
             'Addition for Nepal >> End
 
             If hfPolicyStage.Value = "R" Then
-                'FillProductsd()
-                ' SetProductForRenewal()
-                'If Request.QueryString("rpo") IsNot Nothing Then
-                'Dim UUID As Guid = Guid.Parse(Request.QueryString("rpo"))
-                'PreviousPolicyId = If(UUID.Equals(Guid.Empty), 0, Policy.GetPolicyIdByUUID(UUID))
-                'End If
-            End If
 
-            If ddlProduct.SelectedValue > 0 Then
+                End If
+
+                If ddlProduct.SelectedValue > 0 Then
                 ePolicy.PolicyStage = hfPolicyStage.Value
                 eProduct.ProdID = ddlProduct.SelectedValue
                 ePolicy.tblProduct = eProduct
                 Policy.getPolicyValue(ePolicy, PreviousPolicyId)
                 'need to change
-                ddlPremium.DataSource = Policy.GetPremimumAmount(eProduct.ProdID, FormatNumber(ePolicy.PolicyValue))
-                ddlPremium.DataValueField = "AmountID"
-                ddlPremium.DataTextField = "Amount"
-                ddlPremium.DataBind()
+                'ddlPremium.DataSource = Policy.GetPremimumAmount(eProduct.ProdID, FormatNumber(ePolicy.PolicyValue))
+                'ddlPremium.DataValueField = "AmountID"
+                'ddlPremium.DataTextField = "Amount"
+                'ddlPremium.DataBind()
                 'need to change
                 txtPolicyValue.Text = FormatNumber(ePolicy.PolicyValue)
 
@@ -521,25 +406,6 @@ Partial Public Class PolicyNew
                 If ePolicy.PolicyID > 0 Then ePolicy.PolicyStatus = Nothing
 
 
-                'Check if renewal is late or not
-
-                'Dim rpo As Integer
-                'If Request.QueryString("rpo") IsNot Nothing Then
-                '    Dim UUID As Guid = Guid.Parse(Request.QueryString("rpo"))
-                '    rpo = If(UUID.Equals(Guid.Empty), 0, Policy.GetPolicyIdByUUID(UUID))
-                'End If
-
-                'If IsNumeric(rpo) Then
-                '    If hfIsRenewalLate.Value = 1 Then
-                '        Dim chk1 As Boolean = Policy.IsRenewalLate(rpo, Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing))
-                '        If chk1 = True Then
-                '            Dim Msg As String = imisgen.getMessage("M_LATEPOLICYRENEWAL", True)
-                '            imisgen.Confirm(Msg, pnlButtons, "promptPolicyRenewal", "", AcceptButtonText:=imisgen.getMessage("L_YES", True), RejectButtonText:=imisgen.getMessage("L_NO", True))
-                '            Exit Sub
-                '        End If
-                '    End If
-                'End If
-
                 If IsNumeric(Request.QueryString("rpo")) Then
                     If hfIsRenewalLate.Value = 1 Then
                         Dim chk1 As Boolean = Policy.IsRenewalLate(Request.QueryString("rpo"), Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing))
@@ -583,18 +449,6 @@ Partial Public Class PolicyNew
                 End If
 
                 hfCheckMaxInsureeCount.Value = 0
-                If chkQrRasid.Checked = True Then
-                    If Premium.isUniqueQrReceipt(txtReceiptNumber.Text) = False Then
-                        imisgen.Alert("QR Rasid not found in list. Please Check.", pnlBody, alertPopupTitle:="IMIS")
-                        Return
-                    End If
-                Else
-                    If Premium.isUniqueReceiptHIB(txtReceiptNumber.Text) = False Then
-                        imisgen.Alert(imisgen.getMessage("M_DUPLICATERECEIPT"), pnlBody, alertPopupTitle:="IMIS")
-                        Return
-                    End If
-                End If
-
                 Dim policyID As Integer = Policy.SavePolicyNew(ePolicy, IMIS_Gen.OfflineCHF)
 
                 ePolicy.PolicyID = CInt(policyID)
@@ -602,7 +456,7 @@ Partial Public Class PolicyNew
                 ePolicy.StartDate = txtStartDate.Text
 
                 ePayer.PayerID = ddlPayer.SelectedValue
-                ePremium.Amount = CInt(ddlPremium.SelectedValue)
+                ePremium.Amount = CInt(txtPremium.Text)
                 ePremium.Receipt = txtReceiptNumber.Text
                 ePremium.PayDate = Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing)
                 ePremium.PayType = "C"
@@ -618,7 +472,7 @@ Partial Public Class PolicyNew
                 Dim StartDate As Date = Date.ParseExact(txtStartDate.Text, "dd/MM/yyyy", Nothing)
                 Dim EffectiveDate As Date = If(PayDate < StartDate, StartDate, PayDate)
 
-                If CInt(txtPolicyValue.Text) = ddlPremium.SelectedValue Then
+                If CInt(txtPolicyValue.Text) = txtPremium.Text Then
                     ePolicy.PolicyStatus = 2
                     ePolicy.EffectiveDate = EffectiveDate
                 Else
@@ -628,14 +482,14 @@ Partial Public Class PolicyNew
 
                 ePolicy.isOffline = False
                 ePremium.tblPolicy = ePolicy
-                'removing Policy check for now.
-
-
+                'removing Policy check for now
+                'If Premium.isUniqueReceipt(ePremium) = False Then
+                '    imisgen.Alert(imisgen.getMessage("M_DUPLICATERECEIPT"), pnlBody, alertPopupTitle:="IMIS")
+                '    Return
+                'End If
 
                 Dim chk As Integer = Premium.SavePremium(ePremium, IMIS_Gen.offlineHF)
-                If chkQrRasid.Checked = True Then
-                    Premium.UpdateReceiptByCHFID(ePremium.Receipt, txtHeadCHFID.Text, ePremium.Amount, ePremium.PayDate)
-                End If
+                Premium.UpdateReceipt(CInt(hfReceiptId.Value))
                 If chk = 0 Then
                     Session("Msg") = imisgen.getMessage("M_POLICYENROLEDATE") & " " & ePolicy.EnrollDate & " " & imisgen.getMessage("M_Inserted")
                 Else
@@ -700,4 +554,6 @@ Partial Public Class PolicyNew
         ddlPayer.DataTextField = "PayerName"
         ddlPayer.DataBind()
     End Sub
+
+
 End Class

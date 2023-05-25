@@ -214,7 +214,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                           <td class="DataEntry"><asp:CheckBox ID="chkSameBelow" runat="server" AutoPostBack="True" /></td>
                       </tr>
                     <tr id="trPoverty" runat="server">
-                     
+                     <%--
                         <td class="FormLabel">
                             <asp:Label ID="lblConfirmationType0" runat="server" Text="<%$ Resources:Resource,L_POVERTY %>"></asp:Label>
                         </td>
@@ -224,7 +224,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                         </td>
                         <td>
                             <asp:RequiredFieldValidator ID="rfPoverty" runat="server" ControlToValidate="ddlPoverty" Display="Dynamic" ForeColor="Red" InitialValue="" SetFocusOnError="True" Text="*" ValidationGroup="check"></asp:RequiredFieldValidator>
-                        </td>
+                        </td>--%>
                           <td class="FormLabel">
                               <asp:Label ID="lblConfirmationType" runat="server" Text="<%$ Resources:Resource,L_CONFIRMATIONTYPE %>"></asp:Label>
                           </td>
@@ -244,7 +244,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                               <asp:Label ID="L_CONFIRMATIONNO" runat="server" style="direction: ltr" Text="<%$ Resources:Resource, L_CONFIRMATIONNO %>"></asp:Label>
                           </td>
                           <td class="DataEntry">
-                              <asp:TextBox ID="txtConfirmationNo" runat="server" MaxLength="12" style="direction: ltr" Width="150px"></asp:TextBox>
+                              <asp:TextBox ID="txtConfirmationNo" runat="server" MaxLength="50" style="direction: ltr" Width="150px"></asp:TextBox>
                               <asp:RequiredFieldValidator 
                                 ID="rfConfirmationNo" 
                                 runat="server" 

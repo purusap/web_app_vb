@@ -121,6 +121,8 @@ Partial Public Class HealthFacility
                 ddOwnPricerListService.SelectedValue = eHF.tblPLServices.PLServiceID
                 ddOwnPricerListItem.SelectedValue = eHF.tblPLItems.PLItemID
                 txtAccCode.Text = eHF.AccCode
+                txtContractStartDate.Text = If(eHF.ContractStartDate = Nothing, "", eHF.ContractStartDate)
+                txtContractEndDate.Text = If(eHF.ContractEndDate = Nothing, "", eHF.ContractEndDate)
             End If
 
             ddOwnPricerListService.DataSource = HF.GetPLServices(imisgen.getUserId(Session("User")), Val(ddlRegion.SelectedValue), Val(ddlDistrict.SelectedValue), True)

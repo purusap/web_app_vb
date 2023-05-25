@@ -172,10 +172,10 @@ Public Class FamilyNew
             ddlGender.DataTextField = "Gender"
             ddlGender.DataBind()
 
-            ddlPoverty.DataSource = Family.GetYesNO
-            ddlPoverty.DataValueField = "Code"
-            ddlPoverty.DataTextField = "Status"
-            ddlPoverty.DataBind()
+            'ddlPoverty.DataSource = Family.GetYesNO
+            'ddlPoverty.DataValueField = "Code"
+            'ddlPoverty.DataTextField = "Status"
+            'ddlPoverty.DataBind()
 
             'ddlMarital.DataSource = Family.GetMaritalStatus
             'ddlMarital.DataValueField = "Code"
@@ -257,7 +257,7 @@ Public Class FamilyNew
                 ddlVillage.SelectedValue = eFamily.LocationId
                 ddlWard.SelectedValue = eFamily.WardId
                 'ddlDistrict.SelectedValue = eFamily.tblDistricts.DistrictID
-                ddlPoverty.SelectedValue = eFamily.Poverty
+                'ddlPoverty.SelectedValue = eFamily.Poverty
                 ddlConfirmationType.SelectedValue = eFamily.ConfirmationType
                 ddlEthnicity.SelectedValue = eFamily.Ethnicity
                 'ddlCardIssued.SelectedValue = eFamily.tblInsuree.CardIssued
@@ -486,7 +486,7 @@ Public Class FamilyNew
             If ddlVillage.SelectedValue.Length > 0 Then eFamily.LocationId = ddlVillage.SelectedValue
 
             'eFamily.WardID = ddlWard.SelectedValue
-            If ddlPoverty.SelectedValue.Length > 0 Then eFamily.Poverty = ddlPoverty.SelectedValue
+            'If ddlPoverty.SelectedValue.Length > 0 Then eFamily.Poverty = ddlPoverty.SelectedValue
             If ddlConfirmationType.SelectedValue.Length > 0 Then eFamily.ConfirmationType = ddlConfirmationType.SelectedValue
             If ddlEthnicity.SelectedValue.Length > 0 Then eFamily.Ethnicity = ddlEthnicity.SelectedValue
             eInsuree.CHFID = txtCHFID.Text.Trim
@@ -696,14 +696,14 @@ Public Class FamilyNew
             txtCurrentAddress.Text = ""
         End If
     End Sub
-    Private Sub ddlPoverty_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlPoverty.SelectedIndexChanged
-        If ddlPoverty.SelectedValue = 1 Then
-            ddlConfirmationType.SelectedValue = 2
-            rfConfirmationNo.Enabled = True
-        Else
-            rfConfirmationNo.Enabled = False
-        End If
-    End Sub
+    'Private Sub ddlPoverty_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlPoverty.SelectedIndexChanged
+    '    If ddlPoverty.SelectedValue = 1 Then
+    '        ddlConfirmationType.SelectedValue = 2
+    '        rfConfirmationNo.Enabled = True
+    '    Else
+    '        rfConfirmationNo.Enabled = False
+    '    End If
+    'End Sub
 
     Private Sub ddlConfirmationType_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlConfirmationType.SelectedIndexChanged
         If ddlConfirmationType.SelectedValue <> 1 Then

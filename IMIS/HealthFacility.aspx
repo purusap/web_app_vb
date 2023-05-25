@@ -288,6 +288,58 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                     ValidationGroup="check"></asp:RequiredFieldValidator>--%>
                                 </td>
                             </tr>
+                             <tr>
+                                <td class="FormLabel">
+                                    <asp:Label ID="lblContractStartDate" runat="server" Text='Contract Start Date'></asp:Label>
+                                </td>
+                                <td class="DataEntry">
+                                    <asp:TextBox ID="txtContractStartDate" runat="server" Width="100px" ValidationGroup="check"
+                                        MaxLength="50"></asp:TextBox>
+                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
+                    ControlToValidate="txtContractStartDate" ErrorMessage="*" SetFocusOnError="True" 
+                    ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\d\d$" 
+                    ValidationGroup="check" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                    <asp:RequiredFieldValidator ID="txtContractStartDate_RequiredFieldValidator" 
+                       runat="server" ErrorMessage="*" ControlToValidate="txtContractStartDate" 
+                       ValidationGroup="check" Visible="True" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+               <asp:Button ID="btnContractStartDate" runat="server" Height="15px" padding-bottom="3px" 
+                        Width="15px" class="btnDate" />
+                    <asp:CalendarExtender ID="txtContractStartDate_CalendarExtender" runat="server" 
+                        Format="dd/MM/yyyy" PopupButtonID="btnContractStartDate" TargetControlID="txtContractStartDate">
+                    </asp:CalendarExtender>
+                                </td>
+                                <td>
+                                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                    ControlToValidate="txtAccCode" Text="*" 
+                                    ValidationGroup="check"></asp:RequiredFieldValidator>--%>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td class="FormLabel">
+                                    <asp:Label ID="lblContractEndDate" runat="server" Text='Contract End Date'></asp:Label>
+                                </td>
+                                <td class="DataEntry">
+                                    <asp:TextBox ID="txtContractEndDate" runat="server" Width="100px" ValidationGroup="check"
+                                        MaxLength="50"></asp:TextBox>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                    ControlToValidate="txtContractEndDate" ErrorMessage="*" SetFocusOnError="True" 
+                    ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\d\d$" 
+                    ValidationGroup="check" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                    <asp:RequiredFieldValidator ID="txtContractEndDate_RequiredFieldValidator" 
+                       runat="server" ErrorMessage="*" ControlToValidate="txtContractEndDate" 
+                       ValidationGroup="check" Visible="True" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+               <asp:Button ID="btnContractEndDate" runat="server" Height="15px" padding-bottom="3px" 
+                        Width="15px" class="btnDate" />
+                    <asp:CalendarExtender ID="txtContractEndDate_CalendarExtender" runat="server" 
+                        Format="dd/MM/yyyy" PopupButtonID="btnContractEndDate" TargetControlID="txtContractEndDate">
+                    </asp:CalendarExtender>
+                                </td>
+                                <td>
+                                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                    ControlToValidate="txtAccCode" Text="*" 
+                                    ValidationGroup="check"></asp:RequiredFieldValidator>--%>
+                                </td>
+                            </tr>
 
                         </table>
                     </div>

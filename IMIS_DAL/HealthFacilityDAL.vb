@@ -244,7 +244,8 @@ Public Class HealthFacilityDAL
         Dim data As New ExactSQL
         Dim sSQL As String = ""
         sSQL += " SELECT [HFName],[LegalForm],[HFLevel],[HFSublevel],[HFCode],[HFAddress],RegionId,[LocationId] DistrictId,[Phone],[Fax],[eMail],"
-        sSQL += " [HFCareType],isnull(PLServiceID,0) PLServiceID, isnull(PLItemID,0) PLItemID,[AccCode],HF.ValidityTo,HF.[AuditUserID]"
+        sSQL += " [HFCareType],isnull(PLServiceID,0) PLServiceID, isnull(PLItemID,0) PLItemID,[AccCode],HF.ValidityTo,HF.[AuditUserID],"
+        sSQL += " HF.[ContractStartDate],HF.[ContractEndDate]"
         sSQL += " FROM tblHF HF"
         sSQL += " INNER JOIN tblDistricts D ON D.DistrictId= HF.LocationId"
         sSQL += " INNER JOIN tblRegions R ON R.RegionId=D.Region"
@@ -270,6 +271,8 @@ Public Class HealthFacilityDAL
             eHF.tblPLServices = ePLService
             ePLItem.PLItemID = dr("PLItemID")
             eHF.AccCode = dr("AccCode")
+            eHF.ContractStartDate = dr("ContractStartDate")
+            eHF.ContractEndDate = dr("ContractEndDate")
             eHF.tblPLItems = ePLItem
 
             eHF.ValidityTo = if(dr("ValidityTo").ToString = String.Empty, Nothing, dr("ValidityTo"))
@@ -429,4 +432,16 @@ Public Class HealthFacilityDAL
         'Hfid = IIf(data.sqlParameters("@hfid").Equals(DBNull.Value), 0, data.sqlParameters("@hfid"))
         Return dt
     End Function
+    Public Function getHFContractDateFromID(ByVal id As Integer) As String
+        Dim sSQL As String = ""
+        Dim data As New ExactSQL
+
+        sSQL = "select ContractEndDate from tblHF where HfID = @HfID"
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@HfID", SqlDbType.Int, id)
+        Return data.Filldata.Rows(0)("ContractEndDate").ToString
+        'Return data.Filldata
+    End Function
+
 End Class

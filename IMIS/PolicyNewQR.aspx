@@ -22,7 +22,7 @@ sustained by you or third parties or a failure of the program to operate with an
 advised of the possibility of such damages.
 
 In case of dispute arising out or in relation to the use of the program, it is subject to the public law of Switzerland. The place of jurisdiction is Berne.--%>
-<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/IMIS.Master" CodeBehind="PolicyNew.aspx.vb" Inherits="IMIS.PolicyNew" Title= '<%$ Resources:Resource,L_POLICY %>'  %>
+<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/IMIS.Master" CodeBehind="PolicyNewQR.aspx.vb" Inherits="IMIS.PolicyNewQR" Title= '<%$ Resources:Resource,L_POLICY %>'  %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="contentHead" ContentPlaceHolderID="head" runat="server" >
     <script type="text/javascript" language="javascript">
@@ -171,9 +171,8 @@ In case of dispute arising out or in relation to the use of the program, it is s
                     <asp:UpdatePanel ID="upCHFID" runat="server">
                                 <ContentTemplate>
                                      <asp:HiddenField ID="hfInsurancePeriod" runat="server" />
-                    <table class="style15">
-                        <tr align="right"><td colspan="2" style="font-size:20px;color:#1e9838"><asp:Label ID="lblPolicyStage" runat="server"></asp:Label></td></tr>
-                        <tr align="center"><td colspan="2" style="font-size:20px;color:#ff0000"><asp:CheckBox ID="chkQrRasid" runat="server" AutoPostBack="true" Text="QR Rasid?"></asp:CheckBox></td></tr>
+                    <table class="style15"> 
+                        <tr align="right"><td colspan="2" style="font-size:20px;color:#1e9838"><asp:Label ID="lblPolicyStage" runat="server"></asp:Label></td></tr>                        
                     <tr>
                         <td class="FormLabel">
                         <asp:Label ID="lblEnrolmentDate" runat="server" Text='<%$ Resources:Resource,L_ENROLMENTDATE %>'></asp:Label>
@@ -308,9 +307,8 @@ In case of dispute arising out or in relation to the use of the program, it is s
                             <asp:Label ID="L_PremiumPaid" runat="server" Text='<%$ Resources:Resource,L_PREMIUMPAID %>'></asp:Label>
                         </td>
                         <td class="DataEntry">
-                            <asp:DropDownList ID="ddlPremium" runat="server">
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredfieldValidator6" runat="Server" ControlToValidate="ddlPremium" SetFocusOnError="true" Text="*" InitialValue="0" ValidationGroup="check"  ForeColor="Red" Display="Dynamic" ></asp:RequiredFieldValidator>     
+                            <asp:TextBox ID="txtPremium" runat="server"></asp:TextBox>                           
+                            <asp:RequiredFieldValidator ID="RequiredfieldValidator6" runat="Server" ControlToValidate="txtPremium" SetFocusOnError="true" Text="*" InitialValue="0" ValidationGroup="check"  ForeColor="Red" Display="Dynamic" ></asp:RequiredFieldValidator>     
                         </td>
                     </tr>
                         <tr>
@@ -423,6 +421,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                         <td>
                         <asp:HiddenField ID="hfFamilyID" runat="server"/>
                             <asp:HiddenField ID="hfPolicyStage" runat="server" />
+                            <asp:HiddenField ID="hfReceiptId" runat="server"/>
                         </td>
                         </tr>                   
                    

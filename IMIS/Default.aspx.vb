@@ -135,6 +135,12 @@ Partial Public Class Login
     End Sub
     Private Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         txtUserName.Focus()
+        If Request.QueryString("locked") IsNot Nothing Then
+            Dim type As String = Request.QueryString("type")
+            If type = "hf" Then
+                lblMessage.Text = "Your Health Facility's Contract is expired. Login is Locked."
+            End If
+        End If
         If Request.Form("__EVENTARGUMENT") = "SaveOfflineHFID" Then
             Dim eDefaults As New IMIS_EN.tblIMISDefaults
             Dim txtOfflineHF As String = Request.Form("txtOfflineHF")

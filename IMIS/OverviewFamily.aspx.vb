@@ -707,6 +707,11 @@ Partial Public Class OverviewFamily
         Response.Redirect("PolicyNew.aspx?f=" & FamilyId & "&stage=R")
 
     End Sub
+    Private Sub QrPolicy_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnQrRenew.Click
+        Dim PolicyPage As String = "PolicyNewQR.aspx"
+        'Response.Redirect(PolicyPage & "?f=" & FamilyUUID.ToString() & "&stage=N")
+        Response.Redirect(PolicyPage & "?f=" & FamilyId & "&stage=R")
+    End Sub
 
     Private Sub EditPolicy_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles EditPolicy.Click
         'Dim po As Guid

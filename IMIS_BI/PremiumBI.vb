@@ -78,6 +78,10 @@ Public Class PremiumBI
         Dim Pr As New IMIS_BL.PremiumBL
         Return Pr.isUniqueReceipt(ePremium)
     End Function
+    Public Function isUniqueReceiptHIB(ByVal ReceiptNum As String) As Boolean
+        Dim Pr As New IMIS_BL.PremiumBL
+        Return Pr.isUniqueReceiptHIB(ReceiptNum)
+    End Function
     Public Function GetPremiumIdByUUID(ByVal uuid As Guid) As Integer
         Dim Premium As New IMIS_BL.PremiumBL
         Return Premium.GetPremiumIdByUUID(uuid)
@@ -89,5 +93,17 @@ Public Class PremiumBI
     Public Function GetPremium(ByVal ePremium As IMIS_EN.tblPremium) As DataTable
         Dim premium As New IMIS_BL.PremiumBL
         Return premium.GetPremium(ePremium)
+    End Function
+    Public Function UpdateReceipt(ByRef ReceiptId As Integer)
+        Dim Premium As New IMIS_BL.PremiumBL
+        Premium.UpdateReceipt(ReceiptId)
+    End Function
+    Public Function UpdateReceiptByCHFID(ByVal ReceiptNum As String, ByVal CHFID As String, ByVal Amount As Integer, ByVal EnrolledDate As Date)
+        Dim Premium As New IMIS_BL.PremiumBL
+        Premium.UpdateReceiptByCHFID(ReceiptNum, CHFID, Amount, EnrolledDate)
+    End Function
+    Public Function isUniqueQrReceipt(ByVal ReceiptNum As String) As Boolean
+        Dim Pr As New IMIS_BL.PremiumBL
+        Return Pr.isUniqueQrReceipt(ReceiptNum)
     End Function
 End Class

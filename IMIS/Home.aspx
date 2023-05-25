@@ -140,7 +140,10 @@ In case of dispute arising out or in relation to the use of the program, it is s
 
         </div>
     <%-- Show Notice Div --%>
-     <div style="position:absolute;top:50px;left:170px;width:800px;height:527px; text-align:center" id="getNotice">
+    <div style="position:absolute;top:50px;left:170px;width:800px;height:527px;">   
+    <asp:Label ID="lblExpiryNotice" runat="server" Font-Size="Large" Font-Bold="true"></asp:Label>
+        </div>
+     <div style="position:absolute;top:100px;left:170px;width:800px;height:527px; text-align:center" id="getNotice">         
         <h2 style="color: red;">Notice</h2>
         
         <p id="showNoticeDate" style="text-align:left;color: blue;"></p>

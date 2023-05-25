@@ -203,33 +203,6 @@ Partial Public Class FamilyNew
     Protected WithEvents trPoverty As Global.System.Web.UI.HtmlControls.HtmlTableRow
 
     '''<summary>
-    '''lblConfirmationType0 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblConfirmationType0 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''ddlPoverty control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlPoverty As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''rfPoverty control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rfPoverty As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
     '''lblConfirmationType control.
     '''</summary>
     '''<remarks>

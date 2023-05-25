@@ -62,6 +62,10 @@ Public Class ClaimBI
         Dim claim As New IMIS_BL.ClaimsBL
         claim.UpdateClaimTotalValue(eClaim)
     End Sub
+    Public Sub UpdateClaimValue(ByVal claimID As Integer, ByVal claimTotal As Decimal)
+        Dim claim As New IMIS_BL.ClaimsBL
+        claim.UpdateClaimValue(claimID, claimTotal)
+    End Sub
     Public Function checkClaimCode(ByVal eClaim As IMIS_EN.tblClaim) As Boolean
         Return Claim.checkClaimCode(eClaim)
     End Function

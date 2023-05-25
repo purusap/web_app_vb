@@ -276,6 +276,10 @@ Public Class ClaimsBL
         Dim claim As New IMIS_DAL.ClaimsDAL
         claim.UpdateClaimTotalValue(eClaim)
     End Sub
+    Public Sub UpdateClaimValue(ByVal claimID As Integer, ByVal claimTotal As Decimal)
+        Dim claim As New IMIS_DAL.ClaimsDAL
+        claim.UpdateClaimValue(claimID, claimTotal)
+    End Sub
     Public Function UpdateClaimReview(ByRef eClaim As IMIS_EN.tblClaim) As Boolean
         clm.UpdateClaimReview(eClaim)
         Return True

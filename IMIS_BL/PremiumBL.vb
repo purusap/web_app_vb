@@ -199,6 +199,10 @@ Public Class PremiumBL
         Dim Pr As New IMIS_DAL.PremiumDAL
         Return Pr.isUniqueReceipt(ePremium)
     End Function
+    Public Function isUniqueReceiptHIB(ByVal ReceiptNum As String) As Boolean
+        Dim Pr As New IMIS_DAL.PremiumDAL
+        Return Pr.isUniqueReceiptHIB(ReceiptNum)
+    End Function
     Public Function AddFund(ePremium As IMIS_EN.tblPremium, ProdId As Integer) As Integer
         Dim Fund As New IMIS_DAL.PremiumDAL
         Return Fund.AddFund(ePremium, ProdId)
@@ -210,5 +214,18 @@ Public Class PremiumBL
     Public Function GetPremiumUUIDByID(ByVal id As Integer) As Guid
         Dim Premium As New IMIS_DAL.PremiumDAL
         Return Premium.GetPremiumUUIDByID(id).Rows(0).Item(0)
+    End Function
+    Public Function UpdateReceipt(ByVal ReceiptId As Integer)
+        Dim PI As New IMIS_BL.InsureePolicyBL
+        PI.UpdateReceipt(ReceiptId)
+    End Function
+    Public Function UpdateReceiptByCHFID(ByVal ReceiptNum As String, ByVal CHFID As String, ByVal Amount As Integer, ByVal EnrolledDate As Date)
+        Dim PI As New IMIS_BL.InsureePolicyBL
+        PI.UpdateReceiptByCHFID(ReceiptNum, CHFID, Amount, EnrolledDate)
+    End Function
+
+    Public Function isUniqueQrReceipt(ByVal ReceiptNum As String) As Boolean
+        Dim Pr As New IMIS_DAL.PremiumDAL
+        Return Pr.isUniqueQrReceipt(ReceiptNum)
     End Function
 End Class

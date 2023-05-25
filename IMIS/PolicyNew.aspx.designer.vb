@@ -302,6 +302,15 @@ Partial Public Class PolicyNew
     Protected WithEvents lblPolicyStage As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''chkQrRasid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkQrRasid As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
     '''lblEnrolmentDate control.
     '''</summary>
     '''<remarks>

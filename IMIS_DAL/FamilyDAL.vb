@@ -133,7 +133,7 @@ Public Class FamilyDAL
         data.params("@Poverty", SqlDbType.Bit, eFamily.Poverty, ParameterDirection.Input)
         data.params("@ConfirmationType", SqlDbType.NVarChar, 3, eFamily.ConfirmationType)
         data.params("@Ethnicity", SqlDbType.NVarChar, 1, eFamily.Ethnicity)
-        data.params("@ConfirmationNo", SqlDbType.NVarChar, 12, eFamily.ConfirmationNo)
+        data.params("@ConfirmationNo", SqlDbType.NVarChar, 50, eFamily.ConfirmationNo)
 
 
         data.params("@CHFID", SqlDbType.NVarChar, 12, eFamily.tblInsuree.CHFID)
@@ -195,7 +195,7 @@ Public Class FamilyDAL
         data.params("@isOffline", SqlDbType.Bit, eFamily.isOffline)
         data.params("@FamilyType", SqlDbType.NVarChar, 2, If(eFamily.FamilyType.Length = 0, Nothing, eFamily.FamilyType))
         data.params("@FamilyAddress", SqlDbType.NVarChar, 200, eFamily.FamilyAddress)
-        data.params("@ConfirmationNo", SqlDbType.NVarChar, 12, eFamily.ConfirmationNo)
+        data.params("@ConfirmationNo", SqlDbType.NVarChar, 50, eFamily.ConfirmationNo)
         data.params("@LocationId", SqlDbType.Int, eFamily.LocationId)
 
         data.ExecuteCommand()
@@ -322,7 +322,7 @@ Public Class FamilyDAL
         data.params("@DistrictID", SqlDbType.Int, eFamily.DistrictId)
         data.params("@RegionId", SqlDbType.Int, eFamily.RegionId)
         data.params("@dtYesNo", GetYesNo, "xAttributeV")
-        data.params("@ConfirmationNo", SqlDbType.NVarChar, 12, eFamily.ConfirmationNo & "%")
+        data.params("@ConfirmationNo", SqlDbType.NVarChar, 50, eFamily.ConfirmationNo & "%")
         data.params("@Email", SqlDbType.NVarChar, 50, eFamily.tblInsuree.Email & "%")
         data.params("@ConfirmationType", SqlDbType.NVarChar, 2, eFamily.ConfirmationType)
 

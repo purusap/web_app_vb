@@ -29,4 +29,6 @@
 Partial Public Class tblHF
     Public Property RegionId As Integer?
     Public Property DistrictId As Integer?
+    Public Property ContractStartDate As Date
+    Public Property ContractEndDate As Date
 End Class

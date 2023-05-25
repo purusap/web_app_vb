@@ -126,4 +126,9 @@ Public Class PolicyBI
         Return Policy.GetPolicyByEnrollDate(EnrollDate, ProdID, FamilyID)
     End Function
 
+    Public Function GetQRReceiptNumber(ByVal FamilyCHFID As String) As DataTable
+        Dim Policy As New IMIS_BL.PolicyBL
+        Return Policy.GetQRReceiptNumber(FamilyCHFID)
+    End Function
+
 End Class

@@ -775,7 +775,13 @@ Partial Public Class Claim
             Dim eClaimItems As New IMIS_EN.tblClaimItems
             Dim eClaimServices As New IMIS_EN.tblClaimServices
 
-
+            'Dim serViceTotal As Decimal
+            'Dim itemTotal As Decimal
+            'Dim claimTotal As Decimal
+            'Dim Totali As Decimal
+            'Dim Totals As Decimal
+            'serViceTotal = 0
+            'itemTotal = 0
             For Each row As GridViewRow In gvItems.Rows
                 If Not gvItems.DataKeys.Item(row.RowIndex).Values("ItemCode") Is DBNull.Value Then
                     If Not gvItems.DataKeys.Item(row.RowIndex).Values("ItemCode") = CType(gvItems.Rows(row.RowIndex).Cells(0).Controls(1), TextBox).Text Then
@@ -839,6 +845,8 @@ Partial Public Class Claim
                         eClaimItems.QtyProvided = CType(row.Cells(1).Controls(1), TextBox).Text
                         eClaimItems.PriceAsked = CType(row.Cells(2).Controls(1), TextBox).Text
                         eClaimItems.Explanation = CType(row.Cells(3).Controls(1), TextBox).Text
+                        'Totali = Decimal.Parse(eClaimItems.QtyProvided) * Decimal.Parse(eClaimItems.PriceAsked)
+                        'itemTotal = itemTotal + Totali
                         chkSaveClaimItems = claim.SaveClaimItems(eClaimItems)
                     End If
 
@@ -908,11 +916,14 @@ Partial Public Class Claim
                         eClaimServices.QtyProvided = CType(row.cells(1).controls(1), TextBox).Text
                         eClaimServices.PriceAsked = CType(row.cells(2).controls(1), TextBox).Text
                         eClaimServices.Explanation = CType(row.cells(3).controls(1), TextBox).Text
+                        'Totals = Decimal.Parse(eClaimServices.QtyProvided) * Decimal.Parse(eClaimServices.PriceAsked)
+                        'serViceTotal = serViceTotal + Totals
                         chkSaveClaimServices = claim.SaveClaimServices(eClaimServices)
                     End If
                 End If
             Next
-
+            ' claimTotal = serViceTotal + itemTotal
+            'claim.UpdateClaimValue(eClaimItems.tblClaim.ClaimID, claimTotal)
             ServiceItemGridBinding()
             AfterSaveMessages(chkSaveClaim, chkSaveClaimItems, chkSaveClaimServices)
             tdPrintW.Visible = eClaim.ClaimID > 0

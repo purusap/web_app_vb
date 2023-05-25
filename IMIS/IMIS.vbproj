@@ -227,6 +227,7 @@
     <Content Include="PaymentOverview.aspx" />
     <Content Include="Policy.aspx" />
     <Content Include="PolicyNew.aspx" />
+    <Content Include="PolicyNewQR.aspx" />
     <Content Include="PolicyRenewal.aspx" />
     <Content Include="Premium.aspx" />
     <Content Include="PremiumCollection.aspx" />
@@ -764,6 +765,13 @@
       <DependentUpon>PolicyNew.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PolicyNewQR.aspx.designer.vb">
+      <DependentUpon>PolicyNewQR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PolicyNewQR.aspx.vb">
+      <DependentUpon>PolicyNewQR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="PolicyRenewal.aspx.designer.vb">
       <DependentUpon>PolicyRenewal.aspx</DependentUpon>
     </Compile>
@@ -1193,7 +1201,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="False" />
+      <UserProperties BuildVersion_DetectChanges="False" BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_StartDate="2012/1/1" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

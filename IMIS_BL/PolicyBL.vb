@@ -26,6 +26,9 @@
 ' 
 '
 
+Imports System.Runtime.InteropServices.ComTypes
+Imports System.Security
+
 Public Class PolicyBL
     Private imisgen As New GeneralBL
     Public Function GetPolicybyFamily(ByVal FamilyId As Integer) As DataTable
@@ -230,18 +233,18 @@ Public Class PolicyBL
         rdt.Columns.Add("AmountID")
         rdt.Columns.Add("Amount")
         Dim dr As DataRow = rdt.NewRow
-        dr = rdt.NewRow
-        dr("AmountID") = 0
-        dr("Amount") = "-- Select Amount --"
-        rdt.Rows.InsertAt(dr, 0)
+        'dr = rdt.NewRow
+        'dr("AmountID") = 0
+        'dr("Amount") = "-- Select Amount --"
+        'rdt.Rows.InsertAt(dr, 0)
         dr = rdt.NewRow
         dr("AmountID") = PolicyValue
         dr("Amount") = PolicyValue
-        rdt.Rows.InsertAt(dr, 1)
-        dr = rdt.NewRow
-        dr("AmountID") = PolicyValue / 2
-        dr("Amount") = PolicyValue / 2
-        rdt.Rows.InsertAt(dr, 2)
+        rdt.Rows.InsertAt(dr, 0)
+        'dr = rdt.NewRow
+        'dr("AmountID") = PolicyValue / 2
+        'dr("Amount") = PolicyValue / 2
+        'rdt.Rows.InsertAt(dr, 2)
         Return rdt
     End Function
     Public Function SavePolicyNew(ByRef ePolicy As IMIS_EN.tblPolicy, Optional ByVal IsOffLine As Boolean = False) As Integer
@@ -258,5 +261,8 @@ Public Class PolicyBL
         Dim Policy As New IMIS_DAL.PolicyDAL
         Return Policy.GetPolicyByEnrollDate(EnrollDate, ProdID, FamilyID)
     End Function
-
+    Public Function GetQRReceiptNumber(ByVal FamilyCHFID As String) As DataTable
+        Dim Policy As New IMIS_DAL.PolicyDAL
+        Return Policy.GetQRReceiptNumber(FamilyCHFID)
+    End Function
 End Class

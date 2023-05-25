@@ -75,12 +75,12 @@ In case of dispute arising out or in relation to the use of the program, it is s
                         <td class="ReadOnlyText">
                             <asp:Label ID="txtRegion" runat="server" />
                         </td>
-                        <td class="FormLabel">
+                        <%--<td class="FormLabel">
                             <asp:Label ID="lblPoverty3" runat="server" Text="<%$ Resources:Resource,L_POVERTY %>"></asp:Label>
                         </td>
                         <td class="ReadOnlyText">
                             <asp:Label ID="txtPoverty" runat="server"></asp:Label>
-                        </td>
+                        </td>--%>
                          <td class="FormLabel" style="text-align:left; direction: ltr;">
                              <asp:Label ID="L_ADDRESS0" runat="server" Text="<%$ Resources:Resource, L_PARMANENTADDRESS %>"></asp:Label>
                          </td>
@@ -222,21 +222,21 @@ In case of dispute arising out or in relation to the use of the program, it is s
                         </td>
                        
                     </tr>
-                    <tr id="trPoverty" runat="server">
+                    <%--<tr id="trPoverty" runat="server">
                         <td class="FormLabel">
                             <asp:Label ID="lblPoverty" runat="server" Text='<%$ Resources:Resource,L_POVERTY %>'></asp:Label>
                         </td>
                         <td class="DataEntry">
                             <asp:DropDownList ID="ddlPoverty" runat="server" Width="150px" >
-                                <%--<asp:ListItem>Yes</asp:ListItem>
-                                <asp:ListItem>No</asp:ListItem>--%>
+                                <asp:ListItem>Yes</asp:ListItem>
+                                <asp:ListItem>No</asp:ListItem>
                             </asp:DropDownList>
                         </td>
                         <td >
                            
                             <asp:RequiredFieldValidator ID="rfPoverty" runat="server" ControlToValidate="ddlPoverty" InitialValue="" SetFocusOnError="True" Text="*" ValidationGroup="check"></asp:RequiredFieldValidator>
                         </td>
-                        </tr>
+                        </tr>--%>
                                    <tr id="tfConfirmationType" runat="server">
                                 <td class="FormLabel">
                                     <asp:Label ID="lblPoverty4" runat="server" Text="<%$ Resources:Resource,L_CONFIRMATIONTYPE %>"></asp:Label>
@@ -259,7 +259,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                     <asp:Label ID="lblConfirmationNo" runat="server" style="direction: ltr" Text="<%$ Resources:Resource, L_CONFIRMATIONNO %>"></asp:Label>
                                 </td>
                                 <td class="DataEntry">
-                                    <asp:TextBox ID="txtConfirmationNo" runat="server" AutoPostBack="false" MaxLength="12" Width="150px"></asp:TextBox>
+                                    <asp:TextBox ID="txtConfirmationNo" runat="server" AutoPostBack="false" MaxLength="50" Width="150px"></asp:TextBox>
                                 </td>
                                 <td>
                                     <asp:RequiredFieldValidator ID="rfConfirmationNo" runat="server" ControlToValidate="txtConfirmationNo" InitialValue="" SetFocusOnError="True" Text="*" ValidationGroup="check"></asp:RequiredFieldValidator>

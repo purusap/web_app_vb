@@ -109,4 +109,27 @@ Public Class InsureePolicyDAL
         data.ExecuteCommand()
 
     End Sub
+    Public Sub UpdateReceipt(ByVal ReceiptId As Integer)
+        sSQL = "UPDATE tblReceipt SET IsUsed = 2 WHERE ReceiptId = @ReceiptId"
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+
+        data.params("@ReceiptId", SqlDbType.Int, ReceiptId)
+
+        data.ExecuteCommand()
+
+    End Sub
+    Public Sub UpdateReceiptByCHFID(ByVal ReceiptNum As String, ByVal CHFID As String, ByVal Amount As Integer, ByVal EnrolledDate As Date)
+        sSQL = "UPDATE tblReceipt SET CHFID=@CHFID,Amount=@Amount,EnrolledDate=@EnrolledDate, IsUsed = 2 WHERE ReceiptNum = @ReceiptNum"
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+
+        data.params("@ReceiptNum", SqlDbType.NVarChar, 12, ReceiptNum)
+        data.params("@CHFID", SqlDbType.NVarChar, 12, CHFID)
+        data.params("@Amount", SqlDbType.Decimal, Amount)
+        data.params("@EnrolledDate", SqlDbType.SmallDateTime, EnrolledDate)
+
+        data.ExecuteCommand()
+
+    End Sub
 End Class

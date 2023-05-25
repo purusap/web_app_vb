@@ -43,4 +43,8 @@ Public Class HomeBI
         Dim Region As New IMIS_BL.LocationsBL
         Return Region.GetUserRegions(UserId)
     End Function
+    Public Function GetHFContractDates(HFId As Integer) As String
+        Dim HF As New IMIS_BL.HealthFacilityBL
+        Return HF.getHFContractDateFromID(HFId)
+    End Function
 End Class
