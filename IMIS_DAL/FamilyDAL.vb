@@ -182,7 +182,7 @@ Public Class FamilyDAL
         Dim data As New ExactSQL
         Dim str As String = "insert into tblFamilies ([insureeid],[Poverty],[ConfirmationType],isOffline" &
               ",[ValidityFrom],[ValidityTo],[LegacyID],[AuditUserID],FamilyType, FamilyAddress,Ethnicity,ConfirmationNo, LocationId) select [insureeid]" &
-              ",[Poverty],[ConfirmationType],isOffline,[ValidityFrom],getdate(),@FamilyID, @AuditUserID,FamilyType, FamilyAddress,Ethnicity,ConfirmationNo,LocationId" &
+              ",[Poverty],[ConfirmationType],isOffline,[ValidityFrom],getdate(),@FamilyID, AuditUserID,FamilyType, FamilyAddress,Ethnicity,ConfirmationNo,LocationId" &
               " from tblFamilies where FamilyID = @FamilyID; update [tblFamilies] set " &
               "[Poverty] = @Poverty, [ConfirmationType] = @ConfirmationType, isOffline=@isOffline,[ValidityFrom]=GETDATE()" &
               ",[AuditUserID] = @AuditUserID,FamilyType = @FamilyType, FamilyAddress = @FamilyAddress, Ethnicity = @Ethnicity, ConfirmationNo = @ConfirmationNo, LocationId = @LocationId where FamilyID = @FamilyID"

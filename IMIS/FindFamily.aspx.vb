@@ -132,7 +132,7 @@ Partial Public Class FindFamily
         If Not userBI.RunPageSecurity(IMIS_EN.Enums.Pages.Family, Page) Then
 
             Dim RefUrl = Request.Headers("Referer")
-            Server.Transfer("Redirect.aspx?perm=0&page=" & IMIS_EN.Enums.Pages.FindFamily.ToString & "&retUrl=" & RefUrl)
+            Server.Transfer("Redirect.aspx?perm=0&page=" & IMIS_EN.Enums.Pages.FindFamily.ToString & "&retUrl=" & RefUrl, False)
         End If
     End Sub
     Private Sub ddlDistricts_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlDistrict.SelectedIndexChanged

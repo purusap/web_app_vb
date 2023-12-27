@@ -77,6 +77,10 @@ Public Class ChangeFamilyBI
         Dim insuree As New IMIS_BL.InsureeBL
         insuree.GetInsureesByCHFID(einsuree)
     End Sub
+    Public Function GetClaimsByCHFID(ByRef einsuree As IMIS_EN.tblInsuree) As Boolean
+        Dim insuree As New IMIS_BL.InsureeBL
+        Return insuree.GetClaimsByCHFID(einsuree)
+    End Function
     Public Function GetTypes() As DataTable
         Dim F As New IMIS_BL.FamilyBL
         Return F.GetTypes

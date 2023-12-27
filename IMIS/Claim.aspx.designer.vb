@@ -302,6 +302,15 @@ Partial Public Class Claim
     Protected WithEvents RegularExpressionValidator3 As Global.System.Web.UI.WebControls.RegularExpressionValidator
 
     '''<summary>
+    '''txtENDData_RequiredFieldValidator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtENDData_RequiredFieldValidator As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''btnENDData control.
     '''</summary>
     '''<remarks>

@@ -59,6 +59,7 @@ Partial Public Class Claim
         'lblGurantee.Visible = Not (Adjustibility = "N")
         txtGuaranteeId.Visible = Not (Adjustibility = "N")
         'rfGuranteeId.Enabled = (Adjustibility = "M")
+        txtENDData_RequiredFieldValidator.Enabled = False
 
     End Sub
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -1172,6 +1173,13 @@ Partial Public Class Claim
             ddlRefer.Visible = False
             rfddlRefer.Enabled = False
             'lblRefer.Visible = False
+        End If
+    End Sub
+    Private Sub ddlOPDIPD_IndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlOPDIPD.SelectedIndexChanged
+        If ddlOPDIPD.SelectedValue = "I" Then
+            txtENDData_RequiredFieldValidator.Enabled = True
+        Else
+            txtENDData_RequiredFieldValidator.Enabled = False
         End If
     End Sub
 End Class

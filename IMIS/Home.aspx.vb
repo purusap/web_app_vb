@@ -70,6 +70,10 @@ Partial Public Class Home
                 'txtCURRENTUSER.Text = eUsers.OtherNames & " " & eUsers.LastName
                 If Not eUsers.HFID = 0 Then
                     Dim ContractEndDate = Home.GetHFContractDates(eUsers.HFID)
+                    If ContractEndDate = "" Then
+                        Dim Url As String = "Default.aspx?locked=yes&type=hf"
+                        Response.Redirect(Url)
+                    End If
                     Dim days As Integer = (Date.ParseExact(Left(ContractEndDate, 10), "dd/MM/yyyy", Nothing) - Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing)).Days
                     lblExpiryNotice.Text = "Your Hospital Contract is expiring on : " & Left(ContractEndDate, 10) & " (Remaining Days: " & days & ")"
                     If days < 90 Then

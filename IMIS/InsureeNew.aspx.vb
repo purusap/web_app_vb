@@ -284,7 +284,7 @@ Partial Public Class InsureeNew
                     txtInsureeStatusReason.Visible = True
                     rfInsureetatusReason.Enabled = True
                 End If
-
+                txtCHFID.ReadOnly = True
             End If
             hfFamilyId.Value = efamily.FamilyID
             Insuree.GetFamilyHeadInfo(efamily)
@@ -423,6 +423,11 @@ Partial Public Class InsureeNew
             eInsuree.LastName = txtLastName.Text
             eInsuree.OtherNames = txtOtherNames.Text
             eInsuree.DOB = Date.ParseExact(txtBirthDate.Text, "dd/MM/yyyy", Nothing)
+            Dim days As Integer = (Date.ParseExact(Now.Date(), "dd/MM/yyyy", Nothing) - Date.ParseExact(txtBirthDate.Text, "dd/MM/yyyy", Nothing)).Days
+            If days < 1 Then
+                imisgen.Alert("Date Of Birth Should be less than today!", pnlButtons, alertPopupTitle:="IMIS")
+                Return
+            End If
             eInsuree.Gender = ddlGender.SelectedValue
             'If ddlMarital.SelectedValue <> "" Then eInsuree.Marital = ddlMarital.SelectedValue
             'If ddlCardIssued.SelectedValue <> "" Then eInsuree.CardIssued = ddlCardIssued.SelectedValue
@@ -603,6 +608,7 @@ Partial Public Class InsureeNew
         If Insuree.CheckCHFID(txtCHFID.Text) = True Then
             FetchNewImage()
             FillImageDL()
+            checkPhoto()
             Return
         Else
 
@@ -659,6 +665,14 @@ Partial Public Class InsureeNew
             rfInsureetatusReason.Enabled = True
             txtInsureeStatusReason.Visible = True
             lblinsureeStatusReason.Visible = True
+        End If
+    End Sub
+    Private Sub checkPhoto()
+        If Image1.ImageUrl = "" Then
+            txtCHFID.Text = ""
+            lblNoPhoto.Text = "Photo Not Found in Sever."
+        Else
+            lblNoPhoto.Text = ""
         End If
     End Sub
 End Class

@@ -401,6 +401,15 @@ Partial Public Class OverviewFamily
     Protected WithEvents btnRenewPolicy As Global.System.Web.UI.WebControls.ImageButton
 
     '''<summary>
+    '''btnQrNew control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnQrNew As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
     '''btnQrRenew control.
     '''</summary>
     '''<remarks>

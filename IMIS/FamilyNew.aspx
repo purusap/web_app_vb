@@ -294,12 +294,14 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                 <asp:Label ID="L_CHFID" runat="server" Text="<%$ Resources:Resource,L_CHFID%>">
                                 </asp:Label>
                             </td>
-                            <td class="DataEntry" valign="bottom">
+                            <td class="DataEntry" valign="bottom" style="width:100px">
                                 <asp:TextBox ID="txtCHFID" runat="server" AutoPostBack="True" CssClass="numbersOnly" MaxLength="12" Width="150px"></asp:TextBox>
 
                                 <asp:RequiredFieldValidator ID="RequiredFieldCHFID0" runat="server" ControlToValidate="txtCHFID" SetFocusOnError="True" ValidationGroup="check" ForeColor="Red" Display="Dynamic"
                                         Text='*'>
                                 </asp:RequiredFieldValidator>
+                                
+                            <asp:Label ID="lblNoPhoto" runat="server" Text="" ForeColor="Red"></asp:Label>
                             </td>  
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -309,6 +311,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                 <asp:UpdatePanel ID="upImage" runat="server">
                                     <ContentTemplate>
                                         <asp:Image ID="Image1" runat="server" Width="137px" Height="137px" ImageAlign="Middle" onerror="NoImage(this)" />
+                                        <asp:HiddenField ID="hfImage" runat="server" />
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </td>                         

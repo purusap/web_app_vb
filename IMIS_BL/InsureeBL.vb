@@ -77,6 +77,9 @@ Public Class InsureeBL
         Insuree.GetInsureesByCHFID(einsuree)
 
     End Sub
+    Public Function GetClaimsByCHFID(ByRef einsuree As IMIS_EN.tblInsuree) As Boolean
+        Return Insuree.GetClaimsByCHFID(einsuree)
+    End Function
     Public Function GetCHFNumbers() As DataTable
         Return Insuree.GetCHFNumbers()
     End Function

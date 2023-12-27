@@ -119,7 +119,11 @@ Partial Public Class PolicyNewQR
                 txtEnrollmentDate.Text = receiptDetails.Rows(0)("EnrolledDate")
                 ddlProduct.SelectedValue = 49
                 ddlEnrolementOfficer.SelectedValue = receiptDetails.Rows(0)("OfficerID")
-                ddlPayer.SelectedValue = 1
+                If txtConfirmationType.Text = "Normal" Or txtConfirmationType.Text = "FCHV" Then
+                    ddlPayer.SelectedValue = 1
+                Else
+                    ddlPayer.SelectedValue = 2
+                End If
                 txtPremium.Text = receiptDetails.Rows(0)("Amount")
                 txtReceiptNumber.Text = receiptDetails.Rows(0)("ReceiptNum")
                 getPolicyValue(49)
@@ -131,7 +135,7 @@ Partial Public Class PolicyNewQR
             txtEnrollmentDate.ReadOnly = True
             ddlProduct.Enabled = False
             ddlEnrolementOfficer.Enabled = False
-            'ddlPayer.Enabled = False
+            ddlPayer.Enabled = False
             txtPremium.Enabled = False
             txtReceiptNumber.Enabled = False
 
@@ -180,22 +184,22 @@ Partial Public Class PolicyNewQR
 
             'FillProductsd()
             'Addition for Nepal >> Start
-            If hfPolicyStage.Value <> "R" Then
-                FillProductsd()
-                ddlProduct.SelectedValue = 0
-                txtStartDate.Text = ""
-                txtExpiryDate.Text = ""
-                txtEffectiveDate.Text = ""
-                txtPolicyValue.Text = ""
+            'If hfPolicyStage.Value <> "R" Then
+            '    FillProductsd()
+            '    ddlProduct.SelectedValue = 0
+            '    txtStartDate.Text = ""
+            '    txtExpiryDate.Text = ""
+            '    txtEffectiveDate.Text = ""
+            '    txtPolicyValue.Text = ""
 
-            End If
+            'End If
             'Addition for Nepal >> End
 
-            If hfPolicyStage.Value = "R" Then
+            If hfPolicyStage.Value = "R" Or hfPolicyStage.Value = "N" Then
 
-                End If
+            End If
 
-                If ddlProduct.SelectedValue > 0 Then
+            If ddlProduct.SelectedValue > 0 Then
                 ePolicy.PolicyStage = hfPolicyStage.Value
                 eProduct.ProdID = ddlProduct.SelectedValue
                 ePolicy.tblProduct = eProduct
@@ -207,6 +211,11 @@ Partial Public Class PolicyNewQR
                 'ddlPremium.DataBind()
                 'need to change
                 txtPolicyValue.Text = FormatNumber(ePolicy.PolicyValue)
+                If CInt(txtPolicyValue.Text) <> CInt(txtPremium.Text) Then
+                    imisgen.Alert("Premium Amount and Policy Amount Not Matched!", pnlButtons, alertPopupTitle:="IMIS")
+                    B_SAVE.Enabled = False
+                    Return
+                End If
 
                 'Addition for Nepal >> Start
                 Dim AdminPeriod As Integer = Policy.GetProductAdministrationPeriod(ePolicy.tblProduct.ProdID)

@@ -255,12 +255,13 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                             <asp:Label ID="L_CHFID" runat="server" Text="<%$ Resources:Resource,L_CHFID%>">
                                             </asp:Label>
                                         </td>
-                                        <td class="DataEntry">
+                                        <td class="DataEntry" style="width:100px">
                                             <asp:UpdatePanel ID="up1" runat="server">
                                                 <ContentTemplate>
                                                     <asp:TextBox ID="txtCHFID" runat="server" AutoPostBack="True" CssClass="numbersOnly" MaxLength="12" Width="150px"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldCHFID0" runat="server" ControlToValidate="txtCHFID" SetFocusOnError="True" ValidationGroup="check" ForeColor="Red" Display="Dynamic" Text='*'>
                                                     </asp:RequiredFieldValidator>
+                                                    <asp:Label ID="lblNoPhoto" runat="server" Text="" ForeColor="Red"></asp:Label>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                             

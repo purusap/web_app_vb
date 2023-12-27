@@ -522,7 +522,7 @@ Public Class PolicyDAL
     Public Function GetQRReceiptNumber(ByVal FamilyCHFID As String) As DataTable
         Dim sSQL As String = ""
         Dim data As New ExactSQL
-        sSQL = "select ReceiptId, ReceiptNum, CHFID,Amount,SubmitDate,EnrolledDate, EaCode, o.OfficerID, IsUsed from tblReceipt r inner join tblOfficer o on o.Code=r.EaCode where IsUsed=1 and CHFID= @CHFID"
+        sSQL = "select ReceiptId, ReceiptNum, CHFID,Amount,SubmitDate,EnrolledDate, EaCode, o.OfficerID, IsUsed from tblReceipt r inner join tblOfficer o on o.Code=r.EaCode where IsUsed=1 and o.ValidityTo is null and CHFID= @CHFID"
         data.setSQLCommand(sSQL, CommandType.Text)
         data.params("@CHFID", SqlDbType.NVarChar, 12, FamilyCHFID)
         Return data.Filldata

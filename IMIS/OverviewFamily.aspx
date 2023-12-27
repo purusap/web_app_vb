@@ -330,8 +330,8 @@ title='<%$ Resources:Resource,L_FAMILY%>'%>
                         <asp:ImageButton class="ImageButton DeleteButton" ImageUrl="~/Images/Erase.png"  ID="DeletePolicy" runat="server"></asp:ImageButton>
                          <asp:ImageButton class="ImageButton" ImageUrl="~/Images/Renew.png"  
                                 ID="btnRenewPolicy" runat="server"></asp:ImageButton>
-                            <asp:ImageButton class="ImageButton" ImageUrl="~/Images/qr.png"  
-                                ID="btnQrRenew" runat="server"></asp:ImageButton>
+                            <asp:ImageButton class="ImageButton" ImageUrl="~/Images/qr.png" ID="btnQrNew" runat="server"></asp:ImageButton>
+                            <asp:ImageButton class="ImageButton" ImageUrl="~/Images/qr.png" ID="btnQrRenew" runat="server"></asp:ImageButton>
                         </td>
                     </tr>
                     </table>

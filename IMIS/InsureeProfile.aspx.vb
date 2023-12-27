@@ -74,7 +74,8 @@ Partial Public Class InsureeProfile
         Dim intAge As Int16 = Math.Floor(DateDiff(DateInterval.Month, DateValue(myDOB), Now()) / 12)
         For i As Integer = 0 To rptInsuree.Items.Count - 1
             Dim lblInsureeAge As Label = DirectCast(rptInsuree.Items(i).FindControl("lblInsureeAge"), Label)
-            lblInsureeAge.Text = " (" + intAge.ToString() + " Years)"
+            'lblInsureeAge.Text = " (" + intAge.ToString() + " Years)"
+            lblInsureeAge.Text = " (" + dt.Rows(0)("Age") + ")"
         Next
         dt = Insuree.GetFamilyDetails(NSHI, Request.Cookies("CultureInfo").Value)
 

@@ -268,8 +268,12 @@ Partial Public Class FindClaims
                 eClaim.FeedbackStatus = dic("FeedbackStatus")
                 eClaim.ReviewStatus = dic("ReviewStatus")
                 eClaim.ClaimStatus = dic("ClaimStatus")
-                eICDCodes.ICDID = dic("ICDID")
-
+                ' Changed based on error logs
+                'eICDCodes.ICDID = dic("ICDID")
+                If Not dic("ICDID") = "" Then
+                    eICDCodes.ICDID = dic("ICDID")
+                End If
+                ' Changed based on error logs
                 If Not dic("CHFNo") = "" Then
                     eInsuree.CHFID = dic("CHFNo")
                 End If

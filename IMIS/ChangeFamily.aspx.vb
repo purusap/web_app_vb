@@ -274,6 +274,7 @@ Partial Public Class ChangeFamily
             eFamily.FamilyAddress = txtAddress.Text
             If ddlEthnicity.SelectedValue.Length > 0 Then eFamily.Ethnicity = ddlEthnicity.SelectedValue
             eFamily.ConfirmationNo = txtConfirmationNo.Text
+            eFamily.AuditUserID = imisgen.getUserId(Session("User"))
 
             Dim chk As Boolean = ChangeFamily.UpdateChangeFamily(eFamily)
             If chk = True Then
@@ -477,6 +478,10 @@ Partial Public Class ChangeFamily
             eIinsureeNEW.CHFID = txtCHFIDToMove.Text
             eIinsureeNEW.isOffline = IMIS_Gen.offlineHF Or IMIS_Gen.OfflineCHF
             ChangeFamily.GetInsureesByCHFID(eIinsureeNEW)
+            If ChangeFamily.GetClaimsByCHFID(eIinsureeNEW) Then
+                imisgen.Alert("Insuree cannot be Moved before Claim Settlement!", pnlChangeFamily, alertPopupTitle:="IMIS")
+                Return
+            End If
             If eIinsureeNEW.CHFID = String.Empty Then
                 imisgen.Alert(imisgen.getMessage("M_SELECTEDCHFNONOTEXIT", True), pnlChangeFamily, alertPopupTitle:="IMIS")
                 Return

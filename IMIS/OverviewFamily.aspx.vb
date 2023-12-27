@@ -157,6 +157,7 @@ Partial Public Class OverviewFamily
                 dt = load.GetPremiumsByPolicy(gvPolicies.SelectedDataKey.Values("PolicyID"))
 #If HIB Then
                 AddPolicy.Visible = False
+                btnQrNew.Visible = False
 #End If
                 loadGrid(gvPremiums, dt)
                 If gvPolicies.SelectedIndex >= 0 Then
@@ -165,6 +166,9 @@ Partial Public Class OverviewFamily
             Else
                 gvPremiums.DataSource = New DataTable()
                 gvPremiums.DataBind()
+#If HIB Then
+                btnQrRenew.Visible = False
+#End If
             End If
 
             DisableEmptyGridEditDeleteButtons(gvPremiums)
@@ -707,7 +711,12 @@ Partial Public Class OverviewFamily
         Response.Redirect("PolicyNew.aspx?f=" & FamilyId & "&stage=R")
 
     End Sub
-    Private Sub QrPolicy_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnQrRenew.Click
+    Private Sub QrPolicy_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnQrNew.Click
+        Dim PolicyPage As String = "PolicyNewQR.aspx"
+        'Response.Redirect(PolicyPage & "?f=" & FamilyUUID.ToString() & "&stage=N")
+        Response.Redirect(PolicyPage & "?f=" & FamilyId & "&stage=N")
+    End Sub
+    Private Sub QrPolicyRenew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnQrRenew.Click
         Dim PolicyPage As String = "PolicyNewQR.aspx"
         'Response.Redirect(PolicyPage & "?f=" & FamilyUUID.ToString() & "&stage=N")
         Response.Redirect(PolicyPage & "?f=" & FamilyId & "&stage=R")

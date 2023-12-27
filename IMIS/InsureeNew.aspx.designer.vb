@@ -302,6 +302,15 @@ Partial Public Class InsureeNew
     Protected WithEvents RequiredFieldCHFID0 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
+    '''lblNoPhoto control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblNoPhoto As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''L_Relation control.
     '''</summary>
     '''<remarks>

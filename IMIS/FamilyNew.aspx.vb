@@ -455,6 +455,12 @@ Public Class FamilyNew
                 birthdate = Date.ParseExact(txtBirthDate.Text, "dd/MM/yyyy", Nothing)
             End If
 
+            Dim days As Integer = (Date.ParseExact(Now.Date(), "dd/MM/yyyy", Nothing) - Date.ParseExact(txtBirthDate.Text, "dd/MM/yyyy", Nothing)).Days
+            If days < 1 Then
+                imisgen.Alert("Date Of Birth Should be less than today!", pnlButtons, alertPopupTitle:="IMIS")
+                Return
+            End If
+
             If Not Family.CheckCHFID(txtCHFID.Text) = True Then
                 imisgen.Alert(txtCHFID.Text & imisgen.getMessage("M_NOTVALIDCHFNUMBER"), pnlButtons, alertPopupTitle:="IMIS")
                 Return
@@ -616,6 +622,7 @@ Public Class FamilyNew
             If Family.CheckCHFID(txtCHFID.Text) = True Then
                 FetchNewImage()
                 FillImageDL()
+                checkPhoto()
             End If
         Catch ex As Exception
             'lblMsg.Text = imisgen.getMessage("M_ERRORMESSAGE")
@@ -710,6 +717,14 @@ Public Class FamilyNew
             rfConfirmationNo.Enabled = True
         Else
             rfConfirmationNo.Enabled = False
+        End If
+    End Sub
+    Private Sub checkPhoto()
+        If Image1.ImageUrl = "" Then
+            txtCHFID.Text = ""
+            lblNoPhoto.Text = "Photo Not Found in Sever."
+        Else
+            lblNoPhoto.Text = ""
         End If
     End Sub
 End Class

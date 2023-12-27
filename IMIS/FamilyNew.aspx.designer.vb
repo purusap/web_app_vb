@@ -338,6 +338,15 @@ Partial Public Class FamilyNew
     Protected WithEvents RequiredFieldCHFID0 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
+    '''lblNoPhoto control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblNoPhoto As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''btnBrowse control.
     '''</summary>
     '''<remarks>
@@ -363,6 +372,15 @@ Partial Public Class FamilyNew
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Image1 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''hfImage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfImage As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
     '''L_OTHERNAMES0 control.

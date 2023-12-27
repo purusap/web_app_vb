@@ -937,6 +937,9 @@ In case of dispute arising out or in relation to the use of the program, it is s
                     ControlToValidate="txtENDData" ErrorMessage="*" SetFocusOnError="True" 
                     ValidationExpression="^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\d\d$" 
                     ValidationGroup="check" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                   <asp:RequiredFieldValidator ID="txtENDData_RequiredFieldValidator" 
+   runat="server" ErrorMessage="*" ControlToValidate="txtENDData" 
+   ValidationGroup="check" Visible="True" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
                <asp:Button ID="btnENDData" runat="server" Height="15px" padding-bottom="3px" 
                         Width="15px" style="margin-left:7px" class="btnDate" />
                     <ajax:CalendarExtender ID="txtENDData_CalendarExtender" runat="server" 

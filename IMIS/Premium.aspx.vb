@@ -386,7 +386,7 @@ Partial Public Class Premium
         'Dim PremiumUUID As Guid
         'PremiumUUID = Premium.GetPremiumnUUIDByID(ePremium.PremiumId)
         'Response.Redirect("OverviewFamily.aspx?f=" & eFamily.FamilyUUID.ToString() & "&p=" & PremiumUUID.ToString() & "&po=" & ePolicy.PolicyUUID.ToString())
-        Response.Redirect("OverviewFamily.aspx?f=" & eFamily.FamilyID & "&p=" & ePremium.PremiumId & "&po=" & ePolicy.PolicyID)
+        Response.Redirect("OverviewFamily.aspx?f=" & eFamily.FamilyID & "&p=" & ePremium.PremiumId & "&po=" & ePolicy.PolicyID.ToString(), False)
     End Sub
     Private Sub B_CANCEL_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles B_CANCEL.Click
         If B_SAVE.Visible = False Then 'HttpContext.Current.Request.QueryString("po") Is Nothing
