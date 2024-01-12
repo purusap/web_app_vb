@@ -41,7 +41,9 @@ Public Class InsureeBL
         If InsureeExists(eInsuree) Then Return 1
         If eInsuree.InsureeID = 0 Then
             Insuree.InsertInsuree(eInsuree)
-            AddInsuree(eInsuree.InsureeID, Activate)
+            'Nepal Changes-- Dont add isnurepolicy after policy exists
+            'AddInsuree(eInsuree.InsureeID, Activate)
+            'Nepal Changes-- Dont add isnurepolicy after policy exists
             Dim Policy As New IMIS_DAL.PolicyDAL
 
             Return 0

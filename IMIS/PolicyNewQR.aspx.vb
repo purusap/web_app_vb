@@ -128,7 +128,8 @@ Partial Public Class PolicyNewQR
                 txtReceiptNumber.Text = receiptDetails.Rows(0)("ReceiptNum")
                 getPolicyValue(49)
             Else
-                imisgen.Alert("QR Receipt not found, Enter Data from Old Page!", pnlBody, alertPopupTitle:="IMIS")
+                'imisgen.Alert("QR Receipt not found, Enter Data from Old Page!", pnlBody, alertPopupTitle:="IMIS")
+                imisgen.Alert("QR Receipt not uploaded, Please contact EA!", pnlBody, alertPopupTitle:="IMIS")
                 B_SAVE.Enabled = False
             End If
 
