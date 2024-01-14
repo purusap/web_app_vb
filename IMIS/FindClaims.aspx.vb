@@ -27,6 +27,8 @@
 '
 
 
+Imports Newtonsoft.Json
+
 Partial Public Class FindClaims
     Inherits System.Web.UI.Page
     Private eClaim As New IMIS_EN.tblClaim
@@ -39,6 +41,7 @@ Partial Public Class FindClaims
     Private hfBI As New IMIS_BI.HealthFacilityBI
     Private claimBI As New IMIS_BI.ClaimBI
     Private claimAdminBI As New IMIS_BI.ClaimAdministratorBI
+    Private ApiEntry As New IMIS_BI.ApiEntryBI
 
     Private Sub FormatForm()
 
@@ -53,6 +56,26 @@ Partial Public Class FindClaims
     End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load, txtICDCode.TextChanged
+        Dim action = HttpContext.Current.Request.QueryString("action")
+        If action = "ClaimCopayResponse" Then
+            '/ApiEntryHandler.ashx?xml=<xml></xml>&action=ClaimCopayResponse
+            '/ApiEntryHandler.ashx?xml=<xml><HFID>35</HFID></xml>&action=ClaimCopayResponse
+            Dim xml = HttpContext.Current.Request.Unvalidated("xml")
+
+            If xml = Nothing Then
+                '/ApiEntryHandler.ashx?json={"xml":{"HFID":35}}&action=ClaimCopayResponse
+                Dim json = HttpContext.Current.Request.Unvalidated("json")
+                Dim doc = JsonConvert.DeserializeXmlNode(json)
+                xml = doc.InnerXml
+            End If
+            Dim response = ApiEntry.ClaimsCopayRequired(xml)
+            Context.Response.ContentType = "text/json"
+            Context.Response.Write(response)
+            Context.Response.Flush()
+            Context.Response.End()
+            Return
+        End If
+
         chkboxSubmitAll.Checked = False
         'ddlBatchRun.Attributes.Add("oncontextmenu", "RightClickJSFunction(this.id);")
         'ddlClaimStatus.Attributes.Add("oncontextmenu", "RightClickJSFunction(this.id,31);")
@@ -395,7 +418,7 @@ Partial Public Class FindClaims
                 End If
             End If
 
-                eClaim.tblBatchRun = eBatchRun
+            eClaim.tblBatchRun = eBatchRun
             eClaim.tblHF = eHF
             eClaim.tblInsuree = eInsuree
             eClaim.tblICDCodes = eICDCodes

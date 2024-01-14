@@ -416,7 +416,7 @@ Public Class IMIS
             FSP.Visible = Not (Adjustibility = "N")
             L_FSP.Visible = Not (Adjustibility = "N")
 
-
+            L_CENTER1.Text = "Family Type: " & item.DataItem("FamilyConfirmationType")
         End If
     End Sub
 End Class

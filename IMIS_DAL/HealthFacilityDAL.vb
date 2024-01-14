@@ -216,7 +216,7 @@ Public Class HealthFacilityDAL
       & " select [HFName],[LegalForm],[HFLevel],[HFSublevel],[HFCode],[HFAddress],[LocationId],[Phone],[Fax],[eMail],[HFCareType],[PLServiceID],[PLItemID],[AccCode],[ValidityFrom],getdate(),[HfID],[AuditUserID] from tblHF where HfID = @HfID;" _
       & "UPDATE [tblHF] SET [HFName] = @HFName,[LegalForm] = @LegalForm,[HFLevel] = @HFLevel,HFSublevel = @HFSublevel,[HFCode]=@HFCode,[HFAddress] = @HFAddress,[LocationId] = @LocationId,[Phone] = @Phone ,[Fax] = @Fax" _
       & ",[eMail] = @eMail,[HFCareType] = @HFCareType,[PLServiceID] = @PLServiceID,[PLItemID] = @PLItemID,[AccCode] = @AccCode, [ValidityFrom] = GetDate()" _
-      & ",[LegacyID] = @LegacyID,[AuditUserID] = @AuditUserID  WHERE HfID= @HfID", CommandType.Text)
+      & ",[LegacyID] = @LegacyID,[AuditUserID] = @AuditUserID,[IsCopay]=@IsCopay,ContractStartDate=@ContractStartDate,ContractEndDate=@ContractEndDate  WHERE HfID= @HfID", CommandType.Text)
         data.params("@HfID", SqlDbType.Int, eHF.HfID)
         data.params("@HFName", SqlDbType.NVarChar, 100, eHF.HFName)
         data.params("@LegalForm", SqlDbType.Char, 1, eHF.LegalForm)
@@ -233,6 +233,9 @@ Public Class HealthFacilityDAL
         data.params("@PLItemID", SqlDbType.Int, if(eHF.tblPLItems.PLItemID = 0, DBNull.Value, eHF.tblPLItems.PLItemID))
         data.params("@AccCode", SqlDbType.NVarChar, 25, eHF.AccCode)
         data.params("@LegacyID", SqlDbType.Int, eHF.HfID)
+        data.params("@IsCopay", SqlDbType.Int, eHF.IsCopay)
+        data.params("@ContractStartDate", SqlDbType.Date, eHF.ContractStartDate)
+        data.params("@ContractEndDate", SqlDbType.Date, eHF.ContractEndDate)
         data.params("@AuditUserID", SqlDbType.Int, eHF.AuditUserID)
         data.ExecuteCommand()
 
@@ -245,7 +248,7 @@ Public Class HealthFacilityDAL
         Dim sSQL As String = ""
         sSQL += " SELECT [HFName],[LegalForm],[HFLevel],[HFSublevel],[HFCode],[HFAddress],RegionId,[LocationId] DistrictId,[Phone],[Fax],[eMail],"
         sSQL += " [HFCareType],isnull(PLServiceID,0) PLServiceID, isnull(PLItemID,0) PLItemID,[AccCode],HF.ValidityTo,HF.[AuditUserID],"
-        sSQL += " HF.[ContractStartDate],HF.[ContractEndDate]"
+        sSQL += " HF.[ContractStartDate],HF.[ContractEndDate], HF.[IsCopay]"
         sSQL += " FROM tblHF HF"
         sSQL += " INNER JOIN tblDistricts D ON D.DistrictId= HF.LocationId"
         sSQL += " INNER JOIN tblRegions R ON R.RegionId=D.Region"
@@ -273,6 +276,7 @@ Public Class HealthFacilityDAL
             eHF.AccCode = dr("AccCode")
             eHF.ContractStartDate = dr("ContractStartDate")
             eHF.ContractEndDate = dr("ContractEndDate")
+            eHF.IsCopay = dr("IsCopay")
             eHF.tblPLItems = ePLItem
 
             eHF.ValidityTo = if(dr("ValidityTo").ToString = String.Empty, Nothing, dr("ValidityTo"))

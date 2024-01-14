@@ -282,11 +282,21 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                     <asp:TextBox ID="txtAccCode" runat="server" Width="150px" ValidationGroup="check"
                                         MaxLength="50"></asp:TextBox>
                                 </td>
+
                                 <td>
                                     <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                     ControlToValidate="txtAccCode" Text="*" 
                                     ValidationGroup="check"></asp:RequiredFieldValidator>--%>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td class="FormLabel">
+                                    <asp:Label ID="L_ISCOPAY" runat="server" Text='IsCopay'></asp:Label>
+                                </td>
+                                <td class="DataEntry">
+                                    <asp:CheckBox ID="chkIsCopay" runat="server"></asp:CheckBox>
+                                </td>
+                                <td>
                             </tr>
                              <tr>
                                 <td class="FormLabel">

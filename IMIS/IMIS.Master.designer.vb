@@ -626,6 +626,15 @@ Partial Public Class IMIS
     Protected WithEvents rptInsuree As Global.System.Web.UI.WebControls.Repeater
 
     '''<summary>
+    '''L_CENTER1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents L_CENTER1 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''btnCapped control.
     '''</summary>
     '''<remarks>

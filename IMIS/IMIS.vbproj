@@ -136,6 +136,7 @@
     </Content>
     <Content Include="AddFunding.aspx" />
     <Content Include="AddSamplePercent.aspx" />
+    <Content Include="ApiEntryHandler.aspx" />
     <Content Include="BgService.aspx" />
     <Content Include="CappedItemService.aspx" />
     <Content Include="ChangeFamily.aspx" />
@@ -291,6 +292,7 @@
     <Content Include="Images\Updated\dummy.dmd" />
     <Content Include="x64\SQLite.Interop.dll" />
     <Content Include="AutoCompleteHandlers\AutoCompleteHandler.ashx" />
+    <Content Include="ApiEntryHandler.ashx" />
     <None Include="IMISDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>IMISDataSet.Designer.vb</LastGenOutput>
@@ -334,6 +336,16 @@
     <Compile Include="AddSamplePercent.aspx.vb">
       <DependentUpon>AddSamplePercent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApiEntryHandler.ashx.vb">
+      <DependentUpon>ApiEntryHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ApiEntryHandler.aspx.designer.vb">
+      <DependentUpon>ApiEntryHandler.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ApiEntryHandler.aspx.vb">
+      <DependentUpon>ApiEntryHandler.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="App_GlobalResources\Resource.designer.vb">
       <AutoGen>True</AutoGen>

@@ -123,6 +123,7 @@ Partial Public Class HealthFacility
                 txtAccCode.Text = eHF.AccCode
                 txtContractStartDate.Text = If(eHF.ContractStartDate = Nothing, "", eHF.ContractStartDate)
                 txtContractEndDate.Text = If(eHF.ContractEndDate = Nothing, "", eHF.ContractEndDate)
+                chkIsCopay.Checked = eHF.IsCopay
             End If
 
             ddOwnPricerListService.DataSource = HF.GetPLServices(imisgen.getUserId(Session("User")), Val(ddlRegion.SelectedValue), Val(ddlDistrict.SelectedValue), True)
@@ -202,6 +203,9 @@ Partial Public Class HealthFacility
                 eHF.tblPLItems = ePLItems
                 eHF.AccCode = if(txtAccCode.Text Is Nothing, SqlTypes.SqlString.Null, txtAccCode.Text)
                 eHF.AuditUserID = imisgen.getUserId(Session("User"))
+                eHF.IsCopay = chkIsCopay.Checked
+                eHF.ContractStartDate = txtContractStartDate.Text
+                eHF.ContractEndDate = txtContractEndDate.Text
 
                 Dim chk As Integer = HF.SaveHealthFacilities(eHF, getCatchmentDt)
                 If chk = 0 Then

@@ -28,6 +28,42 @@ In case of dispute arising out or in relation to the use of the program, it is s
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajax" %>
 
 <asp:Content ID="contentHead" ContentPlaceHolderID="head" runat="server" >
+    <script>
+        function getClaimDetailsJson() {
+            var j = {
+                "xml": {
+                    //"ClaimCode": `${$('#Body_lblCLAIMData').text()}`
+                    "ClaimID": `<%=Request.QueryString("c")%>`
+                }
+            };
+            return j;
+        }
+        function fetchCopayDetails() {
+            //ApiEntryHandler.ashx?json={"xml":{"HFID":35}}&action=ClaimCopayResponse
+            var encJson = encodeURI(JSON.stringify(getClaimDetailsJson()));
+            $.get('/FindClaims.aspx?action=ClaimCopayResponse&json=' + encJson, function (res) {
+                console.log(res);
+                $('#idCopayPercent').text(res.percent);
+                $('#idCopayReason').text(res.reason);
+                updateCopayPercent();
+            });
+        }
+        function updateCopayPercent() {
+            var totalAdjustedAmount = 0;
+            $.each($('.txtCopay'), function (sn, el) {
+                var per = $('#idCopayPercent').text();
+                var jEl = $(el);
+                var tr = jEl.closest('tr');
+                var qty = tr.find('.QtyProvided').text()
+                var v = tr.find('.PriceAsked ').text()
+                var adjAmt = qty * v - qty * v * per;
+                jEl.val(adjAmt);
+                totalAdjustedAmount += adjAmt;
+            });
+            $('#idAdjustedAmount').text(totalAdjustedAmount);
+        }
+    </script>
+
     <script type="text/javascript" language="javascript">
         var ClaimTotal = 0;
         var PriceValue;
@@ -143,6 +179,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
             });
         });
         $(window).load(function () {
+            fetchCopayDetails();
             var newclaimcode = <%=Request.QueryString("c")%>;
             var claimtoken = "<%=System.Configuration.ConfigurationManager.AppSettings("ClaimDocumentToken").ToString()%>";
             var documenthref = "<%=System.Configuration.ConfigurationManager.AppSettings("ClaimDocumentHome").ToString()%>" + "view_documents?claim_id=" + newclaimcode + "&token=" + claimtoken;
@@ -157,6 +194,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 $('#lnkOldClaim').remove();
                 //document.getElementById("lnkOldClaim").;
             }
+            
 
         });
     </script>
@@ -181,6 +219,14 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                     <td><span class="FormLabel">DOB/Age:</span> <span class="DataEntry"><%# Eval("DOB", "{0:d}") %><asp:Label ID="lblInsureeAge" runat="server"></asp:Label></span></td>                                   
                                 </tr>
                             </table>
+          <div>
+            <h2>
+                <!-- <input type="button" value="fetch"> -->
+                CopayPercent:<span id="idCopayPercent"  onclick="fetchCopayDetails()">0.1</span>
+                Reason:<span id="idCopayReason">Normal</span>
+                HibPay:<span id="idAdjustedAmount">0</span>
+            </h2>
+          </div>
                         </ItemTemplate>
                     </asp:Repeater>     
            <table  class="catlabel">
@@ -290,7 +336,8 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                </asp:BoundField>
                                
                                 <asp:BoundField DataField="QtyProvided" DataFormatString="{0:n2}"  HeaderText="<%$ Resources:Resource, L_QTY %> "   ItemStyle-HorizontalAlign="Right" SortExpression="QtyProvided" >
-                                <HeaderStyle Width="25px" />                                
+                                <HeaderStyle Width="25px" /> 
+                               <ItemStyle CssClass="QtyProvided" />
                                </asp:BoundField>
                                
                                 <asp:BoundField DataField="PriceAsked"   HeaderText="<%$ Resources:Resource, L_PRICE %>" ItemStyle-HorizontalAlign="Right"  SortExpression="PriceAsked" >
@@ -320,12 +367,13 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                     <%-- <ControlStyle Width="40px" />--%>
                                 </asp:TemplateField>
                                                                                                 
-                                <asp:TemplateField ControlStyle-Width="230px" >
+                                <asp:TemplateField ControlStyle-Width="200px" >
                                     <ItemTemplate>
-                                        <asp:TextBox ID="txtJUSTIFICATION" runat="server" Width="100%" Text='<%# Bind("Justification") %>' ></asp:TextBox>
+                                        <input type="text" class="txtCopay" disabled style="width:20%"/>
+                                        <asp:TextBox ID="txtJUSTIFICATION" runat="server" Width="77%" Text='<%# Bind("Justification") %>' ></asp:TextBox>                                        
                                     </ItemTemplate>
                                      <HeaderTemplate >
-                                      <asp:Label ID="JustificationHeader" runat="server" width="230px" Text='<%$ Resources:Resource, L_JUSTIFICATION %>'></asp:Label>
+                                      PaidBy HIB|<asp:Label ID="JustificationHeader" runat="server" Text='<%$ Resources:Resource, L_JUSTIFICATION %>'></asp:Label>
                                     </HeaderTemplate>                                    
                                 </asp:TemplateField>
                                 
@@ -378,15 +426,29 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                </asp:BoundField>
                                
                                 <asp:BoundField DataField="QtyProvided" DataFormatString="{0:n2}"  HeaderText="<%$ Resources:Resource, L_QTY %> "   ItemStyle-HorizontalAlign="Right" SortExpression="QtyProvided" >
-                                <HeaderStyle Width="25px" /> 
+                                <HeaderStyle Width="25px" /> <ItemStyle CssClass="QtyProvided" /> 
                                </asp:BoundField>
                                
                                 <asp:BoundField DataField="PriceAsked"   HeaderText="<%$ Resources:Resource, L_PRICE %> "   ItemStyle-HorizontalAlign="Right" SortExpression="PriceAsked" >
                                 <ItemStyle CssClass="PriceAsked" /> <HeaderStyle Width="50px" />
                                </asp:BoundField>
+
+
+                            <asp:TemplateField ItemStyle-Width="200px">
+                                    <ItemTemplate>
+                                        <%--<asp:Label ID="PriceAsked" class="PriceAsked" runat="server"  Text='<%# Bind("PriceAsked") %>' style="text-align:left; display:inline-block; width:45%" ></asp:Label>--%>
+                                        <%--<asp:TextBox ID="PriceAsked" CssClass="PriceAsked" runat="server" Text='<%# Bind("PriceAsked") %>' style="text-align:left; width:45%" disabled="1"></asp:TextBox>--%>
+                                        <asp:Label ID="Explanation" runat="server"  Text='<%# Bind("Explanation") %>' styles="text-align:left; display:inline-block; width:45%" ></asp:Label>
+                                        <input type="text" class="txtCopay" disabled style="width:30%; text-align:right"/>
+                                    </ItemTemplate>
+                                     <HeaderTemplate >
+                                      PaidBy HIB|<asp:Label ID="Explanation" runat="server"  Text='<%$ Resources:Resource, L_EXPLANATION %>'></asp:Label>
+                                    </HeaderTemplate>                                    
+                                </asp:TemplateField>
+                            
                                
-                                <asp:BoundField DataField="Explanation"  ItemStyle-Width="215px" HeaderText="<%$ Resources:Resource, L_EXPLANATION %> " SortExpression="Explanation" >
-                               </asp:BoundField>
+                                <%--<asp:BoundField DataField="Explanation"  ItemStyle-Width="215px" HeaderText="<%$ Resources:Resource, L_EXPLANATION %> " SortExpression="Explanation" >
+                               </asp:BoundField>--%>
                               
                                 <asp:TemplateField ControlStyle-Width="45px">
                                     <ItemTemplate>
@@ -398,22 +460,22 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                     
                                 </asp:TemplateField>
                                 
-                                 <asp:TemplateField HeaderText='<%$ Resources:Resource, L_APPVALUE %>' ControlStyle-Width="60px"  >
+                                 <asp:TemplateField HeaderText='<%$ Resources:Resource, L_APPVALUE %>' ControlStyle-Width="65px"  >
                                     <ItemTemplate>
                                         <asp:TextBox ID="txtAPPVALUE" runat="server" Width="100%" Text='<%# Bind("PriceApproved") %>' style="text-align:right" class="appvalue numbersOnly"></asp:TextBox>
                                     </ItemTemplate>
                                      <HeaderTemplate >
-                                       <asp:Label ID="AppValueHeaderI" runat="server"  width="50px" Text='<%$ Resources:Resource, L_APPVALUE %>'></asp:Label>
+                                       <asp:Label ID="AppValueHeaderI" runat="server"  width="65px" Text='<%$ Resources:Resource, L_APPVALUE %>'></asp:Label>
                                     </HeaderTemplate>
                                     
                                 </asp:TemplateField>
                                                                                                  
-                                <asp:TemplateField ControlStyle-Width="230px">
+                                <asp:TemplateField ControlStyle-Width="180px">
                                     <ItemTemplate>
                                         <asp:TextBox ID="txtJUSTIFICATION" runat="server"  Width="100%" Text='<%# Bind("Justification") %>' ></asp:TextBox>
                                     </ItemTemplate>
                                      <HeaderTemplate >
-                                      <asp:Label ID="JustificationHeaderI" runat="server"  width="230px" Text='<%$ Resources:Resource, L_JUSTIFICATION %>'></asp:Label>
+                                      <asp:Label ID="JustificationHeaderI" runat="server"   Text='<%$ Resources:Resource, L_JUSTIFICATION %>'></asp:Label>
                                     </HeaderTemplate>                                    
                                 </asp:TemplateField>
                                 

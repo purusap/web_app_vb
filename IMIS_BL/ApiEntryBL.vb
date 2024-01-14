@@ -26,10 +26,14 @@
 ' 
 '
 
-Partial Public Class tblHF
-    Public Property RegionId As Integer?
-    Public Property DistrictId As Integer?
-    Public Property ContractStartDate As Date
-    Public Property ContractEndDate As Date
-    Public Property IsCopay As Integer?
+Imports System.Web
+Imports System.IO
+
+Public Class ApiEntryBL
+    Dim ApiEntry As New IMIS_DAL.ApiEntryDAL
+    Private imisgen As New GeneralBL
+    Private Const MaxGridRow As Integer = 2000
+    Public Function ClaimsCopayRequired(ByVal XML As String) As String
+        Return ApiEntry.ClaimsCopayRequired(XML)
+    End Function
 End Class

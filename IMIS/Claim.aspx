@@ -27,7 +27,45 @@ In case of dispute arising out or in relation to the use of the program, it is s
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajax" %>
 <asp:Content ID="HeadContent" ContentPlaceHolderID="head" runat="Server">
-
+     <script>
+         function getClaimDetailsJson() {
+             var j = {
+                 "xml": {
+                     "HFCode": `${$('#Body_txtHFCode').val()}`,
+                     "CHFID": `${$('#Body_txtCHFIDData').val()}`,
+                     "ClaimCode": `${$('#Body_txtCLAIMCODEData').val()}`,
+                     "ICDCode0": `${$('#Body_txtICDCode0').val()}`,
+                     "ClaimedDate": `${$('#Body_txtClaimDate').val()}`,
+                     "VisitType": `${$('#Body_ddlVisitType').val()}`,
+                 }
+             };
+             return j;
+         }
+         function fetchCopayDetails() {
+             //ApiEntryHandler.ashx?json={"xml":{"HFID":35}}&action=ClaimCopayResponse
+             var encJson = encodeURI(JSON.stringify(getClaimDetailsJson()));
+             $.get('/FindClaims.aspx?action=ClaimCopayResponse&json=' + encJson, function (res) {
+                 console.log(res);
+                 $('#idCopayPercent').text(res.percent);
+                 $('#idCopayReason').text(res.reason);
+                 updateCopayPercent();
+             });
+         }
+         function updateCopayPercent() {
+             var totalAdjustedAmount = 0;
+             $.each($('.txtCopay'), function (sn, el) {
+                 var per = $('#idCopayPercent').text();
+                 var jEl = $(el);
+                 var tr = jEl.closest('tr');
+                 var qty = tr.find('.ClaimQty').val()
+                 var v = tr.find('.ClaimValue ').val()
+                 var adjAmt = qty * v - qty * v * per;
+                 jEl.val(adjAmt);
+                 totalAdjustedAmount += adjAmt;
+             });
+             $('#idAdjustedAmount').text(totalAdjustedAmount);
+         }
+     </script>
       
 
     <script type="text/javascript">
@@ -90,6 +128,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
         }
 
         $(document).ready(function () {
+            //fetchCopayDetails()
            
             $(".delButton").click(function () {
                 ClearRow($(this));
@@ -468,7 +507,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 } else return;
 
             });
-
+            updateCopayPercent();
         }
         //ICDCode Autocomplete textbox controls Start
         $(document).ready(function () {
@@ -838,6 +877,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="Body" runat="Server">
     <div class="divBody" style="height:650px;" >
+
         <asp:Panel ID="pnlBodyCLM" runat="server">
             <asp:HiddenField ID="hfICDID0" runat="server"/>
             <asp:HiddenField ID="hfICDID1" runat="server"/>
@@ -1123,6 +1163,15 @@ In case of dispute arising out or in relation to the use of the program, it is s
                     </td>
                 </tr>
           </table>
+          <div>
+            <h2>
+                <!-- <input type="button" value="fetch"> -->
+                CopayPercent:<span id="idCopayPercent"  onclick="fetchCopayDetails()">0.1</span>
+                Reason:<span id="idCopayReason">Normal</span>
+                HibPay:<span id="idAdjustedAmount">0</span>
+                <img src="/copayerr.trigger.png" style="display:none;" onerror="fetchCopayDetails()" />
+            </h2>
+          </div>
                     </asp:Panel>
                     <table class="catlabel" style="height: 10px !important;">
                         <tr>
@@ -1180,11 +1229,12 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:TextBox ID="txtExplanationService" runat="server" Width="100%" Text='<%# Bind("Explanation") %>'
+                                        <input type="text" class="txtCopay" disabled style="width:20%"/>
+                                        <asp:TextBox ID="txtExplanationService" runat="server" Width="77%" Text='<%# Bind("Explanation") %>'
                                             class="cmb"></asp:TextBox>
                                     </ItemTemplate>
                                     <HeaderTemplate>
-                                        <asp:Label ID="lblExplanationService" runat="server" Text='<%$ Resources:Resource,L_EXPLANATION %>'></asp:Label>
+                                        Paid By HiB|<asp:Label ID="lblExplanationService" runat="server" Text='<%$ Resources:Resource,L_EXPLANATION %>'></asp:Label>
                                     </HeaderTemplate>
                                 </asp:TemplateField>
                                  <asp:TemplateField>
@@ -1265,11 +1315,12 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:TextBox ID="txtExplanationItem" runat="server" Width="100%" Text='<%# Bind("Explanation") %>'
+                                        <input type="text" class="txtCopay" disabled style="width:20%"/>
+                                        <asp:TextBox ID="txtExplanationItem" runat="server" Width="77%" Text='<%# Bind("Explanation") %>'
                                             class="cmb"></asp:TextBox>
                                     </ItemTemplate>
                                     <HeaderTemplate>
-                                        <asp:Label ID="lblExplanationItem" runat="server" Text='<%$ Resources:Resource,L_EXPLANATION %>'></asp:Label>
+                                        Paid By HiB|<asp:Label ID="lblExplanationItem" runat="server" Text='<%$ Resources:Resource,L_EXPLANATION %>'></asp:Label>
                                     </HeaderTemplate>
                                 </asp:TemplateField>
                                  <asp:TemplateField>

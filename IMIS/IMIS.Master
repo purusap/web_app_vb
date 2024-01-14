@@ -843,6 +843,7 @@
                                     </tr>
                                      <tr>
                                         <td align="center">
+                                            <asp:Label ID="L_CENTER1" Text='<%#Eval("FamilyConfirmationType")%>' style="font-size:xx-large; display:block; color:black;" runat="server" />
                                             <asp:LinkButton runat="server" ID="btnCapped" Text="View Capped Item/Services" Font-Bold="true"></asp:LinkButton>
                                             <asp:LinkButton runat="server" ID="btnProfile" Text="View Profile" Font-Bold="true"></asp:LinkButton>
                                         </td>

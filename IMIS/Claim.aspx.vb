@@ -63,6 +63,7 @@ Partial Public Class Claim
 
     End Sub
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
         lblMsg.Text = ""
         'Dim firstDay_PrevMonth As DateTime
         'Dim lastDay_PrevMonth As DateTime
@@ -260,7 +261,7 @@ Partial Public Class Claim
                     canClearRow = False
                 End If
             End If
-                tdPrintW.Visible = eClaim.ClaimID > 0
+            tdPrintW.Visible = eClaim.ClaimID > 0
         Catch ex As Exception
             'lblMsg.Text = imisgen.getMessage("M_ERRORMESSAGE")
             imisgen.Alert(imisgen.getMessage("M_ERRORMESSAGE"), pnlButtons, alertPopupTitle:="IMIS")

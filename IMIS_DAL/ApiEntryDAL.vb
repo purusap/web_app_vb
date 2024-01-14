@@ -26,10 +26,27 @@
 ' 
 '
 
-Partial Public Class tblHF
-    Public Property RegionId As Integer?
-    Public Property DistrictId As Integer?
-    Public Property ContractStartDate As Date
-    Public Property ContractEndDate As Date
-    Public Property IsCopay As Integer?
+Imports System.Xml
+
+Public Class ApiEntryDAL
+    Dim data As New ExactSQL
+    Public Function ClaimsCopayRequired(Optional ByVal XML As String = Nothing) As String
+        Dim Query As String = "uspProcessClaimsCopayRequired @XML, @percent output, @reason output"
+
+        data.setSQLCommand(Query, CommandType.Text)
+        data.params("@XML", SqlDbType.Text, 2500, XML)
+        data.params("@percent", SqlDbType.Float, 0, ParameterDirection.Output)
+        data.params("@reason", SqlDbType.VarChar, 100, ParameterDirection.Output)
+        Dim dr As DataRow = data.Filldata()(0)
+        'data.ExecuteCommand()
+        'Dim x = data.Filldata
+
+        Dim percent As Single = data.sqlParameters("@percent")
+        Dim reason As String = data.sqlParameters("@reason")
+        'Dim response As String = $"{""percent"":{per}, ""reason"":""{reason}""}}"
+        Dim response As String = String.Format("{{""percent"":{0}, ""reason"":""{1}""}}", dr("per"), dr("reason"))
+
+        'Return data.Filldata
+        Return response
+    End Function
 End Class

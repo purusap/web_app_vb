@@ -473,8 +473,10 @@ Public Class InsureeDAL
         sSQL += " CONCAT(DATEDIFF(MONTH,CASE WHEN DAY(DOB) > DAY(GETDATE())THEN DATEADD(MONTH,1,DOB)ELSE DOB END,GETDATE()) / 12, ' Yrs ', DATEDIFF(MONTH,CASE WHEN DAY(DOB) > DAY(GETDATE())THEN DATEADD(MONTH,1,DOB)ELSE DOB END,GETDATE()) % 12,' Months') AS Age,"
         'sSQL += "" & IIf(Language = "en", "GE.Gender", "ISNULL(GE.AltLanguage,GE.Gender) Gender")
         sSQL += "GE.Gender"
+        sSQL += ", IsNull(ct.ConfirmationType, '-') as FamilyConfirmationType"
         sSQL += ", P.PhotoFileName AS PhotoPath FROM tblInsuree I"
         sSQL += " INNER JOIN tblFamilies F On I.FamilyID = F.FamilyID"
+        sSQL += " LEFT OUTER JOIN tblConfirmationTypes ct On ct.ConfirmationTypeCode = F.ConfirmationType"
         sSQL += " LEFT OUTER JOIN tblPhotos P On I.PhotoID = P.PhotoID"
         sSQL += " LEFT OUTER JOIN tblHF HF On HF.HfID = I.HFID"
         sSQL += " LEFT OUTER JOIN tblLocations D On D.LocationId = HF.LocationId"
