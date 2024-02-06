@@ -432,23 +432,9 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                 <asp:BoundField DataField="PriceAsked"   HeaderText="<%$ Resources:Resource, L_PRICE %> "   ItemStyle-HorizontalAlign="Right" SortExpression="PriceAsked" >
                                 <ItemStyle CssClass="PriceAsked" /> <HeaderStyle Width="50px" />
                                </asp:BoundField>
-
-
-                            <asp:TemplateField ItemStyle-Width="200px">
-                                    <ItemTemplate>
-                                        <%--<asp:Label ID="PriceAsked" class="PriceAsked" runat="server"  Text='<%# Bind("PriceAsked") %>' style="text-align:left; display:inline-block; width:45%" ></asp:Label>--%>
-                                        <%--<asp:TextBox ID="PriceAsked" CssClass="PriceAsked" runat="server" Text='<%# Bind("PriceAsked") %>' style="text-align:left; width:45%" disabled="1"></asp:TextBox>--%>
-                                        <asp:Label ID="Explanation" runat="server"  Text='<%# Bind("Explanation") %>' styles="text-align:left; display:inline-block; width:45%" ></asp:Label>
-                                        <input type="text" class="txtCopay" disabled style="width:30%; text-align:right"/>
-                                    </ItemTemplate>
-                                     <HeaderTemplate >
-                                      PaidBy HIB|<asp:Label ID="Explanation" runat="server"  Text='<%$ Resources:Resource, L_EXPLANATION %>'></asp:Label>
-                                    </HeaderTemplate>                                    
-                                </asp:TemplateField>
-                            
                                
-                                <%--<asp:BoundField DataField="Explanation"  ItemStyle-Width="215px" HeaderText="<%$ Resources:Resource, L_EXPLANATION %> " SortExpression="Explanation" >
-                               </asp:BoundField>--%>
+                                <asp:BoundField DataField="Explanation"  ItemStyle-Width="215px" HeaderText="<%$ Resources:Resource, L_EXPLANATION %> " SortExpression="Explanation" >
+                               </asp:BoundField>
                               
                                 <asp:TemplateField ControlStyle-Width="45px">
                                     <ItemTemplate>
@@ -460,22 +446,23 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                     
                                 </asp:TemplateField>
                                 
-                                 <asp:TemplateField HeaderText='<%$ Resources:Resource, L_APPVALUE %>' ControlStyle-Width="65px"  >
+                                 <asp:TemplateField HeaderText='<%$ Resources:Resource, L_APPVALUE %>' ControlStyle-Width="60px"  >
                                     <ItemTemplate>
                                         <asp:TextBox ID="txtAPPVALUE" runat="server" Width="100%" Text='<%# Bind("PriceApproved") %>' style="text-align:right" class="appvalue numbersOnly"></asp:TextBox>
                                     </ItemTemplate>
                                      <HeaderTemplate >
-                                       <asp:Label ID="AppValueHeaderI" runat="server"  width="65px" Text='<%$ Resources:Resource, L_APPVALUE %>'></asp:Label>
+                                       <asp:Label ID="AppValueHeaderI" runat="server"  width="50px" Text='<%$ Resources:Resource, L_APPVALUE %>'></asp:Label>
                                     </HeaderTemplate>
                                     
                                 </asp:TemplateField>
                                                                                                  
-                                <asp:TemplateField ControlStyle-Width="180px">
+                                <asp:TemplateField ControlStyle-Width="200px">
                                     <ItemTemplate>
-                                        <asp:TextBox ID="txtJUSTIFICATION" runat="server"  Width="100%" Text='<%# Bind("Justification") %>' ></asp:TextBox>
+                                        <input type="text" class="txtCopay" disabled style="width:20%"/>
+                                        <asp:TextBox ID="txtJUSTIFICATION" runat="server"  Width="77%" Text='<%# Bind("Justification") %>' ></asp:TextBox>
                                     </ItemTemplate>
                                      <HeaderTemplate >
-                                      <asp:Label ID="JustificationHeaderI" runat="server"   Text='<%$ Resources:Resource, L_JUSTIFICATION %>'></asp:Label>
+                                      PaidBy HIB|<asp:Label ID="JustificationHeaderI" runat="server"   Text='<%$ Resources:Resource, L_JUSTIFICATION %>'></asp:Label>
                                     </HeaderTemplate>                                    
                                 </asp:TemplateField>
                                 
