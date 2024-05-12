@@ -87,6 +87,9 @@ Partial Public Class PolicyNew
         efamily.FamilyID = HttpContext.Current.Request.QueryString("f")
         ePolicy.PolicyID = HttpContext.Current.Request.QueryString("po")
         ePolicy.tblFamilies = efamily
+        chkQrRasid.Checked = True
+        chkQrRasid.Enabled = False
+
         If IsPostBack = True Then Return
         
         FormatForm()
@@ -122,6 +125,15 @@ Partial Public Class PolicyNew
             txtConfirmationNo1.Text = efamily.ConfirmationNo
             'txt.Text = efamily.tblInsuree.Phone
             FillDropDown()
+            'Check Confirmation type for Payer Starts
+            If txtConfirmationType.Text = "Normal" Or txtConfirmationType.Text = "FCHV" Then
+                ddlPayer.SelectedValue = 1
+                ddlPayer.Enabled = False
+            Else
+                ddlPayer.SelectedValue = 2
+                ddlPayer.Enabled = False
+            End If
+            'Check Confirmation type for Payer End
             Dim premiumPaid As Decimal = 0
 
             'Policy is in modification Mode

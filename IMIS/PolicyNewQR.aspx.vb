@@ -113,7 +113,8 @@ Partial Public Class PolicyNewQR
             FillDropDown()
             Dim premiumPaid As Decimal = 0
             Dim receiptDetails As DataTable
-            receiptDetails = Policy.GetQRReceiptNumber(txtHeadCHFID.Text)
+            'receiptDetails = Policy.GetQRReceiptNumber(txtHeadCHFID.Text)
+            receiptDetails = Policy.GetQRReceiptNumberByFamilyID(efamily.FamilyID)
             If receiptDetails.Rows.Count > 0 Then
                 hfReceiptId.Value = receiptDetails.Rows(0)("ReceiptId")
                 txtEnrollmentDate.Text = receiptDetails.Rows(0)("EnrolledDate")
@@ -128,8 +129,8 @@ Partial Public Class PolicyNewQR
                 txtReceiptNumber.Text = receiptDetails.Rows(0)("ReceiptNum")
                 getPolicyValue(49)
             Else
-                'imisgen.Alert("QR Receipt not found, Enter Data from Old Page!", pnlBody, alertPopupTitle:="IMIS")
-                imisgen.Alert("QR Receipt not uploaded, Please contact EA!", pnlBody, alertPopupTitle:="IMIS")
+                imisgen.Alert("QR Receipt not found, Enter Data from Old Page!", pnlBody, alertPopupTitle:="IMIS")
+                'imisgen.Alert("QR Receipt not uploaded, Please contact EA!", pnlBody, alertPopupTitle:="IMIS")
                 B_SAVE.Enabled = False
             End If
 

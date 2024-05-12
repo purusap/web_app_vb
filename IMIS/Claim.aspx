@@ -70,7 +70,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
 
     <script type="text/javascript">
 
-        const QtyOneServices = ["OPD 2  OPD Hospital", "OPD 1  OPD PHC", "OPD 3  OPD Eye Hospital", "EMR 1  Emergency Hospital", "EMRPHC  Emergency PHC", "EMR 2  Emergency Eye Hospital"];
+        const QtyOneServices = ["OPD 2  OPD Hospital", "OPD 1  OPD PHC", "OPD 3  OPD Eye Hospital", "EMR 1  Emergency Hospital", "EMRPHC  Emergency PHC", "EMR 2  Emergency Eye Hospital", "OPD4  OPD TICKET", "EMRT  Emergency Ticket"];
         var canClearRow = "<%=canClearRow %>";
         function setCaller(flag) {
             document.getElementById('<%=hfCaller.ClientID %>').value = flag;
@@ -1151,8 +1151,8 @@ In case of dispute arising out or in relation to the use of the program, it is s
                      
                          <asp:TextBox ID="txtGuaranteeId" runat="server" width="125px" 
                           MaxLength="50"></asp:TextBox>                  
-                     <%--  <asp:RequiredFieldValidator ID="rfGuranteeiD" runat="server" ErrorMessage="*" ControlToValidate="txtGuaranteeId" Visible="true" ForeColor="Red" Display="Dynamic" ValidationGroup="check"></asp:RequiredFieldValidator>
-                     --%>
+                       <asp:RequiredFieldValidator ID="rfGuranteeiD" runat="server" ErrorMessage="*" ControlToValidate="txtGuaranteeId" Visible="true" ForeColor="Red" Display="Dynamic" ValidationGroup="check"></asp:RequiredFieldValidator>
+                    
                         
                   </td>
                     <td class="FormLabel"><asp:CheckBox ID="chkRefering" Text="Refer To" runat="server" AutoPostBack="true" /></td>
