@@ -28,6 +28,14 @@ In case of dispute arising out or in relation to the use of the program, it is s
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajax" %>
 
 <asp:Content ID="contentHead" ContentPlaceHolderID="head" runat="server" >
+	<script>
+		function fnum(x){
+			//console.log('xxx',x);
+			x=x.replaceAll(',','');
+			return parseFloat(x);
+		}
+	</script>
+	
     <script>
         function getClaimDetailsJson() {
             var j = {
@@ -54,9 +62,9 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 var per = $('#idCopayPercent').text();
                 var jEl = $(el);
                 var tr = jEl.closest('tr');
-                var qty = tr.find('.QtyProvided').text()
-                var v = tr.find('.PriceAsked ').text()
-                var adjAmt = qty * v - qty * v * per;
+                var qty = fnum(tr.find('.QtyProvided').text());
+                var v = tr.find('.PriceAsked ').text();				
+                var adjAmt = (qty * v) - (qty * v * per);				
                 jEl.val(adjAmt);
                 totalAdjustedAmount += adjAmt;
             });
@@ -71,7 +79,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
         var ApprovedTotal = 0;
         function CalculateClaimTotal(x,y) {
             if (x != "" && y != "") {
-                ClaimTotal += parseFloat(y) * parseFloat(x)
+                ClaimTotal += fnum(y) * fnum(x)
             }
         }
 
@@ -83,13 +91,13 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 var Qty = $Row.find("td").eq(1).html();
                 var Value = $Row.find("td").eq(2).html();
                 if (AppValue == "" && AppQty == "") {
-                    ApprovedTotal += parseFloat(Qty) * parseFloat(Value);
+                    ApprovedTotal += fnum(Qty) * fnum(Value);
                 } else if (AppValue != "" && AppQty == "") {
-                    ApprovedTotal += parseFloat(Qty) * parseFloat(AppValue);
+                    ApprovedTotal += fnum(Qty) * fnum(AppValue);
                 } else if (AppValue == "" && AppQty != "") {
-                    ApprovedTotal += parseFloat(AppQty) * parseFloat(Value);
+                    ApprovedTotal += fnum(AppQty) * fnum(Value);
                 } else if (AppValue != "" && AppQty != "") {
-                    ApprovedTotal += parseFloat(AppQty) * parseFloat(AppValue);
+                    ApprovedTotal += fnum(AppQty) * fnum(AppValue);
                 }
                 
             });
@@ -109,7 +117,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
             });
             $("[id^='Body_gvService_txtAppQty_']").change(function () {
                 var currentRow = $(this).closest("tr");
-                var quantity = parseInt(currentRow.find("td:eq(1)").text());
+                var quantity = fnum(currentRow.find("td:eq(1)").text());
                 if ($(this).val() > quantity) {
                     alert('Not Allowed!');
                     $(this).val(quantity);
@@ -117,7 +125,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
             });
             $("[id^='Body_gvService_txtAPPVALUE_']").change(function () {
                 var currentRow = $(this).closest("tr");
-                var price = parseInt(currentRow.find("td:eq(2)").text());
+                var price = fnum(currentRow.find("td:eq(2)").text());
                 if ($(this).val() > price) {
                     alert('Not Allowed!');
                     $(this).val(price);
@@ -125,7 +133,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
             });
             $("[id^='Body_gvItems_txtAPPQTY_']").change(function () {
                 var currentRow = $(this).closest("tr");
-                var quantity = parseInt(currentRow.find("td:eq(1)").text());
+                var quantity = fnum(currentRow.find("td:eq(1)").text());
                 if ($(this).val() > quantity) {
                     alert('Not Allowed!');
                     $(this).val(quantity);
@@ -133,7 +141,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
             });
             $("[id^='Body_gvItems_txtAPPVALUE_']").change(function () {
                 var currentRow = $(this).closest("tr");
-                var price = parseInt(currentRow.find("td:eq(2)").text());
+                var price = fnum(currentRow.find("td:eq(2)").text());
                 if ($(this).val() > price) {
                     alert('Not Allowed!');
                     $(this).val(price);
