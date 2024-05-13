@@ -212,8 +212,8 @@ Public Class HealthFacilityDAL
     Public Sub UpdateHealthFacility(ByRef eHF As IMIS_EN.tblHF)
 
         Dim data As New ExactSQL
-        data.setSQLCommand("INSERT INTO tblHF ([HFName],[LegalForm],[HFLevel],[HFSublevel],[HFCode],[HFAddress],[LocationId],[Phone],[Fax],[eMail],[HFCareType],[PLServiceID],[PLItemID],[AccCode],[ValidityFrom],[ValidityTo],[LegacyID],[AuditUserID])" _
-      & " select [HFName],[LegalForm],[HFLevel],[HFSublevel],[HFCode],[HFAddress],[LocationId],[Phone],[Fax],[eMail],[HFCareType],[PLServiceID],[PLItemID],[AccCode],[ValidityFrom],getdate(),[HfID],[AuditUserID] from tblHF where HfID = @HfID;" _
+        data.setSQLCommand("INSERT INTO tblHF ([HFName],[LegalForm],[HFLevel],[HFSublevel],[HFCode],[HFAddress],[LocationId],[Phone],[Fax],[eMail],[HFCareType],[PLServiceID],[PLItemID],[AccCode],[ValidityFrom],[ValidityTo],[LegacyID],[AuditUserID],IsCopay,ContractStartDate,ContractEndDate)" _
+      & " select [HFName],[LegalForm],[HFLevel],[HFSublevel],[HFCode],[HFAddress],[LocationId],[Phone],[Fax],[eMail],[HFCareType],[PLServiceID],[PLItemID],[AccCode],[ValidityFrom],getdate(),[HfID],[AuditUserID],IsCopay,ContractStartDate,ContractEndDate from tblHF where HfID = @HfID;" _
       & "UPDATE [tblHF] SET [HFName] = @HFName,[LegalForm] = @LegalForm,[HFLevel] = @HFLevel,HFSublevel = @HFSublevel,[HFCode]=@HFCode,[HFAddress] = @HFAddress,[LocationId] = @LocationId,[Phone] = @Phone ,[Fax] = @Fax" _
       & ",[eMail] = @eMail,[HFCareType] = @HFCareType,[PLServiceID] = @PLServiceID,[PLItemID] = @PLItemID,[AccCode] = @AccCode, [ValidityFrom] = GetDate()" _
       & ",[LegacyID] = @LegacyID,[AuditUserID] = @AuditUserID,[IsCopay]=@IsCopay,ContractStartDate=@ContractStartDate,ContractEndDate=@ContractEndDate  WHERE HfID= @HfID", CommandType.Text)
