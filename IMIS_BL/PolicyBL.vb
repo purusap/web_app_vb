@@ -265,4 +265,8 @@ Public Class PolicyBL
         Dim Policy As New IMIS_DAL.PolicyDAL
         Return Policy.GetQRReceiptNumber(FamilyCHFID)
     End Function
+    Public Function GetQRReceiptNumberByFamilyID(ByVal FamilyID As Integer) As DataTable
+        Dim Policy As New IMIS_DAL.PolicyDAL
+        Return Policy.GetQRReceiptNumberByFamilyID(FamilyID)
+    End Function
 End Class

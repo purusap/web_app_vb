@@ -653,6 +653,15 @@ Partial Public Class Claim
     Protected WithEvents txtGuaranteeId As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''rfGuranteeiD control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rfGuranteeiD As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''chkRefering control.
     '''</summary>
     '''<remarks>
