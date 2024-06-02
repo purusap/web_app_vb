@@ -674,7 +674,8 @@
                                                         <tr>
                                                             <td valign="top" width="150px">
                                                                 <div style="border: 1px solid #AAAAAA; width: 150px; height: 150px; overflow: hidden; text-align: center">
-                                                                    <img id="img1" style="max-width:100%; max-height:100%;" alt="" src='https://imis.hib.gov.np/Images/Updated/<%#Eval("PhotoPath") %>' onerror="NoImage(this);" />
+                                                                    <%--<img id="img1" style="max-width:100%; max-height:100%;" alt="" src='https://imis.hib.gov.np/Images/Updated/<%#Eval("PhotoPath") %>' onerror="NoImage(this);" />--%>
+                                                                    <img id="img1" style="max-width:100%; max-height:100%;" alt="<%#Eval("PhotoPath") %>" src='<%#Eval("PhotoPath") %>' onerror="NoImage(this);" />
                                                                 </div>
                                                             </td>
                                                             <td align="left">

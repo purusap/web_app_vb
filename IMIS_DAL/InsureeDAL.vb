@@ -464,7 +464,7 @@ Public Class InsureeDAL
         Return data.Filldata()
     End Function
 
-    Public Function FindInsureeByCHFID(ByVal CHFID As String, Optional Language As String = "en") As DataTable
+    Public Function FindInsureeByCHFIDv0(ByVal CHFID As String, Optional Language As String = "en") As DataTable
         Dim data As New ExactSQL
         Dim UpdatedFolder As String
         UpdatedFolder = System.Web.Configuration.WebConfigurationManager.AppSettings("UpdatedFolder").ToString()
@@ -491,6 +491,14 @@ Public Class InsureeDAL
         data.params("@UpdatedFolder", SqlDbType.NVarChar, 100, UpdatedFolder)
         Return data.Filldata
 
+    End Function
+
+    Public Function FindInsureeByCHFID(ByVal CHFID As String, Optional Language As String = "en") As DataTable
+        Dim data As New ExactSQL
+        Dim sSQL As String = "uspInquiryInsuree", XML As String = $"<xml><CHFID>{CHFID}</CHFID></xml>"
+        data.setSQLCommand(sSQL, CommandType.StoredProcedure)
+        data.params("@XML", SqlDbType.NVarChar, 1200, XML)
+        Return data.Filldata
     End Function
 
     'Corrected
