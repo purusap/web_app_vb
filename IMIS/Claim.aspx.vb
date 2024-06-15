@@ -641,12 +641,14 @@ Partial Public Class Claim
             End If
             If ddlOPDIPD.SelectedValue = "I" Then
                 'Dim days As Integer = (Date.ParseExact(txtClaimDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact(txtENDData.Text, "dd/MM/yyyy", Nothing)).Days
-                Dim days As Integer = (Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing) - Date.ParseExact(txtENDData.Text, "dd/MM/yyyy", Nothing)).Days
-                If days > CInt(System.Configuration.ConfigurationManager.AppSettings("ClaimAllowedDays")) Then
-                    imisgen.Alert("Visit To Date should be less than " & System.Configuration.ConfigurationManager.AppSettings("ClaimAllowedDays").ToString() & " days.", pnlButtons, alertPopupTitle:="IMIS")
+                'Dim days As Integer = (Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing) - Date.ParseExact(txtENDData.Text, "dd/MM/yyyy", Nothing)).Days
+                'If days > CInt(System.Configuration.ConfigurationManager.AppSettings("ClaimAllowedDays")) Then
+                If Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing) <> Date.ParseExact(txtENDData.Text, "dd/MM/yyyy", Nothing) Then
+                    imisgen.Alert("Visit To Date should Today.", pnlButtons, alertPopupTitle:="IMIS")
                     Return "Exit"
                 End If
             End If
+
 
 
             eHF.HfID = hfHFID.Value
@@ -725,6 +727,7 @@ Partial Public Class Claim
                         Else
                             eClaim.DateTo = Date.ParseExact(txtSTARTData.Text, "dd/MM/yyyy", Nothing)
                         End If
+                        eClaim.DateTo = eClaim.DateClaimed
                         eClaim.Claimed = hfClaimTotalValue.Value
                         Dim eICDCodes As New IMIS_EN.tblICDCodes
                         eICDCodes.ICDID = If(hfICDID0.Value = "", 0, CInt(Int(hfICDID0.Value)))
