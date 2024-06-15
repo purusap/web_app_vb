@@ -63,12 +63,12 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 var jEl = $(el);
                 var tr = jEl.closest('tr');
                 var qty = fnum(tr.find('.QtyProvided').text());
-                var appQty = fnum($('.appQty ').val());
+                var appQty = fnum(tr.find('.appQty ').val());
                 if (appQty) {
                     qty = appQty;
                 }
-                var v = tr.find('.PriceAsked ').text();
-                var appvalue = fnum($('.appvalue  ').val());
+                var v = tr.find('.PriceAsked').text();
+                var appvalue = fnum(tr.find('.appvalue').val());
                 if (appvalue ) {
                     v = appvalue ;
                 }
