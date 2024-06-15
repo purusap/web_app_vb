@@ -56,19 +56,29 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 updateCopayPercent();
             });
         }
-        function updateCopayPercent() {
+        function updateCopayPercent() {debugger;
             var totalAdjustedAmount = 0;
-            $.each($('.txtCopay'), function (sn, el) {
-                var per = $('#idCopayPercent').text();
+            var per = $('#idCopayPercent').text();
+            $.each($('.txtCopay'), function (sn, el) {                
                 var jEl = $(el);
                 var tr = jEl.closest('tr');
                 var qty = fnum(tr.find('.QtyProvided').text());
-                var v = tr.find('.PriceAsked ').text();				
+                var appQty = fnum($('.appQty ').val());
+                if (appQty) {
+                    qty = appQty;
+                }
+                var v = tr.find('.PriceAsked ').text();
+                var appvalue = fnum($('.appvalue  ').val());
+                if (appvalue ) {
+                    v = appvalue ;
+                }
                 var adjAmt = (qty * v) - (qty * v * per);				
                 jEl.val(adjAmt);
                 totalAdjustedAmount += adjAmt;
             });
             $('#idAdjustedAmount').text(totalAdjustedAmount);
+            var CopayClaimed = (1- fnum(per)) * fnum($('#Body_txtCLAIMTOTALData').val());
+            $('#idCopayClaimed').text(CopayClaimed)
         }
     </script>
 
@@ -104,6 +114,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
             $('#<%=txtApproved.ClientID %>').val(ApprovedTotal.toFixed(2));
             $('#<%=hfApprovedValue.ClientID %>').val(ApprovedTotal.toFixed(2)); 
             ApprovedTotal = 0;
+            updateCopayPercent();
         }
 
         $(document).ready(function () {
@@ -232,6 +243,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 <!-- <input type="button" value="fetch"> -->
                 CopayPercent:<span id="idCopayPercent"  onclick="fetchCopayDetails()">0.1</span>
                 Reason:<span id="idCopayReason">Normal</span>
+                CopayClaimed:<span id="idCopayClaimed">0</span>
                 HibPay:<span id="idAdjustedAmount">0</span>
             </h2>
           </div>
