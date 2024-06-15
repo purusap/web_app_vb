@@ -47,7 +47,7 @@
                 maxDate = 0;
             }
             else if (($(this).attr("id") === 'Body_txtENDData')) {
-                minDate = -100;
+                minDate = 0;
                 maxDate = 0;
             }
             else if ($(this).attr("class") === 'dateCheck FindFamilyFrom') {
