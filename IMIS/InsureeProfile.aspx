@@ -20,7 +20,8 @@
                                 <tr>
                                     <td valign="top" width="150px">
                                         <div style="border: 1px solid #AAAAAA; width: 150px; height: 150px; overflow: visible;">
-                                            <img id="img1" width="150px" height="175px" alt="" src='https://imis.hib.gov.np/Images/Updated/<%#Eval("PhotoPath") %>' onerror="NoImage(this);" />
+                                            <%--<img id="img1" width="150px" height="175px" alt="" src='https://imis.hib.gov.np/Images/Updated/<%#Eval("PhotoPath") %>' onerror="NoImage(this);" />--%>
+                                            <img id="img1" width="150px" height="175px" alt="<%#Eval("PhotoPath") %>" src='<%#Eval("PhotoPath") %>' onerror="NoImage(this);" />
                                         </div>
                                     </td>
                                     <td></td>

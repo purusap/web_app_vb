@@ -241,7 +241,7 @@ Partial Public Class InsureeNew
                 'ddlCardIssued.SelectedValue = If(eInsuree.CardIssued = True, "1", "0")
                 txtPassport.Text = eInsuree.passport
                 txtPhone.Text = eInsuree.Phone
-                Image1.ImageUrl = UpdatedFolder & eInsuree.tblPhotos.PhotoFileName.ToString 'if(eInsuree.tblPhotos.PhotoFileName.ToString <> String.Empty, eInsuree.tblPhotos.PhotoFolder & eInsuree.tblPhotos.PhotoFileName.ToString, "")
+                Image1.ImageUrl = If(eInsuree.tblPhotos.PhotoFileName.ToString <> String.Empty, "/" & eInsuree.tblPhotos.PhotoFolder & "/" & eInsuree.tblPhotos.PhotoFileName.ToString, "") 'UpdatedFolder & eInsuree.tblPhotos.PhotoFileName.ToString 
                 efamily.FamilyID = eInsuree.tblFamilies1.FamilyID
                 ddlRelation.SelectedValue = eInsuree.Relationship
                 ddlProfession.SelectedValue = eInsuree.Profession
