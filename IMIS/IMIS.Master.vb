@@ -416,7 +416,12 @@ Public Class IMIS
             FSP.Visible = Not (Adjustibility = "N")
             L_FSP.Visible = Not (Adjustibility = "N")
 
-            L_CENTER1.Text = "Family Type: " & item.DataItem("FamilyConfirmationType")
+            Dim isCoPay As String = "No"
+            If item.DataItem("FamilyConfirmationType") = "Normal" Then
+                isCoPay = "Yes"
+            End If
+
+            L_CENTER1.Text = "Co-Pay Applicable: " & isCoPay
         End If
     End Sub
 End Class
