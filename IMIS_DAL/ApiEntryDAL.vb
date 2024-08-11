@@ -30,6 +30,42 @@ Imports System.Xml
 
 Public Class ApiEntryDAL
     Dim data As New ExactSQL
+
+    Public Function ApiEntryAction(Optional ByVal action As String = Nothing, Optional ByVal XML As String = Nothing) As DataTable
+        Dim res As DataTable
+        'If (action = "") Then
+        '    res = ClaimsCopayRequired(XML)
+        'ElseIf (action = "DepartmentList") Then
+        '    res = DepartmentList(XML)
+        'Else
+        '    res = uspAction(action, XML)
+        'End If
+        res = uspAction(action, XML)
+
+        Return res
+    End Function
+
+    'a generic func, which can call passed proc name based on action
+    Public Function uspAction(Optional ByVal action As String = Nothing, Optional ByVal XML As String = Nothing) As DataTable
+        Dim Query As String = "usp" + action + " @XML"
+
+        data.setSQLCommand(Query, CommandType.Text)
+        data.params("@XML", SqlDbType.Text, -1, XML)
+        Dim dt As DataTable = data.Filldata()
+        Return dt
+    End Function
+
+    Public Function DepartmentList(Optional ByVal XML As String = Nothing) As String
+        Dim Query As String = "uspDepartmentList"
+
+        data.setSQLCommand(Query, CommandType.Text)
+        Dim dt As DataTable = data.Filldata()
+        Dim response = "{}"
+
+        'Return data.Filldata
+        Return response
+    End Function
+
     Public Function ClaimsCopayRequired(Optional ByVal XML As String = Nothing) As String
         Dim Query As String = "uspProcessClaimsCopayRequired @XML, @percent output, @reason output"
 

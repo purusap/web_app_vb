@@ -51,9 +51,14 @@ Public Class MedicalServicesDAL
             eServices.ServFrequency = dr("ServFrequency")
             eServices.ServPatCat = dr("ServPatCat")
             eServices.ServCategory = dr("ServCategory").ToString
-
-            eServices.ValidityTo = if(dr("ValidityTo").ToString = String.Empty, Nothing, dr("ValidityTo"))
-        End If
+            If Not IsDBNull(dr("CapDuration")) Then
+                eServices.CapDuration = dr("CapDuration")
+            End If
+            If Not IsDBNull(dr("DeptID")) Then
+                eServices.DeptID = dr("DeptID")
+            End If
+            eServices.ValidityTo = If(dr("ValidityTo").ToString = String.Empty, Nothing, dr("ValidityTo"))
+            End If
 
     End Sub
     Public Function GetMedicalServices(Optional ByVal All As Boolean = False) As DataTable
@@ -108,8 +113,8 @@ Public Class MedicalServicesDAL
     End Function
     Public Sub InsertMedicalServices(ByRef eServices As IMIS_EN.tblServices)
         Dim data As New ExactSQL
-        Dim sSQL As String = "INSERT INTO tblServices(ServCode, ServName, ServType, ServLevel, ServPrice, ServCareType, ServFrequency, ServPatCat,AuditUserID,ServCategory)" & _
-                " VALUES (@ServCode, @ServName, @ServType, @ServLevel, @ServPrice, @ServCareType, @ServFrequency, @ServPatCat,@AuditUserID,@ServCategory)"
+        Dim sSQL As String = "INSERT INTO tblServices(ServCode, ServName, ServType, ServLevel, ServPrice, ServCareType, ServFrequency, CapDuration, DeptID, ServPatCat,AuditUserID,ServCategory)" &
+                " VALUES (@ServCode, @ServName, @ServType, @ServLevel, @ServPrice, @ServCareType, @ServFrequency, @CapDuration, @DeptID, @ServPatCat,@AuditUserID,@ServCategory)"
 
         data.setSQLCommand(sSQL, CommandType.Text)
         data.params("@ServCode", SqlDbType.NVarChar, 25, eServices.ServCode)
@@ -119,6 +124,8 @@ Public Class MedicalServicesDAL
         data.params("@ServPrice", SqlDbType.Decimal, eServices.ServPrice)
         data.params("@ServCareType", SqlDbType.Char, 1, eServices.ServCareType)
         data.params("@ServFrequency", SqlDbType.SmallInt, eServices.ServFrequency)
+        data.params("@CapDuration", SqlDbType.SmallInt, eServices.CapDuration)
+        data.params("@DeptID", SqlDbType.SmallInt, eServices.DeptID)
         data.params("@ServPatCat", SqlDbType.TinyInt, eServices.ServPatCat)
         data.params("@AuditUserID", SqlDbType.Int, eServices.AuditUserID)
         data.params("@ServCategory", SqlDbType.Char, 1, eServices.ServCategory)
@@ -126,9 +133,10 @@ Public Class MedicalServicesDAL
     End Sub
     Public Sub UpdateMedicalServices(ByRef eServices As IMIS_EN.tblServices)
         Dim data As New ExactSQL
-        data.setSQLCommand("INSERT INTO tblServices ([ServCode],[ServName],[ServType],[ServLevel],[ServPrice],[ServCareType],[ServFrequency],[ServPatCat],[ValidityFrom],[ValidityTo],[LegacyID],[AuditUserID],ServCategory)" _
-      & " select [ServCode],[ServName],[ServType],[ServLevel],[ServPrice],[ServCareType],[ServFrequency],[ServPatCat],[ValidityFrom],getdate(),@ServiceID,[AuditUserID],ServCategory from tblServices where ServiceID = @ServiceID;" _
-      & "UPDATE [tblServices] SET [ServCode] = @ServCode,[ServName] = @ServName,[ServType] = @ServType,[ServLevel] = @ServLevel,[ServPrice] = @ServPrice,[ServCareType] = @ServCareType,[ServFrequency] = @ServFrequency, [ServPatCat] = @ServPatCat" _
+        data.setSQLCommand("INSERT INTO tblServices ([ServCode],[ServName],[ServType],[ServLevel],[ServPrice],[ServCareType],[ServFrequency],CapDuration,DeptID,[ServPatCat],[ValidityFrom],[ValidityTo],[LegacyID],[AuditUserID],ServCategory)" _
+      & " select [ServCode],[ServName],[ServType],[ServLevel],[ServPrice],[ServCareType],[ServFrequency],CapDuration,DeptID,[ServPatCat],[ValidityFrom],getdate(),@ServiceID,[AuditUserID],ServCategory from tblServices where ServiceID = @ServiceID;" _
+      & "UPDATE [tblServices] SET [ServCode] = @ServCode,[ServName] = @ServName,[ServType] = @ServType,[ServLevel] = @ServLevel,[ServPrice] = @ServPrice,[ServCareType] = @ServCareType," _
+      & "[ServFrequency] = @ServFrequency, CapDuration=@CapDuration, DeptID=@DeptID, [ServPatCat] = @ServPatCat" _
       & ",[ValidityFrom] = GetDate(),[LegacyID] = @LegacyID,[AuditUserID] = @AuditUserID,ServCategory = @ServCategory  WHERE ServiceID = @ServiceID", CommandType.Text)
         data.params("@ServiceID", SqlDbType.Int, eServices.ServiceID)
         data.params("@ServCode", SqlDbType.NVarChar, 25, eServices.ServCode)
@@ -138,6 +146,8 @@ Public Class MedicalServicesDAL
         data.params("@ServPrice", SqlDbType.Decimal, eServices.ServPrice)
         data.params("@ServCareType", SqlDbType.Char, 1, eServices.ServCareType)
         data.params("@ServFrequency", SqlDbType.SmallInt, eServices.ServFrequency)
+        data.params("@CapDuration", SqlDbType.SmallInt, eServices.CapDuration)
+        data.params("@DeptID", SqlDbType.SmallInt, eServices.DeptID)
         data.params("@ServPatCat", SqlDbType.TinyInt, eServices.ServPatCat)
         data.params("@LegacyID", SqlDbType.Int, 1, ParameterDirection.Output)
         data.params("@AuditUserID", SqlDbType.Int, eServices.AuditUserID)

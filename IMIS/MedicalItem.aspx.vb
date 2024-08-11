@@ -33,6 +33,7 @@ Partial Public Class MedicalItem
     Dim Item As New IMIS_BI.MedicalItemBI
     Private imisGen As New IMIS_Gen
     Private userBI As New IMIS_BI.UserBI
+    Private ApiEntryBI As New IMIS_BI.ApiEntryBI
 
     Private Sub RunPageSecurity()
         Dim RefUrl = Request.Headers("Referer")
@@ -62,6 +63,13 @@ Partial Public Class MedicalItem
                 eItem.ItemID = Item.GetItemIdByUUID(eItem.ItemUUID)
             End If
 
+            If IsPostBack = False Then
+                ddlDeptID.DataSource = ApiEntryBI.ApiEntryActionDt("DepartmentList", Nothing)
+                ddlDeptID.DataValueField = "DeptID"
+                ddlDeptID.DataTextField = "DeptName"
+                ddlDeptID.DataBind()
+            End If
+
             If IsPostBack = True Then Return
             hfMI.Value = 2
             If Not eItem.ItemID = 0 Then
@@ -70,7 +78,9 @@ Partial Public Class MedicalItem
                 txtName.Text = eItem.ItemName
                 txtPackage.Text = eItem.ItemPackage
                 txtPrice.Text = FormatNumber(eItem.ItemPrice, 0)
-                txtFrequency.Text = eItem.ItemFrequency
+                txtFrequency.Text = eItem.ItemFrequency?.ToString()
+                txtCapDuration.Text = eItem.CapDuration?.ToString()
+                ddlDeptID.SelectedValue = eItem.DeptID?.ToString()
                 setItemCare()
                 setItemPatCat()
                 setItemType()
@@ -113,6 +123,12 @@ lblDirty:   Dim chk As Integer = 0
                 eItem.ItemFrequency = If(txtFrequency.Text.Trim.Length = 0, 0, Val(txtFrequency.Text))
                 eItem.ItemPatCat = GetItemPatCat()
                 eItem.AuditUserID = imisGen.getUserId(Session("User"))
+                If Not String.IsNullOrWhiteSpace(ddlDeptID.SelectedValue) Then
+                    eItem.DeptID = ddlDeptID.SelectedValue
+                End If
+                If Not String.IsNullOrWhiteSpace(txtCapDuration.Text) Then
+                    eItem.CapDuration = txtCapDuration.Text
+                End If
                 chk = Item.SaveMedicalItem(eItem)
                 If chk = 0 Then
                     Session("msg") = eItem.ItemCode & "  " & eItem.ItemName & imisGen.getMessage("M_Inserted")
@@ -131,7 +147,7 @@ lblDirty:   Dim chk As Integer = 0
                 hfMI.Value = 1
                 Return
             End Try
-           
+
         End If
         Response.Redirect("FindMedicalItem.aspx?i=" & txtCode.Text)
     End Sub
@@ -230,7 +246,7 @@ lblDirty:   Dim chk As Integer = 0
 
     End Sub
 
-   
+
     Private Sub B_CANCEL_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles B_CANCEL.Click
         Response.Redirect("FindMedicalItem.aspx?i=" & txtCode.Text)
     End Sub

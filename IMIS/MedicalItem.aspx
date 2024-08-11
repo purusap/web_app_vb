@@ -230,6 +230,30 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                     Text="*"></asp:RequiredFieldValidator>--%>
                     </td>
                 </tr>
+
+                <tr>
+                    <td class="auto-style3">
+                        Cap Duration
+                    </td>
+                    <td class="auto-style5">
+                        <asp:TextBox ID="txtCapDuration" runat="server" Class="numbersOnly" Style="text-align: right;"></asp:TextBox>
+                    </td>
+                    <td class="auto-style4">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="FormLabel">
+                        Department
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlDeptID" runat="server">
+                        </asp:DropDownList>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
                 <tr>
                     <td class="FormLabel" valign="middle">
                         <asp:Label ID="L_Patient" runat="server" Text='<%$ Resources:Resource,L_PATIENT %>'></asp:Label>

@@ -33,9 +33,7 @@ Partial Public Class MedicalService
     Dim Service As New IMIS_BI.MedicalServiceBI
     Private imisGen As New IMIS_Gen
     Private userBI As New IMIS_BI.UserBI
-
-
-    
+    Private ApiEntryBI As New IMIS_BI.ApiEntryBI
 
     Protected Sub B_SAVE_Click(ByVal sender As Object, ByVal e As EventArgs) Handles B_SAVE.Click
         If CInt(hfMS.Value) = 1 Then
@@ -58,6 +56,12 @@ lblDirty:   Try
                 eService.ServPatCat = GetServicePatCat()
                 eService.ServCategory = ddlCategory.SelectedValue
                 eService.AuditUserID = imisGen.getUserId(Session("User"))
+                If Not String.IsNullOrWhiteSpace(ddlDeptID.SelectedValue) Then
+                    eService.DeptID = ddlDeptID.SelectedValue
+                End If
+                If Not String.IsNullOrWhiteSpace(txtCapDuration.Text) Then
+                    eService.CapDuration = txtCapDuration.Text
+                End If
 
                 Dim chk As Integer = Service.SaveMedicalService(eService)
 
@@ -119,6 +123,11 @@ lblDirty:   Try
                 ddlCategory.DataTextField = "Category"
                 ddlCategory.DataBind()
 
+                ddlDeptID.DataSource = ApiEntryBI.ApiEntryActionDt("DepartmentList", Nothing)
+                ddlDeptID.DataValueField = "DeptID"
+                ddlDeptID.DataTextField = "DeptName"
+                ddlDeptID.DataBind()
+
             End If
             If IsPostBack = True Then Return
             hfMS.Value = 2
@@ -129,6 +138,8 @@ lblDirty:   Try
                 ddServiceLevel.SelectedValue = eService.ServLevel
                 txtPrice.Text = FormatNumber(eService.ServPrice, 0)
                 txtFrequency.Text = eService.ServFrequency
+                txtCapDuration.Text = eService.CapDuration?.ToString()
+                ddlDeptID.SelectedValue = eService.DeptID?.ToString()
                 ddlCategory.SelectedValue = eService.ServCategory
 
                 setServType()

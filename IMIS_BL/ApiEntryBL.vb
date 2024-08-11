@@ -28,6 +28,7 @@
 
 Imports System.Web
 Imports System.IO
+Imports Newtonsoft.Json
 
 Public Class ApiEntryBL
     Dim ApiEntry As New IMIS_DAL.ApiEntryDAL
@@ -35,5 +36,13 @@ Public Class ApiEntryBL
     Private Const MaxGridRow As Integer = 2000
     Public Function ClaimsCopayRequired(ByVal XML As String) As String
         Return ApiEntry.ClaimsCopayRequired(XML)
+    End Function
+    Public Function ApiEntryActionStr(ByVal action As String, ByVal XML As String) As String
+        Dim dt = ApiEntry.ApiEntryAction(action, XML)
+        Dim res = JsonConvert.SerializeObject(dt)
+        Return res
+    End Function
+    Public Function ApiEntryActionDt(ByVal action As String, ByVal XML As String) As DataTable
+        Return ApiEntry.ApiEntryAction(action, XML)
     End Function
 End Class
