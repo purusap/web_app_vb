@@ -248,13 +248,22 @@ Partial Public Class MedicalService
     Protected WithEvents RequiredFieldValidatorFrequency As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''txtCapDuration control.
+    '''txtCapQtyPeriod control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtCapDuration As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtCapQtyPeriod As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtCapQrstPeriod control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCapQrstPeriod As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''ddlDeptID control.

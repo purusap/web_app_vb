@@ -40,8 +40,11 @@ Public Class MedicalItemsDAL
             eItems.ItemPrice = dr("ItemPrice")
             eItems.ItemCareType = dr("ItemCareType")
             eItems.ItemFrequency = dr("ItemFrequency")
-            If Not IsDBNull(dr("CapDuration")) Then
-                eItems.CapDuration = dr("CapDuration")
+            If Not IsDBNull(dr("CapQtyPeriod")) Then
+                eItems.CapQtyPeriod = dr("CapQtyPeriod")
+            End If
+            If Not IsDBNull(dr("CapQrstPeriod")) Then
+                eItems.CapQrstPeriod = dr("CapQrstPeriod")
             End If
             If Not IsDBNull(dr("DeptID")) Then
                 eItems.DeptID = dr("DeptID")
@@ -81,8 +84,8 @@ Public Class MedicalItemsDAL
    
     Public Sub InsertMedicalItems(ByRef eItems As IMIS_EN.tblItems)
         Dim data As New ExactSQL
-        Dim sSQL As String = "INSERT INTO tblItems(ItemCode,ItemName,ItemType,ItemPackage,ItemPrice,ItemCareType,ItemFrequency,CapDuration,DeptID,ItemPatCat,AuditUserID)" &
-            " VALUES(@ItemCode,@ItemName,@ItemType,@ItemPackage,@ItemPrice,@ItemCareType,@ItemFrequency,@CapDuration,@DeptID,@ItemPatCat,@AuditUserID)"
+        Dim sSQL As String = "INSERT INTO tblItems(ItemCode,ItemName,ItemType,ItemPackage,ItemPrice,ItemCareType,ItemFrequency,CapQtyPeriod,CapQrstPeriod,DeptID,ItemPatCat,AuditUserID)" &
+            " VALUES(@ItemCode,@ItemName,@ItemType,@ItemPackage,@ItemPrice,@ItemCareType,@ItemFrequency,@CapQtyPeriod,@CapQrstPeriod,@DeptID,@ItemPatCat,@AuditUserID)"
         data.setSQLCommand(sSQL, CommandType.Text)
         data.params("@ItemCode", SqlDbType.NVarChar, 25, eItems.ItemCode)
         data.params("@ItemName", SqlDbType.NVarChar, 100, eItems.ItemName)
@@ -91,7 +94,8 @@ Public Class MedicalItemsDAL
         data.params("@ItemPrice", SqlDbType.Int, eItems.ItemPrice)
         data.params("@ItemCareType", SqlDbType.Char, 1, eItems.ItemCareType)
         data.params("@ItemFrequency", SqlDbType.SmallInt, eItems.ItemFrequency)
-        data.params("@CapDuration", SqlDbType.SmallInt, eItems.CapDuration)
+        data.params("@CapQtyPeriod", SqlDbType.SmallInt, eItems.CapQtyPeriod)
+        data.params("@CapQrstPeriod", SqlDbType.SmallInt, eItems.CapQrstPeriod)
         data.params("@DeptID", SqlDbType.SmallInt, eItems.DeptID)
         data.params("@ItemPatCat", SqlDbType.TinyInt, eItems.ItemPatCat)
         data.params("@AuditUserID", SqlDbType.Int, eItems.AuditUserID)
@@ -99,10 +103,10 @@ Public Class MedicalItemsDAL
     End Sub
     Public Sub UpdateMedicalItems(ByRef eItems As IMIS_EN.tblItems)
         Dim data As New ExactSQL
-        data.setSQLCommand("INSERT INTO tblItems ([ItemCode],[ItemName],[ItemType],[ItemPackage],[ItemPrice],[ItemCareType],[ItemFrequency],CapDuration,DeptID,[ItemPatCat],[ValidityFrom],[ValidityTo],[LegacyID],[AuditUserID])" _
-      & " select [ItemCode],[ItemName],[ItemType],[ItemPackage],[ItemPrice],[ItemCareType],[ItemFrequency],@CapDuration,@DeptID,[ItemPatCat],[ValidityFrom],getdate(),@ItemID,[AuditUserID] from tblItems where ItemID = @ItemID;" _
+        data.setSQLCommand("INSERT INTO tblItems ([ItemCode],[ItemName],[ItemType],[ItemPackage],[ItemPrice],[ItemCareType],[ItemFrequency],CapQtyPeriod,CapQrstPeriod,DeptID,[ItemPatCat],[ValidityFrom],[ValidityTo],[LegacyID],[AuditUserID])" _
+      & " select [ItemCode],[ItemName],[ItemType],[ItemPackage],[ItemPrice],[ItemCareType],[ItemFrequency],@CapQtyPeriod,@CapQrstPeriod,@DeptID,[ItemPatCat],[ValidityFrom],getdate(),@ItemID,[AuditUserID] from tblItems where ItemID = @ItemID;" _
       & "UPDATE [tblItems] SET [ItemCode] = @ItemCode,[ItemName] = @ItemName,[ItemType] = @ItemType,[ItemPackage] = @ItemPackage,[ItemPrice] = @ItemPrice,[ItemCareType] = @ItemCareType," _
-      & "[ItemFrequency] = @ItemFrequency, CapDuration=@CapDuration, DeptID=@DeptID, [ItemPatCat] = @ItemPatCat," _
+      & "[ItemFrequency] = @ItemFrequency, CapQtyPeriod=@CapQtyPeriod, CapQrstPeriod=@CapQrstPeriod, DeptID=@DeptID, [ItemPatCat] = @ItemPatCat," _
       & "[ValidityFrom] = GetDate(),[LegacyID] = @LegacyID,[AuditUserID] = @AuditUserID  WHERE ItemID = @ItemID", CommandType.Text)
         data.params("@ItemID", SqlDbType.Int, eItems.ItemID)
         data.params("@ItemCode", SqlDbType.NVarChar, 25, eItems.ItemCode)
@@ -112,7 +116,8 @@ Public Class MedicalItemsDAL
         data.params("@ItemPrice", SqlDbType.Decimal, eItems.ItemPrice)
         data.params("@ItemCareType", SqlDbType.Char, 1, eItems.ItemCareType)
         data.params("@ItemFrequency", SqlDbType.SmallInt, eItems.ItemFrequency)
-        data.params("@CapDuration", SqlDbType.SmallInt, eItems.CapDuration)
+        data.params("@CapQtyPeriod", SqlDbType.SmallInt, eItems.CapQtyPeriod)
+        data.params("@CapQrstPeriod", SqlDbType.SmallInt, eItems.CapQrstPeriod)
         data.params("@DeptID", SqlDbType.SmallInt, eItems.DeptID)
         data.params("@ItemPatCat", SqlDbType.TinyInt, eItems.ItemPatCat)
         data.params("@LegacyID", SqlDbType.Int, 1, ParameterDirection.Output)

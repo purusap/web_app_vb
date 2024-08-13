@@ -79,7 +79,8 @@ Partial Public Class MedicalItem
                 txtPackage.Text = eItem.ItemPackage
                 txtPrice.Text = FormatNumber(eItem.ItemPrice, 0)
                 txtFrequency.Text = eItem.ItemFrequency?.ToString()
-                txtCapDuration.Text = eItem.CapDuration?.ToString()
+                txtCapQtyPeriod.Text = eItem.CapQtyPeriod?.ToString()
+                txtCapQrstPeriod.Text = eItem.CapQrstPeriod?.ToString()
                 ddlDeptID.SelectedValue = eItem.DeptID?.ToString()
                 setItemCare()
                 setItemPatCat()
@@ -126,8 +127,11 @@ lblDirty:   Dim chk As Integer = 0
                 If Not String.IsNullOrWhiteSpace(ddlDeptID.SelectedValue) Then
                     eItem.DeptID = ddlDeptID.SelectedValue
                 End If
-                If Not String.IsNullOrWhiteSpace(txtCapDuration.Text) Then
-                    eItem.CapDuration = txtCapDuration.Text
+                If Not String.IsNullOrWhiteSpace(txtCapQtyPeriod.Text) Then
+                    eItem.CapQtyPeriod = txtCapQtyPeriod.Text
+                End If
+                If Not String.IsNullOrWhiteSpace(txtCapQrstPeriod.Text) Then
+                    eItem.CapQrstPeriod = txtCapQrstPeriod.Text
                 End If
                 chk = Item.SaveMedicalItem(eItem)
                 If chk = 0 Then

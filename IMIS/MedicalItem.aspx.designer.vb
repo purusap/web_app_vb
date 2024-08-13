@@ -230,13 +230,22 @@ Partial Public Class MedicalItem
     Protected WithEvents CompareValidator2 As Global.System.Web.UI.WebControls.CompareValidator
 
     '''<summary>
-    '''txtCapDuration control.
+    '''txtCapQtyPeriod control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtCapDuration As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtCapQtyPeriod As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtCapQrstPeriod control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCapQrstPeriod As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''ddlDeptID control.

@@ -59,8 +59,11 @@ lblDirty:   Try
                 If Not String.IsNullOrWhiteSpace(ddlDeptID.SelectedValue) Then
                     eService.DeptID = ddlDeptID.SelectedValue
                 End If
-                If Not String.IsNullOrWhiteSpace(txtCapDuration.Text) Then
-                    eService.CapDuration = txtCapDuration.Text
+                If Not String.IsNullOrWhiteSpace(txtCapQtyPeriod.Text) Then
+                    eService.CapQtyPeriod = txtCapQtyPeriod.Text
+                End If
+                If Not String.IsNullOrWhiteSpace(txtCapQrstPeriod.Text) Then
+                    eService.CapQrstPeriod = txtCapQrstPeriod.Text
                 End If
 
                 Dim chk As Integer = Service.SaveMedicalService(eService)
@@ -138,7 +141,8 @@ lblDirty:   Try
                 ddServiceLevel.SelectedValue = eService.ServLevel
                 txtPrice.Text = FormatNumber(eService.ServPrice, 0)
                 txtFrequency.Text = eService.ServFrequency
-                txtCapDuration.Text = eService.CapDuration?.ToString()
+                txtCapQtyPeriod.Text = eService.CapQtyPeriod?.ToString()
+                txtCapQrstPeriod.Text = eService.CapQrstPeriod?.ToString()
                 ddlDeptID.SelectedValue = eService.DeptID?.ToString()
                 ddlCategory.SelectedValue = eService.ServCategory
 

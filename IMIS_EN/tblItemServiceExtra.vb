@@ -11,16 +11,16 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class tblItems
-
-    Public Property CapDuration As Nullable(Of Integer)
+    Public Property CapQrstPeriod As Nullable(Of Integer)
+    Public Property CapQtyPeriod As Nullable(Of Integer)
     Public Property DeptID As Nullable(Of Integer)
 
 End Class
 
 
 Partial Public Class tblServices
-
-    Public Property CapDuration As Nullable(Of Integer)
+    Public Property CapQrstPeriod As Nullable(Of Integer)
+    Public Property CapQtyPeriod As Nullable(Of Integer)
     Public Property DeptID As Nullable(Of Integer)
 
 End Class

@@ -261,10 +261,21 @@ In case of dispute arising out or in relation to the use of the program, it is s
 
                 <tr>
                     <td class="FormLabel">
-                        Cap Duration
+                        Cap (Qty)
                     </td>
                     <td class="auto-style5">
-                        <asp:TextBox ID="txtCapDuration" runat="server" Class="numbersOnly" Style="text-align: right;"></asp:TextBox>
+                        <asp:TextBox ID="txtCapQtyPeriod" runat="server" Class="numbersOnly" Style="text-align: right;"></asp:TextBox>
+                    </td>
+                    <td class="auto-style4">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="FormLabel">
+                        Cap (Days)
+                    </td>
+                    <td class="auto-style5">
+                        <asp:TextBox ID="txtCapQrstPeriod" runat="server" Class="numbersOnly" Style="text-align: right;"></asp:TextBox>
                     </td>
                     <td class="auto-style4">
                     </td>
