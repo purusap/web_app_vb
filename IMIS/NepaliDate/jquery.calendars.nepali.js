@@ -4,7 +4,7 @@
    Available under the MIT (http://keith-wood.name/licence.html) license. 
    Please attribute the author if you use it. */
 
-(function($) { // Hide scope, no $ conflict
+(function ($) { // Hide scope, no $ conflict
 	'use strict';
 
 	/** Implementation of the Nepali civil calendar.
@@ -42,7 +42,7 @@
 		firstMonth: 1,
 		/** The minimum day number.
 			@memberof NepaliCalendar */
-		minDay: 1, 
+		minDay: 1,
 		/** The number of days in the year.
 			@memberof NepaliCalendar */
 		daysPerYear: 365,
@@ -67,11 +67,11 @@
 				name: 'Nepali',
 				epochs: ['BBS', 'ABS'],
 				monthNames: ['Baisakh', 'Jestha', 'Ashadh', 'Shrawan', 'Bhadra', 'Ashwin',
-				'Kartik', 'Mangsir', 'Paush', 'Mangh', 'Falgun', 'Chaitra'],
+					'Kartik', 'Mangsir', 'Paush', 'Mangh', 'Falgun', 'Chaitra'],
 				monthNamesShort: ['Bai', 'Je', 'As', 'Shra', 'Bha', 'Ash', 'Kar', 'Mang', 'Pau', 'Ma', 'Fal', 'Chai'],
 				dayNames: ['Aaitabaar', 'Sombaar', 'Manglbaar', 'Budhabaar', 'Bihibaar', 'Shukrabaar', 'Shanibaar'],
-                dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                dayNamesMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'], 
+				dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+				dayNamesMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
 				digits: null,
 				dateFormat: 'dd/mm/yyyy',
 				firstDay: 1,
@@ -84,7 +84,7 @@
 			@param {CDate|number} year The date to examine or the year to examine.
 			@return {boolean} <code>true</code> if this is a leap year, <code>false</code> if not.
 			@throws Error if an invalid year or a different calendar used. */
-		leapYear: function(year) {
+		leapYear: function (year) {
 			return this.daysInYear(year) !== this.daysPerYear;
 		},
 
@@ -95,7 +95,7 @@
 			@param {number} [day] The day to examine (if only <code>year</code> specified above).
 			@return {number} The week of the year.
 			@throws Error if an invalid date or a different calendar used. */
-		weekOfYear: function(year, month, day) {
+		weekOfYear: function (year, month, day) {
 			// Find Sunday of this week starting on Sunday
 			var checkDate = this.newDate(year, month, day);
 			checkDate.add(-checkDate.dayOfWeek(), 'd');
@@ -107,7 +107,7 @@
 			@param {CDate|number} year The date to examine or the year to examine.
 			@return {number} The number of days.
 			@throws Error if an invalid year or a different calendar used. */
-		daysInYear: function(year) {
+		daysInYear: function (year) {
 			var date = this._validate(year, this.minMonth, this.minDay, $.calendars.local.invalidYear);
 			year = date.year();
 			if (typeof this.NEPALI_CALENDAR_DATA[year] === 'undefined') {
@@ -126,7 +126,7 @@
 			@param {number} [month] The month (if only <code>year</code> specified above).
 			@return {number} The number of days in this month.
 			@throws Error if an invalid month/year or a different calendar used. */
-		daysInMonth: function(year, month) {
+		daysInMonth: function (year, month) {
 			if (year.year) {
 				month = year.month();
 				year = year.year();
@@ -143,7 +143,7 @@
 			@param {number} [day] The day to examine (if only <code>year</code> specified above).
 			@return {boolean} <code>true</code> if a week day, <code>false</code> if not.
 			@throws Error if an invalid date or a different calendar used. */
-		weekDay: function(year, month, day) {
+		weekDay: function (year, month, day) {
 			return this.dayOfWeek(year, month, day) !== 6;
 		},
 
@@ -155,7 +155,7 @@
 			@param {number} [day] The day to convert (if only <code>year</code> specified above).
 			@return {number} The equivalent Julian date.
 			@throws Error if an invalid date or a different calendar used. */
-		toJD: function(nepaliYear, nepaliMonth, nepaliDay) {
+		toJD: function (nepaliYear, nepaliMonth, nepaliDay) {
 			var date = this._validate(nepaliYear, nepaliMonth, nepaliDay, $.calendars.local.invalidDate);
 			nepaliYear = date.year();
 			nepaliMonth = date.month();
@@ -181,10 +181,10 @@
 				if (nepaliMonthToCheck <= 0) {
 					nepaliMonthToCheck = 12;
 					nepaliYearToCheck--;
-				}				
+				}
 				gregorianDayOfYear += this.NEPALI_CALENDAR_DATA[nepaliYearToCheck][nepaliMonthToCheck];
 				nepaliMonthToCheck--;
-			}		
+			}
 			// If the date that has to be converted is in Paush (month no. 9) we have to do some other calculation
 			if (nepaliMonth === 9) {
 				// Add the days that are passed since the first day of Paush and substract the
@@ -200,16 +200,16 @@
 			else {
 				gregorianDayOfYear += this.NEPALI_CALENDAR_DATA[nepaliYearToCheck][9] -
 					this.NEPALI_CALENDAR_DATA[nepaliYearToCheck][0];
-			}		
-			return gregorianCalendar.newDate(gregorianYear, 1 ,1).add(gregorianDayOfYear, 'd').toJD();
+			}
+			return gregorianCalendar.newDate(gregorianYear, 1, 1).add(gregorianDayOfYear, 'd').toJD();
 		},
-		
+
 		/** Create a new date from a Julian date.
 			@memberof NepaliCalendar
 			@param {number} jd The Julian date to convert.
 			@return {CDate} The equivalent date. */
-		fromJD: function(jd) {
-			var gregorianCalendar =  $.calendars.instance();
+		fromJD: function (jd) {
+			var gregorianCalendar = $.calendars.instance();
 			var gregorianDate = gregorianCalendar.fromJD(jd);
 			var gregorianYear = gregorianDate.year();
 			var gregorianDayOfYear = gregorianDate.dayOfYear();
@@ -238,7 +238,7 @@
 				if (nepaliMonth > 12) {
 					nepaliMonth = 1;
 					nepaliYear++;
-				}	
+				}
 				daysSinceJanFirstToEndOfNepaliMonth += this.NEPALI_CALENDAR_DATA[nepaliYear][nepaliMonth];
 			}
 			// The last step is to calculate the nepali day-of-month
@@ -248,15 +248,15 @@
 			// we know how far the searched day is away from the end of the Nepali month.
 			// So we simply subtract this number from the amount of days in this month (30) 
 			var nepaliDayOfMonth = this.NEPALI_CALENDAR_DATA[nepaliYear][nepaliMonth] -
-				(daysSinceJanFirstToEndOfNepaliMonth - gregorianDayOfYear);		
+				(daysSinceJanFirstToEndOfNepaliMonth - gregorianDayOfYear);
 			return this.newDate(nepaliYear, nepaliMonth, nepaliDayOfMonth);
 		},
-		
+
 		/** Creates missing data in the NEPALI_CALENDAR_DATA table.
 			This data will not be correct but just give an estimated result. Mostly -/+ 1 day
 			@private
 			@param {number} nepaliYear The missing year number. */
-		_createMissingCalendarData: function(nepaliYear) {
+		_createMissingCalendarData: function (nepaliYear) {
 			var calendarData = this.daysPerMonth.slice(0);
 			calendarData.unshift(17);
 			for (var nepaliYearToCreate = (nepaliYear - 1); nepaliYearToCreate < (nepaliYear + 2); nepaliYearToCreate++) {
@@ -265,8 +265,8 @@
 				}
 			}
 		},
-		
-		NEPALI_CALENDAR_DATA:  {
+
+		NEPALI_CALENDAR_DATA: {
 			// These data are from http://www.ashesh.com.np
 			1970: [18, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
 			1971: [18, 31, 31, 32, 31, 32, 30, 30, 29, 30, 29, 30, 30],
@@ -289,7 +289,7 @@
 			1988: [17, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31],
 			1989: [18, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30],
 			1990: [18, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
-			1991: [18, 31, 32, 31, 32, 31, 30, 30, 29, 30, 29, 30, 30],	
+			1991: [18, 31, 32, 31, 32, 31, 30, 30, 29, 30, 29, 30, 30],
 			// These data are from http://nepalicalendar.rat32.com/index.php
 			1992: [17, 31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31],
 			1993: [18, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30],
@@ -400,9 +400,9 @@
 			2097: [17, 31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30],
 			2098: [17, 31, 31, 32, 31, 31, 31, 29, 30, 29, 30, 30, 31],
 			2099: [17, 31, 31, 32, 31, 31, 31, 30, 29, 29, 30, 30, 30],
-			2100: [17, 31, 32, 31, 32, 30, 31, 30, 29, 30, 29, 30, 30]	
+			2100: [17, 31, 32, 31, 32, 30, 31, 30, 29, 30, 29, 30, 30]
 		}
-	});	
+	});
 
 	// Nepali calendar implementation
 	$.calendars.calendars.nepali = NepaliCalendar;
