@@ -110,7 +110,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                         <asp:Label ID="L_Code" runat="server" Text='<%$ Resources:Resource,L_Code %>'></asp:Label>
                     </td>
                     <td class="auto-style3">
-                        <asp:TextBox ID="txtCode" runat="server" Width="150px" MaxLength="6"></asp:TextBox>
+                        <asp:TextBox ID="txtCode" runat="server" Width="150px" MaxLength="12"></asp:TextBox>
                         <asp:RequiredFieldValidator
                             ID="RequiredFieldCode" runat="server"
                             ControlToValidate="txtCode"
