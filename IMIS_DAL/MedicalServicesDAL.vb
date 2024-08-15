@@ -116,7 +116,7 @@ Public Class MedicalServicesDAL
     End Function
     Public Sub InsertMedicalServices(ByRef eServices As IMIS_EN.tblServices)
         Dim data As New ExactSQL
-        Dim sSQL As String = "INSERT INTO tblServices(ServCode, ServName, ServType, ServLevel, ServPrice, ServCareType, ServFrequency, CapQtyPeriod, DeptID, ServPatCat,AuditUserID,ServCategory)" &
+        Dim sSQL As String = "INSERT INTO tblServices(ServCode, ServName, ServType, ServLevel, ServPrice, ServCareType, ServFrequency, CapQtyPeriod,CapQrstPeriod, DeptID, ServPatCat,AuditUserID,ServCategory)" &
                 " VALUES (@ServCode, @ServName, @ServType, @ServLevel, @ServPrice, @ServCareType, @ServFrequency, @CapQtyPeriod,@CapQrstPeriod, @DeptID, @ServPatCat,@AuditUserID,@ServCategory)"
 
         data.setSQLCommand(sSQL, CommandType.Text)

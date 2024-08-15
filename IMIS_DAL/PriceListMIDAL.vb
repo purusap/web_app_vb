@@ -168,7 +168,7 @@ Public Class PriceListMIDAL
         data.params("@PLItemID", SqlDbType.Int, ePLItems.PLItemID)
         data.params("@PLItemName", SqlDbType.NVarChar, 100, ePLItems.PLItemName)
         data.params("@DatePL", SqlDbType.Date, ePLItems.DatePL)
-        data.params("@LocationId", SqlDbType.Int, if(ePLItems.tblLocations.LocationId = -1, Nothing, ePLItems.tblLocations.LocationId))
+        data.params("@LocationId", SqlDbType.Int, If(ePLItems.tblLocations.LocationId = -1, DBNull.Value, ePLItems.tblLocations.LocationId))
         data.params("@LegacyID", SqlDbType.Int, 1, ParameterDirection.Output)
         data.params("@AuditUserID", SqlDbType.Int, ePLItems.AuditUserID)
         data.ExecuteCommand()
