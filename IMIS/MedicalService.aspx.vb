@@ -139,7 +139,7 @@ lblDirty:   Try
                 txtCode.Text = eService.ServCode
                 txtName.Text = eService.ServName
                 ddServiceLevel.SelectedValue = eService.ServLevel
-                txtPrice.Text = FormatNumber(eService.ServPrice, 0)
+                txtPrice.Text = eService.ServPrice 'FormatNumber(eService.ServPrice, 0)
                 txtFrequency.Text = eService.ServFrequency
                 txtCapQtyPeriod.Text = eService.CapQtyPeriod?.ToString()
                 txtCapQrstPeriod.Text = eService.CapQrstPeriod?.ToString()

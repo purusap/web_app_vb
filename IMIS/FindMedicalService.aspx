@@ -100,7 +100,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                             Text='<%$ Resources:Resource,L_Code %>'></asp:Label>
                         </td>
                 <td class ="DataEntry">
-                    <asp:TextBox ID="txtServiceCode" runat="server" MaxLength="6"></asp:TextBox></td>
+                    <asp:TextBox ID="txtServiceCode" runat="server" MaxLength="12"></asp:TextBox></td>
                 <td class="FormLabel">
                             <asp:Label 
                             ID="L_SERVICENAME"

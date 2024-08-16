@@ -28,6 +28,31 @@ In case of dispute arising out or in relation to the use of the program, it is s
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajax" %>
 <asp:Content ID="HeadContent" ContentPlaceHolderID="head" runat="Server">
      <script>
+         function getRowDetails(thisRef) {
+             var row = {}
+             var tr = $(thisRef).parents('tr');
+             var ItemServ = '';
+             var code = tr.find('.txtItemCode')?.val() //'ctst1  CapTablet'
+             if (code) {
+                 ItemServ = 'Item'
+             } else {
+                 ItemServ='Service'
+                 code = tr.find('txtServiceCode').val()
+             }
+             code=code.split(' ')[0]
+             var Qty = tr.find('.ClaimQty').val();
+             var details = {
+                 "ItemSrv": ItemServ,
+                 "ItemSrvCode": code,
+                 "Qty": Qty,
+                 "CHFID": $('#Body_txtCHFIDData').val(),
+                 "DateClaimed": $('#Body_txtClaimDate').val().split('/').reverse().join('-'),
+             }
+             var j = {
+                 "xml": details
+             }
+             return j;
+         }
          function getClaimDetailsJson() {
              var j = {
                  "xml": {
@@ -422,6 +447,18 @@ In case of dispute arising out or in relation to the use of the program, it is s
 
             $(".ClaimQty").change(function() {
                 $(".ClaimValue").trigger("change");
+                console.log(this);
+            });
+
+            $('.ClaimQty').on("blur", function () {
+                var row = getRowDetails(this);
+                return;
+                console.log(row);
+                var encJson = encodeURI(JSON.stringify(row));
+                $.get('/FindClaims.aspx?action=CapStatus&json=' + encJson, function (res) {
+                     console.log(res);
+                });
+
             });
 
             $(".ClaimValue").change(function() {

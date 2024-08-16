@@ -91,7 +91,7 @@ Public Class MedicalItemsDAL
         data.params("@ItemName", SqlDbType.NVarChar, 100, eItems.ItemName)
         data.params("@itemType", SqlDbType.NVarChar, 1, eItems.ItemType)
         data.params("@ItemPackage", SqlDbType.NVarChar, 255, eItems.ItemPackage)
-        data.params("@ItemPrice", SqlDbType.Int, eItems.ItemPrice)
+        data.params("@ItemPrice", SqlDbType.Decimal, eItems.ItemPrice)
         data.params("@ItemCareType", SqlDbType.Char, 1, eItems.ItemCareType)
         data.params("@ItemFrequency", SqlDbType.SmallInt, eItems.ItemFrequency)
         data.params("@CapQtyPeriod", SqlDbType.SmallInt, eItems.CapQtyPeriod)

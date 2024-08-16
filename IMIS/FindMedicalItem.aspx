@@ -101,7 +101,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                             </asp:Label>
                         </td>
                 <td class ="DataEntry">
-                      <asp:TextBox ID="txtItemCode" runat="server" Width="130px" MaxLength="6"></asp:TextBox>
+                      <asp:TextBox ID="txtItemCode" runat="server" Width="130px" MaxLength="12"></asp:TextBox>
                       </td>
                <td class="FormLabel">
                             <asp:Label 

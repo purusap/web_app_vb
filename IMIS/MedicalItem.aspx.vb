@@ -77,7 +77,7 @@ Partial Public Class MedicalItem
                 txtCode.Text = eItem.ItemCode
                 txtName.Text = eItem.ItemName
                 txtPackage.Text = eItem.ItemPackage
-                txtPrice.Text = FormatNumber(eItem.ItemPrice, 0)
+                txtPrice.Text = eItem.ItemPrice 'FormatNumber(eItem.ItemPrice, 0)
                 txtFrequency.Text = eItem.ItemFrequency?.ToString()
                 txtCapQtyPeriod.Text = eItem.CapQtyPeriod?.ToString()
                 txtCapQrstPeriod.Text = eItem.CapQrstPeriod?.ToString()

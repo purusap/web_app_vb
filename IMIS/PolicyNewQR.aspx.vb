@@ -343,16 +343,16 @@ Partial Public Class PolicyNewQR
                     imisgen.Alert("Enroll Day should be less than today!", pnlButtons, alertPopupTitle:="IMIS")
                     Return
                 End If
-                Dim Calculatedays As Integer = (Date.ParseExact(txtStartDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing)).Days
-                If Calculatedays < 1 Then
-                    imisgen.Alert("Enroll Date should be in running cycle!" & Calculatedays, pnlButtons, alertPopupTitle:="IMIS")
-                    Return
-                End If
-                'Dim Calculatedays As Integer = (Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact("14/01/2024", "dd/MM/yyyy", Nothing)).Days
-                'If Calculatedays <= 0 Then
-                '    imisgen.Alert("Enroll Date should be in running cycle! -" & Calculatedays, pnlButtons, alertPopupTitle:="IMIS")
+                'Dim Calculatedays As Integer = (Date.ParseExact(txtStartDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact(DateTime.Today.Date, "dd/MM/yyyy", Nothing)).Days
+                'If Calculatedays < 1 Then
+                '    imisgen.Alert("Enroll Date should be in running cycle!" & Calculatedays, pnlButtons, alertPopupTitle:="IMIS")
                 '    Return
                 'End If
+                Dim Calculatedays As Integer = (Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact("13/04/2024", "dd/MM/yyyy", Nothing)).Days
+                If Calculatedays <= 0 Then
+                    imisgen.Alert("Enroll Date should be in running cycle! -" & Calculatedays, pnlButtons, alertPopupTitle:="IMIS")
+                    Return
+                End If
 
 
                 If Not ePolicy.PolicyID = 0 Then
