@@ -64,6 +64,11 @@ Partial Public Class FindClaims
             If xml = Nothing Then
                 '/ApiEntryHandler.ashx?json={"xml":{"HFID":35}}&action=ClaimCopayResponse
                 Dim json = HttpContext.Current.Request.Unvalidated("json")
+                If json = Nothing Then
+                    '/ApiEntryHandler.ashx?action=CapStatusApi&args={"HFID":35}
+                    Dim args = HttpContext.Current.Request.Unvalidated("args")
+                    json = "{""xml"":" & args & "}"
+                End If
                 Dim doc = JsonConvert.DeserializeXmlNode(json)
                 xml = doc.InnerXml
             End If
