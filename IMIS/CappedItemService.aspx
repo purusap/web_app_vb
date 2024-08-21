@@ -5,10 +5,21 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Body" runat="Server">
 
+<iframe 
+        src='<%= String.Format("/CapQtyRst.html?CHFID={0}&DateClaimed={1}", 
+                                HttpUtility.UrlEncode(Request.QueryString("nshid")), 
+                                HttpUtility.UrlEncode(DateTime.Now.ToString("yyyy-MM-dd"))) %>' 
+        style="width: 100%; max-height: 400px; border: none;overflow:scroll;" 
+        title="Embedded Page">
+        Your browser does not support iframes.
+    </iframe>
+
     <div class="divBody">
         <br />
         <h3>Capped Item/Service Utilized by Member</h3>
         <br />
+        
+
         <asp:GridView ID="grdCappedDetails" runat="server" AutoGenerateColumns="False" 
             EmptyDataText="No Data Available" CssClass="mGrid" HeaderStyle-HorizontalAlign="Center">
             <Columns>
@@ -23,7 +34,6 @@
             </Columns>
         </asp:GridView>
     </div>
-
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Footer" runat="Server">

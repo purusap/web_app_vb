@@ -445,20 +445,41 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 $("#<%=txtAddItemRows.ClientID %>").attr("disabled", true);
             });
 
+            window.fnClaimRowAction=function (rthis) {
+                var row = getRowDetails(rthis); //row.xml.DateClaimed="2024-05-11";
+                console.log('row',row);
+                var encJson = encodeURI(JSON.stringify(row));
+                $.get('/FindClaims.aspx?action=CapStatusApi&json=' + encJson, function (res) {
+                    console.log(res);
+                    if(res){//debugger
+                        var res0=res[0];
+                        if(res0 &&  res0?.QtyRemain && res0?.QtyRemain < parseFloat(row.xml.Qty) ){
+                            if(!window.errCode){
+                                window.errCode=res0.ItemCode; //todo: verify qty of item and code with api on submit
+                            }
+                            console.log('k ho yesto')
+                            $('#Body_B_SAVE').hide()
+                            alert( `Maximum allowed: ${res0?.QtyRemain} for  ${row.xml.ItemSrvCode}`);
+                        }else{
+                            if( window.errCode==res0.ItemCode ){//only if we handled our err
+                                $('#Body_B_SAVE').show();
+                                window.errCode=null;
+                            } 
+                            console.log('k ho yesto, qty thik cha')
+                        } 
+                    } 
+                });
+
+            }; // fnClaimRowAction( $('#Body_gvItems_txtQuantityI_0') )
+
             $(".ClaimQty").change(function() {
                 $(".ClaimValue").trigger("change");
                 console.log(this);
+                fnClaimRowAction(this);
             });
 
-            $('.ClaimQty').on("blur", function () {
-                var row = getRowDetails(this);
-                return;
-                console.log(row);
-                var encJson = encodeURI(JSON.stringify(row));
-                $.get('/FindClaims.aspx?action=CapStatus&json=' + encJson, function (res) {
-                     console.log(res);
-                });
-
+            $('.ClaimQty').on("blur", function(){
+                fnClaimRowAction(this);
             });
 
             $(".ClaimValue").change(function() {

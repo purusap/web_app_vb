@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claims Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color1: #f2f2f2;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <table id="claimsTable">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>CapQty</th>
+                <th>CapReset(Days)</th>
+                <th>Item/Service</th>
+                <th>QtyUsed</th>
+                <th>QtyRemain</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here -->
+        </tbody>
+    </table>
+    <script>
+        $(document).ready(function() {
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+
+            var chfid = getUrlParameter('CHFID');
+            var dateClaimed = getUrlParameter('DateClaimed')??new Date().toISOString().split('T')[0]; // Format as YYYY-MM-DD
+
+            // Construct the URL with readable parameters
+            var url = `/FindClaims.aspx?action=CapStatus&json={"xml":{"CHFID":"${chfid}","DateClaimed":"${dateClaimed}"}}`;
+
+            // Fetch data from the server
+            $.get(url, function(data) {
+                
+                var claims=data;
+                // Insert data into the table
+                var tableBody = $('#claimsTable tbody');
+                claims.forEach(function(claim) {
+                    var row = '<tr>' +
+                        '<td>' + claim.ItemCode + '</td>' +
+                        '<td>' + claim.ItemName + '</td>' +
+                        '<td>' + claim.CapQtyPeriod + '</td>' +
+                        '<td>' + claim.CapQrstPeriod + '</td>' +
+                        '<td>' + claim.ItemServ + '</td>' +
+                        '<td>' + claim.QtyUsed + '</td>' +
+                        '<td>' + claim.QtyRemain + '</td>' +
+                    '</tr>';
+                    tableBody.append(row);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
