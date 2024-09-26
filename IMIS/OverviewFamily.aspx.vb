@@ -127,9 +127,9 @@ Partial Public Class OverviewFamily
             btnRenewPolicy_Click(sender, New System.Web.UI.ImageClickEventArgs(0, 0))
         End If
 
-        If hfGateway.Value = "1" Then
-            AddInsuree.Visible = False
-        End If
+        'If hfGateway.Value = "1" Then
+        '    AddInsuree.Visible = False
+        'End If
 
         Dim RefUrl = Request.Headers("Referer")
         Dim reg As New Regex("OverviewFamily", RegexOptions.IgnoreCase) '
@@ -300,10 +300,10 @@ Partial Public Class OverviewFamily
                 Dim paymentGatewayList As String = System.Configuration.ConfigurationManager.AppSettings("PaymentGateWayName").ToString()
                 Dim paymentGateway As String() = paymentGatewayList.Split(",")
                 'If paymentGateway.Contains(dr("OfficerCode")) And CInt(hfFamilyCount.Value) <= 5 Then
-                If paymentGateway.Contains(dr("OfficerCode")) Then
-                    AddInsuree.Visible = False
-                    hfGateway.Value = 1
-                End If
+                'If paymentGateway.Contains(dr("OfficerCode")) Then
+                '    AddInsuree.Visible = False
+                '    hfGateway.Value = 1
+                'End If
                 If epolicy.PolicyStatus > 1 Then
                     Continue For
                 End If
