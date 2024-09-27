@@ -567,7 +567,7 @@ Public Class ClaimsBL
             INNER JOIN tblRoleRight RR ON RR.RoleID = UR.RoleID
             INNER JOIN tblRole ROLES ON ROLES.RoleID = UR.RoleID -- AND ISNULL(UR.Assign,0) & 1 > 0
             inner join tblUsers u on u.UserID=ur.UserID
-            where  rolename = 'Medical Officer'"
+            where  rolename = 'Medical Officer' and  u.EmailId != 'block@hib.gov.np'"
         data.setSQLCommand(sSQL, CommandType.Text)
         Return data.Filldata
     End Function

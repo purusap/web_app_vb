@@ -1180,7 +1180,7 @@
         If RandomSamplePassword.Visible Then
             Dim pw = RandomSamplePassword.Text
             If Not String.IsNullOrWhiteSpace(pw) Then
-                If pw = "1cos1cos" Then
+                If pw = "1ranhib" Then
                     Session("_BATCH_ADMIN_") = "1"
                     redirsamepage()
                 Else

@@ -47,6 +47,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                  "Qty": Qty,
                  "CHFID": $('#Body_txtCHFIDData').val(),
                  "DateClaimed": $('#Body_txtClaimDate').val().split('/').reverse().join('-'),
+                 "VisitType": $('#Body_ddlVisitType').val(),
              }
              var j = {
                  "xml": details
@@ -447,6 +448,12 @@ In case of dispute arising out or in relation to the use of the program, it is s
 
             window.fnClaimRowAction=function (rthis) {
                 var row = getRowDetails(rthis); //row.xml.DateClaimed="2024-05-11";
+                args=row.xml;
+                if(args.VisitType=="E"){
+                    console.log('Emergency visit');
+                    return;
+                }
+
                 console.log('row',row);
                 var encJson = encodeURI(JSON.stringify(row));
                 $.get('/FindClaims.aspx?action=CapStatusApi&json=' + encJson, function (res) {

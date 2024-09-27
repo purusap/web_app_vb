@@ -1338,15 +1338,15 @@ Public Class ClaimsSamplingDAL
             Update tblClaimItems Set 
                 -- PriceApproved = QtyProvided*(PriceAsked- PriceAsked*@SampleAmountPercent)
                 -- PriceApproved = PriceAsked- PriceAsked*@SampleAmountPercent
-                   PriceApproved = (PriceAsked*@SampleAmountPercent),
+                   PriceApproved = (PriceAsked*@SampleAmountPercent)
                 --   RejectionReason = 20,
-                   RejectionReason = 0
+                --   RejectionReason = 0
             where ClaimID = @ClaimID; 
             Update tblClaimServices Set 
                 -- PriceApproved = QtyProvided*(PriceAsked- PriceAsked*@SampleAmountPercent)
                 -- PriceApproved = PriceAsked- PriceAsked*@SampleAmountPercent
-                PriceApproved = (PriceAsked*@SampleAmountPercent),
-                RejectionReason = 0
+                PriceApproved = (PriceAsked*@SampleAmountPercent)
+               -- RejectionReason = 0
             where ClaimID = @ClaimID; 
 
             "
