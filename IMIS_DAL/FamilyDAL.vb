@@ -120,8 +120,8 @@ Public Class FamilyDAL
     Public Sub InsertInsuredFamily(ByRef eFamily As IMIS_EN.tblFamilies)
         Dim data As New ExactSQL
         data.setSQLCommand("Insert into tblFamilies (LocationId,Poverty,ConfirmationType,isOffline,AuditUserID,FamilyType,FamilyAddress,Ethnicity,ConfirmationNo) VALUES (@LocationId,@Poverty,@ConfirmationType, @isOffline,@AuditUserID,@FamilyType,@FamilyAddress,@Ethnicity,@ConfirmationNo ); select @FamilyId = scope_identity();" _
-                           & "INSERT INTO tblInsuree ([FamilyID],[CHFID],[LastName],[OtherNames],[DOB],[Gender],[Marital],[IsHead],[passport],[Phone],[PhotoID],[PhotoDate],[CardIssued],isOffline,[AuditUserID],[Email],Education,Profession, TypeOfId, HFID,CurrentAddress,CurrentVillage, GeoLocation)" _
-     & " VALUES (@FamilyID,@CHFID,@LastName,@OtherNames,@DOB,@Gender,@Marital,@IsHead,@passport,@Phone,@PhotoID, @PhotoDate,@CardIssued,@isOffline,@AuditUserID,@Email,@Education,@Profession, @TypeOfId, @HFID,@CurrentAddress, @CurrentVillage, @GeoLocation);select @InsureeID = scope_identity()" _
+                           & "INSERT INTO tblInsuree ([FamilyID],[CHFID],[LastName],[OtherNames],[DOB],[Gender],[Marital],[IsHead],[passport],[Phone],[PhotoID],[PhotoDate],[CardIssued],isOffline,[AuditUserID],[Email],Education,Profession, TypeOfId, HFID,CurrentAddress,CurrentVillage, GeoLocation, NIN)" _
+     & " VALUES (@FamilyID,@CHFID,@LastName,@OtherNames,@DOB,@Gender,@Marital,@IsHead,@passport,@Phone,@PhotoID, @PhotoDate,@CardIssued,@isOffline,@AuditUserID,@Email,@Education,@Profession, @TypeOfId, @HFID,@CurrentAddress, @CurrentVillage, @GeoLocation, @NIN);select @InsureeID = scope_identity()" _
      & "Update tblFamilies set InsureeId = @Insureeid where FamilyId = @FamilyId;" &
      " INSERT INTO tblPhotos (InsureeID,CHFID,PhotoDate,PhotoFolder,PhotoFileName,OfficerID,ValidityFrom,AuditUserID)" &
      " VALUES(@InsureeID,@CHFID,@PhotoDate,@PhotoFolder,@PhotoFileName,@OfficerID,@ValidityFrom,@AuditUserID);" &
@@ -172,6 +172,7 @@ Public Class FamilyDAL
         data.params("@CurrentVillage", SqlDbType.Int, eFamily.tblInsuree.CurrentVillage, ParameterDirection.Input)
         'data.params("@CurWard", SqlDbType.Int, eFamily.tblInsuree.CurrentVillage, ParameterDirection.Input)
         data.params("@GeoLocation", SqlDbType.NVarChar, 50, eFamily.tblInsuree.GeoLocation)
+        data.params("@NIN", SqlDbType.NVarChar, 10, eFamily.tblInsuree.NIN)
         'Addition for Nepal >> End
         data.ExecuteCommand()
         eFamily.FamilyID = data.sqlParameters("@FamilyID")
@@ -397,6 +398,25 @@ Public Class FamilyDAL
         sSQL = "Select * FROM tblInsuree WHERE CHFID = @chfid AND ValidityTo IS NULL"
         data.setSQLCommand(sSQL, CommandType.Text)
         data.params("@chfid", SqlDbType.NVarChar, 12, CHFID)
+        Return data.Filldata
+    End Function
+    Public Function NINExists(ByVal NIN As String) As DataTable
+        Dim data As New ExactSQL
+        Dim sSQL As String = ""
+        Dim dt As New DataTable
+        sSQL = "Select * FROM tblInsuree WHERE NIN = @nin AND ValidityTo IS NULL"
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@nin", SqlDbType.NVarChar, 10, NIN)
+        Return data.Filldata
+    End Function
+
+    Public Function passportExists(ByVal passport As String) As DataTable
+        Dim data As New ExactSQL
+        Dim sSQL As String = ""
+        Dim dt As New DataTable
+        sSQL = "Select * FROM tblInsuree WHERE passport = @passport AND ValidityTo IS NULL"
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@passport", SqlDbType.VarChar, 50, passport)
         Return data.Filldata
     End Function
     Public Function CheckCanBeDeleted(ByVal FamilyID As Integer) As DataTable

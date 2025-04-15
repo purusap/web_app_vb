@@ -545,6 +545,33 @@ Partial Public Class Claim
     Protected WithEvents txtServTotal As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''lblICD2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblICD2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtICDCode2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtICDCode2 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''ddlICDData2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlICDData2 As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''lblClaimAdminCode control.
     '''</summary>
     '''<remarks>

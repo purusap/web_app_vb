@@ -22,7 +22,7 @@ Namespace Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "16.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "17.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Class Resource
@@ -3368,7 +3368,7 @@ Namespace Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to NMC/Council No.
+        '''  Looks up a localized string similar to NMC No.
         '''</summary>
         Friend Shared ReadOnly Property L_GUARANTEE() As String
             Get
@@ -3530,7 +3530,7 @@ Namespace Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Main Dg..
+        '''  Looks up a localized string similar to Provisional Dx.
         '''</summary>
         Friend Shared ReadOnly Property L_ICD() As String
             Get
@@ -3539,7 +3539,7 @@ Namespace Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Main Dg1.
+        '''  Looks up a localized string similar to Differential Dx.
         '''</summary>
         Friend Shared ReadOnly Property L_ICD1() As String
             Get
@@ -3548,7 +3548,7 @@ Namespace Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Main Dg2.
+        '''  Looks up a localized string similar to Final Dx.
         '''</summary>
         Friend Shared ReadOnly Property L_ICD2() As String
             Get
@@ -6248,7 +6248,7 @@ Namespace Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Sec Dg1.
+        '''  Looks up a localized string similar to Differential Dx.
         '''</summary>
         Friend Shared ReadOnly Property L_SECONDARYDG1() As String
             Get
@@ -6257,7 +6257,7 @@ Namespace Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Sec Dg2.
+        '''  Looks up a localized string similar to Final Dx.
         '''</summary>
         Friend Shared ReadOnly Property L_SECONDARYDG2() As String
             Get
@@ -13295,7 +13295,7 @@ Namespace Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to --Select Dg. --.
+        '''  Looks up a localized string similar to --Select Dx. --.
         '''</summary>
         Friend Shared ReadOnly Property T_ICDCODE() As String
             Get
@@ -14386,7 +14386,7 @@ Namespace Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to --Select Main Dg.--.
+        '''  Looks up a localized string similar to --Select Main Dx.--.
         '''</summary>
         Friend Shared ReadOnly Property T_SELECTMAINDG() As String
             Get

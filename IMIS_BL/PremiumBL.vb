@@ -219,9 +219,9 @@ Public Class PremiumBL
         Dim PI As New IMIS_BL.InsureePolicyBL
         PI.UpdateReceipt(ReceiptId)
     End Function
-    Public Function UpdateReceiptByCHFID(ByVal ReceiptNum As String, ByVal CHFID As String, ByVal Amount As Integer, ByVal EnrolledDate As Date)
+    Public Function UpdateReceiptByCHFID(ByVal ReceiptNum As String, ByVal CHFID As String, ByVal Amount As Integer, ByVal EnrolledDate As Date, ByVal EaCode As Integer)
         Dim PI As New IMIS_BL.InsureePolicyBL
-        PI.UpdateReceiptByCHFID(ReceiptNum, CHFID, Amount, EnrolledDate)
+        PI.UpdateReceiptByCHFID(ReceiptNum, CHFID, Amount, EnrolledDate, EaCode)
     End Function
 
     Public Function isUniqueQrReceipt(ByVal ReceiptNum As String) As Boolean

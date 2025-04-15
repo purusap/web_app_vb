@@ -79,6 +79,14 @@ Public Class InsureeBI
         Dim insuree As New IMIS_BL.EscapeBL
         Return insuree.isValidInsuranceNumber(CHFID)
     End Function
+    Public Function NINExists(ByVal NIN As String) As Boolean
+        Dim family As New IMIS_BL.FamilyBL
+        Return family.NINExists(NIN)
+    End Function
+    Public Function passportExists(ByVal passport As String) As Boolean
+        Dim family As New IMIS_BL.FamilyBL
+        Return family.passportExists(passport)
+    End Function
     Public Function GetRelations() As DataTable
         Dim Ins As New IMIS_BL.InsureeBL
         Return Ins.GetRelations

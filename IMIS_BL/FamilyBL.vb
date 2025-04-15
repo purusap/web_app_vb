@@ -67,6 +67,24 @@ Public Class FamilyBL
             Return False
         End If
     End Function
+    Public Function NINExists(ByVal NIN As String) As Boolean
+        Dim Family As New IMIS_DAL.FamilyDAL
+        Dim dt As DataTable = Family.NINExists(NIN)
+        If dt.Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+    Public Function passportExists(ByVal passport As String) As Boolean
+        Dim Family As New IMIS_DAL.FamilyDAL
+        Dim dt As DataTable = Family.passportExists(passport)
+        If dt.Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
     Public Function getOfficerID(ByVal ImageName As String) As Integer
         Dim Officer As New IMIS_BL.OfficersBL
         Return Officer.ValidOfficerCode(ExtractOfficerCode(ImageName))

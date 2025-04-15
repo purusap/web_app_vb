@@ -236,10 +236,12 @@ Partial Public Class InsureeNew
                 txtLastName.Text = eInsuree.LastName
                 txtOtherNames.Text = eInsuree.OtherNames
                 txtBirthDate.Text = eInsuree.DOB
+                ' NID UPdate
                 ddlGender.SelectedValue = eInsuree.Gender
                 'ddlMarital.SelectedValue = eInsuree.Marital
                 'ddlCardIssued.SelectedValue = If(eInsuree.CardIssued = True, "1", "0")
                 txtPassport.Text = eInsuree.passport
+                txtNIN.Text = eInsuree.NIN
                 txtPhone.Text = eInsuree.Phone
                 Image1.ImageUrl = If(eInsuree.tblPhotos.PhotoFileName.ToString <> String.Empty, "/" & eInsuree.tblPhotos.PhotoFolder & "/" & eInsuree.tblPhotos.PhotoFileName.ToString, "") 'UpdatedFolder & eInsuree.tblPhotos.PhotoFileName.ToString 
                 efamily.FamilyID = eInsuree.tblFamilies1.FamilyID
@@ -419,6 +421,28 @@ Partial Public Class InsureeNew
                 Return
             End If
 
+            If Trim(txtNIN.Text).Length > 0 Then
+                If Not IsNumeric(txtNIN.Text) Then
+                    imisgen.Alert(txtNIN.Text & " NIN should be 10 Digit Number!", pnlButtons, alertPopupTitle:="IMIS")
+                    Return
+                End If
+                If Trim(txtNIN.Text).Length <> 10 Then
+                    imisgen.Alert(txtNIN.Text & " NIN should be 10 Digit!", pnlButtons, alertPopupTitle:="IMIS")
+                    Return
+                End If
+                If Insuree.NINExists(txtNIN.Text) Then
+                    imisgen.Alert(txtNIN.Text & " NIN already Exists!", pnlButtons, alertPopupTitle:="IMIS")
+                    Return
+                End If
+            End If
+            If eInsuree.InsureeID = 0 Then
+                If Trim(txtPassport.Text).Length > 0 Then
+                    If Insuree.passportExists(txtPassport.Text) Then
+                        imisgen.Alert(txtPassport.Text & " Birth Certificate/Citizenship Number already Exists!", pnlButtons, alertPopupTitle:="IMIS")
+                        Return
+                    End If
+                End If
+            End If
             eInsuree.CHFID = txtCHFID.Text.Trim
             eInsuree.LastName = txtLastName.Text
             eInsuree.OtherNames = txtOtherNames.Text
@@ -432,6 +456,17 @@ Partial Public Class InsureeNew
             'If ddlMarital.SelectedValue <> "" Then eInsuree.Marital = ddlMarital.SelectedValue
             'If ddlCardIssued.SelectedValue <> "" Then eInsuree.CardIssued = ddlCardIssued.SelectedValue
             eInsuree.passport = txtPassport.Text
+            eInsuree.NIN = txtNIN.Text
+            If Trim(txtPhone.Text).Length > 0 Then
+                If Not IsNumeric(txtPhone.Text) Then
+                    imisgen.Alert(txtPhone.Text & " Mobile Number should be 10 Digit Number!", pnlButtons, alertPopupTitle:="IMIS")
+                    Return
+                End If
+                If Trim(txtPhone.Text).Length <> 10 Then
+                    imisgen.Alert(txtPhone.Text & " Mobile Number be 10 Digit!", pnlButtons, alertPopupTitle:="IMIS")
+                    Return
+                End If
+            End If
             eInsuree.Phone = txtPhone.Text
             eInsuree.isOffline = IMIS_Gen.offlineHF Or IMIS_Gen.OfflineCHF
             If ddlRelation.SelectedValue > 0 Then eInsuree.Relationship = ddlRelation.SelectedValue
@@ -675,4 +710,17 @@ Partial Public Class InsureeNew
             lblNoPhoto.Text = ""
         End If
     End Sub
+    'Private Sub txtNIN_TextChanged(sender As Object, e As EventArgs) Handles txtNIN.TextChanged
+    '    If txtNIN.Text.Length = 10 Then
+    '        ddlIdType.Enabled = False
+    '        txtPassport.Enabled = False
+    '        rfIdType.Enabled = False
+    '        rfIdNo.Enabled = False
+    '    Else
+    '        ddlIdType.Enabled = True
+    '        txtPassport.Enabled = True
+    '        rfIdType.Enabled = True
+    '        rfIdNo.Enabled = True
+    '    End If
+    'End Sub
 End Class

@@ -60,15 +60,16 @@ Public Class ClaimsDAL
                ",C.ClaimStatus,C.ReviewStatus,C.FeedbackStatus,FB.FeedbackID,FB.FeedbackDate,FB.CareRendered" &
                ",FB.DrugPrescribed,FB.DrugReceived,FB.PaymentAsked,FB.Asessment,FB.CHFOfficerCode" &
                ",Cadm.ClaimAdminID,Cadm.ClaimAdminCode,Cadm.LastName CadminLastName,Cadm.OtherNames CadminOtherNames" &
-               " ,C.ICDID1,  C.VisitType,IC1.ICDCode ICDCode1,GuaranteeId" &
+               " ,C.ICDID1, C.ICDID2, C.VisitType,IC1.ICDCode ICDCode1,IC2.ICDCode ICDCode2, GuaranteeId" &
                 ",ISNULL(CS.RejectionReason,NULL) ServiceRejectionReason,ISNULL(CI.RejectionReason,NULL) ItemRejectionReason, Attachment " &
-                 ",IC.ICDName, IC1.ICDName ICDName1, HFF.HFName ReferF, HFT.HFName ReferT, C.CareType, C.referFrom, C.referTo  " &
+                 ",IC.ICDName, IC1.ICDName ICDName1,IC2.ICDName ICDName2, HFF.HFName ReferF, HFT.HFName ReferT, C.CareType, C.referFrom, C.referTo, C.AuditUserIDReview  " &
                " FROM tblClaim C" &
                " INNER JOIN tblInsuree I ON C.InsureeID = I.InsureeID INNER JOIN tblHF H ON C.HfID = H.HfID" &
                " INNER JOIN tblICDCodes IC ON C.ICDID = IC.ICDID" &
                " LEFT JOIN tblHF HFF ON C.referFrom = HFF.HfID" &
                " LEFT JOIN tblHF HFT ON C.referTo = HFT.HfID" &
                 " LEFT JOIN tblICDCodes IC1 ON C.ICDID1 = IC1.ICDID" &
+                " LEFT JOIN tblICDCodes IC2 ON C.ICDID2 = IC2.ICDID" &
                " LEFT JOIN tblFeedback FB ON C.ClaimID = FB.ClaimID" &
                " LEFT JOIN tblClaimAdmin Cadm ON Cadm.ClaimAdminId = C.ClaimAdminId" &
                " LEFT OUTER JOIN tblClaimServices CS ON CS.ClaimID = C.ClaimID" &
@@ -132,16 +133,16 @@ Public Class ClaimsDAL
             If dr("CadminLastName") IsNot DBNull.Value Then eClaimAdmin.LastName = dr("CadminLastName")
             If dr("CadminOtherNames") IsNot DBNull.Value Then eClaimAdmin.OtherNames = dr("CadminOtherNames")
             eClaim.ICDID1 = if(dr("ICDID1") Is DBNull.Value, Nothing, dr("ICDID1"))
-            'eClaim.ICDID2 = if(dr("ICDID2") Is DBNull.Value, Nothing, dr("ICDID2"))
+            eClaim.ICDID2 = If(dr("ICDID2") Is DBNull.Value, Nothing, dr("ICDID2"))
             'eClaim.ICDID3 = if(dr("ICDID3") Is DBNull.Value, Nothing, dr("ICDID3"))
             'eClaim.ICDID4 = if(dr("ICDID4") Is DBNull.Value, Nothing, dr("ICDID4"))
             If eExtra IsNot Nothing Then
                 eExtra.Add("ICDCode1", if(dr("ICDCode1") Is DBNull.Value, Nothing, dr("ICDCode1")))
-                'eExtra.Add("ICDCode2", if(dr("ICDCode2") Is DBNull.Value, Nothing, dr("ICDCode2")))
+                eExtra.Add("ICDCode2", If(dr("ICDCode2") Is DBNull.Value, Nothing, dr("ICDCode2")))
                 'eExtra.Add("ICDCode3", if(dr("ICDCode3") Is DBNull.Value, Nothing, dr("ICDCode3")))
                 'eExtra.Add("ICDCode4", If(dr("ICDCode4") Is DBNull.Value, Nothing, dr("ICDCode4")))
                 eExtra.Add("ICDName1", If(dr("ICDName1") Is DBNull.Value, Nothing, dr("ICDName1")))
-                'eExtra.Add("ICDName2", If(dr("ICDName2") Is DBNull.Value, Nothing, dr("ICDName2")))
+                eExtra.Add("ICDName2", If(dr("ICDName2") Is DBNull.Value, Nothing, dr("ICDName2")))
                 'eExtra.Add("ICDName3", If(dr("ICDName3") Is DBNull.Value, Nothing, dr("ICDName3")))
                 'eExtra.Add("ICDName4", If(dr("ICDName4") Is DBNull.Value, Nothing, dr("ICDName4")))
             End If
@@ -161,6 +162,7 @@ Public Class ClaimsDAL
             eClaim.ReferFromData = If(dr("ReferF") Is DBNull.Value, Nothing, dr("ReferF"))
             eClaim.ReferToData = If(dr("ReferT") Is DBNull.Value, Nothing, dr("ReferT"))
             eClaim.CareType = If(dr("CareType") Is DBNull.Value, Nothing, dr("CareType"))
+            eClaim.AuditUserIDReview = If(dr("AuditUserIDReview") Is DBNull.Value, Nothing, dr("AuditUserIDReview"))
 
 
         End If
@@ -448,7 +450,9 @@ Public Class ClaimsDAL
         sSQL = "SELECT " + UtilitiesDAL.GetEnvMaxRows()
 
         sSQL += " tblClaim.ClaimID,claimcode,DateClaimed,Claimed,ISNULL(Approved, Claimed)Approved, ClaimSt.name as ClaimStatus,"
-        sSQL += " FeedbackStatus,ReviewStatus,tblClaim.RowID,tblHF.HFCode,HFName,tblClaim.HfID,tblClaim.ClaimAdminID,"
+        ' for redacting HF Name
+        'sSQL += " FeedbackStatus,ReviewStatus,tblClaim.RowID,tblHF.HFCode,HFName,tblClaim.HfID,tblClaim.ClaimAdminID,"
+        sSQL += " FeedbackStatus,ReviewStatus,tblClaim.RowID,tblHF.HFCode,CASE WHEN HFName <> '1' THEN '**Redacted**' ELSE HFName END AS HFName,tblClaim.HfID,tblClaim.ClaimAdminID,"
         sSQL += " Cadm.ClaimAdminID,Cadm.ClaimAdminCode,Cadm.LastName CadminLastName,Cadm.OtherNames CadminOtherNames,tblInsuree.CHFID, Attachment from tblClaim"
         sSQL += " INNER JOIN tblICDCodes ON tblICDCodes.ICDID = tblClaim.ICDID"
         sSQL += " INNER JOIN tblInsuree ON tblInsuree.InsureeID = tblClaim.InsureeID"
@@ -542,7 +546,8 @@ Public Class ClaimsDAL
         'sSQL += " AND tblClaim.ClaimID in (select claim_id from claim_ClaimAttachmentsCountView where attachments_count>=1)"
         'End If
 
-        sSQL += " order by DateClaimed ASC"
+        sSQL += " order by CHFID ASC"
+        'sSQL += " order by DateClaimed ASC"
         'sSQL += " order by ClaimID desc"
 
         ' Change By Purushottam Ends

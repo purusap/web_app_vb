@@ -775,7 +775,7 @@
     <value>Batches Found</value>
   </data>
   <data name="L_ICD" xml:space="preserve">
-    <value>Main Dg.</value>
+    <value>Provisional Dx</value>
   </data>
   <data name="L_REVIEWSELECTION" xml:space="preserve">
     <value>Batch Review Selection</value>
@@ -1339,7 +1339,7 @@
     <value>Hospital case</value>
   </data>
   <data name="T_ICDCODE" xml:space="preserve">
-    <value>--Select Dg. --</value>
+    <value>--Select Dx. --</value>
   </data>
   <data name="T_INPATIENT" xml:space="preserve">
     <value>In-Patient</value>
@@ -2710,7 +2710,7 @@
     <value>Pay Category</value>
   </data>
   <data name="L_GUARANTEE" xml:space="preserve">
-    <value>NMC/Council No</value>
+    <value>NMC No</value>
   </data>
   <data name="L_STARTCYCLE1" xml:space="preserve">
     <value>Start Cycle 1</value>
@@ -3028,10 +3028,10 @@
     <value>Generating of the report from past perspective may result in duplication of request for matching funds. &lt;br/&gt; Do you want to continue?</value>
   </data>
   <data name="L_ICD1" xml:space="preserve">
-    <value>Main Dg1</value>
+    <value>Differential Dx</value>
   </data>
   <data name="L_ICD2" xml:space="preserve">
-    <value>Main Dg2</value>
+    <value>Final Dx</value>
   </data>
   <data name="L_ICD3" xml:space="preserve">
     <value>Main Dg3</value>
@@ -3502,10 +3502,10 @@
     <value>Send SMS</value>
   </data>
   <data name="L_SECONDARYDG1" xml:space="preserve">
-    <value>Sec Dg1</value>
+    <value>Differential Dx</value>
   </data>
   <data name="L_SECONDARYDG2" xml:space="preserve">
-    <value>Sec Dg2</value>
+    <value>Final Dx</value>
   </data>
   <data name="L_SECONDARYDG3" xml:space="preserve">
     <value>Sec  Dg3</value>
@@ -3565,7 +3565,7 @@
     <value>Antenatal left</value>
   </data>
   <data name="T_SELECTMAINDG" xml:space="preserve">
-    <value>--Select Main Dg.--</value>
+    <value>--Select Main Dx.--</value>
   </data>
   <data name="L_FORGOTPASSWORD" xml:space="preserve">
     <value>Forgot password?</value>

@@ -132,8 +132,13 @@ Partial Public Class FindPolicy
             End If
 
 
-            If txtBalance.Text.Length > 0 Then
-                ePolicy.PolicyValue = txtBalance.Text
+            'If txtBalance.Text.Length > 0 Then
+            '    ePolicy.PolicyValue = txtBalance.Text
+            'Else
+            '    ePolicy.PolicyValue = Nothing
+            'End If
+            If ddlBalance.SelectedValue.Length > 0 Then
+                ePolicy.PolicyValue = ddlBalance.SelectedValue
             Else
                 ePolicy.PolicyValue = Nothing
             End If

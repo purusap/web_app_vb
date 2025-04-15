@@ -249,12 +249,12 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                         </td>
                                     </tr>
                         <tr>
-                            <td class="FormLabel">
-                                <asp:Label ID="lblPhotoAssigned" runat="server" Text='<%$ Resources:Resource,L_PHOTOASSIGNED %>'></asp:Label></td>
-                            <td>
-                                <asp:DropDownList ID="ddlPhotoAssigned" runat="server"></asp:DropDownList>
+                            <%--<td class="FormLabel" style="visibility:hidden"></td>--%>
+                                <asp:Label ID="lblPhotoAssigned" runat="server" Text='<%$ Resources:Resource,L_PHOTOASSIGNED %>' Visible="false"></asp:Label>
+                           <%-- <td style="visibility:hidden">                           </td>--%>
+                                <asp:DropDownList ID="ddlPhotoAssigned" runat="server" Visible="false"></asp:DropDownList>
 
-                            </td>
+                            <%--
                             <td class="FormLabel">
                                 <asp:Label
                                     ID="L_MARITAL"
@@ -264,15 +264,35 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                 <td>
                                     <asp:DropDownList ID="ddlMarital" runat="server">
                                     </asp:DropDownList>
+                                </td>--%>
+                                 <td class="FormLabel">
+                                    <asp:Label ID="L_PASSPORT1" runat="server" Text="<%$ Resources:Resource,L_PASSPORT%>">
+                                    </asp:Label>
                                 </td>
-                                <td class="FormLabel">
+                                <td class="DataEntry">
+                                    <asp:TextBox ID="txtPassport" runat="server" MaxLength="40" Width="150px"></asp:TextBox>                                          
+                                </td>
+                              
+                                  <td class="FormLabel">
+                                  <asp:Label ID="L_NIN" runat="server" Text="National Identity Number (NIN - Enter Only Digits)">
+                                  </asp:Label>
+                              </td>
+                              <td class="DataEntry">
+                                  <asp:TextBox ID="txtNIN" runat="server" MaxLength="10" Width="150px"></asp:TextBox>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2"
+                                ControlToValidate="txtNIN" runat="server"
+                                ErrorMessage="Invalid NIN"
+                                ValidationExpression="^\d{10}$">
+                            </asp:RegularExpressionValidator>
+                              </td>                           
+                             <td class="FormLabel">
                               <asp:Label ID="lblConfirmationType" runat="server" Text="<%$ Resources:Resource,L_CONFIRMATIONTYPE %>"></asp:Label>
                           </td>
                           <td class="DataEntry">
                               <asp:DropDownList ID="ddlConfirmationType" runat="server" Width="150px">
                               </asp:DropDownList>
                           </td>
-                        </tr>
+                        </tr>                                  
                     </table>
                     </td>
                 <td>
@@ -343,9 +363,12 @@ In case of dispute arising out or in relation to the use of the program, it is s
                     <asp:BoundField DataField="LastName" HeaderText='<%$ Resources:Resource,L_LASTNAME %>' SortExpression="LastName">
                         <HeaderStyle Width="130px"></HeaderStyle>
                     </asp:BoundField>                    
-                    <asp:BoundField DataField="Marital" HeaderText='<%$ Resources:Resource,L_MARITAL %>'>
+                   <%-- <asp:BoundField DataField="Marital" HeaderText='<%$ Resources:Resource,L_MARITAL %>'>
                         <HeaderStyle Width="50px"></HeaderStyle>
-                    </asp:BoundField>
+                    </asp:BoundField>--%>
+                     <asp:BoundField DataField="NIN" HeaderText='NIN'>
+                         <HeaderStyle Width="50px"></HeaderStyle>
+                     </asp:BoundField>
                     <asp:BoundField DataField="Gender" HeaderText='<%$ Resources:Resource,L_GENDER %>'>
                         <HeaderStyle Width="50px"></HeaderStyle>
                     </asp:BoundField>

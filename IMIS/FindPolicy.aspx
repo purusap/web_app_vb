@@ -285,7 +285,22 @@ In case of dispute arising out or in relation to the use of the program, it is s
                          <asp:Label ID="lblBalance" runat="server" text="<%$ Resources:Resource,L_BALANCE %>"></asp:Label>
                  </td>
                  <td class="DataEntry">
-                     <asp:TextBox ID="txtBalance" runat="server"></asp:TextBox>
+                    <asp:DropDownList ID="ddlBalance" runat="server">
+                        <asp:ListItem Text="-- Select --" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="3500" Value="3500"></asp:ListItem>
+                        <asp:ListItem Text="4200" Value="4200"></asp:ListItem>
+                        <asp:ListItem Text="4900" Value="4900"></asp:ListItem>
+                        <asp:ListItem Text="5600" Value="5600"></asp:ListItem>
+                        <asp:ListItem Text="6300" Value="6300"></asp:ListItem>
+                        <asp:ListItem Text="7000" Value="7000"></asp:ListItem>
+                        <asp:ListItem Text="7700" Value="7700"></asp:ListItem>
+                        <asp:ListItem Text="8400" Value="8400"></asp:ListItem>
+                        <asp:ListItem Text="9100" Value="9100"></asp:ListItem>
+                        <asp:ListItem Text="9800" Value="9800"></asp:ListItem>
+                        <asp:ListItem Text="10500" Value="10500"></asp:ListItem>
+                        <asp:ListItem Text=">10500" Value="2"></asp:ListItem>
+                    </asp:DropDownList>
+                    <%-- <asp:TextBox ID="txtBalance" runat="server"></asp:TextBox>--%>
                  </td>      
                 </tr>
                 <tr>

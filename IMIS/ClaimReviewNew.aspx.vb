@@ -47,7 +47,7 @@ Partial Public Class ClaimReviewNew
 
             claim.LoadClaim(eClaim, eExtra)
             If Not eClaim.tblHF Is Nothing Then
-                lblHFCODEData.Text = If(eClaim.tblHF.HFCode Is Nothing, "", eClaim.tblHF.HFCode & " - " & eClaim.tblHF.HFName)
+                lblHFCODEData.Text = "**Redacted**" 'If(eClaim.tblHF.HFCode Is Nothing, "", eClaim.tblHF.HFCode & " - " & eClaim.tblHF.HFName)
             End If
 
             If Not eClaim.tblICDCodes Is Nothing Then
@@ -62,11 +62,11 @@ Partial Public Class ClaimReviewNew
 
             'Addition for Nepal >> Start
             If eExtra.Keys.Contains("ICDCode1") AndAlso eExtra("ICDCode1") IsNot Nothing Then
-                lblICDData1.Text = eExtra("ICDCode1")
+                lblICDData1.Text = eExtra("ICDCode1") & " - " & eExtra("ICDName1")
             End If
-            'If eExtra.Keys.Contains("ICDCode2") AndAlso eExtra("ICDCode2") IsNot Nothing Then
-            '    lblICDData2.Text = eExtra("ICDCode2")
-            'End If
+            If eExtra.Keys.Contains("ICDCode2") AndAlso eExtra("ICDCode2") IsNot Nothing Then
+                lblICDData2.Text = eExtra("ICDCode2") & " - " & eExtra("ICDName2")
+            End If
             'If eExtra.Keys.Contains("ICDCode3") AndAlso eExtra("ICDCode3") IsNot Nothing Then
             '    lblICDData3.Text = eExtra("ICDCode3")
             'End If
@@ -139,6 +139,14 @@ Partial Public Class ClaimReviewNew
                 B_SAVE.Visible = False
                 B_REVIEWED.Visible = False
             End If
+
+            If eClaim.AuditUserIDReview IsNot Nothing Then
+                If imisgen.getUserId(Session("User")) <> eClaim.AuditUserIDReview Then
+                    B_SAVE.Visible = False
+                    B_REVIEWED.Visible = False
+                End If
+            End If
+
 
 
 

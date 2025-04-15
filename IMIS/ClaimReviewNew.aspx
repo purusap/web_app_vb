@@ -196,6 +196,10 @@ In case of dispute arising out or in relation to the use of the program, it is s
                     CalculateApprovedValue();
                 }
             });
+            $("#ddlRejectionReason").change(function () {
+                $("#Body_txtADJUSTMENTData").prop("readonly", true);
+                $("#Body_txtADJUSTMENTData").val($(this).find("option:selected").text());
+            });
         });
         $(window).load(function () {
             fetchCopayDetails();
@@ -310,7 +314,9 @@ In case of dispute arising out or in relation to the use of the program, it is s
                   <td><asp:Label ID="lblDateProcessed" runat="server" Text="" CssClass="DataEntry"></asp:Label></td>             
                   <td><asp:Label ID="lblICD1" runat="server" Text="<%$ Resources:Resource,L_SECONDARYDG1 %>" CssClass="FormLabel" ></asp:Label></td>
                   <td><asp:Label ID="lblICDData1" runat="server" CssClass="DataEntry"></asp:Label><asp:HiddenField ID="hfOldClaimID" runat="server" /></td>
-                  <td colspan="2"><span class="FormLabel">Last Visit:</span> <asp:Label ID="lblLastVisit" runat="server" CssClass="DataEntry"></asp:Label> <asp:Label ID="lblLastDays" runat="server" CssClass="DataEntry"></asp:Label> <a id="lnkOldClaim" target="_blank">View Old Claim</a></td>
+                  <td><asp:Label ID="lblICD2" runat="server" Text="<%$ Resources:Resource,L_SECONDARYDG2 %>" CssClass="FormLabel" ></asp:Label></td>
+                    <td><asp:Label ID="lblICDData2" runat="server" CssClass="DataEntry"></asp:Label></td>
+                  
               </tr>
              <tr>
                   <td><asp:Label ID="lblVisitType" runat="server" Text="<%$ Resources:Resource,L_VISITTYPE %>" CssClass="FormLabel"></asp:Label></td>
@@ -324,6 +330,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
               <tr>
                    <td><asp:Label ID="lblGuaranteeNo" runat="server" Text="<%$ Resources:Resource,L_GUARANTEE %>" CssClass="FormLabel"></asp:Label></td>
                   <td><asp:Label ID="lblGuaranteeData" runat="server"  CssClass="DataEntry"></asp:Label></td>
+                  <td colspan="2"><span class="FormLabel">Last Visit:</span> <asp:Label ID="lblLastVisit" runat="server" CssClass="DataEntry"></asp:Label> <asp:Label ID="lblLastDays" runat="server" CssClass="DataEntry"></asp:Label> <a id="lnkOldClaim" target="_blank">View Old Claim</a></td>
                    <td colspan="2"><asp:Label ID="lblAttachment" runat="server"> <a id="lnkViewDocument" target="_blank" style="color:red;font-size:large">View Document</a></asp:Label></td>
               </tr>
          
@@ -536,7 +543,22 @@ In case of dispute arising out or in relation to the use of the program, it is s
                    <asp:Label ID="lblADJUSTMENT" runat="server"  Text='<%$ Resources:Resource,L_ADJUSTMENT %>' ></asp:Label>
                </td>
                <td class ="DataEntry">
-                   <asp:TextBox ID="txtADJUSTMENTData" runat="server" Width="450px" Text=""></asp:TextBox>
+                   <select id="ddlRejectionReason" style="width:300px">
+                       <option value="0">--- Select ---</option>                       
+                        <option value="MISMATCHED DOCUMENTS">MISMATCHED DOCUMENTS</option>
+                        <option value="INCOMPLETE INFORMATION">INCOMPLETE INFORMATION</option>
+                        <option value="VERTICAL PROGRAMMES">VERTICAL PROGRAMMES</option>
+                        <option value="GENERAL HEALTH CHECKUP">ENERAL HEALTH CHECKUP</option>
+                        <option value="NO REFFERALS">NO REFFERALS</option>
+                        <option value="DIFFERENT PACKAGES CLAIMS">DIFFERENT PACKAGES CLAIMS</option>
+                        <option value="OVER CLAIM">OVER CLAIM</option>
+                        <option value="DUPLICATE CLAIMS">DUPLICATE CLAIMS</option>
+                        <option value="FRADULENT CLAIMS">FRADULENT CLAIMS</option>
+                        <option value="IRRATIONAL PRESCRIPTION">IRRATIONAL PRESCRIPTION</option>
+                        <option value="TIMELINES">TIMELINES</option>
+                        <option value="BILLING ERRORS">BILLING ERRORS</option>
+                   </select>
+                   <asp:TextBox ID="txtADJUSTMENTData" runat="server" Width="300px" Text=""></asp:TextBox>
                </td>
          
                

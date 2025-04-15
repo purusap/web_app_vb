@@ -348,7 +348,7 @@ Partial Public Class PolicyNewQR
                     imisgen.Alert("Enroll Date should be in running cycle!" & Calculatedays, pnlButtons, alertPopupTitle:="IMIS")
                     Return
                 End If
-                'Dim Calculatedays As Integer = (Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact("13/04/2024", "dd/MM/yyyy", Nothing)).Days
+                'Dim Calculatedays As Integer = (Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact("17/10/2024", "dd/MM/yyyy", Nothing)).Days
                 'If Calculatedays <= 0 Then
                 '    imisgen.Alert("Enroll Date should be in running cycle! -" & Calculatedays, pnlButtons, alertPopupTitle:="IMIS")
                 '    Return

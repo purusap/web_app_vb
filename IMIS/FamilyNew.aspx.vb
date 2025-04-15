@@ -477,6 +477,31 @@ Public Class FamilyNew
                 msg = imisgen.getMessage("M_CHFNUMBERMEMBEREXISTS")
             End If
 
+            If Trim(txtNIN.Text).Length > 0 Then
+                If Not IsNumeric(txtNIN.Text) Then
+                    msg = "NIN should be 10 digit Number!"
+                End If
+                If Trim(txtNIN.Text).Length <> 10 Then
+                    msg = "NIN should be 10 Digit!"
+                End If
+                If Family.NINExists(txtNIN.Text) Then
+                    msg = "NIN already Exists!"
+                End If
+            End If
+
+            If Family.passportExists(txtPassport.Text) Then
+                msg = "Birth Certificate/Citizenship Number already Exists!"
+            End If
+
+            If Trim(txtPhone.Text).Length > 0 Then
+                If Not IsNumeric(txtPhone.Text) Then
+                    msg = "Mobile number should be 10 digit number!"
+                End If
+                If Trim(txtPhone.Text).Length <> 10 Then
+                    msg = "Mobile number should be 10 number!"
+                End If
+            End If
+
             If msg.Length > 0 Then
                 Dim ltl As New Literal()
                 ltl.Text = "<script language='javascript'>$(document).ready(function(){popup.alert('" & msg & "');});</script>"
@@ -512,6 +537,7 @@ Public Class FamilyNew
             'If ddlMarital.SelectedValue <> "" Then eInsuree.Marital = ddlMarital.SelectedValue
             'If ddlCardIssued.SelectedValue.Length > 0 Then eInsuree.CardIssued = ddlCardIssued.SelectedValue
             eInsuree.passport = txtPassport.Text
+            eInsuree.NIN = txtNIN.Text
             eInsuree.Phone = txtPhone.Text
             eInsuree.Email = txtEmail.Text
             If ddlProfession.SelectedValue > 0 Then

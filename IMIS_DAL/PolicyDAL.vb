@@ -314,6 +314,15 @@ Public Class PolicyDAL
         If Not ePolicy.PolicyStatus = 0 Then
             sSQL = sSQL & " and PL.PolicyStatus = @PolicyStatus"
         End If
+        If Not ePolicy.PolicyValue Is Nothing Then
+            If ePolicy.PolicyValue = 0 Then
+                sSQL += " AND PL.PolicyValue > @PolicyValue"
+            ElseIf ePolicy.PolicyValue = 2 Then
+                sSQL += " AND PL.PolicyValue > 10500"
+            Else
+                sSQL += " AND PL.PolicyValue = @PolicyValue"
+            End If
+        End If
         If All = False Then
             sSQL = sSQL & " and PL.ValidityTo is null"
         End If
@@ -329,18 +338,17 @@ Public Class PolicyDAL
         sSQL += " GROUP BY PL.isOffline, PL.PolicyId, F.FamilyId, PL.EnrollDate, I.LastName, I.OtherNames, PL.EffectiveDate,"
         sSQL += " PL.StartDate, PL.ExpiryDate, PL.PolicyStage, PL.PolicyValue, Prod.ProductCode, O.OtherNames, O.LastName,"
         sSQL += " PL.ValidityFrom, PL.ValidityTo,PS.Name, PL.PolicyUUID, F.FamilyUUID"
-        If Not ePolicy.PolicyValue Is Nothing Then
-            If ePolicy.PolicyValue = 0 Then
-                'sSQL += " and (PolicyValue - isnull(PaidAmount,0)) > @PolicyValue"
-                sSQL += " HAVING  PL.PolicyValue - ISNULL(SUM(PR.Amount), 0) > @PolicyValue"
-            Else
-                ' sSQL += " and (PolicyValue - isnull(PaidAmount,0)) >= @PolicyValue"
-                sSQL += " HAVING  PL.PolicyValue - ISNULL(SUM(PR.Amount), 0) >= @PolicyValue"
-            End If
+        'If Not ePolicy.PolicyValue Is Nothing Then
+        '    If ePolicy.PolicyValue = 0 Then
+        '        'sSQL += " and (PolicyValue - isnull(PaidAmount,0)) > @PolicyValue"
+        '        sSQL += " HAVING  PL.PolicyValue - ISNULL(SUM(PR.Amount), 0) > @PolicyValue"
+        '    Else
+        '        ' sSQL += " and (PolicyValue - isnull(PaidAmount,0)) >= @PolicyValue"
+        '        sSQL += " HAVING  PL.PolicyValue - ISNULL(SUM(PR.Amount), 0) >= @PolicyValue"
+        '    End If
+        'End If
 
-        End If
 
-       
         sSQL += " order by EnrollDate desc, F.familyid ,PL.ValidityFrom desc ,PL.ValidityTo desc"
         data.setSQLCommand(sSQL, CommandType.Text)
         data.params("@UserId", SqlDbType.Int, ePolicy.AuditUserID)

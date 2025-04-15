@@ -119,8 +119,8 @@ Public Class InsureePolicyDAL
         data.ExecuteCommand()
 
     End Sub
-    Public Sub UpdateReceiptByCHFID(ByVal ReceiptNum As String, ByVal CHFID As String, ByVal Amount As Integer, ByVal EnrolledDate As Date)
-        sSQL = "UPDATE tblReceipt SET CHFID=@CHFID,Amount=@Amount,EnrolledDate=@EnrolledDate, IsUsed = 2 WHERE ReceiptNum = @ReceiptNum"
+    Public Sub UpdateReceiptByCHFID(ByVal ReceiptNum As String, ByVal CHFID As String, ByVal Amount As Integer, ByVal EnrolledDate As Date, ByVal EaCode As Integer)
+        sSQL = "UPDATE tblReceipt SET CHFID=@CHFID,Amount=@Amount,EnrolledDate=@EnrolledDate,EaCode=(select Code from tblOfficer where OfficerID=@EaCode and ValidityTo is null), IsUsed = 2 WHERE ReceiptNum = @ReceiptNum"
 
         data.setSQLCommand(sSQL, CommandType.Text)
 
@@ -128,6 +128,7 @@ Public Class InsureePolicyDAL
         data.params("@CHFID", SqlDbType.NVarChar, 12, CHFID)
         data.params("@Amount", SqlDbType.Decimal, Amount)
         data.params("@EnrolledDate", SqlDbType.SmallDateTime, EnrolledDate)
+        data.params("@EaCode", SqlDbType.Int, EaCode)
 
         data.ExecuteCommand()
 

@@ -466,7 +466,7 @@ Partial Public Class PolicyNew
                 End If
                 'Dim maxEnrollDays As Integer = System.Configuration.ConfigurationManager.AppSettings("MaxEnrollDays")
                 'Dim calculateNewdays As Integer = (Date.ParseExact(txtStartDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing)).Days
-                'Dim Calculatedays As Integer = (Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact("13/04/2024", "dd/MM/yyyy", Nothing)).Days
+                'Dim Calculatedays As Integer = (Date.ParseExact(txtEnrollmentDate.Text, "dd/MM/yyyy", Nothing) - Date.ParseExact("17/10/2024", "dd/MM/yyyy", Nothing)).Days
                 'If Calculatedays <= 0 Then
                 '    imisgen.Alert("Enroll Date should be in running cycle! -" & Calculatedays, pnlButtons, alertPopupTitle:="IMIS")
                 '    Return
@@ -653,7 +653,7 @@ Partial Public Class PolicyNew
 
                 Dim chk As Integer = Premium.SavePremium(ePremium, IMIS_Gen.offlineHF)
                 If chkQrRasid.Checked = True Then
-                    Premium.UpdateReceiptByCHFID(ePremium.Receipt, txtHeadCHFID.Text, ePremium.Amount, ePremium.PayDate)
+                    Premium.UpdateReceiptByCHFID(ePremium.Receipt, txtHeadCHFID.Text, ePremium.Amount, ePremium.PayDate, ddlEnrolementOfficer.SelectedValue)
                 End If
                 If chk = 0 Then
                     Session("Msg") = imisgen.getMessage("M_POLICYENROLEDATE") & " " & ePolicy.EnrollDate & " " & imisgen.getMessage("M_Inserted")
