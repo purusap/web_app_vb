@@ -489,7 +489,7 @@ Public Class FamilyNew
                 End If
             End If
 
-            If Family.passportExists(txtPassport.Text) Then
+            If Family.passportExists(txtPassport.Text, txtOtherNames.Text, birthdate) Then
                 msg = "Birth Certificate/Citizenship Number already Exists!"
             End If
 

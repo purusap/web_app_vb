@@ -76,9 +76,9 @@ Public Class FamilyBI
         Dim Family As New IMIS_BL.FamilyBL
         Return Family.NINExists(NIN)
     End Function
-    Public Function passportExists(ByVal passport As String) As Boolean
+    Public Function passportExists(ByVal passport As String, ByVal otherNames As String, ByVal DOB As Date) As Boolean
         Dim Family As New IMIS_BL.FamilyBL
-        Return Family.passportExists(passport)
+        Return Family.passportExists(passport, otherNames, DOB)
     End Function
 
     Public Function getOfficerID(ByVal ImageName As String) As Integer

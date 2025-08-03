@@ -76,9 +76,9 @@ Public Class FamilyBL
             Return False
         End If
     End Function
-    Public Function passportExists(ByVal passport As String) As Boolean
+    Public Function passportExists(ByVal passport As String, ByVal otherNames As String, ByVal DOB As Date) As Boolean
         Dim Family As New IMIS_DAL.FamilyDAL
-        Dim dt As DataTable = Family.passportExists(passport)
+        Dim dt As DataTable = Family.passportExists(passport, otherNames, DOB)
         If dt.Rows.Count > 0 Then
             Return True
         Else

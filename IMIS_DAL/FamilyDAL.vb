@@ -410,13 +410,15 @@ Public Class FamilyDAL
         Return data.Filldata
     End Function
 
-    Public Function passportExists(ByVal passport As String) As DataTable
+    Public Function passportExists(ByVal passport As String, ByVal otherNames As String, ByVal DOB As Date) As DataTable
         Dim data As New ExactSQL
         Dim sSQL As String = ""
         Dim dt As New DataTable
-        sSQL = "Select * FROM tblInsuree WHERE passport = @passport AND ValidityTo IS NULL"
+        sSQL = "Select * FROM tblInsuree WHERE passport = @passport and OtherNames=@otherNames and DOB=@DOB AND ValidityTo IS NULL"
         data.setSQLCommand(sSQL, CommandType.Text)
         data.params("@passport", SqlDbType.VarChar, 50, passport)
+        data.params("@otherNames", SqlDbType.VarChar, 50, otherNames)
+        data.params("@DOB", SqlDbType.SmallDateTime, DOB)
         Return data.Filldata
     End Function
     Public Function CheckCanBeDeleted(ByVal FamilyID As Integer) As DataTable

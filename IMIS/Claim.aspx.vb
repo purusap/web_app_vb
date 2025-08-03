@@ -162,6 +162,55 @@ Partial Public Class Claim
                 hfInsureeId.Value = eClaim.tblInsuree.InsureeID
                 txtCHFIDData.Text = eClaim.tblInsuree.CHFID
                 txtNAMEData.Text = eClaim.tblInsuree.OtherNames & " " & eClaim.tblInsuree.LastName
+                'Code to add remaining balance and validity
+                Try
+                    Dim dts As New DataTable
+                    Dim remainingBalance As String = ""
+                    Dim ExpiryDate As Date
+                    Dim Insuree As New IMIS_BI.InsureeBI
+                    dts = Insuree.GetInsureeByCHFIDGrid(eClaim.tblInsuree.CHFID)
+                    If (dt.Rows.Count > 0) Then
+                        Try
+                            Dim drr As DataRow = dts.[Select]("Status = 'क्रियाशिल'").Last
+
+                            ExpiryDate = Convert.ToDateTime(drr("ExpiryDate").ToString())
+                            If (ExpiryDate < Today.Date) Then
+                                txtExpiry.Text = ExpiryDate.ToString("yyyy-MM-dd") + " (" + Convert.ToString(ExpiryDate.Subtract(Today.Date).Days) + " Days)"
+                                txtExpiry.ForeColor = System.Drawing.Color.Red
+
+                            Else
+                                txtExpiry.Text = ExpiryDate.ToString("yyyy-MM-dd") + " (" + Convert.ToString(ExpiryDate.Subtract(Today.Date).Days) + " Days)"
+                                txtExpiry.ForeColor = System.Drawing.Color.Green
+                            End If
+                            remainingBalance = drr("Ceiling1").ToString()
+                            txtRemainingBalance.Text = remainingBalance
+                            If (Convert.ToDecimal(remainingBalance) >= 10000) Then
+                                txtRemainingBalance.ForeColor = System.Drawing.Color.Green
+                            ElseIf (Convert.ToDecimal(remainingBalance) >= 5000 And Convert.ToDecimal(remainingBalance) <= 10000) Then
+                                txtRemainingBalance.ForeColor = System.Drawing.Color.Orange
+                            Else
+                                txtRemainingBalance.ForeColor = System.Drawing.Color.Red
+                            End If
+                            'txtVisitDays.Text = claim.getLastVisitDays(sender.Text, CType(hfBI.GetHfIdByUUID(Guid.Parse(Request.QueryString("h"))), Integer)) + " Days Ago"
+                            txtVisitDays.Text = claim.getLastVisitDays(sender.Text, CType(Request.QueryString("h"), Integer)) + " Days Ago"
+
+                            If ((ExpiryDate < Today.Date) Or (Convert.ToDecimal(remainingBalance) <= 0)) Then
+                                B_SAVE.Visible = False
+                            Else
+                                B_SAVE.Visible = True
+                            End If
+                        Catch ex As Exception
+
+                        End Try
+
+                    End If
+                Catch ex As Exception
+                    B_SAVE.Visible = False
+                    txtRemainingBalance.Text = "0"
+                    txtRemainingBalance.ForeColor = System.Drawing.Color.Red
+                End Try
+                'Code to add remaining balance and validity
+
             End If
 
             If Not eClaim.tblICDCodes Is Nothing Then

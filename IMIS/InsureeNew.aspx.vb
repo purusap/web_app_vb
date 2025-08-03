@@ -435,18 +435,19 @@ Partial Public Class InsureeNew
                     Return
                 End If
             End If
+
+            eInsuree.CHFID = txtCHFID.Text.Trim
+            eInsuree.LastName = txtLastName.Text
+            eInsuree.OtherNames = txtOtherNames.Text
+            eInsuree.DOB = Date.ParseExact(txtBirthDate.Text, "dd/MM/yyyy", Nothing)
             If eInsuree.InsureeID = 0 Then
                 If Trim(txtPassport.Text).Length > 0 Then
-                    If Insuree.passportExists(txtPassport.Text) Then
+                    If Insuree.passportExists(txtPassport.Text, txtOtherNames.Text, eInsuree.DOB) Then
                         imisgen.Alert(txtPassport.Text & " Birth Certificate/Citizenship Number already Exists!", pnlButtons, alertPopupTitle:="IMIS")
                         Return
                     End If
                 End If
             End If
-            eInsuree.CHFID = txtCHFID.Text.Trim
-            eInsuree.LastName = txtLastName.Text
-            eInsuree.OtherNames = txtOtherNames.Text
-            eInsuree.DOB = Date.ParseExact(txtBirthDate.Text, "dd/MM/yyyy", Nothing)
             Dim days As Integer = (Date.ParseExact(Now.Date(), "dd/MM/yyyy", Nothing) - Date.ParseExact(txtBirthDate.Text, "dd/MM/yyyy", Nothing)).Days
             If days < 1 Then
                 imisgen.Alert("Date Of Birth Should be less than today!", pnlButtons, alertPopupTitle:="IMIS")

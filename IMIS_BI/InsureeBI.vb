@@ -83,9 +83,9 @@ Public Class InsureeBI
         Dim family As New IMIS_BL.FamilyBL
         Return family.NINExists(NIN)
     End Function
-    Public Function passportExists(ByVal passport As String) As Boolean
+    Public Function passportExists(ByVal passport As String, ByVal otherNames As String, ByVal DOB As Date) As Boolean
         Dim family As New IMIS_BL.FamilyBL
-        Return family.passportExists(passport)
+        Return family.passportExists(passport, otherNames, DOB)
     End Function
     Public Function GetRelations() As DataTable
         Dim Ins As New IMIS_BL.InsureeBL
