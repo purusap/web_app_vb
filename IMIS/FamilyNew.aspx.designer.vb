@@ -617,6 +617,33 @@ Partial Public Class FamilyNew
     Protected WithEvents trIdentificationType As Global.System.Web.UI.HtmlControls.HtmlTableRow
 
     '''<summary>
+    '''L_NIN control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents L_NIN As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtNIN control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtNIN As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''RegularExpressionValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator2 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
     '''L_IDTYPE control.
     '''</summary>
     '''<remarks>

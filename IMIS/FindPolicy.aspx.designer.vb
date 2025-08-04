@@ -437,13 +437,13 @@ Partial Public Class FindPolicy
     Protected WithEvents lblBalance As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtBalance control.
+    '''ddlBalance control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtBalance As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents ddlBalance As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''lblPolicyStatus control.

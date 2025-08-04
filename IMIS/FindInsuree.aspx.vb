@@ -55,13 +55,13 @@ Partial Public Class FindInsuree
     End Sub
     Private Sub FormatForm()
         Dim Adjustibility As String = ""
-        Adjustibility = General.getControlSetting("MaritalStatus")
-        L_MARITAL.Visible = Not (Adjustibility = "N")
-        ddlMarital.Visible = Not (Adjustibility = "N")
+        'Adjustibility = General.getControlSetting("MaritalStatus")
+        ' L_MARITAL.Visible = Not (Adjustibility = "N")
+        'ddlMarital.Visible = Not (Adjustibility = "N")
 
-        For i As Integer = 0 To gvInsuree.Columns.Count
-            If gvInsuree.Columns(i).HeaderText.Equals(imisgen.getMessage("L_MARITAL")) Then gvInsuree.Columns(i).Visible = Not (Adjustibility = "N") : Exit For
-        Next
+        'For i As Integer = 0 To gvInsuree.Columns.Count
+        '    If gvInsuree.Columns(i).HeaderText.Equals(imisgen.getMessage("L_MARITAL")) Then gvInsuree.Columns(i).Visible = Not (Adjustibility = "N") : Exit For
+        'Next
     End Sub
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If IsPostBack Then Return
@@ -82,10 +82,10 @@ Partial Public Class FindInsuree
             ddlGender.DataValueField = "Code"
             ddlGender.DataTextField = If(Request.Cookies("CultureInfo").Value = "en", "Gender", "AltLanguage")
             ddlGender.DataBind()
-            ddlMarital.DataSource = Insuree.GetMaritalStatus
-            ddlMarital.DataValueField = "Code"
-            ddlMarital.DataTextField = "Status"
-            ddlMarital.DataBind()
+            'ddlMarital.DataSource = Insuree.GetMaritalStatus
+            'ddlMarital.DataValueField = "Code"
+            'ddlMarital.DataTextField = "Status"
+            'ddlMarital.DataBind()
             Dim today As DateTime = DateTime.Today
             Dim dueDate As DateTime = today.AddDays(-120)
             txtBirthDateFrom.Text = dueDate
@@ -172,7 +172,7 @@ Partial Public Class FindInsuree
             End If
             eInsuree.Phone = txtPhone.Text
             eInsuree.Gender = ddlGender.SelectedValue
-            eInsuree.Marital = ddlMarital.SelectedValue
+            'eInsuree.Marital = ddlMarital.SelectedValue
             eInsuree.isOffline = chkOffline.Checked
 
             eFamily.RegionId = Val(ddlRegion.SelectedValue)
@@ -186,6 +186,8 @@ Partial Public Class FindInsuree
             If Not Val(ddlConfirmationType.SelectedValue) = 0 Then
                 eFamily.ConfirmationType = ddlConfirmationType.SelectedValue
             End If
+            eInsuree.passport = txtPassport.Text
+            eInsuree.NIN = txtNIN.Text
 
             eInsuree.tblFamilies1 = eFamily
 

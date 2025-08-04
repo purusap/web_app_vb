@@ -408,6 +408,18 @@ In case of dispute arising out or in relation to the use of the program, it is s
                             <td class="DataEntry">&nbsp;</td>
                         </tr>
                         <tr id="trIdentificationType" runat="server">
+                              <td class="FormLabel">
+                                  <asp:Label ID="L_NIN" runat="server" Text="National Identity Number (NIN - Enter Only Digits)">
+                                  </asp:Label>
+                              </td>
+                              <td class="DataEntry">
+                                  <asp:TextBox ID="txtNIN" runat="server" MaxLength="10" Width="150px"></asp:TextBox>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2"
+                                ControlToValidate="txtNIN" runat="server"
+                                ErrorMessage="Invalid NIN" SetFocusOnError="true" Display="Dynamic" ForeColor="Red"
+                                ValidationExpression="^\d{10}$">
+                            </asp:RegularExpressionValidator>
+                              </td>                           
                             <td class="FormLabel">
                                 <asp:Label ID="L_IDTYPE" runat="server" Text="<%$ Resources:Resource, L_IDTYPE %>"></asp:Label>
                             </td>
@@ -425,9 +437,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                                 <asp:TextBox ID="txtPassport" runat="server" MaxLength="40" Width="150px"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="rfIdNo1" runat="server" ControlToValidate="txtPassport" InitialValue="" SetFocusOnError="True" ValidationGroup="check" ForeColor="Red" Display="Dynamic"
                                         Text='*'></asp:RequiredFieldValidator>
-                            </td>
-                            <td></td>
-                            <td class="DataEntry">&nbsp;</td>
+                            </td>                            
                         </tr>
                         <tr id="trFSPRegion" runat="server">
                             <td class="FormLabel">

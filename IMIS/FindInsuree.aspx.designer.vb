@@ -311,22 +311,49 @@ Partial Public Class FindInsuree
     Protected WithEvents ddlPhotoAssigned As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''L_MARITAL control.
+    '''L_PASSPORT1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents L_MARITAL As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents L_PASSPORT1 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''ddlMarital control.
+    '''txtPassport control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlMarital As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents txtPassport As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''L_NIN control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents L_NIN As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtNIN control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtNIN As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''RegularExpressionValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator2 As Global.System.Web.UI.WebControls.RegularExpressionValidator
 
     '''<summary>
     '''lblConfirmationType control.

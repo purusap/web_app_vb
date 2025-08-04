@@ -162,6 +162,55 @@ Partial Public Class Claim
                 hfInsureeId.Value = eClaim.tblInsuree.InsureeID
                 txtCHFIDData.Text = eClaim.tblInsuree.CHFID
                 txtNAMEData.Text = eClaim.tblInsuree.OtherNames & " " & eClaim.tblInsuree.LastName
+                'Code to add remaining balance and validity
+                Try
+                    Dim dts As New DataTable
+                    Dim remainingBalance As String = ""
+                    Dim ExpiryDate As Date
+                    Dim Insuree As New IMIS_BI.InsureeBI
+                    dts = Insuree.GetInsureeByCHFIDGrid(eClaim.tblInsuree.CHFID)
+                    If (dt.Rows.Count > 0) Then
+                        Try
+                            Dim drr As DataRow = dts.[Select]("Status = 'क्रियाशिल'").Last
+
+                            ExpiryDate = Convert.ToDateTime(drr("ExpiryDate").ToString())
+                            If (ExpiryDate < Today.Date) Then
+                                txtExpiry.Text = ExpiryDate.ToString("yyyy-MM-dd") + " (" + Convert.ToString(ExpiryDate.Subtract(Today.Date).Days) + " Days)"
+                                txtExpiry.ForeColor = System.Drawing.Color.Red
+
+                            Else
+                                txtExpiry.Text = ExpiryDate.ToString("yyyy-MM-dd") + " (" + Convert.ToString(ExpiryDate.Subtract(Today.Date).Days) + " Days)"
+                                txtExpiry.ForeColor = System.Drawing.Color.Green
+                            End If
+                            remainingBalance = drr("Ceiling1").ToString()
+                            txtRemainingBalance.Text = remainingBalance
+                            If (Convert.ToDecimal(remainingBalance) >= 10000) Then
+                                txtRemainingBalance.ForeColor = System.Drawing.Color.Green
+                            ElseIf (Convert.ToDecimal(remainingBalance) >= 5000 And Convert.ToDecimal(remainingBalance) <= 10000) Then
+                                txtRemainingBalance.ForeColor = System.Drawing.Color.Orange
+                            Else
+                                txtRemainingBalance.ForeColor = System.Drawing.Color.Red
+                            End If
+                            'txtVisitDays.Text = claim.getLastVisitDays(sender.Text, CType(hfBI.GetHfIdByUUID(Guid.Parse(Request.QueryString("h"))), Integer)) + " Days Ago"
+                            txtVisitDays.Text = claim.getLastVisitDays(sender.Text, CType(Request.QueryString("h"), Integer)) + " Days Ago"
+
+                            If ((ExpiryDate < Today.Date) Or (Convert.ToDecimal(remainingBalance) <= 0)) Then
+                                B_SAVE.Visible = False
+                            Else
+                                B_SAVE.Visible = True
+                            End If
+                        Catch ex As Exception
+
+                        End Try
+
+                    End If
+                Catch ex As Exception
+                    B_SAVE.Visible = False
+                    txtRemainingBalance.Text = "0"
+                    txtRemainingBalance.ForeColor = System.Drawing.Color.Red
+                End Try
+                'Code to add remaining balance and validity
+
             End If
 
             If Not eClaim.tblICDCodes Is Nothing Then
@@ -178,12 +227,13 @@ Partial Public Class Claim
                 txtICDCode1.Text = eClaim.ICDID1
                 hfICDID1.Value = eClaim.ICDID1
             End If
+
+            If Not eClaim.ICDID2 Is Nothing Then
+                ddlICDData2.SelectedValue = eClaim.ICDID2
+                txtICDCode2.Text = ddlICDData2.SelectedItem.Text
+                hfICDID2.Value = eClaim.ICDID2
+            End If
             'Remove icd 2,3,4
-            'If Not eClaim.ICDID2 Is Nothing Then
-            '    ddlICDData2.SelectedValue = eClaim.ICDID2
-            '    txtICDCode2.Text = ddlICDData2.SelectedItem.Text
-            '    hfICDID2.Value = eClaim.ICDID2
-            'End If
             'If Not eClaim.ICDID3 Is Nothing Then
             '    ddlICDData3.SelectedValue = eClaim.ICDID3
             '    txtICDCode3.Text = ddlICDData3.SelectedItem.Text
@@ -280,11 +330,11 @@ Partial Public Class Claim
         ddlICDData1.DataTextField = "ICDCODE"
         ddlICDData1.DataValueField = "ICDID"
         ddlICDData1.DataBind()
+        ddlICDData2.DataSource = dtICD
+        ddlICDData2.DataTextField = "ICDCODE"
+        ddlICDData2.DataValueField = "ICDID"
+        ddlICDData2.DataBind()
         'Remove icd 2,3,4
-        'ddlICDData2.DataSource = dtICD
-        'ddlICDData2.DataTextField = "ICDCODE"
-        'ddlICDData2.DataValueField = "ICDID"
-        'ddlICDData2.DataBind()
         'ddlICDData3.DataSource = dtICD
         'ddlICDData3.DataTextField = "ICDCODE"
         'ddlICDData3.DataValueField = "ICDID"
@@ -314,13 +364,13 @@ Partial Public Class Claim
         'Addition for Nepal >> Start
 
         Session("LoadedICD1") = ddlICDData1.SelectedValue
-        'Session("LoadedICD2") = ddlICDData2.SelectedValue
+        Session("LoadedICD2") = ddlICDData2.SelectedValue
         'Session("LoadedICD3") = ddlICDData3.SelectedValue
         'Session("LoadedICD4") = ddlICDData4.SelectedValue
 
         Session("LoadedICD1") = txtICDCode1.Text
+        Session("LoadedICD2") = txtICDCode2.Text
         'Remove icd 2,3,4
-        'Session("LoadedICD2") = txtICDCode2.Text
         'Session("LoadedICD3") = txtICDCode3.Text
         'Session("LoadedICD4") = txtICDCode4.Text
         'Remove icd 2,3,4
@@ -493,7 +543,7 @@ Partial Public Class Claim
             txtEXPLANATION.Text = ""
             txtICDCode0.Text = ""
             txtICDCode1.Text = ""
-            'txtICDCode2.Text = ""
+            txtICDCode2.Text = ""
             'txtICDCode3.Text = ""
             'txtICDCode4.Text = ""
             txtCLAIMTOTALData.Text = 0
@@ -563,8 +613,9 @@ Partial Public Class Claim
         ElseIf Not Session("LoadedExplanation") = txtEXPLANATION.Text.Trim Then
             'Addition for Nepal >> Start
         ElseIf Not Session("LoadedICD1") = txtICDCode1.Text Then
+
+        ElseIf Not Session("LoadedICD2") = txtICDCode2.Text Then
             'Remove icd 2,3,4
-            'ElseIf Not Session("LoadedICD2") = txtICDCode2.Text Then
             'ElseIf Not Session("LoadedICD3") = txtICDCode3.Text Then
             'ElseIf Not Session("LoadedICD4") = txtICDCode4.Text Then
             'Remove icd 2,3,4
@@ -669,6 +720,11 @@ Partial Public Class Claim
                 End If
             End If
 
+            If CInt(txtRemainingBalance.Text) < CInt(hfClaimTotalValue.Value) Then
+                imisgen.Alert("Insufficent Balance!", pnlButtons, alertPopupTitle:="IMIS")
+                Return "Exit"
+            End If
+
         Catch ex As Exception
             'lblMsg.Text = imisgen.getMessage("M_ERRORMESSAGE")
             'imisgen.Alert(imisgen.getMessage("M_ERRORMESSAGE"), pnlButtons, alertPopupTitle:="IMIS")
@@ -734,8 +790,8 @@ Partial Public Class Claim
 
                         'Addition for Nepal >> Start
                         If Not txtICDCode1.Text = "" Then eClaim.ICDID1 = If(hfICDID1.Value = "", 0, CInt(Int(hfICDID1.Value)))
+                        If Not txtICDCode2.Text = "" Then eClaim.ICDID2 = If(hfICDID2.Value = "", 0, CInt(Int(hfICDID2.Value)))
                         'Remove icd 2,3,4
-                        'If Not txtICDCode2.Text = "" Then eClaim.ICDID2 = If(hfICDID2.Value = "", 0, CInt(Int(hfICDID2.Value)))
                         'If Not txtICDCode3.Text = "" Then eClaim.ICDID3 = If(hfICDID3.Value = "", 0, CInt(Int(hfICDID3.Value)))
                         'If Not txtICDCode4.Text = "" Then eClaim.ICDID4 = If(hfICDID4.Value = "", 0, CInt(Int(hfICDID4.Value)))
                         'Remove icd 2,3,4

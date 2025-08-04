@@ -236,6 +236,13 @@ Public Partial Class ClaimOverview
                 Server.Transfer("Redirect.aspx?perm=0&page=" & IMIS_EN.Enums.Pages.ClaimOverview.ToString & "&retUrl=" & RefUrl)
             End If
         End If
+        If userBI.checkRights(IMIS_EN.Enums.Rights.ClaimReview, UserID) Then
+            ddlRegion.Enabled = False
+            ddlHFCode.Enabled = False
+            ddlDistrict.Enabled = False
+            ddlClaimAdmin.Enabled = False
+            txtHFName.Enabled = False
+        End If
     End Sub
     Private Sub FilterStatusCombination(ByRef dropDownlst As DropDownList)
         Dim Index = dropDownlst.SelectedIndex - 1

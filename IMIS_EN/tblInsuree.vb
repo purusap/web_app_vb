@@ -41,6 +41,7 @@ Partial Public Class tblInsuree
     Public Property CurrentAddress As String
     Public Property GeoLocation As String
     Public Property CurrentVillage As Nullable(Of Integer)
+    Public Property NIN As String
 
     Public Overridable Property tblClaim As ICollection(Of tblClaim) = New HashSet(Of tblClaim)
     Public Overridable Property tblClaimDedRem As ICollection(Of tblClaimDedRem) = New HashSet(Of tblClaimDedRem)

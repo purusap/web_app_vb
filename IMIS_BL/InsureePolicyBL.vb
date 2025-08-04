@@ -51,8 +51,8 @@ Public Class InsureePolicyBL
         Dim PI As New IMIS_DAL.InsureePolicyDAL
         PI.UpdateReceipt(ReceiptId)
     End Sub
-    Public Sub UpdateReceiptByCHFID(ByVal ReceiptNum As String, ByVal CHFID As String, ByVal Amount As Integer, ByVal EnrolledDate As Date)
+    Public Sub UpdateReceiptByCHFID(ByVal ReceiptNum As String, ByVal CHFID As String, ByVal Amount As Integer, ByVal EnrolledDate As Date, ByVal EaCode As Integer)
         Dim PI As New IMIS_DAL.InsureePolicyDAL
-        PI.UpdateReceiptByCHFID(ReceiptNum, CHFID, Amount, EnrolledDate)
+        PI.UpdateReceiptByCHFID(ReceiptNum, CHFID, Amount, EnrolledDate, EaCode)
     End Sub
 End Class

@@ -338,22 +338,22 @@ Partial Public Class ClaimReviewNew
     Protected WithEvents hfOldClaimID As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
-    '''lblLastVisit control.
+    '''lblICD2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblLastVisit As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblICD2 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblLastDays control.
+    '''lblICDData2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblLastDays As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblICDData2 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''lblVisitType control.
@@ -426,6 +426,24 @@ Partial Public Class ClaimReviewNew
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblGuaranteeData As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblLastVisit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblLastVisit As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblLastDays control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblLastDays As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''lblAttachment control.

@@ -26,10 +26,10 @@
                 minDate = -38325;
                 maxDate = 0;
             }
-            else if (($(this).attr("class") === 'dateCheck insureePageFrom') || ($(this).attr("class") === 'dateCheck insureePageTo')) {
-                minDate = -2555;
-                maxDate = 0;
-            }
+            //else if (($(this).attr("class") === 'dateCheck insureePageFrom') || ($(this).attr("class") === 'dateCheck insureePageTo')) {
+            //    minDate = -2555;
+            //    maxDate = 0;
+            //}
             else if (($(this).attr("class") === 'dateCheck policyPageFrom') || ($(this).attr("class") === 'dateCheck policyPageTo')) {
                 minDate = -2555;
                 maxDate = 0;
@@ -50,10 +50,10 @@
                 minDate = 0;
                 maxDate = 0;
             }
-            else if ($(this).attr("class") === 'dateCheck FindFamilyFrom') {
-                minDate = -2555;
-                maxDate = 0;
-            }
+            //else if ($(this).attr("class") === 'dateCheck FindFamilyFrom') {
+            //    minDate = -2555;
+            //    maxDate = 0;
+            //}
             else {
                 minDate = -10;
                 maxDate = +10;

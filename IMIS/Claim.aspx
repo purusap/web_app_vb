@@ -668,7 +668,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                     $(this).val(1);
                 }
             });
-            <%--
+           
             $("#<%=txtICDCode2.ClientID %>").focus(function () {
                 var datasource;
                 $.ajax({
@@ -701,6 +701,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 if ($(this).val() === "") {
                     $('#<% = hfICDID2.ClientID%>').val("")
                 }
+            });
             $("#<%=txtICDCode0.ClientID %>").autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -790,7 +791,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 },
                 minLength: 1
             });
-
+             <%--
             $("#<%=txtICDCode3.ClientID %>").autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -941,7 +942,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
     </style>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="Body" runat="Server">
-    <div class="divBody" style="height:650px;" >
+    <div class="divBody" style="height:700px;" >
 
         <asp:Panel ID="pnlBodyCLM" runat="server">
             <asp:HiddenField ID="hfICDID0" runat="server"/>
@@ -1062,7 +1063,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                <td class ="DataEntry">
                    <asp:TextBox ID="txtCLAIMCODEData" runat="server" size="10" MaxLength="10" Text="" Width="130px" ></asp:TextBox>
                    <asp:RegularExpressionValidator ID="RegexValidator" runat="server" ControlToValidate="txtCLAIMCODEData"
-                       ValidationExpression="^([RST][0-9]{9})$|(^[0-9]{9,10})$" ErrorMessage="Invalid Claim Code"></asp:RegularExpressionValidator>
+                       ValidationExpression="^([0-9]{9})$|(^[0-9]{9,10})$" ErrorMessage="Invalid Claim Code"></asp:RegularExpressionValidator>
                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" 
                        runat="server" ErrorMessage="*" ControlToValidate="txtCLAIMCODEData" 
                        ValidationGroup="check" Visible="True" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -1132,10 +1133,8 @@ In case of dispute arising out or in relation to the use of the program, it is s
                       <asp:Label ID="lblICD1" runat="server" Text="<%$ Resources:Resource,L_SECONDARYDG1 %>"  ></asp:Label>  
                   </td>
                   <td class="DataEntry">
-                   <%--     <asp:TextBox ID="txtICDCode2" runat="server" MaxLength="8"   width="135px" class="cmb txtICDCode" autocomplete="off"></asp:TextBox>
-                      <asp:TextBox ID="txtICDCode2" runat="server" MaxLength="8"   width="135px" class="cmb txtICDCode" autocomplete="off"></asp:TextBox>
-                      <asp:DropDownList ID="ddlICDData2" runat="server" width="135px" Visible="false">
-                      </asp:DropDownList> --%>
+                   <%--     <asp:TextBox ID="txtICDCode2" runat="server" MaxLength="8"   width="135px" class="cmb txtICDCode" autocomplete="off"></asp:TextBox>  --%>
+                     
                       <asp:TextBox ID="txtICDCode1" runat="server" MaxLength="8"  width="135px"  class="cmb txtICDCode" autocomplete="off"></asp:TextBox>
                       <asp:DropDownList ID="ddlICDData1" runat="server" width="135px" Visible="false">
                       </asp:DropDownList>
@@ -1161,6 +1160,16 @@ In case of dispute arising out or in relation to the use of the program, it is s
                       </asp:DropDownList> --%>
                       <asp:textbox ID="txtServTotal" runat="server" Text="" BorderStyle="Solid" style="text-align:right" Enabled ="false" Width="135px"></asp:textbox>
                   </td>
+              </tr>
+              <tr>
+                  <td class="FormLabel">
+    <asp:Label ID="lblICD2" runat="server" Text="<%$ Resources:Resource,L_SECONDARYDG2 %>"></asp:Label> 
+</td>
+                  <td class="DataEntry">
+ <asp:TextBox ID="txtICDCode2" runat="server" MaxLength="8"   width="135px" class="cmb txtICDCode" autocomplete="off"></asp:TextBox>
+ <asp:DropDownList ID="ddlICDData2" runat="server" width="135px" Visible="false">
+ </asp:DropDownList>
+</td>
               </tr>
               <tr>
                   <td class="FormLabel" style="width:400px;">
