@@ -123,6 +123,9 @@
   <data name="L_POLICIES" xml:space="preserve">
     <value>Policies</value>
   </data>
+	  <data name="L_CRITICALILLNESS" xml:space="preserve">
+    <value>Critical Illness</value>
+  </data>
   <data name="B_ADDINSUREE" xml:space="preserve">
     <value>Add Insuree</value>
   </data>

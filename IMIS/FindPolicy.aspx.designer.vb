@@ -509,6 +509,15 @@ Partial Public Class FindPolicy
     Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''SubAddCriticalIllness control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SubAddCriticalIllness As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''L_FOUNDPOLICY control.
     '''</summary>
     '''<remarks>

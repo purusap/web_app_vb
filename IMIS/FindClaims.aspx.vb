@@ -60,19 +60,63 @@ Partial Public Class FindClaims
         If Not String.IsNullOrWhiteSpace(action) Then
             '/ApiEntryHandler.ashx?xml=<xml></xml>&action=ClaimCopayResponse
             '/ApiEntryHandler.ashx?xml=<xml><HFID>35</HFID></xml>&action=ClaimCopayResponse
-            Dim xml = HttpContext.Current.Request.Unvalidated("xml")
-            If xml = Nothing Then
-                '/ApiEntryHandler.ashx?json={"xml":{"HFID":35}}&action=ClaimCopayResponse
-                Dim json = HttpContext.Current.Request.Unvalidated("json")
-                If json = Nothing Then
-                    '/ApiEntryHandler.ashx?action=CapStatusApi&args={"HFID":35}
-                    Dim args = HttpContext.Current.Request.Unvalidated("args")
-                    json = "{""xml"":" & args & "}"
+            'Dim xml = HttpContext.Current.Request.Unvalidated("xml")
+            'If xml = Nothing Then
+            '    '/ApiEntryHandler.ashx?json={"xml":{"HFID":35}}&action=ClaimCopayResponse
+            '    Dim json = HttpContext.Current.Request.Unvalidated("json")
+            '    If json = Nothing Then
+            '        '/ApiEntryHandler.ashx?action=CapStatusApi&args={"HFID":35}
+            '        Dim args = HttpContext.Current.Request.Unvalidated("args")
+            '        json = "{""xml"":" & args & "}"
+            '    End If
+            '    Dim doc = JsonConvert.DeserializeXmlNode(json)
+            '    xml = doc.InnerXml
+            'End If
+            eUsers.UserID = imisgen.getUserId(Session("User"))
+            
+
+
+            ' Step 1: Check for "xml" in QueryString
+            Dim xml = HttpContext.Current.Request.Unvalidated.QueryString("xml")
+
+                ' Step 2: If not in QueryString, check in POST form
+                If String.IsNullOrWhiteSpace(xml) Then
+                    xml = HttpContext.Current.Request.Unvalidated.Form("xml")
                 End If
-                Dim doc = JsonConvert.DeserializeXmlNode(json)
-                xml = doc.InnerXml
-            End If
-            Dim response = ""
+
+                Dim json As String = Nothing
+
+                ' Step 3: If xml is still empty, check for "json" or "args"
+                If String.IsNullOrWhiteSpace(xml) Then
+                    ' Try json from QueryString
+                    json = HttpContext.Current.Request.Unvalidated.QueryString("json")
+
+                ' If not in QueryString, try POST
+                If String.IsNullOrWhiteSpace(json) Then
+                    json = HttpContext.Current.Request.Unvalidated.Form("json")
+
+                    ' Add user_id ONLY for POST json requests using string manipulation
+                    If Not String.IsNullOrWhiteSpace(json) Then
+                        json = json.Replace(",""Documents"":", ",""user_id"":""" & eUsers.UserID & """,""Documents"":")
+                    End If
+                End If
+
+                ' Try args from QueryString
+                If String.IsNullOrWhiteSpace(json) Then
+                        Dim args = HttpContext.Current.Request.Unvalidated.QueryString("args")
+                        If String.IsNullOrWhiteSpace(args) Then
+                            args = HttpContext.Current.Request.Unvalidated.Form("args")
+                        End If
+
+                        If Not String.IsNullOrWhiteSpace(args) Then
+                            json = "{""xml"":" & args & "}"
+                        End If
+                    End If
+                    Dim doc = JsonConvert.DeserializeXmlNode(json)
+                    xml = doc.InnerXml
+
+                End If
+                Dim response = ""
             If action = "ClaimCopayResponse" Then
                 response = ApiEntryBI.ClaimsCopayRequired(xml)
             Else

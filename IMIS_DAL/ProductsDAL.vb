@@ -306,6 +306,7 @@ Public Class ProductsDAL
         sSQL += " LEFT OUTER JOIN tblUsersDistricts UD ON Prod.LocationId = UD.LocationId AND UD.UserId = @UserId AND UD.ValidityTo IS NULL"
         sSQL += " LEFT JOIN (SELECT   ProductCode, MIN(ValidityFrom) ValidityFrom from tblProduct WHERE LegacyID IS NOT NULL GROUP BY ProductCode) HPROD ON HPROD.ProductCode=PROD.ProductCode"
         sSQL += " WHERE Prod.ValidityTo IS NULL "
+        sSQL += " AND Prod.ProdID=49"
         sSQL += " AND (L.Regionid = @RegionId OR @RegionId = 0 OR L.LocationId = 0)"
         sSQL += " AND (L.DistrictId = @DistrictId OR @DistrictId = 0 OR L.DistrictId IS NULL)"
         'sSQL += " AND (@EnrollDate BETWEEN Prod.DateFrom AND Prod.DateTo OR @EnrollDate IS NULL)"

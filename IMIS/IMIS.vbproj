@@ -244,6 +244,7 @@
     <Content Include="Report.aspx" />
     <Content Include="Reports.aspx" />
     <Content Include="Role.aspx" />
+    <Content Include="SeriousIllnessPage.aspx" />
     <Content Include="SqlServerTypes\Loader.cs" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
@@ -884,6 +885,10 @@
     <Compile Include="Reports\ds.vb">
       <DependentUpon>ds.xsd</DependentUpon>
     </Compile>
+    <Compile Include="SeriousIllnessPage.aspx.vb">
+      <DependentUpon>SeriousIllnessPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="User.aspx.designer.vb">
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
@@ -1214,7 +1219,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="False" />
+      <UserProperties BuildVersion_DetectChanges="False" BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_StartDate="2012/1/1" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

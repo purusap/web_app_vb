@@ -22,7 +22,7 @@ Namespace Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "17.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Class Resource
@@ -1834,6 +1834,15 @@ Namespace Resources
         Friend Shared ReadOnly Property L_CRITERIADETAILS() As String
             Get
                 Return ResourceManager.GetString("L_CRITERIADETAILS", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Critical Illness.
+        '''</summary>
+        Friend Shared ReadOnly Property L_CRITICALILLNESS() As String
+            Get
+                Return ResourceManager.GetString("L_CRITICALILLNESS", resourceCulture)
             End Get
         End Property
         

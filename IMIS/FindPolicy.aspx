@@ -301,6 +301,8 @@ In case of dispute arising out or in relation to the use of the program, it is s
                         <asp:ListItem Text=">10500" Value="2"></asp:ListItem>
                     </asp:DropDownList>
                     <%-- <asp:TextBox ID="txtBalance" runat="server"></asp:TextBox>--%>
+                     
+
                  </td>      
                 </tr>
                 <tr>
@@ -335,7 +337,9 @@ In case of dispute arising out or in relation to the use of the program, it is s
                           Text='<%$ Resources:Resource,B_SEARCH %>' >
                   </asp:Button>
                   <br />
-                  
+                                         <a id="AddCriticalIllness" class="candisable" href="SeriousIllnessPage.aspx">
+    <asp:Label ID="SubAddCriticalIllness" runat="server" Text='Critical Illness'></asp:Label>
+    </a>
                 </td>
             </tr>
             </table>
@@ -441,6 +445,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                          <RowStyle CssClass="normal" Wrap="False" />
     </asp:GridView>
                      </asp:Panel>
+
     </div>
      <asp:Panel ID="pnlButtons" runat="server"   CssClass="panelbuttons" >
         <table width="100%" cellpadding="10 10 10 10">
@@ -479,7 +484,9 @@ In case of dispute arising out or in relation to the use of the program, it is s
                     Text='<%$ Resources:Resource,B_CANCEL%>'
                       />
                     </td>                                          
-                    
+                    <td>
+ 
+                    </td>
                 </tr>
             </table>             
          </asp:Panel>  
