@@ -337,7 +337,7 @@ In case of dispute arising out or in relation to the use of the program, it is s
                           Text='<%$ Resources:Resource,B_SEARCH %>' >
                   </asp:Button>
                   <br />
-                                         <a id="AddCriticalIllness" class="candisable" href="SeriousIllnessPage.aspx">
+                                         <a id="AddCriticalIllness" runat="server" class="candisable" href="SeriousIllnessPage.aspx">
     <asp:Label ID="SubAddCriticalIllness" runat="server" Text='Critical Illness'></asp:Label>
     </a>
                 </td>

@@ -34,8 +34,12 @@ Partial Public Class FindPolicy
     Protected imisgen As New IMIS_Gen
     Private userBI As New IMIS_BI.UserBI
 
+    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
+        loadSecurity()
+    End Sub
     Protected Overrides Sub Render(ByVal writer As System.Web.UI.HtmlTextWriter)
         AddRowSelectToGridView(gvPolicies)
+        loadSecurity()
         MyBase.Render(writer)
     End Sub
     Private Sub AddRowSelectToGridView(ByVal gv As GridView)
@@ -177,7 +181,9 @@ Partial Public Class FindPolicy
     End Sub
     Private Sub loadSecurity()
         Dim RoleID As Integer = imisgen.getRoleId(Session("User"))
+        Dim UserID As Integer = imisgen.getUserId(Session("User"))
         Dim AllowEdit As Boolean = userBI.RunPageSecurity(IMIS_EN.Enums.Pages.OverviewFamily, Page)
+        AddCriticalIllness.Visible =         userBI.checkRights(IMIS_EN.Enums.Rights.InsureeEdit, UserID) Or userBI.checkRights(IMIS_EN.Enums.Rights.InsureeAdd, UserID)
 
         Dim hlink As HyperLinkField = gvPolicies.Columns(1)
         If chkLegacy.Checked Then

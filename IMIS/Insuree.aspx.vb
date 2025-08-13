@@ -77,7 +77,7 @@ Partial Public Class Insuree
         trCurrentVillage.Visible = Not (Adjustibility = "N")
         rfCurrentVillage.Enabled = (Adjustibility = "M")
 
-        'Education
+        'Educationch
         Adjustibility = General.getControlSetting("Education")
         rfEducation.Enabled = (Adjustibility = "M")
         trEducation.Visible = Not (Adjustibility = "N")
