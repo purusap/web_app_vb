@@ -265,36 +265,89 @@
         window.open(blobUrl, '_blank');
     }
 
-    function fetchAndShowDocument(documentBase64, element) {
-        const originalText = element.innerHTML;
+    function fetchAndShowDocument(documentId, element) {
+        debugger
+        // --- Input Validation ---
+        if (!documentId) {
+            alert('Error: Document ID is missing.');
+            return;
+        }
+
+        // --- UI: Show Loading State ---
+        const originalHtml = element.innerHTML;
         element.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Loading...';
+        // Disable the link to prevent multiple clicks
         element.style.pointerEvents = 'none';
 
+        // --- API Call ---
+        // 1. Construct the JSON parameter as a string
+        const jsonParam = `{"xml":{"DocumentID":"${documentId}"}}`;
+
+        // 2. Construct the full API URL, ensuring the JSON is properly encoded
+        const apiUrl = `/FindClaims.aspx?action=SeriousIllnessGetDocumentByID&json=${encodeURIComponent(jsonParam)}`;
+
+        // 3. Use jQuery's AJAX to call the API
+        $.ajax({
+            url: apiUrl,
+            type: 'GET',
+            dataType: 'json', // We expect the server to return JSON
+            success: function (response) {
+                // Your backend should return the result of the `uspGetDocumentByID` procedure.
+                // This procedure returns BOTH the Base64 string and the MimeType.
+                // Expected response format: [{ "DocumentDataB64": "...", "MimeType": "image/jpeg" }]
+                if (response && response.length > 0 && response[0].DocumentDataB64) {
+                    const base64Data = response[0].DocumentDataB64;
+                    const mimeType = response[0].MimeType; // Get the MimeType from the response
+
+                    // Call the helper function to open the document
+                    openBase64InNewTab(base64Data, mimeType);
+                } else {
+                    alert('Document not found or the file is empty.');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("API call failed:", textStatus, errorThrown);
+                alert('An error occurred while fetching the document. Please check the console for details.');
+            },
+            complete: function () {
+                // --- UI: Restore Original State ---
+                // This block runs after success or error, ensuring the button is always restored.
+                element.innerHTML = originalHtml;
+                element.style.pointerEvents = 'auto';
+            }
+        });
+    }
+
+
+    function openBase64InNewTab(base64Data, mimeType) {
         try {
-            // Convert base64 to binary
-            const byteCharacters = atob(documentBase64);
+            if (!base64Data) {
+                throw new Error("Received empty document data from the server.");
+            }
+
+            // 1. Decode the Base64 string into binary data
+            const byteCharacters = atob(base64Data);
             const byteNumbers = new Array(byteCharacters.length);
             for (let i = 0; i < byteCharacters.length; i++) {
                 byteNumbers[i] = byteCharacters.charCodeAt(i);
             }
             const byteArray = new Uint8Array(byteNumbers);
 
-            // Create blob and object URL
-            const blob = new Blob([byteArray], { type: 'application/pdf' });
+            // 2. Create a Blob from the binary data
+            // Use the provided mimeType, or a generic one if it's missing.
+            const blob = new Blob([byteArray], { type: mimeType || 'application/octet-stream' });
+
+            // 3. Create a temporary URL for the Blob
             const blobUrl = URL.createObjectURL(blob);
 
-            // Open in a new tab without blank screen issue
+            // 4. Open the URL in a new tab
             window.open(blobUrl, '_blank');
+
         } catch (error) {
-            alert('Could not load the document: ' + error.message);
-        } finally {
-            element.innerHTML = originalText;
-            element.style.pointerEvents = 'auto';
+            console.error("Error opening Base64 document:", error);
+            alert('Could not display the document: ' + error.message);
         }
     }
-
-
-
 
     // --- POLICY LIST RENDERING AND FETCHING ---
     function renderPolicyList(meta, policies, searchChfid = '', searchDiseaseId = '') {
@@ -310,7 +363,7 @@
                     docLinksHtml = documents.map(doc => `
         <div style="margin-bottom: 4px; white-space: nowrap;">
             <a href="#"
-               onclick="fetchAndShowDocument('${doc.DocumentData}', this, true); return false;"
+               onclick="fetchAndShowDocument('${doc.DocID}', this, true); return false;"
                style="color:#0056b3;">
                <i class="fa fa-file-alt"></i> ${escapeHtml(doc.FileName)}
             </a>
