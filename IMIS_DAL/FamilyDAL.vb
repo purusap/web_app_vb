@@ -400,13 +400,14 @@ Public Class FamilyDAL
         data.params("@chfid", SqlDbType.NVarChar, 12, CHFID)
         Return data.Filldata
     End Function
-    Public Function NINExists(ByVal NIN As String) As DataTable
+    Public Function NINExists(ByVal NIN As String, ByVal CHFID As String) As DataTable
         Dim data As New ExactSQL
         Dim sSQL As String = ""
         Dim dt As New DataTable
-        sSQL = "Select * FROM tblInsuree WHERE NIN = @nin AND ValidityTo IS NULL"
+        sSQL = "Select * FROM tblInsuree WHERE NIN = @nin AND ValidityTo IS NULL AND insureeId <> (select insureeId from tblInsuree where CHFID=@chfid and ValidityTo is NULL)"
         data.setSQLCommand(sSQL, CommandType.Text)
         data.params("@nin", SqlDbType.NVarChar, 10, NIN)
+        data.params("@chfid", SqlDbType.NVarChar, 10, CHFID)
         Return data.Filldata
     End Function
 

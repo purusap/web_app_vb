@@ -484,7 +484,7 @@ Public Class FamilyNew
                 If Trim(txtNIN.Text).Length <> 10 Then
                     msg = "NIN should be 10 Digit!"
                 End If
-                If Family.NINExists(txtNIN.Text) Then
+                If Family.NINExists(txtNIN.Text, txtCHFID.Text) Then
                     msg = "NIN already Exists!"
                 End If
             End If

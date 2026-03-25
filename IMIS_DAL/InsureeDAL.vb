@@ -75,7 +75,8 @@ Public Class InsureeDAL
     End Sub
     Public Function GetClaimsByCHFID(ByRef einsuree As IMIS_EN.tblInsuree) As Boolean
 
-        data.setSQLCommand("select claimid from tblClaim c where InsureeID=@insureeid and ClaimStatus in (2,4) and ValidityTo is null", CommandType.Text)
+        'data.setSQLCommand("select claimid from tblClaim c where InsureeID=@insureeid and ClaimStatus in (2,4) and ValidityTo is null", CommandType.Text)
+        data.setSQLCommand("select claimid from tblClaim c where InsureeID=@insureeid  and ValidityTo is null", CommandType.Text)
         data.params("@insureeid", SqlDbType.Int, einsuree.InsureeID)
         Dim dr As DataRow = data.Filldata()(0)
         If Not dr Is Nothing Then

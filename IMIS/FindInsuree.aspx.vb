@@ -123,12 +123,14 @@ Partial Public Class FindInsuree
     End Sub
     Private Sub RunPageSecurity()
         Dim UserID As Integer = imisgen.getUserId(Session("User"))
+        FindInsureeAll.Visible = (userBI.checkRights(IMIS_EN.Enums.Rights.InsureeEdit, UserID) Or userBI.checkRights(IMIS_EN.Enums.Rights.InsureeAdd, UserID))
         If userBI.RunPageSecurity(IMIS_EN.Enums.Pages.Insuree, Page) Then
             B_VIEW.Enabled = userBI.checkRights(IMIS_EN.Enums.Rights.InsureeSearch, UserID)
             B_CLAIM.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.ClaimSearch, UserID)
             B_CLAIMSREVIEWS.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.ClaimSearch, UserID)
             btnSearch.Visible = userBI.checkRights(IMIS_EN.Enums.Rights.InsureeSearch, UserID)
 #If HIB Then
+
             B_CLAIM.Visible = False
             B_CLAIMSREVIEWS.Visible = False
 #End If

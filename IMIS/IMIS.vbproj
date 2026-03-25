@@ -164,6 +164,7 @@
     <Content Include="FindFamily.aspx" />
     <Content Include="FindHealthFacility.aspx" />
     <Content Include="FindInsuree.aspx" />
+    <Content Include="FindInsureeAll.aspx" />
     <Content Include="FindMedicalItem.aspx" />
     <Content Include="FindMedicalService.aspx" />
     <Content Include="FindOfficer.aspx" />
@@ -1219,7 +1220,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_DetectChanges="False" BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_StartDate="2012/1/1" />
+      <UserProperties BuildVersion_StartDate="2012/1/1" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

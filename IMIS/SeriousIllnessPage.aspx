@@ -2,111 +2,257 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Body" runat="Server">
 <style>
-    /* All CSS styles are self-contained here */
+    /* --- RESET & LAYOUT --- */
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #f4f4f9; color: #333; }
-    .divBody { max-width: 1200px; margin: 40px auto; }
-    .panel { border: 1px solid #ddd; padding: 20px; margin: 20px 0; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    .FormLabel { font-weight: bold; padding-right: 10px; vertical-align: top; padding-top: 10px; }
-    .DataEntry input[type="text"], .DataEntry input[type="file"], .DataEntry select, .doc-type-select { width: 250px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    .divBody { max-width: 1200px; margin: 20px auto; padding: 0 15px; box-sizing: border-box; }
+
+    /* --- TAB STYLES (Fixed Layout) --- */
+    .tab-container { margin-top: 20px; }
+    
+    .tab-nav { 
+        display: flex; 
+        border-bottom: 1px solid #ccc; 
+        background: transparent; 
+        padding-left: 0; 
+        margin-bottom: 0;
+        list-style: none;
+    }
+    
+    .tab-link { 
+        background-color: #e9ecef; 
+        border: 1px solid transparent; 
+        border-bottom: none;
+        border-radius: 6px 6px 0 0;
+        cursor: pointer; 
+        padding: 12px 25px; 
+        margin-right: 5px;
+        font-size: 16px; 
+        font-weight: 600; 
+        color: #495057; 
+        outline: none;
+        position: relative;
+        bottom: -1px; /* Pushes it down to cover the line */
+        transition: all 0.2s ease-in-out;
+    }
+
+    .tab-link:hover { 
+        background-color: #dbe0e5; 
+        color: #0056b3;
+    }
+
+    .tab-link.active { 
+        background-color: #fff; 
+        color: #007bff; 
+        border-color: #ccc;
+        border-bottom-color: #fff; /* Merges with content */
+        z-index: 2;
+    }
+
+    .tab-content { 
+        display: none; 
+        padding: 25px; 
+        border: 1px solid #ccc; 
+        border-top: none; /* Top is handled by nav */
+        background-color: #fff; 
+        border-radius: 0 0 8px 8px; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.04); 
+        animation: fadeEffect 0.3s;
+    }
+
+    /* --- FORM & PANEL STYLES --- */
+    .panel { /* Kept for legacy if needed */ }
+    .list-panel { border: 1px solid #ddd; padding: 20px; margin: 20px 0; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    
+    .FormLabel { font-weight: bold; padding-right: 15px; vertical-align: top; padding-top: 12px; width: 180px; }
+    .DataEntry { padding-bottom: 10px; }
+    .DataEntry input[type="text"], .DataEntry select, .doc-type-select { width: 280px; padding: 0px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    
+    /* BUTTONS */
     button, .button { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; text-align: center; }
-    #btnAddPolicy { background-color: #007bff; color: white; }
-    #btnAddPolicy:disabled { background-color: #6c757d; cursor: not-allowed; opacity: 0.6; }
-    #btnCancel { background-color: #6c757d; color: white; }
-    #btnCheckEligibility { background-color: #17a2b8; color: white; margin-left: 10px; }
-    #btnAddDocumentRow { background-color: #28a745; color: white; }
+    .btn-primary { background-color: #007bff; color: white; }
+    .btn-primary:disabled { background-color: #6c757d; cursor: not-allowed; opacity: 0.6; }
+    .btn-cancel { background-color: #6c757d; color: white; }
+    .btn-check { background-color: #17a2b8; color: white; margin-left: 10px; }
+    .btn-add-row { background-color: #28a745; color: white; margin-top: 10px; }
     .btn-remove-doc { background-color: #dc3545; color: white; padding: 5px 10px; font-size: 12px; }
-    legend { font-size: 1.2em; font-weight: bold; color: #0056b3; }
+    
+    legend { font-size: 1.2em; font-weight: bold; color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; width: 100%; display: block;}
+    
+    /* TABLE STYLES */
     .results-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    .results-table th { background-color: #343a40; color: white; }
-    .results-table th, .results-table td { padding: 12px; text-align: left; border: 1px solid #dee2e6; vertical-align: top; }
+    .results-table th { background-color: #343a40; color: white; padding: 12px; text-align: left; }
+    .results-table td { padding: 12px; border: 1px solid #dee2e6; }
     .results-table tr:nth-child(even) { background-color: #f8f9fa; }
-    .results-table tr:hover { background-color: #e9ecef; }
-    .pagination { display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; margin-top: 15px; }
-    .page-link { display: inline-block; padding: 8px 12px; text-decoration: none; border: 1px solid #007bff; color: #007bff; border-radius: 4px; cursor: pointer; }
-    .page-link.active, .page-link:hover { background-color: #007bff; color: white; }
-    .page-link.disabled { color: #6c757d; border-color: #6c757d; cursor: not-allowed; background-color: #f8f9fa; }
+    .pagination { display: flex; justify-content: center; gap: 5px; margin-top: 15px; }
+    .page-link { padding: 8px 12px; text-decoration: none; border: 1px solid #007bff; color: #007bff; border-radius: 4px; cursor: pointer; }
+    .page-link.active { background-color: #007bff; color: white; }
+    
+    /* MODAL */
     .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
     .modal-content { background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; border-radius: 8px; width: 80%; max-width: 600px; position: relative; }
-    .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
-    .eligibility-info .info-row { display: flex; margin: 8px 0; }
-    .eligibility-info .info-label { font-weight: bold; min-width: 140px; }
+    .close { float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
     .status-active { color: #28a745; font-weight: bold; }
     .status-expired { color: #dc3545; font-weight: bold; }
-    .eligibility-header { text-align: center; margin-bottom: 20px; color: #0056b3; }
-    .document-entry-row td { padding: 4px; }
+    
+    @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }
 </style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <div class="divBody">
-    <div class="panel">
-        <fieldset>
-            <legend>Create Serious Illness Policy</legend>
-            <span id="welcomeMessage"></span>
-            <table>
-                <tr>
-                    <td class="FormLabel" style="vertical-align: middle;">Insurance No (CHFID)</td>
-                    <td class="DataEntry">
-                        <input type="text" id="txtInsuranceNo" maxlength="50" />
-                        <button id="btnCheckEligibility">Check Eligibility Status</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="FormLabel" style="vertical-align: middle;">Select Disease</td>
-                    <td>
-                        <select id="selectDisease">
-                            <option value="">-- Loading Diseases --</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="FormLabel">Add Documents</td>
-                    <td>
-                        <table id="documentList" style="width: 100%;">
-                            <tbody id="documentListBody"></tbody>
-                        </table>
-                        <button type="button" id="btnAddDocumentRow" style="margin-top: 10px;">+ Add Document</button>
-                        <div id="fileError" style="color: red; font-size: 12px; margin-top: 5px;"></div>
-                    </td>
-                </tr>
-            </table>
-        </fieldset>
-         <div class="panelbuttons">
-            <table style="width: 100%;">
-                <tr><td align="left"><button id="btnAddPolicy" disabled>Add Policy</button></td><td align="right"><button id="btnCancel">Cancel</button></td></tr>
-            </table>
+    
+    <!-- TABS NAVIGATION (Added type="button" to prevent reload) -->
+    <div class="tab-container">
+        <div class="tab-nav">
+            <button type="button" class="tab-link active" onclick="openTab(event, 'tab-add')">
+                <i class="fa fa-plus-circle"></i> Add Policy
+            </button>
+            <button type="button" class="tab-link" onclick="openTab(event, 'tab-renew')">
+                <i class="fa fa-sync-alt"></i> Renew Policy
+            </button>
         </div>
-        <div id="footer"><label id="lblStatus" style="font-weight: bold;"></label></div>
+
+        <!-- TAB 1: ADD POLICY -->
+        <div id="tab-add" class="tab-content" style="display: block;">
+            <fieldset style="border:none;">
+                <legend>Create Serious Illness Policy</legend>
+                <div id="welcomeMessage" style="margin-bottom:15px; font-style:italic; color:#666;"></div>
+                <table style="width: 100%;">
+                    <tr>
+                        <td class="FormLabel">Insurance No (CHFID)</td>
+                        <td class="DataEntry">
+                            <input type="text" id="txtInsuranceNo" maxlength="50" class="input-chfid" data-suffix="" />
+                            <button type="button" id="btnCheckEligibility" class="btn-check" data-suffix="">Check Status</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="FormLabel">Select Disease</td>
+                        <td class="DataEntry">
+                            <select id="selectDisease" class="disease-dropdown">
+                                <option value="">-- Loading Diseases --</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="FormLabel">Add Documents</td>
+                        <td class="DataEntry">
+                            <table id="documentList" style="width: 100%;">
+                                <tbody id="documentListBody"></tbody>
+                            </table>
+                            <button type="button" id="btnAddDocumentRow" class="btn-add-row" data-suffix="">+ Add Document</button>
+                            <div id="fileError" style="color: red; font-size: 12px; margin-top: 5px;"></div>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+             <div class="panelbuttons" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td align="left"><button type="button" id="btnAddPolicy" class="btn-primary action-btn" data-suffix="" disabled>Add Policy</button></td>
+                        <td align="right"><button type="button" id="btnCancel" class="btn-cancel cancel-btn" data-suffix="">Cancel</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="footer"><label id="lblStatus" style="font-weight: bold; margin-top:10px; display:block;"></label></div>
+        </div>
+
+        <!-- TAB 2: RENEW POLICY -->
+        <div id="tab-renew" class="tab-content">
+            <fieldset style="border:none;">
+                <legend>Renew Serious Illness Policy</legend>
+                <div style="margin-bottom:15px; font-style:italic; color:#666;">Existing Policy Renewal</div>
+                <table style="width: 100%;">
+                    <tr>
+                        <td class="FormLabel">Insurance No (CHFID)</td>
+                        <td class="DataEntry">
+                            <input type="text" id="txtInsuranceNo_renew" maxlength="50" class="input-chfid" data-suffix="_renew" />
+                            <button type="button" id="btnCheckEligibility_renew" class="btn-check" data-suffix="_renew">Check Status</button>
+                        </td>
+                    </tr>
+                    <!-- Disease Selection kept commented out as per user request/code -->
+<%--                    <tr>
+                        <td class="FormLabel">Select Disease</td>
+                        <td class="DataEntry">
+                            <select id="selectDisease_renew" class="disease-dropdown">
+                                <option value="">-- Loading Diseases --</option>
+                            </select>
+                        </td>
+                    </tr>--%>
+                    <tr>
+                        <td class="FormLabel">Add Documents</td>
+                        <td class="DataEntry">
+                            <table id="documentList_renew" style="width: 100%;">
+                                <tbody id="documentListBody_renew"></tbody>
+                            </table>
+                            <button type="button" id="btnAddDocumentRow_renew" class="btn-add-row" data-suffix="_renew">+ Add Document</button>
+                            <div id="fileError_renew" style="color: red; font-size: 12px; margin-top: 5px;"></div>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+             <div class="panelbuttons" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td align="left"><button type="button" id="btnAddPolicy_renew" class="btn-primary action-btn" data-suffix="_renew" disabled>Renew Policy</button></td>
+                        <td align="right"><button type="button" id="btnCancel_renew" class="btn-cancel cancel-btn" data-suffix="_renew">Cancel</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="footer"><label id="lblStatus_renew" style="font-weight: bold; margin-top:10px; display:block;"></label></div>
+        </div>
     </div>
 
-    <div id="policyListContainer">
-        <div class="panel" style="text-align:center; padding: 40px;"><i class="fa fa-spinner fa-spin"></i> Loading policy list...</div>
+    <!-- GLOBAL POLICY LIST CONTAINER -->
+    <div id="policyListContainer" class="list-panel" style="display: block;">
+        <!-- Populated via JS -->
     </div>
 </div>
 
+<!-- MODAL -->
 <div id="eligibilityModal" class="modal">
     <div class="modal-content">
-        <span class="close">×</span>
-        <h2 class="eligibility-header">Insurance Eligibility Status</h2>
+        <span class="close">X</span>
+        <h2 style="text-align:center; color:#0056b3;">Insurance Eligibility Status</h2>
         <div id="eligibilityContent"></div>
     </div>
 </div>
 
 <script type="text/javascript">
-    // This server-side code nugget is executed when the page is rendered.
-    // It embeds the logged-in username into a JavaScript constant.
     const loggedInUserName = '<%: User.Identity.Name %>';
+
+    // --- TABS LOGIC ---
+    function openTab(evt, tabName) {
+        if(evt) evt.preventDefault();
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+        tablinks = document.getElementsByClassName("tab-link");
+        for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+        document.getElementById(tabName).style.display = "block";
+        if(evt) evt.currentTarget.className += " active";
+    }
 </script>
 
 <script type="text/javascript">
-    // --- GLOBAL CONFIGURATION & CACHING ---
+    // --- GLOBAL CONFIGURATION ---
     const DOCUMENT_TYPES_HARDCODED = ["Medical Report", "Citizenship Certificate", "Photo", "Hospital Discharge Summary", "Claim Form", "Other"];
-    const MANDATORY_DOC_IDS = ['1', '2', '3'];
-    let documentTypeOptionsHtml = '<option value="">-- Loading Types... --</option>';
-    let isEligible = false; // Flag to track eligibility status
 
-    // --- UTILITY AND HELPER FUNCTIONS ---
+    // ADD TAB REQUIREMENTS: Needs 1, 2, and 3
+    const MANDATORY_DOC_IDS_ADD = ['1', '2', '3'];
+    // RENEW TAB REQUIREMENTS: Needs ONLY 1
+    const MANDATORY_DOC_IDS_RENEW = ['1'];
+
+    // Store separate HTML for dropdowns
+    let documentTypeOptionsHtml_Add = '<option value="">-- Loading Types... --</option>';
+    let documentTypeOptionsHtml_Renew = '<option value="">-- Loading Types... --</option>';
+
+    let formState = {
+        "": { isEligible: false },       // Add Tab
+        "_renew": { isEligible: false }  // Renew Tab
+    };
+
+    // --- UTILITY FUNCTIONS ---
     function escapeHtml(str) {
         if (str === null || typeof str === 'undefined') return '';
         const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
@@ -125,231 +271,259 @@
         } catch (e) { return true; }
     }
 
-    function updateAddPolicyButtonState() {
-        // 1. Get all currently selected document type IDs from the UI
-        const selectedDocIds = $('.doc-type-select1').map(function () {
+    // --- UPDATED BUTTON STATE LOGIC ---
+    function updateAddPolicyButtonState(suffix) {
+        const container = suffix === "" ? "#tab-add" : "#tab-renew";
+        const btnId = "#btnAddPolicy" + suffix;
+
+        const selectedDocIds = $(container + ' .doc-type-select1').map(function () {
             return $(this).val();
-        }).get(); // .get() converts jQuery object to a standard array
+        }).get();
 
-        // 2. Check if every mandatory ID is included in the list of selected IDs
-        const hasAllMandatoryDocs = MANDATORY_DOC_IDS.every(id => selectedDocIds.includes(id));
+        const eligible = formState[suffix].isEligible;
+        let hasMandatoryDocs = false;
 
-        // 3. The button is enabled only if the user is eligible AND has selected all mandatory docs.
-        $('#btnAddPolicy').prop('disabled', !(isEligible && hasAllMandatoryDocs));
+        // Check which tab calls this function
+        if (suffix === "_renew") {
+            // RENEW TAB: Logic = Eligible + Has Document ID '1'
+            hasMandatoryDocs = MANDATORY_DOC_IDS_RENEW.every(id => selectedDocIds.includes(id));
+        } else {
+            // ADD TAB: Logic = Eligible + Has Documents 1, 2, 3 (Existing Logic)
+            hasMandatoryDocs = MANDATORY_DOC_IDS_ADD.every(id => selectedDocIds.includes(id));
+        }
+
+        $(btnId).prop('disabled', !(eligible && hasMandatoryDocs));
     }
 
-    // --- API FETCHING FUNCTIONS ---
+    // --- API FETCHING ---
     function populateDiseaseDropdown() {
         var apiUrl = '/FindClaims.aspx?action=GetCriticalIllnessBenefits&json={"xml":{}}';
-        var dropdown = $('#selectDisease');
+        var dropdowns = $('.disease-dropdown');
         return $.get(apiUrl, function (data) {
-            dropdown.empty().append('<option value="">-- Select a Disease --</option>');
+            dropdowns.empty().append('<option value="">-- Select a Disease --</option>');
             if (data && Array.isArray(data)) {
                 $.each(data, function (index, item) {
-                    dropdown.append($('<option>', { value: item.id, text: `${item.disease_name_nepali} (${item.disease_name_english})` }));
+                    dropdowns.append($('<option>', { value: item.id, text: `${item.disease_name_nepali} (${item.disease_name_english})` }));
                 });
             }
         }).fail(function () {
-            dropdown.empty().append('<option value="">-- Error loading diseases --</option>');
+            dropdowns.empty().append('<option value="">-- Error loading diseases --</option>');
         });
     }
 
+    // --- UPDATED DOCUMENT FETCHING ---
     function fetchDocumentTypes() {
         var apiUrl = '/FindClaims.aspx?action=GetCriticalIllnessDocumentTypes&json={"xml":{}}';
         return $.get(apiUrl, function (data) {
-            let options = '<option value="">-- Select Document Type --</option>';
+            let optionsAdd = '<option value="">-- Select Document Type --</option>';
+            let optionsRenew = '<option value="">-- Select Document Type --</option>';
+
             if (data && Array.isArray(data)) {
                 $.each(data, function (index, item) {
-                    options += `<option value="${item.id}">${item.type_np} (${item.type_en})</option>`;
+                    // Build Full List for Add Tab
+                    optionsAdd += `<option value="${item.id}">${item.type_np} (${item.type_en})</option>`;
+
+                    // Build Restricted List for Renew Tab (Only show ID 1)
+                    if (item.id == '1') {
+                        optionsRenew += `<option value="${item.id}">${item.type_np} (${item.type_en})</option>`;
+                    }
                 });
             }
-            documentTypeOptionsHtml = options;
+
+            documentTypeOptionsHtml_Add = optionsAdd;
+            documentTypeOptionsHtml_Renew = optionsRenew;
+
         }).fail(function () {
-            let fallbackOptions = '<option value="">-- Select Document Type --</option>';
-            DOCUMENT_TYPES_HARDCODED.forEach(type => { fallbackOptions += `<option value="${type}">${type}</option>`; });
-            documentTypeOptionsHtml = fallbackOptions;
-            console.error("Failed to load document types from database. Using fallback list.");
+            // Fallback Logic
+            let fallbackAdd = '<option value="">-- Select Document Type --</option>';
+            let fallbackRenew = '<option value="">-- Select Document Type --</option>';
+
+            DOCUMENT_TYPES_HARDCODED.forEach((type, index) => {
+                fallbackAdd += `<option value="${type}">${type}</option>`;
+                // Assuming first item in hardcoded array is ID 1
+                if (index === 0) fallbackRenew += `<option value="${type}">${type}</option>`;
+            });
+
+            documentTypeOptionsHtml_Add = fallbackAdd;
+            documentTypeOptionsHtml_Renew = fallbackRenew;
         });
     }
 
-    // --- UI AND BUSINESS LOGIC FUNCTIONS ---
-    function addDocumentRow() {
-        $('#fileError').text('');
+    // --- UPDATED ROW ADDITION LOGIC ---
+    function addDocumentRow(suffix) {
+        $('#fileError' + suffix).text('');
+        const tbodyId = '#documentListBody' + suffix;
         const newRowId = `doc-row-${Date.now()}`;
+
+        // Decide which dropdown HTML to use based on the tab
+        let dropdownHtml = (suffix === "_renew") ? documentTypeOptionsHtml_Renew : documentTypeOptionsHtml_Add;
+
         const newRowHtml = `
             <tr id="${newRowId}" class="document-entry-row">
-                <td><select class="doc-type-select1">${documentTypeOptionsHtml}</select></td>
+                <td><select class="doc-type-select1" data-suffix="${suffix}">${dropdownHtml}</select></td>
                 <td><input type="file" class="doc-file-input" style="width: 100%;"></td>
-                <td style="text-align: right;"><button type="button" class="btn-remove-doc" data-row-id="${newRowId}">Remove</button></td>
+                <td style="text-align: right;"><button type="button" class="btn-remove-doc" data-row-id="${newRowId}" data-suffix="${suffix}">Remove</button></td>
             </tr>`;
-        $('#documentListBody').append(newRowHtml);
+        $(tbodyId).append(newRowHtml);
     }
 
-    function sendPolicyDataToServer(chfId, disease, documents) {
+    function sendPolicyDataToServer(chfId, disease, documents, suffix) {
         var requestData = { "xml": { "CHFID": chfId, "Disease": disease, "Documents": { "Document": documents } } };
-        $('#lblStatus').css('color', 'orange').text('Processing...');
+        var apiAction = (suffix === "_renew") ? "SeriousIllnessApi3" : "SeriousIllnessApi3";
+
+        $('#lblStatus' + suffix).css('color', 'orange').text('Processing...');
+
         $.ajax({
-            url: "/FindClaims.aspx?action=SeriousIllnessApi3",
+            url: "/FindClaims.aspx?action=" + apiAction,
             type: "POST",
             data: { json: JSON.stringify(requestData) },
             success: function (response) {
                 if (response && response.length > 0 && response[0].Message) {
-                    $('#lblStatus').css('color', response[0].Message.includes('successfully') ? 'green' : 'blue').text(response[0].Message);
+                    $('#lblStatus' + suffix).css('color', response[0].Message.includes('successfully') ? 'green' : 'blue').text(response[0].Message);
                     if (response[0].Message.includes('successfully')) {
-                        $('#btnCancel').click();
+                        $('#btnCancel' + suffix).click();
                         fetchPolicyList(1);
                     }
                 } else {
-                    $('#lblStatus').css('color', 'red').text('An unknown error occurred. The server response was not in the expected format.');
+                    $('#lblStatus' + suffix).css('color', 'red').text('An unknown error occurred.');
                 }
             },
-            error: function (xhr) { $('#lblStatus').css('color', 'red').text('An error occurred: ' + xhr.responseText); }
+            error: function (xhr) { $('#lblStatus' + suffix).css('color', 'red').text('Error: ' + xhr.responseText); }
         });
     }
 
-    function checkEligibilityStatus(chfId) {
+    function sendRenewPolicyDataToServer(chfId, disease, documents) {
+        var requestData = { "xml": { "CHFID": chfId, "Disease": disease, "Documents": { "Document": documents } } };
+        var suffix = "_renew";
+        $('#lblStatus_renew').css('color', 'orange').text('Processing Renewal...');
+
+        $.ajax({
+            url: "/FindClaims.aspx?action=SeriousIllnessRenewApi",
+            type: "POST",
+            data: { json: JSON.stringify(requestData) },
+            success: function (response) {
+                if (response && response.length > 0 && response[0].Message) {
+                    $('#lblStatus_renew').css('color', response[0].Message.includes('successfully') ? 'green' : 'blue').text(response[0].Message);
+                    if (response[0].Message.includes('successfully')) {
+                        $('#btnCancel_renew').click();
+                        fetchPolicyList(1);
+                    }
+                } else {
+                    $('#lblStatus_renew').css('color', 'red').text('Unknown server response., Please check if Critical Policy is active, cannot add if policy is active');
+                }
+            },
+            error: function (xhr) { $('#lblStatus_renew').css('color', 'red').text('Error: ' + xhr.responseText); }
+        });
+    }
+
+
+    function checkEligibilityStatus(chfId, suffix) {
         if (!chfId) {
-            $('#lblStatus').css('color', 'red').text('Please enter Insurance No. (CHFID) first.');
+            $('#lblStatus' + suffix).css('color', 'red').text('Please enter Insurance No. (CHFID) first.');
             return;
         }
         var requestData = { "xml": { "CHFID": chfId } };
         var encodedJson = encodeURIComponent(JSON.stringify(requestData));
         var apiUrl = `/FindClaims.aspx?action=PolicyInquiryApi&json=${encodedJson}`;
-        $('#lblStatus').css('color', 'orange').text('Checking eligibility...');
+        $('#lblStatus' + suffix).css('color', 'orange').text('Checking eligibility...');
+
         $.get(apiUrl, function (response) {
-            $('#lblStatus').text('');
+            $('#lblStatus' + suffix).text('');
             if (response && response.length > 0) {
-                displayEligibilityInfo(response[0]);
+                displayEligibilityInfo(response[0], suffix);
             } else {
-                isEligible = false;
-                updateAddPolicyButtonState();
-                $('#lblStatus').css('color', 'red').text('No eligibility information found for this CHFID.');
+                formState[suffix].isEligible = false;
+                updateAddPolicyButtonState(suffix);
+                $('#lblStatus' + suffix).css('color', 'red').text('No eligibility information found.');
             }
         }).fail(function (xhr) {
-            isEligible = false;
-            updateAddPolicyButtonState();
-            $('#lblStatus').css('color', 'red').text('Error checking eligibility: ' + xhr.responseText);
+            formState[suffix].isEligible = false;
+            updateAddPolicyButtonState(suffix);
+            $('#lblStatus' + suffix).css('color', 'red').text('Error checking eligibility.');
         });
     }
 
-    function displayEligibilityInfo(data) {
+    function displayEligibilityInfo(data, suffix) {
         var isExpired = isDateExpired(data.ExpiryDate);
         var isInactive = data.Status === 'निष्कृय';
-        isEligible = !isExpired && !isInactive;
-        updateAddPolicyButtonState();
-        var statusText = isInactive ? 'Expired/Inactive' : 'Active';
-        var expiryText = isExpired ? ' (EXPIRED)' : ' (Valid)';
+
+        var eligible = !isExpired && !isInactive;
+
+        formState[suffix].isEligible = eligible;
+        updateAddPolicyButtonState(suffix);
+
+        var statusText = isInactive ? 'Expired/Inactive' : '';
+        var expiryText = isExpired ? ' EXPIRED' : ' Valid';
+
         var content = `
-            <div class="eligibility-info">
+            <div class="eligibility-info" style="line-height: 1.8;">
                 <div class="info-row"><span class="info-label">CHFID:</span><span>${data.CHFID || 'N/A'}</span></div>
                 <div class="info-row"><span class="info-label">Insuree Name:</span><span>${data.InsureeName || 'N/A'}</span></div>
-                <div class="info-row"><span class="info-label">Expiry Date:</span><span class="${isExpired ? 'status-expired' : 'status-active'}">${data.ExpiryDate || 'N/A'}${expiryText}</span></div>
-                <div class="info-row"><span class="info-label">Status:</span><span class="${isInactive ? 'status-expired' : 'status-active'}">${data.Status || 'N/A'} (${statusText})</span></div>
+                <div class="info-row"><span class="info-label">Expiry Date:</span><span class="${isExpired ? 'status-expired1' : 'status-active1'}">${data.ExpiryDate || 'N/A'}${expiryText}</span></div>
+                <div class="info-row"><span class="info-label">Status:</span><span class="${isInactive ? 'status-expired1' : 'status-active1'}">${data.Status || 'N/A'} (${statusText})</span></div>
             </div>`;
-        if (!isEligible) {
-            content += `<div style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 4px; margin-top: 15px;"><b>Cannot create policy:</b> Insurance is inactive or expired.</div>`;
+
+        if (!eligible) {
+            content += `<div style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 4px; margin-top: 15px;"><b>Cannot proceed:</b> Insurance is inactive or expired.</div>`;
         } else {
-            content += `<div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 4px; margin-top: 15px;"><b>Eligible for policy creation.</b></div>`;
+            content += `<div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 4px; margin-top: 15px;"><b>Eligible.</b></div>`;
         }
         $('#eligibilityContent').html(content);
         $('#eligibilityModal').show();
     }
 
-    function viewDocument(base64Data, mimeType) {
-        const byteCharacters = atob(base64Data);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) { byteNumbers[i] = byteCharacters.charCodeAt(i); }
-        const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray], { type: mimeType || 'application/pdf' });
-        const blobUrl = URL.createObjectURL(blob);
-        window.open(blobUrl, '_blank');
+    function openBase64InNewTab(base64Data, mimeType) {
+        try {
+            const byteCharacters = atob(base64Data);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) byteNumbers[i] = byteCharacters.charCodeAt(i);
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: mimeType || 'application/octet-stream' });
+            const blobUrl = URL.createObjectURL(blob);
+            window.open(blobUrl, '_blank');
+        } catch (error) { console.error(error); alert('Could not display document.'); }
     }
 
     function fetchAndShowDocument(documentId, element) {
-        debugger
-        // --- Input Validation ---
-        if (!documentId) {
-            alert('Error: Document ID is missing.');
-            return;
-        }
-
-        // --- UI: Show Loading State ---
         const originalHtml = element.innerHTML;
         element.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Loading...';
-        // Disable the link to prevent multiple clicks
         element.style.pointerEvents = 'none';
-
-        // --- API Call ---
-        // 1. Construct the JSON parameter as a string
         const jsonParam = `{"xml":{"DocumentID":"${documentId}"}}`;
-
-        // 2. Construct the full API URL, ensuring the JSON is properly encoded
         const apiUrl = `/FindClaims.aspx?action=SeriousIllnessGetDocumentByID&json=${encodeURIComponent(jsonParam)}`;
-
-        // 3. Use jQuery's AJAX to call the API
         $.ajax({
-            url: apiUrl,
-            type: 'GET',
-            dataType: 'json', // We expect the server to return JSON
+            url: apiUrl, type: 'GET', dataType: 'json',
             success: function (response) {
-                // Your backend should return the result of the `uspGetDocumentByID` procedure.
-                // This procedure returns BOTH the Base64 string and the MimeType.
-                // Expected response format: [{ "DocumentDataB64": "...", "MimeType": "image/jpeg" }]
                 if (response && response.length > 0 && response[0].DocumentDataB64) {
-                    const base64Data = response[0].DocumentDataB64;
-                    const mimeType = response[0].MimeType; // Get the MimeType from the response
-
-                    // Call the helper function to open the document
-                    openBase64InNewTab(base64Data, mimeType);
-                } else {
-                    alert('Document not found or the file is empty.');
-                }
+                    openBase64InNewTab(response[0].DocumentDataB64, response[0].MimeType);
+                } else { alert('Document not found.'); }
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error("API call failed:", textStatus, errorThrown);
-                alert('An error occurred while fetching the document. Please check the console for details.');
-            },
-            complete: function () {
-                // --- UI: Restore Original State ---
-                // This block runs after success or error, ensuring the button is always restored.
-                element.innerHTML = originalHtml;
-                element.style.pointerEvents = 'auto';
-            }
+            error: function () { alert('Error fetching document.'); },
+            complete: function () { element.innerHTML = originalHtml; element.style.pointerEvents = 'auto'; }
         });
     }
 
-
-    function openBase64InNewTab(base64Data, mimeType) {
-        try {
-            if (!base64Data) {
-                throw new Error("Received empty document data from the server.");
-            }
-
-            // 1. Decode the Base64 string into binary data
-            const byteCharacters = atob(base64Data);
-            const byteNumbers = new Array(byteCharacters.length);
-            for (let i = 0; i < byteCharacters.length; i++) {
-                byteNumbers[i] = byteCharacters.charCodeAt(i);
-            }
-            const byteArray = new Uint8Array(byteNumbers);
-
-            // 2. Create a Blob from the binary data
-            // Use the provided mimeType, or a generic one if it's missing.
-            const blob = new Blob([byteArray], { type: mimeType || 'application/octet-stream' });
-
-            // 3. Create a temporary URL for the Blob
-            const blobUrl = URL.createObjectURL(blob);
-
-            // 4. Open the URL in a new tab
-            window.open(blobUrl, '_blank');
-
-        } catch (error) {
-            console.error("Error opening Base64 document:", error);
-            alert('Could not display the document: ' + error.message);
-        }
+    // --- SEARCH & LIST ---
+    function renderInitialSearchPanel() {
+        const container = $('#policyListContainer');
+        const diseaseOptionsHtml = $('#selectDisease').html().replace('<option value="">-- Select a Disease --</option>', '<option value="">All Diseases</option>');
+        container.html(`
+            <fieldset style="border:none;">
+                <legend>Policy Holders List</legend>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom:20px;">
+                    <div><label style="font-weight:bold;">CHFID:</label><input type="text" id="txtSearchChfid_list" placeholder="Enter CHFID..." style="padding:3px; border:1px solid #ccc; border-radius:4px;" /></div>
+                    <div><label style="font-weight:bold;">Disease:</label><select id="ddlDisease_list" style="padding:0px; border:1px solid #ccc; border-radius:4px; width:200px;">${diseaseOptionsHtml}</select></div>
+                    <div style="margin-top:20px;">
+                        <button type="button" id="btnSearch_list" class="button btn-primary">Search</button>
+                        <button type="button" id="btnClear_list" class="button btn-cancel">Clear</button>
+                    </div>
+                </div>
+                <div style="text-align: center; padding: 40px; color: #666;">
+                    <i class="fa fa-search" style="font-size: 48px; margin-bottom: 15px; opacity: 0.3;"></i>
+                    <p>Click <strong>Search</strong> to view policy holders</p>
+                </div>
+            </fieldset>`);
     }
 
-    // --- POLICY LIST RENDERING AND FETCHING ---
     function renderPolicyList(meta, policies, searchChfid = '', searchDiseaseId = '') {
         const container = $('#policyListContainer');
         let tableRowsHtml = '';
@@ -358,143 +532,158 @@
         } else {
             policies.forEach(policy => {
                 let docLinksHtml = 'No documents';
-                const documents = policy.DocumentsJSON;
-                if (documents && Array.isArray(documents) && documents.length > 0) {
-                    docLinksHtml = documents.map(doc => `
-        <div style="margin-bottom: 4px; white-space: nowrap;">
-            <a href="#"
-               onclick="fetchAndShowDocument('${doc.DocID}', this, true); return false;"
-               style="color:#0056b3;">
-               <i class="fa fa-file-alt"></i> ${escapeHtml(doc.FileName)}
-            </a>
-            <span style="color:#6c757d; font-size:0.9em; margin-left:8px;">
-                (${escapeHtml(doc.DocumentType)})
-            </span>
-        </div>`
-                    ).join('');
+                if (policy.DocumentsJSON && Array.isArray(policy.DocumentsJSON)) {
+                    docLinksHtml = policy.DocumentsJSON.map(doc => `
+                        <div style="margin-bottom: 4px; white-space: nowrap;">
+                            <a href="#" onclick="fetchAndShowDocument('${doc.DocID}', this); return false;" style="color:#0056b3;">
+                            <i class="fa fa-file-alt"></i> ${escapeHtml(doc.FileName)}</a>
+                        </div>`).join('');
                 }
                 tableRowsHtml += `<tr><td>${escapeHtml(policy.CHFID)}</td><td>${escapeHtml(policy.FullName)}</td><td>${policy.PolicyID}</td><td>${escapeHtml(policy.StartDate)}</td><td>${escapeHtml(policy.ExpiryDate)}</td><td>${escapeHtml(policy.ProductName)}</td><td>${docLinksHtml}</td></tr>`;
             });
         }
+
         let paginationHtml = '';
         if (meta.TotalPages > 1) {
-            paginationHtml += (meta.PageNumber > 1) ? `<a href="#" class="page-link" data-page="${meta.PageNumber - 1}">« Prev</a>` : `<span class="page-link disabled">« Prev</span>`;
+            paginationHtml += (meta.PageNumber > 1) ? `<a class="page-link" data-page="${meta.PageNumber - 1}">« Prev</a>` : `<span class="page-link disabled">« Prev</span>`;
             for (let i = 1; i <= meta.TotalPages; i++) {
-                paginationHtml += (i == meta.PageNumber) ? `<span class="page-link active">${i}</span>` : `<a href="#" class="page-link" data-page="${i}">${i}</a>`;
+                paginationHtml += (i == meta.PageNumber) ? `<span class="page-link active">${i}</span>` : `<a class="page-link" data-page="${i}">${i}</a>`;
             }
-            paginationHtml += (meta.PageNumber < meta.TotalPages) ? `<a href="#" class="page-link" data-page="${meta.PageNumber + 1}">Next »</a>` : `<span class="page-link disabled">Next »</span>`;
+            paginationHtml += (meta.PageNumber < meta.TotalPages) ? `<a class="page-link" data-page="${meta.PageNumber + 1}">Next »</a>` : `<span class="page-link disabled">Next »</span>`;
         }
+
         const diseaseOptionsHtml = $('#selectDisease').html().replace('<option value="">-- Select a Disease --</option>', '<option value="">All Diseases</option>').replace(`value="${searchDiseaseId}"`, `value="${searchDiseaseId}" selected`);
-        const finalHtml = `<div class="panel"><fieldset><legend>Policy Holders List</legend><div class="search-area" style="margin-bottom: 15px;"><div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;"><div><label for="txtSearchChfid_list" style="display: block; margin-bottom: 5px; font-weight: bold;">CHFID:</label><input type="text" id="txtSearchChfid_list" placeholder="Enter CHFID..." value="${escapeHtml(searchChfid)}" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 200px;" /></div><div><label for="ddlDisease_list" style="display: block; margin-bottom: 5px; font-weight: bold;">Disease:</label><select id="ddlDisease_list" >${diseaseOptionsHtml}</select></div><div style="margin-top: 25px;"><button type="button" id="btnSearch_list" class="button" style="background-color: #007bff; color: white;">Search</button><button type="button" id="btnClear_list" class="button" style="background-color: #6c757d; color: white; margin-left: 5px;">Clear</button></div></div></div><div style="margin-bottom: 10px; color: #666; font-size: 14px;">Total Records: <b>${meta.TotalRecords}</b> | Page <b>${meta.PageNumber}</b> of <b>${meta.TotalPages || 1}</b></div><table class="results-table"><thead><tr><th>CHFID</th><th>Name</th><th>Policy ID</th><th>Start Date</th><th>Expiry Date</th><th>Product Name</th><th>Documents</th></tr></thead><tbody>${tableRowsHtml}</tbody></table><div class="pagination">${paginationHtml}</div></fieldset></div>`;
-        container.html(finalHtml);
+
+        container.html(`
+            <fieldset style="border:none;">
+                <legend>Policy Holders List</legend>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom:15px;">
+                    <div><label style="font-weight:bold;">CHFID:</label><input type="text" id="txtSearchChfid_list" value="${escapeHtml(searchChfid)}" style="padding:3px; border:1px solid #ccc; border-radius:4px;" /></div>
+                    <div><label style="font-weight:bold;">Disease:</label><select id="ddlDisease_list" style="padding:0px; border:1px solid #ccc; border-radius:4px; width:200px;">${diseaseOptionsHtml}</select></div>
+                    <div style="margin-top:20px;">
+                        <button type="button" id="btnSearch_list" class="button btn-primary">Search</button>
+                        <button type="button" id="btnClear_list" class="button btn-cancel">Clear</button>
+                    </div>
+                </div>
+                <div style="margin-bottom: 10px; color: #666; font-size: 14px;">Total Records: <b>${meta.TotalRecords}</b> | Page <b>${meta.PageNumber}</b> of <b>${meta.TotalPages || 1}</b></div>
+                <table class="results-table"><thead><tr><th>CHFID</th><th>Name</th><th>Policy ID</th><th>Start Date</th><th>Expiry Date</th><th>Product Name</th><th>Documents</th></tr></thead><tbody>${tableRowsHtml}</tbody></table>
+                <div class="pagination">${paginationHtml}</div>
+            </fieldset>`);
     }
 
     function fetchPolicyList(page = 1) {
         var searchChfid = $('#txtSearchChfid_list').val() || '';
         var diseaseId = $('#ddlDisease_list').val() || '';
-        $('#policyListContainer').html('<div class="panel" style="text-align:center; padding: 40px;"><i class="fa fa-spinner fa-spin"></i> Loading...</div>');
-        // FIX 1: Properly encode the XML data
-        var xmlData = `<xml><search>${escapeHtml(searchChfid)}</search><diseaseId>${diseaseId}</diseaseId><page>${page}</page></xml>`;
-        var xmlData = { search: escapeHtml(searchChfid), diseaseId: escapeHtml(diseaseId), page: escapeHtml(page) }; ///var xmlData = JSON.stringify(jsonData);
+        $('#policyListContainer').html('<div style="text-align:center; padding: 40px;"><i class="fa fa-spinner fa-spin"></i> Loading...</div>');
 
-        // FIX 2: Use proper JSON structure that matches what the stored procedure expects
-        var requestData = { "xml": xmlData };
+        var xmlData = { search: escapeHtml(searchChfid), diseaseId: escapeHtml(diseaseId), page: escapeHtml(page) };
+        var apiUrl = `/FindClaims.aspx?action=SeriousIllnessAPIList2&json=${encodeURIComponent(JSON.stringify({ xml: xmlData }))}`;
 
-        var apiUrl = `/FindClaims.aspx?action=SeriousIllnessAPIList2&json=${encodeURIComponent(JSON.stringify(requestData))}`;
         $.get(apiUrl, function (response) {
             let metaData = { TotalRecords: 0, TotalPages: 1, PageNumber: 1 };
             let policies = [];
             let fullJsonString = "";
             try {
                 if (response && Array.isArray(response) && response.length > 0) {
-                    response.forEach(item => {
-                        const key = Object.keys(item)[0];
-                        if (item[key]) { fullJsonString += item[key]; }
-                    });
+                    response.forEach(item => { const key = Object.keys(item)[0]; if (item[key]) fullJsonString += item[key]; });
                 }
                 if (fullJsonString) {
                     const data = JSON.parse(fullJsonString);
-                    if (data && data.Meta && typeof data.Meta === 'string') {
-                        metaData = JSON.parse(data.Meta);
-                    }
-                    if (data && data.Policies) {
-                        policies = data.Policies;
-                    }
+                    if (data.Meta) metaData = JSON.parse(data.Meta);
+                    if (data.Policies) policies = data.Policies;
                 }
-            } catch (e) {
-                console.error("Error parsing policy list response:", e);
-                console.error("Assembled JSON string that failed to parse:", fullJsonString);
-            }
+            } catch (e) { console.error(e); }
             renderPolicyList(metaData, policies, searchChfid, diseaseId);
-        }).fail(function () {
-            $('#policyListContainer').html('<div class="panel" style="text-align:center; color:red;"><b>Error:</b> Could not load policy list.</div>');
-        });
+        }).fail(function () { $('#policyListContainer').html('<div style="color:red;text-align:center;padding:20px;">Error loading list.</div>'); });
     }
 
-    // --- DOCUMENT READY (Single, unified block) ---
+    // --- DOCUMENT READY ---
     $(document).ready(function () {
-        // --- INITIAL LOAD ---
-        
-        if (loggedInUserName) {
-            $('#welcomeMessage').text('Welcome, ' + loggedInUserName);
-        }
-        Promise.all([
-            populateDiseaseDropdown(),
-            fetchDocumentTypes()
-        ]).then(() => {
-            fetchPolicyList(1);
+        if (loggedInUserName) $('#welcomeMessage').text('Welcome, ' + loggedInUserName);
+
+        $('button').not('[type="submit"]').attr('type', 'button');
+
+        Promise.all([populateDiseaseDropdown(), fetchDocumentTypes()]).then(() => { renderInitialSearchPanel(); });
+
+        // 1. Delegated Events
+        $(document).on('input', '.input-chfid', function () {
+            const suffix = $(this).data('suffix');
+            formState[suffix].isEligible = false;
+            updateAddPolicyButtonState(suffix);
         });
 
-        // --- CREATE POLICY EVENT HANDLERS ---
-        $('#txtInsuranceNo').on('input', function () {
-            isEligible = false;
-            updateAddPolicyButtonState();
-        });
-
-        $('#btnCheckEligibility').click(function (e) {
+        $(document).on('click', '.btn-check', function (e) {
             e.preventDefault();
-            checkEligibilityStatus($('#txtInsuranceNo').val().trim());
+            const suffix = $(this).data('suffix');
+            checkEligibilityStatus($('#txtInsuranceNo' + suffix).val().trim(), suffix);
         });
 
-        $('#btnAddDocumentRow').on('click', function () {
-            addDocumentRow();
-            updateAddPolicyButtonState();
+        $(document).on('click', '.btn-add-row', function () {
+            const suffix = $(this).data('suffix');
+            addDocumentRow(suffix);
+            updateAddPolicyButtonState(suffix);
         });
 
-        $('#documentListBody').on('click', '.btn-remove-doc', function () {
-            var rowId = $(this).data('row-id');
+        $(document).on('click', '.btn-remove-doc', function () {
+            const rowId = $(this).data('row-id');
+            const suffix = $(this).data('suffix');
             $('#' + rowId).remove();
-            updateAddPolicyButtonState();
+            updateAddPolicyButtonState(suffix);
         });
 
-        $('#documentListBody').on('change', '.doc-type-select1', function () {
-            updateAddPolicyButtonState();
+        $(document).on('change', '.doc-type-select1', function () {
+            updateAddPolicyButtonState($(this).data('suffix'));
         });
 
-        $('#btnAddPolicy').click(function (e) {
+        // 2. Main Actions
+        $(document).on('click', '.action-btn', function (e) {
             e.preventDefault();
-            $('#fileError').text('');
-            var chfId = $('#txtInsuranceNo').val().trim();
-            var selectedDisease = $('#selectDisease').val();
-            if (!chfId || !selectedDisease) {
-                $('#lblStatus').css('color', 'red').text('Insurance No. and a selected disease are required.');
-                return;
+            const suffix = $(this).data('suffix'); // "" or "_renew"
+            $('#fileError' + suffix).text('');
+
+            var chfId = $('#txtInsuranceNo' + suffix).val().trim();
+            var selectedDisease = $('#selectDisease' + suffix).val(); // Might be undefined for renew if hidden
+
+            // VALIDATION ADJUSTMENT:
+            // If 'Renew', we might not need disease, or it's hidden.
+            // But if your backend requires it for Renew (even if reusing old), logic needs to be here.
+            // Assuming Renew relies on documents mainly as per request.
+            // If Renew keeps same disease, user might not need to select.
+            // However, strict validation:
+            if (suffix === "") {
+                if (!chfId || !selectedDisease) {
+                    $('#lblStatus' + suffix).css('color', 'red').text('Insurance No. and a selected disease are required.');
+                    return;
+                }
+            } else {
+                // Renew specific validation
+                if (!chfId) {
+                    $('#lblStatus' + suffix).css('color', 'red').text('Insurance No. is required.');
+                    return;
+                }
             }
-            if (!confirm('Create a new policy for CHFID: ' + chfId + '?')) return;
+
+            var actionName = (suffix === "") ? "Create new policy" : "Renew policy";
+            if (!confirm(actionName + ' for CHFID: ' + chfId + '?')) return;
+
+            // File Reading Logic
             var fileReadPromises = [];
             var hasValidationError = false;
-            $('.document-entry-row').each(function (index, row) {
+            const container = suffix === "" ? "#tab-add" : "#tab-renew";
+
+            $(container + ' .document-entry-row').each(function (index, row) {
                 var fileInput = $(row).find('.doc-file-input')[0];
-                var docTypeId = $(row).find('.doc-type-select1').val(); // Correctly get the ID
+                var docTypeId = $(row).find('.doc-type-select1').val();
+
                 if (fileInput.files.length === 0) {
-                    $('#fileError').text('Error: Please select a file for every document row.');
+                    $('#fileError' + suffix).text('Error: Please select a file for every document row.');
                     hasValidationError = true; return false;
                 }
+
                 var file = fileInput.files[0];
                 let promise = new Promise((resolve, reject) => {
                     var reader = new FileReader();
                     reader.onload = function (event) {
-                        // Send DocumentTypeID to the backend
                         resolve({ DocumentData: event.target.result.split(',')[1], FileName: file.name, MimeType: file.type, DocumentTypeID: docTypeId });
                     };
                     reader.onerror = () => reject('Error reading file: ' + file.name);
@@ -502,43 +691,41 @@
                 });
                 fileReadPromises.push(promise);
             });
+
             if (hasValidationError) return;
+
             Promise.all(fileReadPromises)
-                .then(documents => { sendPolicyDataToServer(chfId, selectedDisease, documents); })
-                .catch(error => { $('#lblStatus').css('color', 'red').text(error); });
+                .then(documents => {
+                    if (suffix === "_renew") {
+                        sendRenewPolicyDataToServer(chfId, selectedDisease, documents);
+                    } else {
+                        sendPolicyDataToServer(chfId, selectedDisease, documents);
+                    }
+                })
+                .catch(error => { $('#lblStatus' + suffix).css('color', 'red').text(error); });
         });
 
-        $('#btnCancel').click(function (e) {
+        // 3. Cancel
+        $(document).on('click', '.cancel-btn', function (e) {
             e.preventDefault();
-            $('#txtInsuranceNo, #selectDisease').val('');
-            $('#documentListBody').empty();
-            $('#fileError, #lblStatus').text('');
-            isEligible = false;
-            updateAddPolicyButtonState();
+            const suffix = $(this).data('suffix');
+            $('#txtInsuranceNo' + suffix + ', #selectDisease' + suffix).val('');
+            $('#documentListBody' + suffix).empty();
+            $('#fileError' + suffix + ', #lblStatus' + suffix).text('');
+            formState[suffix].isEligible = false;
+            updateAddPolicyButtonState(suffix);
         });
 
+        // 4. Common
         $('.close').click(function () { $('#eligibilityModal').hide(); });
         $(window).click(function (event) { if ($(event.target).is('#eligibilityModal')) $('#eligibilityModal').hide(); });
 
-        // --- POLICY LIST EVENT HANDLERS (Delegated from static parent) ---
+        // 5. List Search Events
         const listContainer = $('#policyListContainer');
         listContainer.on('click', '#btnSearch_list', () => fetchPolicyList(1));
-        listContainer.on('click', '#btnClear_list', () => {
-            listContainer.find('#txtSearchChfid_list, #ddlDisease_list').val('');
-            fetchPolicyList(1);
-        });
-        listContainer.on('keypress', '#txtSearchChfid_list', e => {
-            if (e.key === 'Enter' || e.which === 13) {
-                e.preventDefault();
-                fetchPolicyList(1);
-            }
-        });
-        // listContainer.on('change', '#ddlDisease_list', () => fetchPolicyList(1)); // This was commented out as requested
-        listContainer.on('click', '.page-link:not(.disabled):not(.active)', function (e) {
-            e.preventDefault();
-            fetchPolicyList($(this).data('page'));
-        });
+        listContainer.on('click', '#btnClear_list', () => { listContainer.find('#txtSearchChfid_list, #ddlDisease_list').val(''); fetchPolicyList(1); });
+        listContainer.on('keypress', '#txtSearchChfid_list', e => { if (e.which === 13) { e.preventDefault(); fetchPolicyList(1); } });
+        listContainer.on('click', '.page-link:not(.disabled):not(.active)', function (e) { e.preventDefault(); fetchPolicyList($(this).data('page')); });
     });
 </script>
-
 </asp:Content>

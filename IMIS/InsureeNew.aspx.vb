@@ -416,6 +416,15 @@ Partial Public Class InsureeNew
     Private Sub btnSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles B_SAVE.Click
         Try
 
+            For Each ctrl As Control In Me.Controls
+                If TypeOf ctrl Is TextBox Then
+                    Dim tb As TextBox = CType(ctrl, TextBox)
+                    Console.WriteLine(tb.ID & " = " & tb.Text)
+                End If
+            Next
+
+
+
             If Not Insuree.CheckCHFID(txtCHFID.Text) = True Then
                 imisgen.Alert(txtCHFID.Text & imisgen.getMessage("M_NOTVALIDCHFNUMBER", True), pnlButtons, alertPopupTitle:="IMIS")
                 Return
@@ -430,7 +439,7 @@ Partial Public Class InsureeNew
                     imisgen.Alert(txtNIN.Text & " NIN should be 10 Digit!", pnlButtons, alertPopupTitle:="IMIS")
                     Return
                 End If
-                If Insuree.NINExists(txtNIN.Text) Then
+                If Insuree.NINExists(txtNIN.Text, txtCHFID.Text) Then
                     imisgen.Alert(txtNIN.Text & " NIN already Exists!", pnlButtons, alertPopupTitle:="IMIS")
                     Return
                 End If

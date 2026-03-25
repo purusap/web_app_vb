@@ -778,14 +778,7 @@
                     </asp:DropDownList>
                     
                 </td>
-                <td class ="FormLabel">
-                    <asp:Label ID="lblReviewStatus" runat="server" 
-                        Text='<%$ Resources:Resource,L_REVIEWSTATUS%>'></asp:Label>
-                </td>
-                <td class="DataEntry">
-                     <asp:DropDownList ID="ddlReviewStatus" runat="server" >
-                     </asp:DropDownList>
-                 </td>
+
             
                   
                <td class="FormLabel">
@@ -926,11 +919,7 @@
                 <td class="FormLabel">
                     <asp:Label ID="lblAttachment" runat="server" Text="Attachment"></asp:Label>  <asp:CheckBox ID="chkAttachment" runat="server" />
                 </td>
-                <td class="FormLabel">
-                   <asp:Button class="button" ID="btnSearch" runat="server" 
-                          Text='<%$ Resources:Resource,B_SEARCH %>' >
-                    </asp:Button>
-                </td>
+
           </tr>           
             <tr>
                 <td class="FormLabel">
@@ -941,13 +930,7 @@
                 </td>
                 <td class="FormLabel">&nbsp;</td>
                 <td class="DataEntry">&nbsp;</td>
-                <td class="FormLabel">
-                    <asp:Label ID="lblBatchNo" runat="server" Text="Remain Batch"></asp:Label>
-                </td>
-                <td class="FormLabel">
-                    <asp:DropDownList ID="ddlClaimSampleBatch" runat="server">
-                    </asp:DropDownList>
-                </td>
+
                 <td class="FormLabel">&nbsp;</td>
 
 
@@ -975,6 +958,33 @@
             </tr>--%>
        </table>               
         </asp:Panel>
+      <table>
+          <tr>
+              <td class="FormLabel">
+                    <asp:Label ID="lblBatchNo" runat="server" Text="Remain Batch"></asp:Label>
+                </td>
+                <td class="FormLabel">
+                    <asp:DropDownList ID="ddlClaimSampleBatch" runat="server">
+                    </asp:DropDownList>
+                </td>
+              <td>
+                                  <td class ="FormLabel">
+                    <asp:Label ID="lblReviewStatus" runat="server" 
+                        Text='<%$ Resources:Resource,L_REVIEWSTATUS%>'></asp:Label>
+                </td>
+                <td class="DataEntry">
+                     <asp:DropDownList ID="ddlReviewStatus" runat="server" >
+                     </asp:DropDownList>
+                 </td>
+              </td>
+                      <td class="FormLabel">
+                   <asp:Button class="button" ID="btnSearch" runat="server" 
+                          Text='<%$ Resources:Resource,B_SEARCH %>' >
+                    </asp:Button>
+                </td>
+          </tr>
+      </table>
+                      
         <%--Claim Selection Criteria--%>
         
         <%--Claim Selection Update--%>

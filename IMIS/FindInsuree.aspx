@@ -306,6 +306,10 @@ In case of dispute arising out or in relation to the use of the program, it is s
                     <asp:Button class="button" ID="btnSearch" runat="server"
                         Text='<%$ Resources:Resource,B_SEARCH %>'></asp:Button>
                     <br />
+                    <%--<a href="FindInsureeAll.aspx">Find Insuree</a>--%>
+                    <a id="FindInsureeAll" runat="server" class="candisable" href="FindInsureeAll.aspx">Find Insuree
+    </a>
+
 
                 </td>
                     </tr>

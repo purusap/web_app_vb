@@ -72,9 +72,9 @@ Public Class FamilyBI
         Return Family.FamilyExists(CHFID)
     End Function
 
-    Public Function NINExists(ByVal NIN As String) As Boolean
+    Public Function NINExists(ByVal NIN As String, ByVal CHFID As String) As Boolean
         Dim Family As New IMIS_BL.FamilyBL
-        Return Family.NINExists(NIN)
+        Return Family.NINExists(NIN, CHFID)
     End Function
     Public Function passportExists(ByVal passport As String, ByVal otherNames As String, ByVal DOB As Date) As Boolean
         Dim Family As New IMIS_BL.FamilyBL

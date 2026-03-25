@@ -185,24 +185,6 @@ Partial Public Class ClaimOverviewSampling
     Protected WithEvents ddlDistrict As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''lblReviewStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblReviewStatus As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''ddlReviewStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlReviewStatus As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
     '''lblClaimedDateFrom control.
     '''</summary>
     '''<remarks>
@@ -500,15 +482,6 @@ Partial Public Class ClaimOverviewSampling
     Protected WithEvents chkAttachment As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
-    '''btnSearch control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''lblBatchNo0 control.
     '''</summary>
     '''<remarks>
@@ -543,6 +516,33 @@ Partial Public Class ClaimOverviewSampling
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlClaimSampleBatch As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''lblReviewStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblReviewStatus As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''ddlReviewStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlReviewStatus As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''btnSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''l_claimselectionupdate control.

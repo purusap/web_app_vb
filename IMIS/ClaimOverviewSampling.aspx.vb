@@ -49,6 +49,11 @@
             Response.Redirect(Request.Path)
             'Server.Transfer("Redirect.aspx?perm=0&page=ClaimOverviewSampling.aspx" & "&retUrl=" & Request.Path)
         End If
+        pnlTop.Visible = False
+        If Session("_BATCH_ADMIN_") = "1" Then
+            pnlTop.Visible = True
+
+        End If
         If Not HasBatchPrivilege() Then
             Panel2.Visible = False
         End If
@@ -297,6 +302,11 @@
 
         Dim duplicateCHFIDCheck As String = ""
         For Each row As GridViewRow In gv.Rows
+            Dim isAdmin = Session("_BATCH_ADMIN_")
+            If isAdmin <> "1" Then
+                ' NOT admin → redact
+                row.Cells(2).Text = "**Redacted**"
+            End If
             ddl = CType(row.Cells(5).Controls(1), DropDownList)
             ddl.DataSource = dt
             ddl.DataTextField = "Status"
@@ -1180,11 +1190,15 @@
         If RandomSamplePassword.Visible Then
             Dim pw = RandomSamplePassword.Text
             If Not String.IsNullOrWhiteSpace(pw) Then
-                If pw = "1ranhib" Then
+
+                'If pw = "1ranhib" Then
+                If pw = System.Configuration.ConfigurationManager.AppSettings("RSPW") Then
                     Session("_BATCH_ADMIN_") = "1"
+                    pnlTop.Visible = True
                     redirsamepage()
                 Else
                     Session("_BATCH_ADMIN_") = "0"
+                    pnlTop.Visible = False
                     lblMessage.Text = "Invalid creds."
                     Return
                 End If
