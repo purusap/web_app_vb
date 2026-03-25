@@ -449,14 +449,25 @@ Public Class ClaimsDAL
         Dim sSQL As String
         sSQL = "SELECT " + UtilitiesDAL.GetEnvMaxRows()
 
-        sSQL += " tblClaim.ClaimID,claimcode,DateClaimed,Claimed,ISNULL(Approved, Claimed)Approved, ClaimSt.name as ClaimStatus,"
+        sSQL += " tblClaim.ClaimID,claimcode,DateClaimed,"
+        sSQL += "CASE WHEN CopayPercent>0 THEN Claimed-Claimed*CopayPercent ELSE Claimed END AS Claimed,"
+        'sSQL += "ISNULL(Approved, CASE WHEN CopayPercent>0 THEN Claimed-Claimed*CopayPercent ELSE Claimed END)Approved,"'
+        sSQL +=
+            <sql>
+                CASE WHEN CopayPercent > 0 THEN
+                    CASE WHEN Approved is NULL THEN Claimed-Claimed*CopayPercent ELSE Approved-Approved*CopayPercent END
+                ELSE 
+                     ISNULL(Approved,  Claimed) 
+                END AS Approved 
+            </sql>.Value
+        sSQL += ",ClaimSt.name as ClaimStatus,"
         ' for redacting HF Name
         'sSQL += " FeedbackStatus,ReviewStatus,tblClaim.RowID,tblHF.HFCode,HFName,tblClaim.HfID,tblClaim.ClaimAdminID,"
         sSQL += " FeedbackStatus,ReviewStatus,tblClaim.RowID,tblHF.HFCode,CASE WHEN HFName <> '1' THEN '**Redacted**' ELSE HFName END AS HFName,tblClaim.HfID,tblClaim.ClaimAdminID,"
         sSQL += " Cadm.ClaimAdminID,Cadm.ClaimAdminCode,Cadm.LastName CadminLastName,Cadm.OtherNames CadminOtherNames,tblInsuree.CHFID, Attachment from tblClaim"
         sSQL += " INNER JOIN tblICDCodes ON tblICDCodes.ICDID = tblClaim.ICDID"
         sSQL += " INNER JOIN tblInsuree ON tblInsuree.InsureeID = tblClaim.InsureeID"
-        sSQL += " INNER JOIN tblFamilies ON tblFamilies.FamilyID = tblInsuree.FamilyID"
+        sSQL += " INNER JOIN tblFamilies ON tblFamilies.FamilyID = tblInsuree.FamilyID  "
         sSQL += " INNER JOIN tblHF ON tblClaim.HfID = tblHF.HfID"
 
         ' sSQL += " INNER JOIN tblDistricts ON tblDistricts.DistrictID = tblHF.LocationId"

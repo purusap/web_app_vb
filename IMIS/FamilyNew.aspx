@@ -610,4 +610,14 @@ In case of dispute arising out or in relation to the use of the program, it is s
                  <asp:HiddenField ID="hfInsureeIsOffline" runat="server" Value="" />
                <asp:HiddenField ID="hfFamilyIsOffline" runat="server" Value="" />
                     </asp:Panel>
+
+t>
+    <!-- Assuming you already have the HTML structure -->
+
+
+
+
+
+
+
 </asp:Content>

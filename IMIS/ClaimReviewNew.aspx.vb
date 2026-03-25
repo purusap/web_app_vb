@@ -167,14 +167,19 @@ Partial Public Class ClaimReviewNew
         Dim dt As New DataTable
         Dim Insuree As New IMIS_BI.InsureeBI
         dt = Insuree.GetInsureeByCHFIDGrid(NSHI)
-        lblFSPDATA.Text = dt.Rows(0)("ProductName")
-        lblExpiryData.Text = dt.Rows(0)("ExpiryDate")
-        lblStatusData.Text = dt.Rows(0)("Status")
-        lblBalacneData.Text = dt.Rows(0)("Ceiling1")
-
+        Try
+            lblFSPDATA.Text = dt.Rows(0)("ProductName")
+            lblExpiryData.Text = dt.Rows(0)("ExpiryDate")
+            lblStatusData.Text = dt.Rows(0)("Status")
+            lblBalacneData.Text = dt.Rows(0)("Ceiling1")
+        Catch ex As Exception
+            lblFSPDATA.Text = ""
+            lblExpiryData.Text = ""
+            lblStatusData.Text = ""
+            lblBalacneData.Text = ""
+        End Try
         'gvPolicy.DataSource = dt
         'gvPolicy.DataBind()
-
     End Sub
     Private Sub FillRepeater(ByVal NSHI As String, ByVal CLAIMID As Integer, ByVal VISITDATETO As Date)
         If Not IsNumeric(NSHI) Then Return

@@ -77,8 +77,10 @@ In case of dispute arising out or in relation to the use of the program, it is s
                 totalAdjustedAmount += adjAmt;
             });
             $('#idAdjustedAmount').text(totalAdjustedAmount);
-            var CopayClaimed = (1- fnum(per)) * fnum($('#Body_txtCLAIMTOTALData').val());
-            $('#idCopayClaimed').text(CopayClaimed)
+            var CopayClaimed = (1 - fnum(per)) * fnum($('#Body_txtCLAIMTOTALData').val());
+            var CopayApproved = (1 - fnum(per)) * fnum($('#Body_txtApproved').val());
+            $('#ClaimedWithCopay').text(CopayClaimed);
+            $('#ApprovedWithCopay').text(CopayApproved);
         }
     </script>
 
@@ -284,7 +286,10 @@ In case of dispute arising out or in relation to the use of the program, it is s
                   <td><asp:Label ID="lblSTARTDATE" runat="server" Text='<%$ Resources:Resource,L_START %>'  CssClass="FormLabel" ></asp:Label></td>
                   <td><asp:Label ID="lblSTARTData" runat="server" Text="" CssClass="DataEntry"></asp:Label></td>
                   <td><asp:Label ID="lblCLAIMTOTAL" runat="server" Text='<%$ Resources:Resource,L_CLAIMTOTAL %>' CssClass="FormLabel" ></asp:Label></td>
-                  <td><asp:textbox ID="txtCLAIMTOTALData" runat="server" Text="" BorderStyle="Solid" style="text-align:right" Enabled ="false"  ></asp:textbox></td>
+                  <td>
+                      <asp:textbox ID="txtCLAIMTOTALData" runat="server" Text="" BorderStyle="Solid" style="text-align:right" Enabled ="false"  ></asp:textbox>
+                      <span id="ClaimedWithCopay"></span>
+                  </td>
               </tr>
               <tr>               
                   <td><asp:Label ID="lblHFCODE" runat="server" Text='<%$ Resources:Resource,L_HF %>' CssClass="FormLabel" > </asp:Label></td>
@@ -292,7 +297,10 @@ In case of dispute arising out or in relation to the use of the program, it is s
                   <td><asp:Label ID="lblEND" runat="server" Text='<%$ Resources:Resource,L_END %>'  CssClass="FormLabel"></asp:Label></td>
                   <td><asp:Label ID="lblENDData" runat="server" Text="" CssClass="DataEntry"></asp:Label> <span class="FormLabel">(<asp:Label ID="lblTotalDays" runat="server"></asp:Label> Days)</span> </td>
                   <td><asp:Label ID="L_APPROVED" runat="server" Text='<%$ Resources:Resource,L_APPROVED %>' CssClass="FormLabel" ></asp:Label></td>
-                  <td><asp:textbox ID="txtApproved" runat="server" Text="" BorderStyle="Solid" style="text-align:right" Enabled ="false"></asp:textbox></td>
+                  <td>
+                      <asp:textbox ID="txtApproved" runat="server" Text="" BorderStyle="Solid" style="text-align:right;display:None" Enabled ="false"></asp:textbox>
+                      <span id="ApprovedWithCopay"></span>
+                  </td>
               </tr>
               <tr>
                   <td><asp:Label ID="lblCLAIMDATE" runat="server" Text='<%$ Resources:Resource,L_CLAIMDATE %>'  CssClass="FormLabel"></asp:Label></td>
