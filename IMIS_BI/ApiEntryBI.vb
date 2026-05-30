@@ -38,6 +38,11 @@ Public Class ApiEntryBI
         Return ApiEntry.ApiEntryActionStr(action, XML)
     End Function
 
+    Public Function ApiEntryActionStrObj(ByVal action As String, ByVal XML As String) As String
+        Return ApiEntry.ApiEntryActionStrObj(action, XML)
+    End Function
+
+
     Public Function ApiEntryActionDt(ByVal action As String, ByVal XML As String) As DataTable
         Return ApiEntry.ApiEntryActionDt(action, XML)
     End Function

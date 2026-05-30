@@ -179,4 +179,8 @@ Public Class FamilyBI
         Dim Family As New IMIS_BL.FamilyBL
         Return Family.GetFamilyUUIDByID(id)
     End Function
+    Public Function ValidateIdentification(ByVal TypeOfId As String, ByVal Passport As String) As String
+        Dim BL As New IMIS_BL.InsureeBL
+        Return BL.ValidateIdentification(TypeOfId, Passport)
+    End Function
 End Class

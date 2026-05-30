@@ -115,6 +115,28 @@ Public Class ExactSQL
             Throw New Exception(ex.Message)
         End Try
     End Function
+
+    Public Function FilldataApiEx(Optional ByVal IdentityColumn As String = "", Optional ByVal TableName As String = "", Optional ByVal timeout As Integer = 120) As DataTable
+        Try
+            _TableName = TableName
+            _IdentityKey = IdentityColumn
+            _sqladapter = New SqlClient.SqlDataAdapter
+            Dim commandTimeout As Integer = IMIS_EN.AppConfiguration.CommandTimeout
+            If commandTimeout <= 0 Then
+                _SQLCommand.CommandTimeout = timeout
+            Else
+                _SQLCommand.CommandTimeout = commandTimeout
+            End If
+            _sqladapter.SelectCommand = _SQLCommand
+            _dtbl = New DataTable
+            _sqladapter.Fill(_dtbl)
+            Return _dtbl
+        Catch ex1 As System.Data.SqlClient.SqlException
+            Throw New Exception(ex1.Message, ex1)
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
     Public Function ExecuteScalar() As Boolean
         Try
             Dim count As Integer
@@ -230,6 +252,10 @@ Public Class ExactSQL
         End Try
 
     End Function
+
+    Friend Sub params(v As String, varChar As SqlDbType, code As String)
+        Throw New NotImplementedException()
+    End Sub
 End Class
 
 

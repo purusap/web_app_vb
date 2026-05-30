@@ -108,4 +108,8 @@ Public Class HealthFacilityBI
         Dim Hf As New IMIS_BL.HealthFacilityBL
         Return Hf.GetHfUUIDByID(id)
     End Function
+    Public Function HFApiProvided(ByVal Code As String) As Boolean
+        Dim healthfacilities As New IMIS_BL.HealthFacilityBL
+        Return healthfacilities.HFApiProvided(Code)
+    End Function
 End Class

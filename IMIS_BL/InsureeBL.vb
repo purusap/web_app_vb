@@ -282,4 +282,13 @@ Public Class InsureeBL
         'dt.Rows.InsertAt(dr, 0)
         Return dt
     End Function
+
+    Public Function GetMemberCount(ByVal FamilyID As Integer) As Integer
+        Return Insuree.GetMemberCount(FamilyID)
+    End Function
+
+    Public Function ValidateIdentification(ByVal TypeOfId As String, ByVal Passport As String) As String
+        Dim DAL As New IMIS_DAL.InsureeDAL
+        Return DAL.ValidateIdentification(TypeOfId, Passport)
+    End Function
 End Class

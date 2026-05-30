@@ -30,8 +30,8 @@ Public Class IdentificationTypesDAL
     Public Function GetIdentificationTypes() As DataTable
         Dim sSQL As String = String.Empty
         Dim data As New ExactSQL
-        sSQL = "SELECT IdentificationCode,IdentificationTypes,  ISNULL(AltLanguage,IdentificationTypes) AltLanguage FROM tblIdentificationTypes ORDER BY SortOrder"
-
+        'sSQL = "SELECT IdentificationCode,IdentificationTypes,  ISNULL(AltLanguage,IdentificationTypes) AltLanguage FROM tblIdentificationTypes ORDER BY SortOrder"
+        sSQL = "SELECT IdentificationCode, IdentificationTypes, ISNULL(AltLanguage, IdentificationTypes) AltLanguage FROM tblIdentificationTypes WHERE ValidityTo IS NULL ORDER BY SortOrder"
         data.setSQLCommand(sSQL, CommandType.Text)
         Return data.Filldata
     End Function

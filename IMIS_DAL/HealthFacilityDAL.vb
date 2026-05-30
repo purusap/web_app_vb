@@ -448,4 +448,34 @@ Public Class HealthFacilityDAL
         'Return data.Filldata
     End Function
 
+    Public Function HFApiProvided(ByVal Code As String) As Boolean
+
+        Dim sSQL As String = ""
+        Dim data As New ExactSQL
+
+        sSQL = "SELECT COUNT(*) " &
+           "FROM tblHF " &
+           "WHERE ValidityTo IS NULL " &
+           "AND HFCode = @HFCode " &
+           "AND HfID IN ( " &
+           "    SELECT HFID " &
+           "    FROM tblUsers " &
+           "    WHERE LoginName LIKE 'hib\_%' ESCAPE '\' " &
+           "      AND ValidityTo IS NULL " &
+           ")"
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@HFCode", Code)
+
+        Dim dt As DataTable = data.Filldata()
+
+        'If dt.Rows.Count > 0 AndAlso Convert.ToInt32(dt.Rows(0)(0)) > 0 Then
+        If dt.Rows.Count > 0 Then
+            Return True
+        End If
+
+        Return False
+
+    End Function
+
 End Class

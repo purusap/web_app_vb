@@ -319,4 +319,9 @@ Public Class HealthFacilityBL
         Dim hf As New IMIS_DAL.HealthFacilityDAL
         Return hf.getHFContractDateFromID(HFID)
     End Function
+
+    Public Function HFApiProvided(ByVal Code As String) As Boolean
+        Dim Hf As New IMIS_DAL.HealthFacilityDAL
+        Return Hf.HFApiProvided(Code)
+    End Function
 End Class

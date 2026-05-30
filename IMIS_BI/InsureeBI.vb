@@ -179,4 +179,9 @@ Public Class InsureeBI
         rdt.Rows.InsertAt(dr, 2)
         Return rdt
     End Function
+
+    Public Function ValidateIdentification(ByVal TypeOfId As String, ByVal Passport As String) As String
+        Dim BL As New IMIS_BL.InsureeBL
+        Return BL.ValidateIdentification(TypeOfId, Passport)
+    End Function
 End Class

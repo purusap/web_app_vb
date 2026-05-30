@@ -188,4 +188,9 @@ Public Class FamilyBL
         Dim Family As New IMIS_DAL.FamilyDAL
         Return Family.GetFamilyUUIDByID(id).Rows(0).Item(0)
     End Function
+
+    Public Function GetHeadAge(ByVal FamilyID As Integer) As Integer
+        Dim Family As New IMIS_DAL.FamilyDAL
+        Return Family.GetHeadAge(FamilyID)
+    End Function
 End Class

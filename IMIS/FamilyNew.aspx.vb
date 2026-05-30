@@ -466,6 +466,20 @@ Public Class FamilyNew
                 Return
             End If
 
+            ' Senior Citizen Age Validation
+            If ddlConfirmationType.SelectedItem.Text.Trim() = "Senior Citizen" Then
+                Dim dobDate As Date = Date.ParseExact(txtBirthDate.Text, "dd/MM/yyyy", Nothing)
+                Dim today As Date = DateTime.Now.Date
+                Dim age As Integer = today.Year - dobDate.Year
+
+                ' Adjust age if the birthday hasn't occurred yet this year
+                If dobDate > today.AddYears(-age) Then age -= 1
+
+                If age < 70 Then
+                    imisgen.Alert("For Senior Citizen Confirmation, the Insuree must be at least 70 years old.", pnlButtons, alertPopupTitle:="IMIS")
+                    Return
+                End If
+            End If
 
             Dim ePhotos As New IMIS_EN.tblPhotos
 
@@ -551,7 +565,12 @@ Public Class FamilyNew
             ePhotos.InsureeID = eInsuree.InsureeID
             ePhotos.CHFID = eInsuree.CHFID.Trim
             ePhotos.PhotoFolder = IMIS_EN.AppConfiguration.UpdatedFolder
-
+            Dim ValidationResult As String = ""
+            ValidationResult = Family.ValidateIdentification(ddlIdType.SelectedValue, txtPassport.Text.Trim())
+            If ValidationResult <> "OK" Then
+                imisgen.Alert(ValidationResult, pnlButtons, alertPopupTitle:="IMIS")
+                Return
+            End If
             'If ddlType.SelectedValue <> "" Then eFamily.FamilyType = ddlType.SelectedValue
             eFamily.FamilyAddress = txtAddress.Text
             eFamily.ConfirmationNo = txtConfirmationNo.Text

@@ -695,4 +695,35 @@ Public Class InsureeDAL
         Return data.Filldata
 
     End Function
+
+    Public Function GetMemberCount(ByVal FamilyID As Integer) As Integer
+        Dim sSQL As String = "SELECT COUNT(*) AS member_count FROM tblInsuree WHERE FamilyID = @FamilyID AND ValidityTo IS NULL"
+        Dim data As New ExactSQL
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@FamilyID", SqlDbType.Int, FamilyID)
+
+        ' Following your reference: Filldata()(0) gets the first DataRow
+        Dim dr As DataRow = data.Filldata()(0)
+
+        If dr Is Nothing Then
+            Return 0
+        Else
+            ' Extract the count from the "member_count" column
+            Return Convert.ToInt32(dr("member_count"))
+        End If
+    End Function
+
+    Public Function ValidateIdentification(ByVal TypeOfId As String, ByVal Passport As String) As String
+        Dim data As New ExactSQL
+        Try
+            data.setSQLCommand("dbo.ValidateIdentification", CommandType.StoredProcedure)
+            data.params("@TypeOfId", SqlDbType.VarChar, 20, TypeOfId)
+            data.params("@Passport", SqlDbType.VarChar, 50, Passport)
+            data.ExecuteCommand()
+            Return "OK"
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+    End Function
 End Class

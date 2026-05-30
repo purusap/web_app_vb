@@ -42,6 +42,29 @@ Public Class ApiEntryBL
         Dim res = JsonConvert.SerializeObject(dt)
         Return res
     End Function
+
+    Public Function ApiEntryActionStrObj(ByVal action As String, ByVal XML As String) As String
+        Try
+            Dim dt = ApiEntry.ApiEntryAction(action, XML)
+
+            Dim response = New With {
+            .data = dt,
+            .msg = "Success",
+            .ok = 1
+        }
+
+            Return JsonConvert.SerializeObject(response)
+
+        Catch ex As Exception
+            Dim response = New With {
+            .data = Nothing,
+            .msg = ex.Message,
+            .ok = 0
+        }
+
+            Return JsonConvert.SerializeObject(response)
+        End Try
+    End Function
     Public Function ApiEntryActionDt(ByVal action As String, ByVal XML As String) As DataTable
         Return ApiEntry.ApiEntryAction(action, XML)
     End Function

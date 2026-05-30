@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class InsureeProfile
-    
+
     '''<summary>
     '''rptInsuree control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class InsureeProfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents rptInsuree As Global.System.Web.UI.WebControls.Repeater
-    
+
     '''<summary>
     '''grdFamilyDetail control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class InsureeProfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents grdFamilyDetail As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''gvPolicy control.
     '''</summary>
@@ -39,7 +39,16 @@ Partial Public Class InsureeProfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gvPolicy As Global.System.Web.UI.WebControls.GridView
-    
+
+    '''<summary>
+    '''tblClaims control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tblClaims As Global.System.Web.UI.HtmlControls.HtmlTable
+
     '''<summary>
     '''ddlRegion control.
     '''</summary>
@@ -48,7 +57,7 @@ Partial Public Class InsureeProfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlRegion As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''ddlDistrict control.
     '''</summary>
@@ -57,7 +66,7 @@ Partial Public Class InsureeProfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlDistrict As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''ddlHFCode control.
     '''</summary>
@@ -66,7 +75,7 @@ Partial Public Class InsureeProfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlHFCode As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''ddlClaimAdmin control.
     '''</summary>
@@ -75,7 +84,7 @@ Partial Public Class InsureeProfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlClaimAdmin As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''B_ADD control.
     '''</summary>
@@ -84,7 +93,7 @@ Partial Public Class InsureeProfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents B_ADD As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''grdClaimDetail control.
     '''</summary>
@@ -93,7 +102,7 @@ Partial Public Class InsureeProfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents grdClaimDetail As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''lblMsg control.
     '''</summary>

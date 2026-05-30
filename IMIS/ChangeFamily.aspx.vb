@@ -276,6 +276,25 @@ Partial Public Class ChangeFamily
             eFamily.ConfirmationNo = txtConfirmationNo.Text
             eFamily.AuditUserID = imisgen.getUserId(Session("User"))
 
+            If ddlConfirmationType.SelectedValue = "6" Then
+                Dim memberCount As Integer
+                memberCount = ChangeFamily.GetMemberCount(eFamily.FamilyID)
+
+                If memberCount > 1 Then
+                    imisgen.Alert("Cannot change to senior citizen. More than one member in family", pnlButtons, alertPopupTitle:="Validation Error")
+                    Return
+                End If
+
+                Dim headAge As Integer
+                headAge = ChangeFamily.GetHeadAge(eFamily.FamilyID)
+
+                If headAge < 70 Then
+                    imisgen.Alert("Cannot change to senior citizen. Age of head less than 70 years", pnlButtons, alertPopupTitle:="Validation Error")
+                    Return
+                End If
+
+            End If
+
             Dim chk As Boolean = ChangeFamily.UpdateChangeFamily(eFamily)
             If chk = True Then
                 Session("Msg") = imisgen.getMessage("L_POLICYHOLDER") & " " & txtHeadLastName.Text & imisgen.getMessage("M_Updated")

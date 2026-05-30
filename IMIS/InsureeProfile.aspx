@@ -79,7 +79,8 @@
         </asp:GridView>
 
 
-        <table class="catlabel">
+<%--        <table class="catlabel">--%>
+            <table id="tblClaims" runat="server" class="catlabel" visible='False'>
             <tr>
                 <td>Claims                  
                 </td>

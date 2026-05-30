@@ -97,4 +97,14 @@ Public Class ChangeFamilyBI
         Dim BL As New IMIS_BL.LocationsBL
         Return BL.GetRegions(UserId, ShowSelect)
     End Function
+
+    Public Function GetMemberCount(ByVal FamilyID As Integer) As Integer
+        Dim BL As New IMIS_BL.InsureeBL
+        Return BL.GetMemberCount(FamilyID)
+    End Function
+
+    Public Function GetHeadAge(ByVal FamilyID As Integer) As Integer
+        Dim BL As New IMIS_BL.FamilyBL
+        Return BL.GetHeadAge(FamilyID)
+    End Function
 End Class

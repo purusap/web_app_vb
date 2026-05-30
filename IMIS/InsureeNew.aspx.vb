@@ -430,6 +430,22 @@ Partial Public Class InsureeNew
                 Return
             End If
 
+            ' Implementation: Senior Citizen Age Validation
+            If txtConfirmationType.Text.Trim() = "Senior Citizen" Then
+                ' Calculate age in years
+                Dim birthDate As Date = Date.ParseExact(txtBirthDate.Text, "dd/MM/yyyy", Nothing)
+                Dim today As Date = DateTime.Now.Date
+                Dim age As Integer = today.Year - birthDate.Year
+
+                ' Adjust age if the birthday hasn't occurred yet this year
+                If birthDate > today.AddYears(-age) Then age -= 1
+
+                If age < 70 Then
+                    imisgen.Alert("Insuree must be at least 70 years old for Senior Citizen Confirmation Type!", pnlButtons, alertPopupTitle:="Validation Error")
+                    Return
+                End If
+            End If
+
             If Trim(txtNIN.Text).Length > 0 Then
                 If Not IsNumeric(txtNIN.Text) Then
                     imisgen.Alert(txtNIN.Text & " NIN should be 10 Digit Number!", pnlButtons, alertPopupTitle:="IMIS")
@@ -487,6 +503,13 @@ Partial Public Class InsureeNew
             eInsuree.InsureeStatus = ddlInsureeStatus.SelectedValue
             eInsuree.InsureeStatusReason = txtInsureeStatusReason.Text
             If ddlIdType.SelectedValue <> "" Then eInsuree.TypeOfId = ddlIdType.SelectedValue
+
+            Dim ValidationResult As String = ""
+            ValidationResult = Insuree.ValidateIdentification(ddlIdType.SelectedValue, txtPassport.Text.Trim())
+            If ValidationResult <> "OK" Then
+                imisgen.Alert(ValidationResult, pnlButtons, alertPopupTitle:="IMIS")
+                Return
+            End If
 
             Dim eHF As New IMIS_EN.tblHF
             If ddlFSP.Items.Count > 0 AndAlso ddlFSP.SelectedValue > 0 Then

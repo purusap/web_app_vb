@@ -51,7 +51,7 @@ Public Class ApiEntryDAL
 
         data.setSQLCommand(Query, CommandType.Text)
         data.params("@XML", SqlDbType.Text, -1, XML)
-        Dim dt As DataTable = data.Filldata()
+        Dim dt As DataTable = data.FilldataApiEx()
         Return dt
     End Function
 

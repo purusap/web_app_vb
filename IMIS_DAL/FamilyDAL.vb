@@ -491,4 +491,28 @@ Public Class FamilyDAL
 
         Return data.Filldata
     End Function
+
+    Public Function GetHeadAge(ByVal FamilyID As Integer) As Integer
+        Dim sSQL As String = String.Empty
+        Dim data As New ExactSQL
+
+        ' SQL calculates age from DOB based on your table structure
+        sSQL = "SELECT DATEDIFF(hour, DOB, GETDATE()) / 8766 AS Age " &
+           "FROM tblInsuree " &
+           "WHERE InsureeID = (SELECT InsureeID FROM tblFamilies WHERE FamilyID = @FamilyID AND ValidityTo IS NULL) " &
+           "AND ValidityTo IS NULL"
+
+        data.setSQLCommand(sSQL, CommandType.Text)
+        data.params("@FamilyID", SqlDbType.Int, FamilyID)
+
+        ' Use the reference pattern: Filldata()(0) to get the first row
+        Dim dr As DataRow = data.Filldata()(0)
+
+        If dr Is Nothing OrElse IsDBNull(dr("Age")) Then
+            Return 0
+        Else
+            ' Extract the calculated Age value
+            Return Convert.ToInt32(dr("Age"))
+        End If
+    End Function
 End Class

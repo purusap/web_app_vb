@@ -374,10 +374,36 @@
         $('#lblStatus' + suffix).css('color', 'orange').text('Processing...');
 
         $.ajax({
-            url: "/FindClaims.aspx?action=" + apiAction,
+            url: "/FindClaims.aspx?api=" + apiAction,
             type: "POST",
             data: { json: JSON.stringify(requestData) },
             success: function (response) {
+                // 1. Access the 'data' array inside the response object
+                if (response && response.ok === 1 && response.data && response.data.length > 0) {
+
+                    var result = response.data[0]; // Get the first item in the data array
+                    var message = result.Message;  // Extract the "Policy created successfully" string
+
+                    // 2. Show the native browser alert
+                    alert(message);
+
+                    // 3. Update the label on the page for visual feedback
+                    var isSuccess = message.toLowerCase().includes('successfully');
+                    $('#lblStatus' + suffix)
+                        .css('color', isSuccess ? 'green' : 'blue')
+                        .text(message);
+
+                    // 4. If successful, clear the form and refresh the list
+                    if (isSuccess) {
+                        $('#btnCancel' + suffix).click();
+                        fetchPolicyList(1);
+                    }
+                } else {
+                    alert("An unknown error occurred.");
+                    $('#lblStatus' + suffix).css('color', 'red').text('An unknown error occurred.');
+                }
+            }
+            /*success: function (response) {
                 if (response && response.length > 0 && response[0].Message) {
                     $('#lblStatus' + suffix).css('color', response[0].Message.includes('successfully') ? 'green' : 'blue').text(response[0].Message);
                     if (response[0].Message.includes('successfully')) {
@@ -388,7 +414,7 @@
                     $('#lblStatus' + suffix).css('color', 'red').text('An unknown error occurred.');
                 }
             },
-            error: function (xhr) { $('#lblStatus' + suffix).css('color', 'red').text('Error: ' + xhr.responseText); }
+            error: function (xhr) { $('#lblStatus' + suffix).css('color', 'red').text('Error: ' + xhr.responseText); }*/
         });
     }
 
